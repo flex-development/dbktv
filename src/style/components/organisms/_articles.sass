@@ -1,0 +1,18 @@
+// ----------------------------------------------------------------------------
+// Articles page specific styles, variables, placeholders, mixins and functions
+// @see components/organisms/Articles.jsx
+// @author Lexus Drumgold
+// ----------------------------------------------------------------------------
+
+// Style
+
+.ado-articles
+  +flex(column, center)
+
+  > .adt-article
+    .headline
+      +respond-to($breakpoint-xxl)
+        font-size: size(24)
+        font-weight: 600
+
+    margin-bottom: size(40)

@@ -1,0 +1,48 @@
+// -----------------------------------------------------------------------------
+// Styles entry point
+// @author Lexus Drumgold
+// -----------------------------------------------------------------------------
+
+// Charset
+@charset 'utf-8'
+
+// Import global font
+@import url(https://fonts.googleapis.com/css?family=IBM+Plex+Sans:300,300i,400,400i,500,500i,600,600i,700,700i&display=swap)
+
+// Directories
+@import abstracts/abstracts
+@import vendors/vendors
+@import base/base
+@import components/components
+
+// Styles
+
+#app
+  height: 100vh
+  width: 100vw
+
+// Center header contents on opposite sites of the header
+// Make inner container the height of the content
+// Decrease size of logo image
+.ado-header,
+.ado-footer
+  > .ada-container
+    +flex(row, center, space-between)
+
+    height: max-content
+
+// Position header absolutely
+// Position header on top of the other content
+.ado-header
+  +absolute(0, null, null, 0)
+
+  z-index: 10
+
+  &.ui-sticky
+    background-color: $light
+    border-bottom: $border
+    position: fixed
+
+    > .ada-container
+      // border-bottom: $border
+      padding: size(16) 0

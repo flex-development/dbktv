@@ -1,0 +1,32 @@
+// ----------------------------------------------------------------------------
+// This file contains very basic styles.
+// ----------------------------------------------------------------------------
+
+// Set up a decent box model on the root element
+// Prevent scrolling
+html
+  box-sizing: border-box
+  overflow: hidden
+
+// Add default transition to all elements
+*
+  +transition
+
+// Make all elements from the DOM inherit from the parent box-sizing
+// Since `*` has a specificity of 0, it does not override the `html` value
+// making all elements inheriting from the root box-sizing value
+*, *::before, *::after
+  box-sizing: inherit
+
+// Hide scrollbar
+\::-webkit-scrollbar
+  display: none
+
+body,
+main
+  +size(100vw, 100vh)
+
+// Change background color to dark base color
+body
+  background-color: $dark
+  margin: 0 !important

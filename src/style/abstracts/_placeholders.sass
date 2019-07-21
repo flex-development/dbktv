@@ -1,0 +1,45 @@
+//// ---------------------------------------------------------------------------
+/// This file contains all application-wide Sass placeholders.
+//// ---------------------------------------------------------------------------
+
+/// Makes an element background color Diamondback Blue
+/// @requires {mixin} set-bkg-color-and-hover
+%ui-accent-dark
+  +set-bkg-color-and-hover($accent-dark)
+
+/// Makes an element background color Diamondback Red
+/// @requires {mixin} set-bkg-color-and-hover
+%ui-accent-med
+  +set-bkg-color-and-hover($accent-med)
+
+/// Makes an element background color Diamondback Yellow
+/// @requires {mixin} set-bkg-color-and-hover
+%ui-accent-light
+  +set-bkg-color-and-hover($accent-light)
+
+/// Removes the border from an element
+/// @requires {mixin} borderless
+%ui-borderless
+  +borderless
+
+/// Make an element full screen
+/// @requires {mixin} size
+%ui-full
+  +size(100vw, 100vh)
+
+/// Make a element not transparent
+/// @requires {mixin} opacity
+%ui-not-transparent
+  +opacity(1)
+
+/// Make an element the height of its parent
+/// @requires {mixin} stretch
+%ui-stretch
+  +stretch
+
+/// Make an element transparent
+/// @requires {mixin} opacity
+%ui-transparent
+  +opacity(0)
+
+  background-color: transparent

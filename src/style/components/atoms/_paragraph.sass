@@ -1,0 +1,49 @@
+// ----------------------------------------------------------------------------
+// Paragraph specific styles, variables, placeholders, mixins and functions
+// @see components/atoms/Paragraph.jsx
+// @author Lexus Drumgold
+// ----------------------------------------------------------------------------
+
+// Styles
+
+.ada-paragraph
+  color: $light
+  margin: 0
+
+  > span
+    font-weight: 600
+
+.author,
+.category
+  +respond-to($breakpoint-xxl)
+    font-size: size(14) !important
+
+
+  +respond-to($breakpoint-xxxl, min)
+    font-size: size(20) !important
+
+
+  font-weight: 500 !important
+  text-transform: uppercase
+
+.blurb
+  +respond-to($breakpoint-xl)
+    font-size: size(16)
+
+
+  +respond-to($breakpoint-xxl, min)
+    font-size: size(20)
+
+
+  width: 100%
+
+.category
+  color: $accent-med
+
+.subheading
+  +respond-to($breakpoint-xxl)
+    font-size: size(16) !important
+
+
+  font-weight: 300
+  text-transform: uppercase

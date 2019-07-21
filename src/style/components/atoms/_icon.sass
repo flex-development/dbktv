@@ -1,0 +1,40 @@
+// ----------------------------------------------------------------------------
+// Icon specific styles, variables, placeholders, mixins and functions
+// @see components/atoms/Icon.jsx
+// @author Lexus Drumgold
+// ----------------------------------------------------------------------------
+
+// Variables
+
+// Default icon style
+// 1. Add icons we're using
+// 2. Adds Font Awesome icon styles to our default icon
+// 3. Set default font size
+// 4. Add space around the icon
+.ada-icon
+  font-size: size(14)
+  margin: size(8)
+
+  // Background color = Diamondback Blue
+  &.ui-accent-dark
+    color: $accent-dark
+
+  // Font color = Diamondback Red
+  &.ui-accent-med
+    color: $accent-med
+
+  // Font color = Diamondback Yellow
+  &.ui-accent-light
+    color: $accent-light
+
+  // Font color = Dark base color
+  &.ui-dark
+    color: $accent-dark
+
+  // Font color = Light base color
+  &.ui-light
+    color: $accent-light
+
+  // Font color = white
+  &.ui-white
+    color: $white

@@ -1,0 +1,20 @@
+{
+  "firebase": {
+    "apiKey": "AIzaSyBOkrT_f_WhtkHQ2LfNk4zgerClCdP1SJQ",
+    "authDomain": "thedbktv.firebaseapp.com",
+    "databaseURL": "https://thedbktv.firebaseio.com",
+    "projectId": "thedbktv",
+    "storageBucket": "thedbktv.appspot.com",
+    "messagingSenderId": "700606859987",
+    "appId": "1:700606859987:web:91b3c2635f9bb934"
+  },
+  "host": "localhost",
+  "port": 5000,
+  "routes": {
+    "articles": "articles",
+    "decks": "decks",
+    "docs": "docs",
+    "multimedia": "multimedia",
+    "news": "news"
+  }
+}

@@ -1,0 +1,51 @@
+// ----------------------------------------------------------------------------
+// Link specific styles, variables, placeholders, mixins and functions
+// @see components/atoms/Link.jsx
+// @author Lexus Drumgold
+// ----------------------------------------------------------------------------
+
+// Default link
+// 1. Style &:hover, &:active, &:focus -> add cursor and increase font weight
+// 2. Set default color to Diamondback Red
+// 3. Remove text decoration
+.ada-link
+  +event
+    cursor: pointer
+    font-weight: 600
+
+
+  color: $accent-med
+  text-decoration: none
+
+  &.headline,
+  &.footer
+    color: $light
+    font-weight: 600
+
+  &.headline
+    +respond-to($breakpoint-xl)
+      font-size: size(28)
+
+
+    +respond-to($breakpoint-xxl, min)
+      font-size: size(40)
+
+
+    +respond-to($breakpoint-xxxl, min)
+      font-size: size(48)
+
+
+    font-size: size(28)
+    font-weight: 700
+
+    &.feature
+      font-size: size(48)
+
+  &.related-article
+    color: $light-gray
+    font-size: size(20)
+    font-style: italic
+
+  &.footer
+    color: $light
+    margin-right: size(16)

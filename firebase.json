@@ -1,0 +1,47 @@
+{
+  "functions": {
+    "source": "functions",
+    "predeploy": [
+      "NODE_ENV=production",
+      "npm run lint"
+    ]
+  },
+  "hosting": {
+    "public": "public",
+    "cleanUrls": true,
+    "trailingSlash": false,
+    "predeploy": [
+      "NODE_ENV=production",
+      "npm run lint",
+      "npm run build"
+    ],
+    "redirects": [
+      {
+        "source": "/:year/:month/:day/:title",
+        "destination": "https://dbknews.com/:year/:month/:day/:title",
+        "type": 301
+      },
+      {
+        "source": "/repo",
+        "destination": "https://github.com/The-Diamondback-Lab/dbktv",
+        "type": 301
+      }
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ],
+    "ignore": [
+      "babel.config.js",
+      "firebase.json",
+      "jest.config.js",
+      "preact.config.js",
+      "prerender-urls.json",
+      "**/.*",
+      "**/node_modules/**",
+      "**/tests/**"
+    ]
+  }
+}

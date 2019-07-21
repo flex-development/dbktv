@@ -1,0 +1,35 @@
+// ----------------------------------------------------------------------------
+// Article specific styles, variables, placeholders, mixins and functions
+// @see components/templates/Article.jsx
+// @author Lexus Drumgold
+// ----------------------------------------------------------------------------
+
+// Variables
+$article-height: auto
+$article-width: 40%
+
+.adt-article
+  +constrain($article-width)
+
+  // Background image url is set dynamically
+
+  background-position: center
+  background-repeat: no-repeat
+  background-size: cover
+  border-bottom: $border
+  max-width: $article-width
+
+.article-content
+  +size(100%)
+
+.article-header
+  +flex(row, center)
+
+  margin-bottom: size(5)
+  width: 100%
+
+  > .ada-paragraph
+    margin: 0 size(10) 0 0
+
+.blurb
+  margin: size(10) 0 size(20)

@@ -1,0 +1,20 @@
+// ----------------------------------------------------------------------------
+// Loading specific styles, variables, placeholders, mixins and functions
+// @see components/atoms/Loading.jsx
+// @author Lexus Drumgold
+// ----------------------------------------------------------------------------
+
+// Default loading component style
+// 1. Set height/width of loading container to 100%. Will grow to size of parent
+// 2. Add padding to top and bottom of the loading container
+// 3. Target inner container and change font color of loading icon
+.adm-loading
+  +size(100%)
+
+  padding: size(45) 0
+
+  > .ada-container
+    +flex(row, center, center)
+
+    .ada-icon
+      color: $accent-med

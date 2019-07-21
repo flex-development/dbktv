@@ -1,0 +1,29 @@
+// ----------------------------------------------------------------------------
+// Feature specific styles, variables, placeholders, mixins and functions
+// @see components/templates/Feature.jsx
+// @author Lexus Drumgold
+// ----------------------------------------------------------------------------
+
+// Variables
+$feature-height: 100vh
+$feature-width: 100vw
+
+// Styles
+
+.adt-feature
+  +flex(row, center, center)
+  +relative
+  +size($feature-width, $feature-height)
+
+  > .ada-image
+    +absolute(0, null, null, 0)
+    +opacity(0.1)
+    +size(100%, auto)
+
+    height: 100%
+    margin: 0 auto
+    width: 100%
+    z-index: -1
+
+  > .adt-article
+    z-index: 5

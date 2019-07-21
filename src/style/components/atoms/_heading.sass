@@ -1,0 +1,19 @@
+// ----------------------------------------------------------------------------
+// Heading specific styles, variables, placeholders, mixins and functions
+// @see components/atoms/Heading.jsx
+// @author Lexus Drumgold
+// ----------------------------------------------------------------------------
+
+// Default heading text
+// 1. Set font weight
+// 2. Remove margin
+.ada-heading
+  font-weight: 700
+  margin: 0
+
+h1.ada-heading
+  +respond-to($breakpoint-schmedium)
+    font-size: size(30)
+
+
+  font-size: size(40)

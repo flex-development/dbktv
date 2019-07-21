@@ -1,0 +1,203 @@
+//// ---------------------------------------------------------------------------
+/// This file contains all application-wide Sass mixins.
+//// ---------------------------------------------------------------------------
+
+/// Wrapper for animation property
+/// @param {String} $name - animation-name
+/// @param {Number} $duration [1.25s] - animation-duration
+/// @param {String} $timing [ease] - animation-timing-function
+/// @param {Number} $delay [0s] - animation-delay
+=animation($name, $duration: 1.25s, $timing: ease, $delay: 0s)
+  animation: $name $duration $timing $delay
+
+/// Removes the border from an element
+=borderless
+  border: none
+
+/// Set an element's width and max-width to the same value
+/// @param {Number} $width - Element width and max-width
+/// @param {Number} $height [$width] - Element height
+=constrain($width)
+  @if $width == null
+    @error '$width parameter is required'
+
+  max-width: $width
+  width: $width
+
+/// Event wrapper for &:hover, &:active, &:focus
+/// @param {Bool} $self [false] - Whether or not to include current selector
+=event($self: false)
+  @if $self
+    &, &:hover, &:active, &:focus
+      @content
+  @else
+    &:hover, &:active, &:focus
+      @content
+
+/// Display: flex helper
+/// @param {String} $flexDirection [row] - flex-direction
+/// @param {String} $alignItems [stretch] - align-items
+/// @param {String} $justifyContent [flex-start] - justify-content
+=flex($flexDirection: row, $alignItems: stretch, $justifyContent: flex-start)
+  display: flex
+  flex-direction: $flexDirection
+  align-items: $alignItems
+  justify-content: $justifyContent
+
+  @content
+
+/// Target $child elements inside $context
+/// @param {String | List} $context - Parent element(s)
+/// @param {String | List} [null] $child - Child element(s)
+=inside($context, $child: null)
+  @if $child != null
+    #{$context}
+      & #{$child}
+        @content
+  @else
+    #{$context} &
+      @content
+
+/// Mixin to handle cross browser keyframes for CSS animations.
+/// @group cross-browser-support
+/// @param {String} $name - Name of animation
+=keyframes($name)
+  @-webkit-keyframes #{$name}
+    @content
+
+  @keyframes #{$name}
+    @content
+
+/// Mixin for cross-browser opacity (IE 8).
+/// Clamps the value between 0 and 1.
+/// @group cross-browser-support
+/// @requires {function} clamp
+/// @param {Number} $opacity - Opacity level, between 0 and 1
+=opacity($opacity)
+  $filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=#{$opacity * 100})'
+  $opacity: clamp($opacity, 0, 1)
+
+  -ms-filter: $filter
+  opacity: $opacity
+
+/// Shorthand for positioning.
+/// @access private
+/// @param {String} $position - Position type - `absolute` |`fixed` | `relative`
+/// @param {Length} $top [null] - Top offset
+/// @param {Length} $right [null] - Right offset
+/// @param {Length} $bottom [null] - Bottom offset
+/// @param {Length} $left [null] - Left offset
+=position($position, $top: null, $right: null, $bottom: null, $left: null)
+  position: $position
+  top: $top
+  right: $right
+  bottom: $bottom
+  left: $left
+
+/// Shorthand for absolute positioning.
+/// @requires {mixin} position
+/// @param {Arglist} $args - Offsets
+/// @example sass - Stretch an item over its parent.
+///  @include absolute($top: 0, $right: 0, $bottom: 0, $left: 0)
+=absolute($args...)
+  @if $args
+    +position(absolute, $args...)
+  @else
+    +position(absolute)
+
+/// Shorthand for fixed positioning.
+/// @requires {mixin} position
+/// @param {Arglist} $args - Offsets
+=fixed($args...)
+  @if $args
+    +position(fixed, $args...)
+  @else
+    +position(fixed)
+
+/// Shorthand for relative positioning.
+/// @requires {mixin} position
+/// @param {Arglist} $args - Offsets
+=relative($args...)
+  @if $args
+    +position(relative, $args...)
+  @else
+    +position(relative)
+
+/// Mixin to prefix properties
+/// @group cross-browser-support
+/// @example @include prefixer('transform', 'translate(10px)')
+/// @param {String} $property - Property to prefix
+/// @param {*} $value  - Value for property
+/// @param {List} $vendors ['webkit' 'moz' 'ms' 'o'] - Vendor prefixes to output
+=prefixer($property, $value, $vendors: 'webkit' 'moz' 'ms' 'o')
+  @if $vendors
+    @each $vendor in $vendors
+      #{'-' + $vendor + '-' + $property}: #{$value}
+
+  #{$property}: #{$value}
+
+/// Media query mixin
+/// @param {Number} $breakpoint - Breakpoint value
+/// @param {String} $bound [max] - Target max or min width/height
+/// @param {String} $dimension [width] - Target width or height
+=respond-to($breakpoint, $bound: max, $dimension: width)
+  @if $bound == min
+    @if $dimension == height
+      @media all and (min-height: $breakpoint)
+        @content
+    @else
+      @media all and (min-width: $breakpoint)
+        @content
+  @else
+    @if $dimension == height
+      @media all and (max-height: $breakpoint)
+        @content
+    @else
+      @media all and (max-width: $breakpoint)
+        @content
+
+/// Sets the initial background color of an element and the element's
+/// background color when it is hovered over.
+/// @param {Color} $color - Initial background color
+/// @param {Color} $hoverColor [darken($color, 5%)] - Background color on hover
+=set-bkg-color-and-hover($color, $hoverColor: darken($color, 5%))
+  background-color: $color
+
+  &:hover
+    background-color: $hoverColor
+
+/// Background image helper
+/// @param {String} $filename - name of image file with extension
+/// @param {List} $pos [center center] - background-position
+/// @param {String} $repeat [no-repeat] - background-repeat
+/// @param {String} $size [cover] - background-size
+=set-bkg-img($filename, $pos: center center, $repeat: no-repeat, $size: cover)
+  background:
+    image: image('#{$filename}')
+    position: $pos
+    repeat: $repeat
+    size: $size
+
+  @content
+
+/// Make an element the height of its parent
+=stretch
+  height: 100%
+  max-height: 100%
+
+  @content
+
+/// Set an element's height and width
+/// @param {Number} $width - Element width
+/// @param {Number} $height [$width] - Element height
+=size($width, $height: $width)
+  height: $height
+  width: $width
+
+/// Wrapper for transition property
+/// @param {String} $property [all] - transition-property
+/// @param {Number} $duration [.25s] - transition-duration
+/// @param {String} $timing [ease] - transition-timing
+/// @param {Number} $delay [0s] - transition-delay
+=transition($property: all, $duration: 0.25s, $timing: ease, $delay: 0s)
+  transition: $property $duration $timing $delay

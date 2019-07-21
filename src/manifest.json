@@ -1,0 +1,15 @@
+{
+  "name": "Diamondback TV",
+  "short_name": "DBKTV",
+  "start_url": "/feature",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#1A1A1A",
+  "theme_color": "#E51D37",
+  "icons": [
+    {
+      "src": "/assets/icons/app-icon-192.png",
+      "sizes": "192x192"
+    }
+  ]
+}

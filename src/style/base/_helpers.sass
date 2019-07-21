@@ -1,0 +1,25 @@
+// -----------------------------------------------------------------------------
+// This file contains helper classes.
+// -----------------------------------------------------------------------------
+
+// Removes the border from an element
+.ui-borderless
+  @extend %ui-borderless
+
+// Make an element as tall and wide as the viewport
+.ui-full
+  @extend %ui-full
+
+// Make an element invisible
+.ui-hide
+  @extend %ui-transparent
+
+  display: none
+
+// Make an element visible
+.ui-show
+  @extend %ui-not-transparent
+
+/// Make an element the height of its parent
+.ui-stretch
+  @extend %ui-stretch
