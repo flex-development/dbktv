@@ -33,14 +33,9 @@ Follow the steps below to get your development environment set up.
 
 ## Making Changes
 
-This project is built with [Preact][1], a smaller alternative to [React][2].
-
-To begin making changes, run the command `npm run dev` in your terminal.  
-This command will compile both your JSX and Sass files.
-
-### Directories & Files
-
-**Attention: This section is under construction.**
+This project uses [Flamelink][1] for its Content Management System, [Google Firebase][2]
+on the backend, and [Preact][3], a smaller alternative to [React][4], on the
+frontend.
 
 ### JavaScript Style
 
@@ -52,17 +47,89 @@ This command will compile both your JSX and Sass files.
 - **Space after keywords** `if (condition) { ... }`
 - Always use `===` instead of `==` – but `obj == null` is allowed to check `null || undefined`.
 
-For a detailed overview of our JavaScript style, visit [**StandardJS**][3].
+For a detailed overview of our JavaScript style, visit [**StandardJS**][5].
 You'll find not only an overview of Standard Style, but a list of editor plugins
 as well.
 
+### Cloud Functions
+
+Make your changes under the `functions` directory.
+
+1. Retreive the `credentials.firebase.json` file from a team leader. Place it
+   under in the the `functions/cms` directory.
+2. Run `npm run dev-functions` to begin emulating Cloud Functions in a
+   `development` Node environment.
+3. After running the command, you'll see something similar to the following in
+   your terminal:
+
+   ```bash
+    wireless-10-105-182-92:dbktv LexusDrumgold$ npm run dev-functions
+
+    > @thedbklab/diamondbacktv@1.0.0 dev-functions /Users/LexusDrumgold/Documents/projects/dbktv
+    > npm run --prefix functions dev
+
+
+    > @thedbklab/dbktvcloud@1.0.0 dev /Users/LexusDrumgold/Documents/projects/dbktv/functions
+    > NODE_ENV=development firebase serve --only functions
+
+    ⚠  Your requested "node" version "10" doesn't match your global version "12"
+    ✔  functions: Emulator started at http://localhost:5000
+    i  functions: Watching "/Users/LexusDrumgold/Documents/projects/dbktv/functions" for Cloud Functions...
+    >  Initialized Documentation service on http://localhost:5000/thedbktv/us-central1/cloud/docs
+    >  Node environment: development -> Cloud services started on http://localhost:5000
+    i  functions: HTTP trigger initialized at http://localhost:5000/thedbktv/us-central1/cloud
+   ```
+
+#### Cloud Functions: Directories & Files
+
+- `functions/cms`: Flamelink and Firebase configuration. Exports a configured CMS client
+- `functions/config`: Contains our Feathers configuration files, as well as our
+  Firebase Admin credentials. To learn more about Feathers configuration, visit
+  [this link][6]
+- `functions/controllers`: Application controllers
+- `functions/feathers`: [Feathers][7] application, services, hooks, models, and
+  utility functions
+- `functions/triggers`: [Firebase Cloud Function][8] triggers
+- `functions/index.js`: Exports our cloud functions
+
+### User Interface
+
+The design spec can be found [here][9]. When ready, make your changes under the
+`src` directory.
+
+1. Run `npm run dev-hosting` to launch the DBKTV frontend in a `development`
+   Node environment. This command will compile both your JSX and Sass files, as
+   watch your files for changes you develop.
+2. If successful, you'll see something similar to the following in your terminal:
+
+   ```bash
+    Compiled successfully!
+
+    You can view the application in browser.
+
+    Local:            http://localhost:3000
+    On Your Network:  http://10.105.182.92:3000
+   ```
+
+#### User Interface: Directories & Files
+
+- `src/assets`: Project fonts, images, and icons
+- `src/components`: Preact components, organized in an [Atomic Design][10] pattern
+- `src/components/index.js`: Main application
+- `src/context`: Context configuration. For information on Peact Context, please view [this link][11]
+- `src/style`: Application stylesheets, built with [Sass][12], and organized in an [Atomic Design][10] pattern
+- `src/utils`: Frontend utility functions
+- `src/index.html`: HTML template
+- `src/index.js`: Exports our web app
+- `./preact.config.js`: Preact configuration
+
 ## Testing
 
-For generating sample test data, use [**Mockaroo**][4].
+For generating sample test data, use [**Mockaroo**][13].
 
 **Snapshot Testing**
 Under `tests/__snapshots__`, add `*.snap` file to test your component spec
-against. For information on creating Jest Snapshots, please visit [this link][5].
+against. For information on creating Jest Snapshots, please visit [this link][14].
 
 **Running Tests**
 When you're ready to test your changes, you have two options:
@@ -74,7 +141,7 @@ When you're ready to test your changes, you have two options:
 
 ## Documentation
 
-Following [JSDoc][6] standards, be sure to document any
+Following [JSDoc][15] standards, be sure to document any
 functions, classes, and other code you write. It will be reviewed by a reviewer
 during your code review, and your pull request will be denied if any code is
 improperly documented.
@@ -105,15 +172,24 @@ For example:
 
 ## Submit for Review
 
-- Use [**this template**][7]
+- Use [**this template**][16]
 - Label your pull request as `help wanted` and `pull request`
 - Prefix your pull request title with `PR  -`
 - Assign the task to yourself and the appropriate reviewer
 
-[1]: https://preactjs.com/
-[2]: https://reactjs.org/
-[3]: https://standardjs.com
-[4]: https://mockaroo.com/
-[5]: https://jestjs.io/docs/en/snapshot-testing
-[6]: https://jsdoc.app/
-[7]: https://gist.github.com/lexusdrumgold/47ca17fdc04739ffd85b0bf96d546ae7
+[1]: https://flamelink.github.io/flamelink/
+[2]: https://firebase.google.com/
+[3]: https://preactjs.com/
+[4]: https://reactjs.org/
+[5]: https://standardjs.com
+[6]: https://docs.feathersjs.com/api/configuration.html
+[7]: https://docs.feathersjs.com/
+[8]: https://firebase.google.com/docs/functions
+[9]: https://xd.adobe.com/spec/d8902b2f-721b-4006-5b21-ffd8e4e42993-aea1/
+[10]: http://atomicdesign.bradfrost.com/chapter-2/
+[11]: https://github.com/preactjs/preact/releases/tag/10.0.0-alpha.0
+[12]: https://sass-lang.com/
+[13]: https://mockaroo.com/
+[14]: https://jestjs.io/docs/en/snapshot-testing
+[15]: https://jsdoc.app/
+[16]: https://gist.github.com/lexusdrumgold/47ca17fdc04739ffd85b0bf96d546ae7
