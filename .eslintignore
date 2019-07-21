@@ -2,5 +2,4 @@
 # Ignore build files, design files, and assets
 
 ./build/*
-./design/*
 ./src/assets/*

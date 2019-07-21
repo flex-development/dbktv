@@ -22,6 +22,10 @@ DiamondbackTV (DBKTV) is a digital signage project with the goal of streaming
 specially curated Diamondback content - feature stories, multimedia, article
 previews, and advertisements - to various televisions on campus.
 
+### Design
+
+A prototype of the project can be viewed at [this link][1].
+
 ## Usage
 
 **Attention: This section is under construction.**
@@ -33,8 +37,9 @@ our [Guide to Contributing](CONTRIBUTING.md).
 
 ## Built With
 
-- [Google Firebase][1] - Mobile development platform
-- [Preact.js][2] - JavaScript library for building user interfaces
+- [Google Firebase][2] - Mobile development platform
+- [Preact.js][3] - JavaScript library for building user interfaces
 
-[1]: https://firebase.google.com/
-[2]: https://preactjs.com/
+[1]: https://xd.adobe.com/view/e8f623a2-52e8-455d-7f57-05d9fa1ad038-9ec7/
+[2]: https://firebase.google.com/
+[3]: https://preactjs.com/
