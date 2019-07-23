@@ -6,30 +6,44 @@
 
 // Variables
 $article-height: auto
-$article-width: 40%
+$article-width: 50%
+$article-width-alt: 87.5%
 
 .adt-article
   +constrain($article-width)
+  +respond-to($breakpoint-schmedium)
+    +constrain($article-width-alt)
 
-  // Background image url is set dynamically
+    max-width: $article-width-alt
 
-  background-position: center
-  background-repeat: no-repeat
-  background-size: cover
+
   border-bottom: $border
   max-width: $article-width
 
-.article-content
-  +size(100%)
+  > .headline
+    +respond-to($breakpoint-xxl, min)
+      font-size: size(30)
+
+
+    font-size: size(24)
+
+  &.feature
+    > .headline
+      +event
+        font-weight: 700
+
+
+      +respond-to($breakpoint-xxl, min)
+        font-size: size(48)
+
+
+      font-size: size(32)
 
 .article-header
-  +flex(row, center)
+  +flex
 
   margin-bottom: size(5)
   width: 100%
 
   > .ada-paragraph
     margin: 0 size(10) 0 0
-
-.blurb
-  margin: size(10) 0 size(20)

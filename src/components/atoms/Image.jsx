@@ -1,6 +1,10 @@
 // Packages
 import { h, Component } from 'preact'
 
+// Logos
+import full_light from '../../assets/images/diamondback-tv-logo-light.png'
+import mini_light from '../../assets/images/dbk-tv-logo-light.png'
+
 /**
  * Component representing an <img> element.
  *

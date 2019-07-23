@@ -22,11 +22,14 @@ html
 \::-webkit-scrollbar
   display: none
 
-body,
-main
+body
   +size(100vw, 100vh)
 
-// Change background color to dark base color
-body
   background-color: $dark
+  color: $light
   margin: 0 !important
+
+main,
+section
+  height: 100%
+  min-height: 100%
