@@ -1,0 +1,26 @@
+// ----------------------------------------------------------------------------
+// Loading specific styles, variables, placeholders, mixins and functions
+// @see components/molecules/Loading.jsx
+// @author Lexus Drumgold
+// ----------------------------------------------------------------------------
+
+// Variables
+
+$icon-size: size(40)
+
+.adm-loading
+  +flex(column, center, center)
+
+  > .adm-logo
+    margin-top: size(60)
+
+  > .ada-heading
+    font-weight: 300
+    margin: size(20) 0
+
+    .ada-link
+      color: $accent-med
+
+  > .ada-icon
+    color: $accent-light
+    font-size: $icon-size

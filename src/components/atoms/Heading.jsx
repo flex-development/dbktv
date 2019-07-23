@@ -28,34 +28,22 @@ export default class Heading extends Component {
 
     switch (size) {
       case 2:
-        element = <h2 className={style} id={id} dangerouslySetInnerHTML={{
-          __html: (children || '').replace('\n', '<br/><br/>')
-        }} />
+        element = <h2 className={style} id={id}>{children}</h2>
         break
       case 3:
-        element = <h3 className={style} id={id} dangerouslySetInnerHTML={{
-          __html: (children || '').replace('\n', '<br/><br/>')
-        }} />
+        element = <h3 className={style} id={id}>{children}</h3>
         break
       case 4:
-        element = <h4 className={style} id={id} dangerouslySetInnerHTML={{
-          __html: (children || '').replace('\n', '<br/><br/>')
-        }} />
+        element = <h4 className={style} id={id}>{children}</h4>
         break
       case 5:
-        element = <h5 className={style} id={id} dangerouslySetInnerHTML={{
-          __html: (children || '').replace('\n', '<br/><br/>')
-        }} />
+        element = <h5 className={style} id={id}>{children}</h5>
         break
       case 6:
-        element = <h6 className={style} id={id} dangerouslySetInnerHTML={{
-          __html: (children || '').replace('\n', '<br/><br/>')
-        }} />
+        element = <h6 className={style} id={id}>{children}</h6>
         break
       default:
-        element = <h1 className={style} id={id} dangerouslySetInnerHTML={{
-          __html: (children || '').replace('\n', '<br/><br/>')
-        }} />
+        element = <h1 className={style} id={id}>{children}</h1>
         break
     }
 

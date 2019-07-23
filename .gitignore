@@ -133,10 +133,7 @@ typings/
 # End of https://www.gitignore.io/api/node,macos,firebase
 
 # Build files
-public/
+build/
 
 # Credentials
 functions/config/credentials.firebase.json
-
-# Babel config needed for VSCode
-babel.config.js

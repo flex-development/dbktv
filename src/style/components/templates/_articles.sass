@@ -1,0 +1,39 @@
+// ----------------------------------------------------------------------------
+// Articles specific styles, variables, placeholders, mixins and functions
+// @see components/templates/Articles.jsx
+// @author Lexus Drumgold
+// ----------------------------------------------------------------------------
+
+// Style
+
+.adt-articles
+  +flex(column, center, center)
+
+  > .ada-container
+    +flex(row, flex-start, center)
+
+    height: 100%
+
+.articles
+  > .adt-article
+    margin-bottom: size(40)
+
+    .article-header
+      > .ada-paragraph
+        +respond-to($breakpoint-xl)
+          font-size: size(16)
+
+.left-rail,
+.right-rail
+  height: 100%
+
+.left-rail
+  // +constrain(74.5%)
+  +flex(column, flex-start, center)
+
+.right-rail
+  // +constrain(24.5%)
+  +flex(row, center, center)
+
+  > .ada-advertisement
+    +size(size(300), size(600))

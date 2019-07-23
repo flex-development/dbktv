@@ -22,7 +22,7 @@ const Preact = {
       ]
     ]
   },
-  template: './src/index.html'
+  template: './public/index.html'
 }
 
 /**
@@ -36,6 +36,8 @@ const Preact = {
  * working with the webpack config.
  */
 export default function (config, env, helpers) {
+  config.node.process = 'mock'
+
   // Initialize environment variables for the application
   // Application environment variables are prefixed with PREACT_APP_
   envVars(config, env, helpers)

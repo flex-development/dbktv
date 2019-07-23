@@ -20,12 +20,12 @@ export default class Paragraph extends Component {
    * @returns {HTMLParagraphElement}
    */
   render(props, state, context) {
-    const { className, id, paragraph } = props
+    const { className, children, id } = props
     const style = (`ada-paragraph ${className || ''}`).trim()
 
     return (
       <p id={id} className={style} dangerouslySetInnerHTML={{
-        __html: (paragraph || '').replace('\n', '<br/><br/>')
+        __html: children
       }} />
     )
   }

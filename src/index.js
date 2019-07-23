@@ -4,11 +4,14 @@ import 'preact/debug'
 // Application
 import App from './components'
 
-// Styles
-import './style/app.sass'
 
 /**
  * @file Application entry point
+ * 
+ * @todo Lint codebase
+ * @todo Update documentation
+ * @todo Make app real time
+ * 
  * @author Lexus Drumgold <lex@lexusdrumgold.design>
  */
 

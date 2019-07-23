@@ -1,0 +1,28 @@
+// ----------------------------------------------------------------------------
+// Error page specific styles, variables, placeholders, mixins and functions
+// @see components/pages/Error.jsx
+// @author Lexus Drumgold
+// ----------------------------------------------------------------------------
+
+.adp-error
+  > .ada-container
+    +flex(column, flex-start, center)
+
+    height: 100%
+
+    code,
+    .ada-heading
+      color: $white
+
+    .ada-heading
+      margin-bottom: size(16)
+
+    code
+      &:first-of-type
+        margin-bottom: size(8)
+
+      font-size: size(20)
+
+      span
+        color: $accent-med
+        font-weight: 600

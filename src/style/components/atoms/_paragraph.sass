@@ -14,27 +14,27 @@
     font-weight: 600
 
 .author,
+.blurb,
 .category
-  +respond-to($breakpoint-xxl)
-    font-size: size(14) !important
-
-
-  +respond-to($breakpoint-xxxl, min)
-    font-size: size(20) !important
-
-
-  font-weight: 500 !important
-  text-transform: uppercase
-
-.blurb
-  +respond-to($breakpoint-xl)
-    font-size: size(16)
-
-
   +respond-to($breakpoint-xxl, min)
     font-size: size(20)
 
 
+  +respond-to($breakpoint-xxxl, min)
+    font-size: size(24)
+
+
+  font-size: size(16)
+
+.author,
+.category
+  font-weight: 500
+  margin-right: size(10)
+  text-transform: uppercase
+
+.blurb
+  font-weight: 300
+  margin: size(10) 0 size(20)
   width: 100%
 
 .category
@@ -42,8 +42,15 @@
 
 .subheading
   +respond-to($breakpoint-xxl)
-    font-size: size(16) !important
+    font-size: size(24)
 
 
-  font-weight: 300
+  font:
+    size: size(18) !important
+    weight: 300
+  margin-bottom: size(10)
   text-transform: uppercase
+
+  > .ada-link
+    color: $light
+    font-weight: 500
