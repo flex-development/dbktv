@@ -10,52 +10,6 @@ import $ from 'jquery'
 
 export default {
   /**
-   * Attaches or detaches a window scroll listener to the window resize event.
-   *
-   * @see @param fn defaults to null, @see @param on defaults to false.
-   *
-   * @param {Function} fn - Function to call on window resize
-   * @param {boolean} on - True if scroll window listener should be added
-   * @returns {boolean} @see @param on
-   * @throws {GeneralError}
-   */
-  handle_window_resize: (fn = null, on = false) => {
-    // Check if resize function exists. If so, attach listener
-    if (on && !fn) throw new GeneralError('Function required.', { on })
-
-    /**
-     * Remove scroll window listener if @see @param on is false,
-     * or attach the listener
-     */
-    on ? $(window).resize(() => fn()) : $(window).off('resize')
-
-    return on
-  },
-
-  /**
-   * Attaches or detaches a window scroll listener to window scroll event.
-   *
-   * @see @param fn defaults to null, @see @param on defaults to false.
-   *
-   * @param {Function} fn - Function to call on window scroll
-   * @param {boolean} on - True if scroll window listener should be added
-   * @returns {boolean} @see @param on
-   * @throws {BadRequest}
-   */
-  handle_window_scroll: (fn = null, on = false) => {
-    // Check if scroll function exists. If so, attach listener
-    if (on && !fn) throw new GeneralError('Function required.', { on })
-
-    /**
-     * Remove scroll window listener if @see @param on is false,
-     * or attach the listener
-     */
-    on ? $(window).scroll(() => fn()) : $(window).off('scroll')
-
-    return on
-  },
-
-  /**
    * Checks if an element is in the viewport.
    *
    * @param {string} selector - A string containing a selector expression
@@ -88,13 +42,6 @@ export default {
 
     return element
   },
-
-  /**
-   * Returns true if the viewport width is <= 768px.
-   *
-   * @returns {boolean} If viewport width is <= 768px.
-   */
-  is_mobile: () => $(window).width() <= 768,
 
   /**
    * Returns true if the user has scrolled the page.

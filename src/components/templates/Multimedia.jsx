@@ -9,7 +9,7 @@ import {
 export default class Multimedia extends Component {
   componentDidMount() {
     const { duration, next, slide } = this.props
-    slide(30000, next)
+    slide(duration, next)
   }
 
   render(props, state) {

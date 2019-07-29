@@ -1,6 +1,6 @@
 // Packages
 import { h, Component } from 'preact'
-import { DFPSlotsProvider, AdSlot } from 'react-dfp'
+// import { DFPSlotsProvider, AdSlot } from 'react-dfp'
 
 // Components
 import { Container, Subheading } from '../atoms'
@@ -28,7 +28,7 @@ export default class Articles extends Component {
 
   componentDidMount() {
     const { duration, next, slide } = this.props
-    slide(30000, next)
+    slide(duration, next)
   }
 
   /**

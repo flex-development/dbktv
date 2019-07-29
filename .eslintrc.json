@@ -26,6 +26,7 @@
   "root": true,
   "rules": {
     "camelcase": 0,
+    "react/jsx-key": 0,
     "react/prop-types": 0,
     "space-before-function-paren": 0
   }

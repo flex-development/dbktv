@@ -28,7 +28,7 @@ export default class News extends Component {
   componentDidMount() {
     const { duration, next, content, slide } = this.props
     $('.ado-deck').css('background-image', `url(${content.image.src})`)
-    slide(30000, next)
+    slide(duration, next)
   }
 
   componentWillUnmount() {

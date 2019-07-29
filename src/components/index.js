@@ -1,14 +1,11 @@
 // Packages
-import { h, Component, Fragment } from 'preact'
+import { h, Component } from 'preact'
 import { BadRequest } from '@feathersjs/errors'
 import $ from 'jquery'
 
-
 // Components
-import { LoadingIcon } from './atoms'
-import { Loading } from './molecules'
 import { Deck } from './organisms'
-import { ErrorScreen, Landing } from './pages'
+import { Error, Loading } from './screens'
 
 // Mock data
 import mock from '../../tests/__mocks__/Deck.mock.json'
@@ -16,13 +13,9 @@ import mock from '../../tests/__mocks__/Deck.mock.json'
 // Styles
 import '../style/app.sass'
 
-// Utilities
-import utils from '../utils'
-
 /**
  * Class representing the web application.
  *
- * @todo Implement state handlers
  * @todo Implement data fetching
  * @todo Implement real time data streaming
  *
@@ -32,10 +25,10 @@ import utils from '../utils'
  */
 export default class App extends Component {
   /**
-   * Creates a new application.
+   * Creates a new Diamondback TV web application.
    *
    * @param {object} props - Component properties
-   * @returns {App}
+   * @returns {<App/>}
    */
   constructor(props) {
     super(props)
@@ -48,8 +41,8 @@ export default class App extends Component {
      * @property {object[]} state.deck.slides - Slide content
      * @property {FeathersError | null} state.error - Current error
      * @property {object | string | null} state.info - Error info or stack
-     * @property {boolean} state.loading - True if fetching content
-     * @property {boolean} state.mobile - True if viewport width <= 768px
+     * @property {boolean} state.loading - True if fetching slide deck
+     * @property {boolean} state.mobile - True if window width <= 768px
      * @instance
      */
     this.state = {
@@ -58,21 +51,22 @@ export default class App extends Component {
   }
 
   /**
-   * If an error is caught, the deck @see state.error and @see state.info will
-   * be updated.
+   * If an error is caught, the app's internal error state, @see state.error,
+   * and it's associated info, @see state.info will be updated.
    *
    * @param {FeathersError} error - Current error
    * @param {object} info - Error information
    * @returns {undefined}
    */
   componentDidCatch(error, info) {
-    console.error('Error caught by App component ->', error)
-    this.setState({ error, info })
+    return this.setState({ error, info }, () => console.error('!ERR:', error))
   }
 
   /**
    * Fetches the initial slide deck data and then subscribes to new data
    * changes.
+   *
+   * @todo Subscribe to data changes from the API
    *
    * @async
    * @returns {undefined}
@@ -82,8 +76,8 @@ export default class App extends Component {
     document.title = 'DiamondbackTV 📺'
 
     // Update mobile state and attach window listener to update mobile state
-    this.setState({ mobile: $(window).width() <= 768 })
-    this.resize()
+    this.setState({ mobile: this.mobile() })
+    $(window).resize(this.resize())
 
     try {
       // Get initial data
@@ -97,32 +91,28 @@ export default class App extends Component {
     setTimeout(() => this.setState({ loading: false }), 1200)
   }
 
-
   /**
    * Remove window listeners and unsubscribes from data changes.
+   *
+   * @todo Unsubscribe from data changes
    *
    * @returns {undefined}
    */
   componentWillUnmount() {
-    // Unsubscribe from data changes
+    // TODO: Unsubscribe from data changes
 
     // Remove resize window listener
     $(window).off('resize')
   }
 
   /**
-   * Creates a deck slide. After @see @param duration ms, the window location
-   * will be set to @see @param next .
-   * 
-   * @param {number} duration - Slide duration in ms
-   * @param {string} next - URL of next slide
-   * @returns {undefined}
+   * Retreives the current slide deck from the DBKTV API.
+   *
+   * @todo Replace mock data with server call after MVP Demo
+   *
+   * @async
+   * @returns {Promise<object>} Promise containing a Deck resource
    */
-  slide = (duration, next) => {
-    duration = duration < 60000 ? 60000 : duration
-    return setTimeout(() => route(next || '/'), duration)
-  }
-
   get_data = async () => {
     // Update loading state
     this.setState({ loading: true }, () => console.warn('Getting slide deck.'))
@@ -130,17 +120,6 @@ export default class App extends Component {
     try {
       // TODO: Request data from API
       const deck = mock
-
-      deck.slides = deck.slides.map(slide => {
-        // const component = slide.component
-        // const templates = { Articles, Multimedia, News }
-
-        // Reflect.deleteProperty(slide, 'component')
-        // slide.component = templates[component]
-
-        return slide
-      })
-
       console.info('Retreived slide deck ->', deck)
       return deck
     } catch (err) {
@@ -148,18 +127,36 @@ export default class App extends Component {
     }
   }
 
-
+  /**
+   * Updates @see state.error and @see state.info .
+   *
+   * @param {FeathersError | Error} error - Exception that was thrown
+   * @param {object} info - Error infomation+
+   * @returns {undefined}
+   */
   handle_error = (error, info = null) => {
     return this.setState({ error, info: (error.stack || info) || null })
   }
 
+  /**
+   * Updates the internal loading state.
+   *
+   * @param {boolean} loading - True if fetching content. Defaults to true
+   * @returns {undefined}
+   */
   handle_loading = (loading = true) => this.setState({ loading })
 
   /**
-   * Returns the slide deck application.
-   * If an error is caught, the deck will push to an error screen.
+   * Returns true if the window width is less than or equal to 768.
    *
-   * @todo Implement routing
+   * @returns {boolean} True if viewport width <= 768px
+   */
+  mobile = () => $(window).width() <= 768
+
+  /**
+   * Returns the web application.
+   * If an error is caught, the Application will push to an error screen.
+   *
    *
    * @param {object} props - Component properties
    * @param {object} state - Component state
@@ -177,27 +174,26 @@ export default class App extends Component {
     const { deck, error, info, loading, mobile } = state
 
     // Handle error state
-    if (error) return <ErrorScreen error={error} info={info} />
+    if (error) return <Error error={error} info={info} />
 
     // Handle loading state
-    if (loading) return <Landing path='/' />
+    if (loading) return <Loading />
 
     // Handle successful API response
     return (
       <Deck
         deck={deck}
         loading={this.handle_loading}
+        mobile={mobile}
         catch={this.handle_error}
       />
     )
   }
 
   /**
-   * Updates the @see state.mobile when the window is resized.
-   * 
+   * Updates the internal mobile state.
+   *
    * @returns {undefined}
    */
-  resize = () => {
-    $(window).resize(() => this.setState({ mobile: $(window).width() <= 768 }))
-  }
+  resize = () => this.setState({ mobile: this.mobile() })
 }

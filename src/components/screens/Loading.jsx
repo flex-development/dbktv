@@ -5,30 +5,31 @@ import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 
 // Components
 import { Container, Heading } from '../atoms'
-import { Loading } from '../molecules'
+import { Loading as LoadingMolecule } from '../molecules'
 
 /**
- * Class representing the landing page.
+ * Class representing the loading screen.
  *
  *
- * @class Landing
+ * @class Loading
  * @extends Component
  * @author Lexus Drumgold <lex@lexusdrumgold.design>
  */
-export default class Landing extends Component {
+export default class Loading extends Component {
   /**
    * Updates the document title.
    *
    * @returns {undefined}
    */
   componentDidMount() {
-    document.title = 'Loading DiamondbackTV 📺'
+    document.title = 'DiamondbackTV is loading...'
   }
 
   /**
-   * Renders a <main> element representing a landing page.
+   * Renders a <main> element representing the loading screen.
    *
-   * Displays the DiamondbackTV logo loading spinner.
+   * Displays the DiamondbackTV logo, the dbknews.com plug, and a loading
+   * spinner.
    *
    * @param {object} props - Component properties
    * @param {object} state - Component state
@@ -36,12 +37,11 @@ export default class Landing extends Component {
    */
   render(props, state) {
     const { className, id } = props
-    const style = (`adp-landing ${className || ''}`).trim()
 
     return (
-      <main id={id} className={style}>
+      <main id={id} className={(`ads-loading ${className || ''}`).trim()}>
         <Container>
-          <Loading />
+          <LoadingMolecule />
         </Container>
       </main>
     )

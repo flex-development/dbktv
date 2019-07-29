@@ -1,11 +1,12 @@
 // Pages
-import ErrorScreen from './Error'
-import Landing from './Landing'
+import Error from './Error'
+import Landing from './Loading'
 
 /**
- * @file Page components
+ * @file Screen (page) components
  * @see {@link http://atomicdesign.bradfrost.com/chapter-2/}
  * @author Lexus Drumgold <lex@lexusdrumgold.design>
  */
 
-export { ErrorScreen, Landing }
+export { Error, Landing }
+  

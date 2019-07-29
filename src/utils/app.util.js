@@ -24,9 +24,9 @@ export default {
    * undefined if the interval was cleared
    * @throws {GeneralError}
    */
-  timer: (start, interval, lap = 1000) => {
+  timer: (start, interval, lap) => {
     if (start && !(start instanceof Function)) {
-      throw new GeneralError('Invalid start function.', { start: start || null })
+      throw new GeneralError('Invalid start function.', { start })
     } else if (interval && !interval.length) {
       throw new GeneralError('Invalid interval id.', { interval })
     } else if (lap < 0) {
