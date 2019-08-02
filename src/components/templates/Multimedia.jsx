@@ -7,19 +7,35 @@ import {
 } from '../atoms'
 
 export default class Multimedia extends Component {
+  /**
+   * If an error is caught, the component the error will be handed off to the
+   * @see @class App component.
+   *
+   * @param {FeathersError | Error} error - Current error
+   * @param {object} info - Error information
+   * @returns {undefined}
+   */
+  componentDidCatch(error, info) {
+    return this.props.catch(error, info)
+  }
+
+  /**
+   * Updates the document title.
+   *
+   * @returns {undefined}
+   */
   componentDidMount() {
-    const { duration, next, slide } = this.props
-    slide(duration, next)
+    const { title } = this.props
+    document.title = title || 'Multimedia'
   }
 
   render(props, state) {
     const { className, content, id } = props
-    const style = (`adt-multimedia ${className || ''}`).trim()
 
     const { category, credit, media, related } = content
 
     return (
-      <section className={style}>
+      <section id={id} className={`adt-multimedia ${className || ''}`.trim()}>
         <figure>
           {media.video ? <Embed {...media} /> : <Image {...media} />}
           <figcaption className='ada-figcaption'>

@@ -1,6 +1,6 @@
 // Pages
 import Error from './Error'
-import Landing from './Loading'
+import Loading from './Loading'
 
 /**
  * @file Screen (page) components
@@ -8,5 +8,4 @@ import Landing from './Loading'
  * @author Lexus Drumgold <lex@lexusdrumgold.design>
  */
 
-export { Error, Landing }
-  
+export { Error, Loading }

@@ -19,4 +19,4 @@ import Video from './Video'
 
 export {
   Button, SmoothScrollButton, Container, Embed, Figcaption, Heading, Icon, Image, Link, LoadingIcon, Headline, Paragraph, Author, Blurb, Category, Subheading, Redirect, Video
-} 
+}

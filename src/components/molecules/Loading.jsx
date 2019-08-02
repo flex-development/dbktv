@@ -36,7 +36,8 @@ export default class Loading extends Component {
 
     return (
       <div id={id} className={(`adm-loading ${className || ''}`).trim()}>
-        
+        <Logo plug />
+        <LoadingIcon spin />
       </div>
     )
   }

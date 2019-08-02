@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "author": "Lexus Drumgold <lex@lexusdrumgold.design> (https://lexusdrumgold.design)",
   "scripts": {
-    "preinstall": "rm -rf ./public && rm -rf node_modules",
+    "preinstall": "rm -rf node_modules",
     "lint-components": "eslint ./src/components/**/*.jsx ./*.js --fix",
     "lint-functions": "npm run --prefix functions lint",
     "lint": "npm run lint-components && npm run lint-functions",

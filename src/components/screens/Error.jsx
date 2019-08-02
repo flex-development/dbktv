@@ -23,8 +23,8 @@ export default class Error extends Component {
   }
 
   /**
-   * Renders a <main> element representing an error screen. 
-   * 
+   * Renders a <main> element representing an error screen.
+   *
    * The page will display the error name, message, and info, if it is defined.
    *
    * @param {object} props - Component properties

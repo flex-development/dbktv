@@ -8,7 +8,7 @@ export default class Icon extends Component {
     const { className, id, icon, spin } = props
     const style = (`ada-icon ${className || ''}`).trim()
 
-    return <FontAwesomeIcon className='ada-icon' icon={icon} spin={spin} />
+    return <FontAwesomeIcon id={id} className={style} icon={icon} spin={spin} />
   }
 }
 

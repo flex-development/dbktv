@@ -1,14 +1,10 @@
 // Packages
 import { h, Component } from 'preact'
-import { BadRequest } from '@feathersjs/errors'
 import $ from 'jquery'
 
 // Components
 import { Deck } from './organisms'
 import { Error, Loading } from './screens'
-
-// Mock data
-import mock from '../../tests/__mocks__/Deck.mock.json'
 
 // Styles
 import '../style/app.sass'
@@ -117,14 +113,8 @@ export default class App extends Component {
     // Update loading state
     this.setState({ loading: true }, () => console.warn('Getting slide deck.'))
 
-    try {
-      // TODO: Request data from API
-      const deck = mock
-      console.info('Retreived slide deck ->', deck)
-      return deck
-    } catch (err) {
-      throw new BadRequest(`Error getting slide deck -> ${err.message}`)
-    }
+    // TODO: Request data from API
+    return null
   }
 
   /**

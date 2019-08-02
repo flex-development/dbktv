@@ -18,7 +18,7 @@ export default class Articles extends Component {
    * If an error is caught, the component the error will be handed off to the
    * @see @class App component.
    *
-   * @param {FeathersError} error - Current error
+   * @param {FeathersError | Error} error - Current error
    * @param {object} info - Error information
    * @returns {undefined}
    */
@@ -26,9 +26,14 @@ export default class Articles extends Component {
     return this.props.catch(error, info)
   }
 
+  /**
+   * Updates the document title.
+   *
+   * @returns {undefined}
+   */
   componentDidMount() {
-    const { duration, next, slide } = this.props
-    slide(duration, next)
+    const { title } = this.props
+    document.title = title || 'Continue reading on dbknews.com'
   }
 
   /**
