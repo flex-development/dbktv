@@ -1,10 +1,8 @@
 // Packages
 import { h, Component } from 'preact'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 
 // Components
-import { Container, Heading } from '../atoms'
+import { Container } from '../atoms'
 import { Loading as LoadingMolecule } from '../molecules'
 
 /**
@@ -21,9 +19,7 @@ export default class Loading extends Component {
    *
    * @returns {undefined}
    */
-  componentDidMount() {
-    document.title = 'DiamondbackTV is loading...'
-  }
+  componentDidMount() { document.title = 'DiamondbackTV' }
 
   /**
    * Renders a <main> element representing the loading screen.

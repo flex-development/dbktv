@@ -1,4 +1,5 @@
 // Molecules
+import Figure from './Figure'
 import Loading from './Loading'
 import Logo from './Logo'
 
@@ -8,4 +9,4 @@ import Logo from './Logo'
  * @author Lexus Drumgold <lex@lexusdrumgold.design>
  */
 
-export { Loading, Logo }
+export { Figure, Loading, Logo }

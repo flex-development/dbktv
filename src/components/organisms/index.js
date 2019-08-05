@@ -1,7 +1,9 @@
 // Components
+import AutoScroll from './AutoScroll'
 import Deck from './Deck'
 import Footer from './Footer'
 import Header from './Header'
+import Navigation from './Navigation'
 
 /**
  * @file Organism components
@@ -9,4 +11,4 @@ import Header from './Header'
  * @author Lexus Drumgold <lex@lexusdrumgold.design>
  */
 
-export { Deck, Footer, Header }
+export { AutoScroll, Deck, Footer, Header, Navigation }

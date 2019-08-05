@@ -1,20 +1,12 @@
 {
-  "count": 8,
-  "duration": 189000,
+  "count": 7,
+  "duration": 164000,
   "slides": [
-    {
-      "component": "Default",
-      "duration": 15000,
-      "id": "default1",
-      "next": 1,
-      "path": "/default/1",
-      "title": "DiamondbackTV"
-    },
     {
       "component": "News",
       "duration": 15000,
       "id": "youve-heard-of-hot-girl-summer-but-have-you-heard-about-the-girl-who-started-it",
-      "next": 2,
+      "next": 1,
       "path": "/news/youve-heard-of-hot-girl-summer-but-have-you-heard-about-the-girl-who-started-it",
       "title": "You’ve heard of hot girl summer — but have you heard about the girl who started it?",
       "content": {
@@ -34,7 +26,7 @@
       "component": "Multimedia",
       "duration": 15000,
       "id": "second-baseman-brandon-lowe-swings-at-a-pitch-in-the-terps-1-0-loss-to-cal-state-fullerton-at-bob-turtle-smith-field-on-april-19-2015",
-      "next": 3,
+      "next": 2,
       "path": "/multimedia/second-baseman-brandon-lowe-swings-at-a-pitch-in-the-terps-1-0-loss-to-cal-state-fullerton-at-bob-turtle-smith-field-on-april-19-2015",
       "title": "Second baseman Brandon Lowe swings at a pitch in the Terps’ 1-0 loss to Cal State Fullerton at Bob “Turtle” Smith Field on April 19, 2015",
       "content": {
@@ -56,11 +48,13 @@
       "component": "Articles",
       "duration": 15000,
       "id": "sexually-fluid-cast-of-mt-vs-are-you-the-one-shows-surprisingly-strong-representation",
-      "next": 4,
+      "next": 3,
       "path": "/articles/sexually-fluid-cast-of-mt-vs-are-you-the-one-shows-surprisingly-strong-representation",
       "title": "Continue Reading on dbknews.com",
       "content": {
-        "ads": "[]",
+        "ads": [
+          "300x600_Banner_C"
+        ],
         "articles": [
           {
             "author": "Daisy Grant",
@@ -85,10 +79,10 @@
     },
     {
       "component": "Default",
-      "duration": 15000,
-      "id": "default2",
-      "next": 5,
-      "path": "/default/2",
+      "duration": 5000,
+      "id": "default1",
+      "next": 4,
+      "path": "/default/1",
       "title": "DiamondbackTV"
     },
     {
@@ -96,7 +90,7 @@
       "duration": 15000,
       "id": "sean-urbanskis-murder-trial-has-been-delayed-for-a-fourth-time",
       "path": "/news/sean-urbanskis-murder-trial-has-been-delayed-for-a-fourth-time",
-      "next": 6,
+      "next": 5,
       "title": "Sean Urbanski’s murder trial has been delayed for a fourth time",
       "content": {
         "author": "Jillian Atelsek",
@@ -116,7 +110,7 @@
       "duration": 84000,
       "id": "prince-georges-county-police-use-force-against-two-skateboarders-in-college-park",
       "path": "/multimedia/prince-georges-county-police-use-force-against-two-skateboarders-in-college-park",
-      "next": 7,
+      "next": 6,
       "title": "Prince George’s County Police use force against two skateboarders in College Park",
       "content": {
         "category": "campus",
@@ -124,7 +118,7 @@
         "media": {
           "alt": "Prince George’s County Police use force against two skateboarders in College Park",
           "caption": "Prince George’s County Police use force against two skateboarders in College Park",
-          "src": "https://www.youtube.com/watch?v=Zo6m8AP5odA",
+          "src": "http://www.youtube.com/embed/Zo6m8AP5odA?autoplay=1&controls=0",
           "video": true
         },
         "related": {
@@ -141,7 +135,9 @@
       "next": 0,
       "title": "Continue Reading on dbknews.com",
       "content": {
-        "ads": "[]",
+        "ads": [
+          "300x600_Banner_C"
+        ],
         "articles": [
           {
             "author": "Daisy Grant",

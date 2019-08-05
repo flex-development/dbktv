@@ -17,10 +17,39 @@
   color: $accent-med
   text-decoration: none
 
-.headline,
-.footer-link,
-.related-article
-  color: $light
-
 .headline
-  font-weight: 600
+  +event
+    font-weight: 700
+
+  +respond-to($breakpoint-xxl, min)
+    font-size: size(30)
+
+  +respond-to($breakpoint-xxxl, min)
+    font-size: size(40)
+
+  color: $light
+  font:
+    size: size(22.5)
+    weight: 700
+
+  &.feature
+    +respond-to($breakpoint-xxl, min)
+      font-size: size(48)
+
+    +respond-to($breakpoint-xxxl, min)
+      font-size: size(64)
+
+    font-size: size(36)
+
+.related-article
+  +respond-to($breakpoint-xxl, min)
+    font-size: size(20)
+
+  +respond-to($breakpoint-xxxl, min)
+    font-size: size(26.667)
+
+  color: $light-gray
+  font:
+    size: size(15)
+    style: italic
+    weight: 500

@@ -4,8 +4,22 @@
 // @author Lexus Drumgold
 // ----------------------------------------------------------------------------
 
+// Variables
+$article-height: auto
+$article-width: 60%
+$article-width-alt: 87.5%
+
 // Styles
 
 .adt-news
   +flex(row, center, center)
+
+  > .adt-article
+    +constrain($article-width)
+    +respond-to($breakpoint-schmedium)
+      +constrain($article-width-alt)
+
+      max-width: $article-width-alt
+
+    max-width: $article-width
 

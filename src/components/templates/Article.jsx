@@ -8,6 +8,8 @@ import { Author, Blurb, Category, Headline } from '../atoms'
 /**
  * Class representing an article.
  *
+ * @todo Update documentation
+ *
  * @class Article
  * @extends Component
  * @author Lexus Drumgold <lex@lexusdrumgold.design>
@@ -33,7 +35,7 @@ export default class Article extends Component {
           <Category category={category} />
           <Author author={author} />
         </div>
-        <Headline {...headline} />
+        <Headline feature={feature} {...headline} />
         <Blurb blurb={convert(blurb)} />
       </article>
     )

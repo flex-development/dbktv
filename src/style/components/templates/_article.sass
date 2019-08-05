@@ -4,40 +4,8 @@
 // @author Lexus Drumgold
 // ----------------------------------------------------------------------------
 
-// Variables
-$article-height: auto
-$article-width: 50%
-$article-width-alt: 87.5%
-
 .adt-article
-  +constrain($article-width)
-  +respond-to($breakpoint-schmedium)
-    +constrain($article-width-alt)
-
-    max-width: $article-width-alt
-
-
   border-bottom: $border
-  max-width: $article-width
-
-  > .headline
-    +respond-to($breakpoint-xxl, min)
-      font-size: size(30)
-
-
-    font-size: size(24)
-
-  &.feature
-    > .headline
-      +event
-        font-weight: 700
-
-
-      +respond-to($breakpoint-xxl, min)
-        font-size: size(48)
-
-
-      font-size: size(32)
 
 .article-header
   +flex

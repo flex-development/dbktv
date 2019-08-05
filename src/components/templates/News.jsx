@@ -8,6 +8,8 @@ import Article from './Article'
 /**
  * Class representing the "Top News" template.
  *
+ * @todo Update documentation
+ *
  * @class News
  * @extends Component
  * @author Lexus Drumgold <lex@lexusdrumgold.design>
@@ -31,9 +33,11 @@ export default class News extends Component {
    * @returns {undefined}
    */
   componentDidMount() {
-    const { content, title } = this.props
+    const { content, duration, next, title, slide } = this.props
+
+    document.title = `Top News: ${title}`
     $('.ado-deck').css('background-image', `url(${content.image.src})`)
-    document.title = title || 'Top News'
+    setTimeout(() => slide(next), duration)
   }
 
   /**

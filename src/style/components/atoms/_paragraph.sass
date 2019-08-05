@@ -14,36 +14,44 @@
     font-weight: 600
 
 .author,
-.blurb,
+.blurb
+  color: $light
+
+.author,
 .category
   +respond-to($breakpoint-xxl, min)
     font-size: size(20)
 
 
   +respond-to($breakpoint-xxxl, min)
-    font-size: size(24)
+    font-size: size(26.667)
 
 
-  font-size: size(16)
-
-.author,
-.category
-  font-weight: 500
-  margin-right: size(10)
+  font-size: size(15)
   text-transform: uppercase
 
 .blurb
-  font-weight: 300
+  +respond-to($breakpoint-xxl, min)
+    font-size: size(22)
+
+  +respond-to($breakpoint-xxxl, min)
+    font-size: size(29.333)
+
+  font-size: size(16.5)
   margin: size(10) 0 size(20)
   width: 100%
 
 .category
   color: $accent-med
+  font-weight: 600
+  margin-right: size(10)
 
 .subheading
-  +respond-to($breakpoint-xxl)
+  +respond-to($breakpoint-xxl, min)
     font-size: size(24)
 
+  +respond-to($breakpoint-xxxl, min)
+    font-size: size(32)
 
   font:
     size: size(18) !important

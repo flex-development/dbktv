@@ -7,6 +7,8 @@ import { Container, Heading } from '../atoms'
 /**
  * Class representing an error screen.
  *
+ * @todo Transforms all errors to FeathersError via getDerivedStateFromProps
+ *
  * @class Error
  * @extends Component
  * @author Lexus Drumgold <lex@lexusdrumgold.design>

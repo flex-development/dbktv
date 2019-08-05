@@ -1,0 +1,28 @@
+{
+  "count": 1,
+  "duration": 15000,
+  "slides": [
+    {
+      "component": "Multimedia",
+      "duration": 15000,
+      "id": "second-baseman-brandon-lowe-swings-at-a-pitch-in-the-terps-1-0-loss-to-cal-state-fullerton-at-bob-turtle-smith-field-on-april-19-2015",
+      "next": 0,
+      "path": "/multimedia/second-baseman-brandon-lowe-swings-at-a-pitch-in-the-terps-1-0-loss-to-cal-state-fullerton-at-bob-turtle-smith-field-on-april-19-2015",
+      "title": "Second baseman Brandon Lowe swings at a pitch in the Terps’ 1-0 loss to Cal State Fullerton at Bob “Turtle” Smith Field on April 19, 2015",
+      "content": {
+        "category": "campus",
+        "credit": "Diamondback Staff",
+        "media": {
+          "alt": "Second baseman Brandon Lowe swings at a pitch in the Terps’ 1-0 loss to Cal State Fullerton at Bob “Turtle” Smith Field on April 19, 2015",
+          "caption": "Second baseman Brandon Lowe swings at a pitch in the Terps’ 1-0 loss to Cal State Fullerton at Bob “Turtle” Smith Field on April 19, 2015",
+          "src": "https://d3gx1wgrn4cpnk.cloudfront.net/uploads/2019/05/2015-05-a9044ffdf577551e6704c6676420509f-1.jpg",
+          "video": false
+        },
+        "related": {
+          "href": "https://dbknews.com/2019/07/03/brandon-lowe-mlb-all-star-game-tampa-bay-rays/",
+          "text": "Former Maryland baseball player Brandon Lowe selected to MLB All-Star Game"
+        }
+      }
+    }
+  ]
+}

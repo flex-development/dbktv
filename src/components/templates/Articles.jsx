@@ -1,6 +1,6 @@
 // Packages
 import { h, Component } from 'preact'
-// import { DFPSlotsProvider, AdSlot } from 'react-dfp'
+import { DFPSlotsProvider, AdSlot } from 'react-dfp'
 
 // Components
 import { Container, Subheading } from '../atoms'
@@ -22,9 +22,7 @@ export default class Articles extends Component {
    * @param {object} info - Error information
    * @returns {undefined}
    */
-  componentDidCatch(error, info) {
-    return this.props.catch(error, info)
-  }
+  componentDidCatch(error, info) { return this.props.catch(error, info) }
 
   /**
    * Updates the document title.
@@ -32,8 +30,10 @@ export default class Articles extends Component {
    * @returns {undefined}
    */
   componentDidMount() {
-    const { title } = this.props
-    document.title = title || 'Continue reading on dbknews.com'
+    const { duration, next, slide } = this.props
+
+    document.title = `Continue reading on dbknews.com`
+    setTimeout(() => slide(next), duration)
   }
 
   /**
@@ -46,6 +46,9 @@ export default class Articles extends Component {
   render(props, state) {
     const { className, content, id } = props
     const style = (`adt-articles ${className || ''}`).trim()
+
+    const NETWORK_ID = '123934970'
+    const UNIT = content.ads[0]
 
     return (
       <section id={id} className={style}>
@@ -64,12 +67,12 @@ export default class Articles extends Component {
           </div>
           <div className='right-rail'>
             {
-              content.ads[0]
+              UNIT
                 ? (
-                  <div id={`ad-${content.ads[0]}`} className='ada-advertisement'>
-                    {/* <DFPSlotsProvider dfpNetworkId={'123934970'} >
-                      <AdSlot adUnit={adUnit} sizes={[300, 600]} />
-                    </DFPSlotsProvider> */}
+                  <div id={`ad-${UNIT}`} className='ada-advertisement'>
+                    <DFPSlotsProvider dfpNetworkId={NETWORK_ID} >
+                      <AdSlot adUnit={UNIT} sizes={[300, 600]} fetchNow />
+                    </DFPSlotsProvider>
                   </div>
                 )
                 : null

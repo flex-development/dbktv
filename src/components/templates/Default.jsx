@@ -1,5 +1,6 @@
 // Packages
 import { h, Component } from 'preact'
+import $ from 'jquery'
 
 // Components
 import { Container } from '../atoms'
@@ -21,19 +22,26 @@ export default class Default extends Component {
    * @param {object} info - Error information
    * @returns {undefined}
    */
-  componentDidCatch(error, info) {
-    return this.props.catch(error, info)
-  }
+  componentDidCatch(error, info) { return this.props.catch(error, info) }
 
   /**
-   * Updates the document title.
+   * Hides the header.
    *
    * @returns {undefined}
    */
   componentDidMount() {
-    const { title } = this.props
-    document.title = title || 'DiamondbackTV'
+    const { duration, next, slide } = this.props
+
+    $('.ado-header').css('display', 'none')
+    setTimeout(() => slide(next), duration)
   }
+
+  /**
+   * Shows the header.
+   *
+   * @returns {undefined}
+   */
+  componentWillUnmount() { $('.ado-header').css('display', 'flex') }
 
   /**
    * Renders a <section> element representing the default slide.

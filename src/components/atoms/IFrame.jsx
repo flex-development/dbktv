@@ -2,14 +2,14 @@
 import { h, Component } from 'preact'
 
 /**
- * Component representing a <embed> element.
+ * Component representing an <iframe> element.
  *
  * @extends Component
  * @author Lexus Drumgold <lex@lexusdrumgold.design>
  */
-export default class Embed extends Component {
+export default class IFrame extends Component {
   /**
-   * Renders an <embed> element with the base class 'ada-embed'.
+   * Renders an <iframe> element with the base class 'ada-iframe'.
    *
    * @param {object} props - Component properties
    * @param {string} props.className - Space delimitted list of extra classes
@@ -17,12 +17,16 @@ export default class Embed extends Component {
    * @param {string} props.src - Address of the external file to embed
    * @param {string} props.type - Media type of the embedded content
    * @param {object} state - Component state
-   * @returns {HTMLEmbedElement}
+   * @returns {HTMLIFrameElement}
    */
   render(props, state) {
     const { className, id, src, type } = props
-    const style = (`ada-embed ${className || ''}`).trim()
+    const style = (`ada-iframe ${className || ''}`).trim()
 
-    return <embed id={id} className={style} src={src} type={type} />
+    return (
+      <iframe
+        id={id} className={style} src={src} type={type} frameBorder='0'
+      />
+    )
   }
 }
