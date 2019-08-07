@@ -98,7 +98,10 @@ export default class App extends Component {
     try {
       // Get initial data
       const { autoscroll, deck } = await this.get_data()
-      this.setState({ autoscroll, curr: deck.slides[0], deck, loading: false })
+
+      // TODO: Remove setTimeout
+      const state = { autoscroll, curr: deck.slides[0], deck, loading: false }
+      setTimeout(() => this.setState(state), 1250)
     } catch (err) {
       this.handle_error(err)
     }
