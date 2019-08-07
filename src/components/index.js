@@ -15,7 +15,7 @@ import '../style/app.sass'
 
 // Mock data
 import mock_deck from '../../tests/__mocks__/Deck.mock.json'
-import mock_scroll from '../../tests/__mocks__/Autoscroll.mock.json'
+import mock_autoscroll from '../../tests/__mocks__/AutoScroll.mock.json'
 
 /**
  * Class representing the web application.
@@ -97,15 +97,13 @@ export default class App extends Component {
 
     try {
       // Get initial data
-      const { deck, scroll } = await this.get_data()
-      this.setState({ curr: deck.slides[0], deck, scroll })
+      const { autoscroll, deck } = await this.get_data()
+      this.setState({ autoscroll, curr: deck.slides[0], deck, loading: false })
     } catch (err) {
       this.handle_error(err)
     }
 
     // TODO: Subscribe to data changes
-
-    setTimeout(() => this.setState({ loading: false }), 1200)
   }
 
   /**
@@ -138,7 +136,7 @@ export default class App extends Component {
 
     try {
       // TODO: Request data from API
-      return { deck: mock_deck, scroll: mock_scroll }
+      return { autoscroll: mock_autoscroll, deck: mock_deck }
     } catch (err) {
       throw new BadRequest('Unable to get deck ->', err.message)
     }
@@ -204,7 +202,7 @@ export default class App extends Component {
    * @returns {<Fragment/>} <Header> and <Deck> components
    */
   render(props, state) {
-    const { curr, deck, error, info, loading, mobile, scroll } = state
+    const { autoscroll, curr, deck, error, info, loading, mobile } = state
 
     // Handle error state
     if (error) return <Error error={error} info={info} />
@@ -264,7 +262,7 @@ export default class App extends Component {
         >
           <Footer>
             <Logo mini />
-            <AutoScroll scroll={scroll} />
+            <AutoScroll autoscroll={autoscroll} />
           </Footer>
         </Deck>
       </Fragment>
