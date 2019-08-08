@@ -41,7 +41,7 @@ export default class Footer extends Component {
         {
           container
             ? <Container {...c_props} />
-            : { children }
+            : children
         }
       </footer>
     )

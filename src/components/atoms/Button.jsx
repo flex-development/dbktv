@@ -1,9 +1,7 @@
 // Packages
 import { h, Component } from 'preact'
 import { BadRequest } from '@feathersjs/errors'
-
-// Utilities
-import utilities from '../../utils'
+import $ from 'jquery'
 
 /**
  * Component representing a basic button.
@@ -75,6 +73,22 @@ export class SmoothScrollButton extends Component {
   }
 
   /**
+   * Smooth scrolls to the top of @see @param target .
+   *
+   * @see @param target defaults to 'body', @see @param speed defaults to 750.
+   *
+   * @param {Event} event - onClick event
+   * @param {string} target - Element to scroll to the top of
+   * @param {number} speed - Animation speed in milliseconds
+   * @returns {undefined}
+   */
+  static scroll(event, target = 'body', speed = 500) {
+    $('html, body').animate({ scrollTop: $(target).offset().top }, speed)
+    if (process.env.NODE_ENV !== 'production') console.info('Smooth scrolled.')
+    event.preventDefault()
+  }
+
+  /**
    * Renders a button that when clicked, smooth scrolls to the top of
    * this.props.target. The button will have the class 'scroll-to-top-btn'.
    *
@@ -99,7 +113,7 @@ export class SmoothScrollButton extends Component {
     return (
       <Button
         disabled={disabled} class={style}
-        events={{ onClick: e => utilities.ui.smooth_scroll(e, target, speed) }}
+        events={{ onClick: e => SmoothScrollButton.scroll(e, target, speed) }}
       >
         {children}
       </Button>

@@ -6,21 +6,14 @@
 
 // Variables
 
+$icon-color: $accent-light
+$icon-margin: size(16)
 $icon-size: size(40)
 
 .adm-loading
   +flex(column, center, center)
 
-  > .adm-logo
-    margin-top: size(60)
-
-  > .ada-heading
-    font-weight: 300
-    margin: size(20) 0
-
-    .ada-link
-      color: $accent-med
-
   > .ada-icon
-    color: $accent-light
+    color: $icon-color
     font-size: $icon-size
+    margin-top: $icon-margin

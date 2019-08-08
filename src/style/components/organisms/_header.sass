@@ -11,10 +11,28 @@ $header-width: 100vw
 
 // Styles
 
+// Position header absolutely
 // Make header full width
+// Position header on top of the other content
 // Add space on the top and bottom of header
 .ado-header
+  +absolute(0, null, null, 0)
   +size($header-width, $header-height)
+
+  z-index: 10
 
   > .ada-container
     padding: $header-padding
+
+    .adm-logo
+      width: size(125)
+
+  &.ui-sticky
+    background-color: $light
+    border-bottom: $border
+    position: fixed
+
+    > .ada-container
+      // border-bottom: $border
+      padding: size(16) 0
+  

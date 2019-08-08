@@ -5,7 +5,8 @@
 // ----------------------------------------------------------------------------
 
 // Variables
-$footer-height: auto
+$footer-border: size(.5) solid $light
+$footer-height: size(90)
 $footer-padding: size(40) 0
 $footer-width: 100vw
 
@@ -14,7 +15,18 @@ $footer-width: 100vw
 // Make footer full width
 // Add space on the top and bottom of footer
 .ado-footer
+  +flex(row, center)
   +size($footer-width, $footer-height)
 
-  > .ada-container
-    padding: $footer-padding
+  background-color: $black
+  padding-left: 3.25%
+
+  .adm-logo
+    +constrain(size(1280))
+
+    border-right: $footer-border
+    margin-right: size(16)
+    padding: 0 size(20)
+
+  &.multimedia-border
+    border-top: $footer-border

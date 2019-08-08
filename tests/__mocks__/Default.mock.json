@@ -1,0 +1,14 @@
+{
+  "count": 1,
+  "duration": 15000,
+  "slides": [
+    {
+      "component": "Default",
+      "duration": 15000,
+      "id": "default1",
+      "next": 0,
+      "path": "/default/1",
+      "title": "DiamondbackTV"
+    }
+  ]
+}

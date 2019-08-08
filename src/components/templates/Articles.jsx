@@ -18,17 +18,22 @@ export default class Articles extends Component {
    * If an error is caught, the component the error will be handed off to the
    * @see @class App component.
    *
-   * @param {FeathersError} error - Current error
+   * @param {FeathersError | Error} error - Current error
    * @param {object} info - Error information
    * @returns {undefined}
    */
-  componentDidCatch(error, info) {
-    return this.props.catch(error, info)
-  }
+  componentDidCatch(error, info) { return this.props.catch(error, info) }
 
+  /**
+   * Updates the document title.
+   *
+   * @returns {undefined}
+   */
   componentDidMount() {
     const { duration, next, slide } = this.props
-    slide(30000, next)
+
+    document.title = `Continue reading on dbknews.com`
+    setTimeout(() => slide(next), duration)
   }
 
   /**
@@ -41,6 +46,9 @@ export default class Articles extends Component {
   render(props, state) {
     const { className, content, id } = props
     const style = (`adt-articles ${className || ''}`).trim()
+
+    const NETWORK_ID = '123934970'
+    const UNIT = content.ads[0]
 
     return (
       <section id={id} className={style}>
@@ -59,12 +67,12 @@ export default class Articles extends Component {
           </div>
           <div className='right-rail'>
             {
-              content.ads[0]
+              UNIT
                 ? (
-                  <div id={`ad-${content.ads[0]}`} className='ada-advertisement'>
-                    {/* <DFPSlotsProvider dfpNetworkId={'123934970'} >
-                      <AdSlot adUnit={adUnit} sizes={[300, 600]} />
-                    </DFPSlotsProvider> */}
+                  <div id={`ad-${UNIT}`} className='ada-advertisement'>
+                    <DFPSlotsProvider dfpNetworkId={NETWORK_ID} >
+                      <AdSlot adUnit={UNIT} sizes={[300, 600]} fetchNow />
+                    </DFPSlotsProvider>
                   </div>
                 )
                 : null

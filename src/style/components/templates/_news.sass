@@ -5,13 +5,21 @@
 // ----------------------------------------------------------------------------
 
 // Variables
-$news-height: 100vh
-$news-width: 100vw
+$article-height: auto
+$article-width: 60%
+$article-width-alt: 87.5%
 
 // Styles
 
 .adt-news
   +flex(row, center, center)
-  +size($news-width, $news-height)
 
-  background-color: rgba($dark, 0.85)
+  > .adt-article
+    +constrain($article-width)
+    +respond-to($breakpoint-schmedium)
+      +constrain($article-width-alt)
+
+      max-width: $article-width-alt
+
+    max-width: $article-width
+

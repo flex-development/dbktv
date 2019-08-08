@@ -1,0 +1,26 @@
+{
+  "count": 1,
+  "duration": 15000,
+  "slides": [
+    {
+      "component": "News",
+      "duration": 15000,
+      "id": "youve-heard-of-hot-girl-summer-but-have-you-heard-about-the-girl-who-started-it",
+      "next": 0,
+      "path": "/news/youve-heard-of-hot-girl-summer-but-have-you-heard-about-the-girl-who-started-it",
+      "title": "You’ve heard of hot girl summer — but have you heard about the girl who started it?",
+      "content": {
+        "author": "Jason Fontelieu",
+        "blurb": "Now you might ask: What is a hot girl summer? You may have seen several people caption their beach pictures with “hot girl summer” and some sort of emoji with its tongue out.\n\nBut before you can understand what a hot girl summer is, you must know the original hot girl herself: Megan Thee Stallion.\n\nMegan Thee Stallion is one of the biggest rappers at the moment — and on an amazingly swift come-up at that. You might have seen her recently on Jimmy Kimmel Live! performing her smash hit “Big Ole Freak” and the track “Realer” from her latest mixtape Fever. Her effortless moves and simple, yet stunning, costume are indicators of her swagger and showmanship.\n\nI won’t delve into a full-on review of Fever, but I’ll just say that there’s not a bad track on it. If you’re especially hoping to channel your inner hot girl, try “Simon Says” or “Shake That” to get the room dancing.",
+        "headline": {
+          "href": "https://dbknews.com/2019/07/16/hot-girl-summer-megan-thee-stallion-mixtape-rap-music/",
+          "text": "You’ve heard of hot girl summer — but have you heard about the girl who started it?"
+        },
+        "image": {
+          "alt": "Megan Thee Stallion has successfully branded Summer 2019 a hot girl summer (Photo via YouTube).\n",
+          "src": "https://d3gx1wgrn4cpnk.cloudfront.net/uploads/2019/07/Screen-Shot-2019-07-16-at-8.49.45-PM-e1563324747898.png"
+        }
+      }
+    }
+  ]
+}

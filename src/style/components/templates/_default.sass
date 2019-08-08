@@ -1,0 +1,22 @@
+// ----------------------------------------------------------------------------
+// Default specific styles, variables, placeholders, mixins and functions
+// @see components/templates/Default.jsx
+// @author Lexus Drumgold
+// ----------------------------------------------------------------------------
+
+// Styles
+
+// Position inner content in the center
+.adt-default
+  > .ada-container
+    +flex(row, center, center)
+
+    .adm-logo
+      +respond-to($breakpoint-xxl, min)
+        width: size(800)
+
+
+      +respond-to($breakpoint-xxxl, min)
+        font-size: size(1000)
+
+      width: size(600)

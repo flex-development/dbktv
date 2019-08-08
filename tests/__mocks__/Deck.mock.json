@@ -1,10 +1,10 @@
 {
-  "count": 6,
-  "duration": 6400,
+  "count": 7,
+  "duration": 164000,
   "slides": [
     {
       "component": "News",
-      "duration": 60000,
+      "duration": 15000,
       "id": "youve-heard-of-hot-girl-summer-but-have-you-heard-about-the-girl-who-started-it",
       "next": 1,
       "path": "/news/youve-heard-of-hot-girl-summer-but-have-you-heard-about-the-girl-who-started-it",
@@ -24,7 +24,7 @@
     },
     {
       "component": "Multimedia",
-      "duration": 60000,
+      "duration": 15000,
       "id": "second-baseman-brandon-lowe-swings-at-a-pitch-in-the-terps-1-0-loss-to-cal-state-fullerton-at-bob-turtle-smith-field-on-april-19-2015",
       "next": 2,
       "path": "/multimedia/second-baseman-brandon-lowe-swings-at-a-pitch-in-the-terps-1-0-loss-to-cal-state-fullerton-at-bob-turtle-smith-field-on-april-19-2015",
@@ -46,13 +46,15 @@
     },
     {
       "component": "Articles",
-      "duration": 60000,
+      "duration": 15000,
       "id": "sexually-fluid-cast-of-mt-vs-are-you-the-one-shows-surprisingly-strong-representation",
       "next": 3,
       "path": "/articles/sexually-fluid-cast-of-mt-vs-are-you-the-one-shows-surprisingly-strong-representation",
       "title": "Continue Reading on dbknews.com",
       "content": {
-        "ads": "[]",
+        "ads": [
+          "300x600_Banner_C"
+        ],
         "articles": [
           {
             "author": "Daisy Grant",
@@ -76,11 +78,19 @@
       }
     },
     {
+      "component": "Default",
+      "duration": 5000,
+      "id": "default1",
+      "next": 4,
+      "path": "/default/1",
+      "title": "DiamondbackTV"
+    },
+    {
       "component": "News",
-      "duration": 60000,
+      "duration": 15000,
       "id": "sean-urbanskis-murder-trial-has-been-delayed-for-a-fourth-time",
       "path": "/news/sean-urbanskis-murder-trial-has-been-delayed-for-a-fourth-time",
-      "next": 4,
+      "next": 5,
       "title": "Sean Urbanski’s murder trial has been delayed for a fourth time",
       "content": {
         "author": "Jillian Atelsek",
@@ -96,14 +106,38 @@
       }
     },
     {
+      "component": "Multimedia",
+      "duration": 84000,
+      "id": "prince-georges-county-police-use-force-against-two-skateboarders-in-college-park",
+      "path": "/multimedia/prince-georges-county-police-use-force-against-two-skateboarders-in-college-park",
+      "next": 6,
+      "title": "Prince George’s County Police use force against two skateboarders in College Park",
+      "content": {
+        "category": "campus",
+        "credit": "DiamondbackVideo",
+        "media": {
+          "alt": "Prince George’s County Police use force against two skateboarders in College Park",
+          "caption": "Prince George’s County Police use force against two skateboarders in College Park",
+          "src": "https://www.youtube.com/embed/Zo6m8AP5odA?autoplay=1&controls=0&enablejsapi=1&loop=1&rel=0",
+          "video": true
+        },
+        "related": {
+          "href": "",
+          "text": ""
+        }
+      }
+    },
+    {
       "component": "Articles",
-      "duration": 60000,
+      "duration": 15000,
       "id": "review-prettymuc-hs-fomo-tour-revived-my-love-for-boy-bands",
       "path": "/articles/review-prettymuc-hs-fomo-tour-revived-my-love-for-boy-bands",
       "next": 0,
       "title": "Continue Reading on dbknews.com",
       "content": {
-        "ads": "[]",
+        "ads": [
+          "300x600_Banner_C"
+        ],
         "articles": [
           {
             "author": "Daisy Grant",

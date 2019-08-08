@@ -1,11 +1,13 @@
-// Pages
-import ErrorScreen from './Error'
-import Landing from './Landing'
+// Components
+import Articles from './Articles'
+import Gallery from './Gallery'
+import News from './News'
+import NotFound from './NotFound'
 
 /**
- * @file Page components
+ * @file JSX Pages
  * @see {@link http://atomicdesign.bradfrost.com/chapter-2/}
  * @author Lexus Drumgold <lex@lexusdrumgold.design>
  */
 
-export { ErrorScreen, Landing }
+export { Articles, Gallery, News, NotFound }

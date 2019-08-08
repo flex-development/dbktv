@@ -1,9 +1,9 @@
 // Templates
 import Article from './Article'
 import Articles from './Articles'
+import Default from './Default'
 import Multimedia from './Multimedia'
 import News from './News'
-import Slide from './Slide'
 
 /**
  * @file Template components
@@ -11,4 +11,4 @@ import Slide from './Slide'
  * @author Lexus Drumgold <lex@lexusdrumgold.design>
  */
 
-export { Article, Articles, Multimedia, News, Slide }
+export { Article, Articles, Default, Multimedia, News }

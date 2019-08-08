@@ -4,8 +4,20 @@
 // @author Lexus Drumgold
 // ----------------------------------------------------------------------------
 
+// Styles
+
+// Stack content
+// Add breathing room to DBKNews online plug
+// Set image width and max-width
 .adm-logo
-  +size(size(600), min-content)
+  +flex(column, center, center)
+
+  height: min-content
+
+  > .ada-heading
+    margin-top: size(16)
 
   > .ada-image
+    +constrain(100%)
+    max-width: 100%
     width: 100%

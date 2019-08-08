@@ -5,39 +5,40 @@ import { h, Component } from 'preact'
 import { Container, Heading } from '../atoms'
 
 /**
- * Class representing an error page.
+ * Class representing an error screen.
  *
- * @todo Check props with getDerivedStateFromProps and render error from
- * Component state instead of props
+ * @todo Transforms all errors to FeathersError via getDerivedStateFromProps
  *
- * @class ErrorScreen
+ * @class Error
  * @extends Component
  * @author Lexus Drumgold <lex@lexusdrumgold.design>
  */
-export default class ErrorScreen extends Component {
+export default class Error extends Component {
   /**
    * Sets the error name as the document title.
    *
    * @returns {undefined}
    */
   componentDidMount() {
-    const { error, info } = this.props
+    const { error } = this.props
     document.title = `${error.name}: ${error.message}`
   }
 
   /**
-   * Renders a <main> element representing an error. The page will display @see
-   * @param props.error.message and @see @param props.info .
+   * Renders a <main> element representing an error screen.
+   *
+   * The page will display the error name, message, and info, if it is defined.
    *
    * @param {object} props - Component properties
    * @property {FeathersError} props.error - Current error
+   * @property {string} props.error.message - Current error message
    * @property {object} props.info - Error info
    * @param {object} state - Component state
    * @returns {HTMLElement} <main> element
    */
   render(props, state) {
     const { className, error, id, info } = props
-    const style = (`adp-error ${error.className} ${className || ''}`).trim()
+    const style = (`ads-error ${error.className} ${className || ''}`).trim()
 
     return (
       <main id={id} className={style}>

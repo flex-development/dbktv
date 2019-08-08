@@ -38,3 +38,15 @@
   // Font color = white
   &.ui-white
     color: $white
+
+
+.square
+  +respond-to($breakpoint-xxxl, min)
+    font-size: size(20)
+
+  color: $accent-med
+  font-size: size(16)
+  transform: rotate(45deg)
+
+  &.active
+    color: $accent-light

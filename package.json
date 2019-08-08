@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "author": "Lexus Drumgold <lex@lexusdrumgold.design> (https://lexusdrumgold.design)",
   "scripts": {
-    "preinstall": "rm -rf ./public && rm -rf node_modules",
+    "preinstall": "rm -rf node_modules",
     "lint-components": "eslint ./src/components/**/*.jsx ./*.js --fix",
     "lint-functions": "npm run --prefix functions lint",
     "lint": "npm run lint-components && npm run lint-functions",
@@ -13,7 +13,7 @@
     "test": "clear && NODE_ENV=test jest --detectOpenHandles --passWithNoTests",
     "build": "rm -rf ./build && preact build --no-prerender",
     "functions": "npm --prefix functions start",
-    "hosting": "firebase serve --only hosting",
+    "hosting": "npm run build && firebase serve --only hosting",
     "start": "NODE_ENV=staging npm run build && firebase serve"
   },
   "repository": {

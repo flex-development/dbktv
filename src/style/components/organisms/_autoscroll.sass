@@ -1,0 +1,38 @@
+// ----------------------------------------------------------------------------
+// AutoScroll specific styles, variables, placeholders, mixins and functions
+// @see components/organisms/AutoScroll.jsx
+// @author Lexus Drumgold
+// ----------------------------------------------------------------------------
+
+
+.ado-autoscroll
+  +flex(row, center)
+
+  overflow: hidden
+
+  > .ada-link,
+  > .square
+    margin: 0 size(7.5)
+
+  > .ada-link
+    +respond-to($breakpoint-xxl, min)
+      height: size(18)
+
+    +respond-to($breakpoint-xxxl, min)
+      height: size(24)
+
+    color: $light
+    font:
+      size: size(13.5)
+      weight: 600
+    min-width: max-content
+
+  > .square
+    +respond-to($breakpoint-xxl, min)
+      font-size: size(15)
+
+    +respond-to($breakpoint-xxxl, min)
+      font-size: size(20)
+
+    color: $accent-light
+    font-size: size(11.25)

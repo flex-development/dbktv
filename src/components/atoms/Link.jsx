@@ -42,9 +42,15 @@ export default class Link extends Component {
  * @param {string} param0.href - Article link
  * @returns {<Headline>}
  */
-const Headline = ({ text, href }) => (
-  <Link className='headline' href={href} target='_blank'>{text}</Link>
-)
+const Headline = ({ text, href, feature }) => {
+  const style = `headline ${feature ? 'feature' : ''}`
+
+  return (
+    <Link className={style} href={href} target='_blank'>
+      {text}
+    </Link>
+  )
+}
 
 /**
  * Component representing a related article link.

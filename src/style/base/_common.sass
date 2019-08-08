@@ -2,6 +2,10 @@
 // This file contains very basic styles.
 // ----------------------------------------------------------------------------
 
+// Variables
+$outer-container-height: 100%
+$outer-container-width: 100%
+
 // Set up a decent box model on the root element
 // Prevent scrolling
 html
@@ -15,21 +19,32 @@ html
 // Make all elements from the DOM inherit from the parent box-sizing
 // Since `*` has a specificity of 0, it does not override the `html` value
 // making all elements inheriting from the root box-sizing value
-*, *::before, *::after
+*,
+*::before,
+*::after
   box-sizing: inherit
 
 // Hide scrollbar
 \::-webkit-scrollbar
   display: none
 
+// Make body full size of viewport
+// Set default text color
+// Remove default margins
 body
+  +flex(column, center, space-between)
   +size(100vw, 100vh)
 
   background-color: $dark
   color: $light
   margin: 0 !important
 
+// Make outer content containers full size
 main,
 section
-  height: 100%
-  min-height: 100%
+  +flex(row, center, center)
+  +size($outer-container-width, $outer-container-height)
+
+// Set template background color
+section
+  background-color: rgba($dark, 0.85)
