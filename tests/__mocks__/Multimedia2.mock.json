@@ -4,18 +4,18 @@
   "slides": [
     {
       "component": "Multimedia",
-      "duration": 84000,
-      "id": "prince-georges-county-police-use-force-against-two-skateboarders-in-college-park",
-      "path": "/multimedia/prince-georges-county-police-use-force-against-two-skateboarders-in-college-park",
+      "duration": 91000,
+      "id": "dbk-multimedia-montage",
+      "path": "/multimedia/dbk-multimedia-montage",
       "next": 0,
-      "title": "Prince George’s County Police use force against two skateboarders in College Park",
+      "title": "DBK Multimedia Montage",
       "content": {
-        "category": "campus",
-        "credit": "DiamondbackVideo",
+        "category": "diversions",
+        "credit": "The Diamondback",
         "media": {
-          "alt": "Prince George’s County Police use force against two skateboarders in College Park",
-          "caption": "Prince George’s County Police use force against two skateboarders in College Park",
-          "src": "https://www.youtube.com/embed/Zo6m8AP5odA?autoplay=1&controls=0&enablejsapi=1&loop=1&rel=0",
+          "alt": "DBK Multimedia Montage",
+          "caption": "DBK Multimedia Montage",
+          "src": "https://www.youtube.com/embed/OOrRXaD8Kx4?autoplay=1&controls=0&enablejsapi=1&loop=1&rel=0",
           "video": true
         },
         "related": {
