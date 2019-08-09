@@ -34,7 +34,10 @@ export default class Multimedia extends Component {
     const { duration, next, slide, title } = this.props
 
     document.title = `Gallery: ${title}`
+
     $('.ado-footer').addClass('multimedia-border')
+    $('.ado-nav').addClass('ui-hide')
+
     setTimeout(() => slide(next), duration)
   }
 
@@ -45,6 +48,7 @@ export default class Multimedia extends Component {
    */
   componentWillUnmount() {
     $('.ado-footer').removeClass('multimedia-border')
+    $('.ado-nav').removeClass('ui-hide')
   }
 
   /**

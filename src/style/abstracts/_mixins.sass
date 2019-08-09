@@ -28,10 +28,15 @@
 /// @param {Bool} $self [false] - Whether or not to include current selector
 =event($self: false)
   @if $self
-    &, &:hover, &:active, &:focus
+    &,
+    &:hover,
+    &:active,
+    &:focus
       @content
   @else
-    &:hover, &:active, &:focus
+    &:hover,
+    &:active,
+    &:focus
       @content
 
 /// Display: flex helper
@@ -39,9 +44,9 @@
 /// @param {String} $alignItems [stretch] - align-items
 /// @param {String} $justifyContent [flex-start] - justify-content
 =flex($flexDirection: row, $alignItems: stretch, $justifyContent: flex-start)
+  align-items: $alignItems
   display: flex
   flex-direction: $flexDirection
-  align-items: $alignItems
   justify-content: $justifyContent
 
   @content

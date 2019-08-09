@@ -22,6 +22,11 @@
   height: size(285)
   z-index: 15
 
+  &.ui-hide
+    +opacity(0)
+
+    display: none
+
   > .square
     +respond-to($breakpoint-xxl, min)
       font-size: size(15)
