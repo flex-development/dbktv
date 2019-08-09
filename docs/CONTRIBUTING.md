@@ -97,7 +97,7 @@ Make your changes under the `functions` directory.
 The design spec can be found [here][9]. When ready, make your changes under the
 `src` directory.
 
-1. Run `npm run dev-hosting` to launch the DBKTV frontend in a `development`
+1. Run `npm run dev-components` to launch the DBKTV frontend in a `development`
    Node environment. This command will compile both your JSX and Sass files, as
    watch your files for changes you develop.
 2. If successful, you'll see something similar to the following in your terminal:
@@ -116,7 +116,6 @@ The design spec can be found [here][9]. When ready, make your changes under the
 - `src/assets`: Project fonts, images, and icons
 - `src/components`: Preact components, organized in an [Atomic Design][10] pattern
 - `src/components/index.js`: Main application
-- `src/context`: Context configuration. For information on Peact Context, please view [this link][11]
 - `src/style`: Application stylesheets, built with [Sass][12], and organized in an [Atomic Design][10] pattern
 - `src/utils`: Frontend utility functions
 - `src/index.html`: HTML template
@@ -173,7 +172,7 @@ For example:
 ## Submit for Review
 
 - Use [**this template**][16]
-- Label your pull request as `help wanted` and `pull request`
+- Label your pull request as `pull request` and `needs review`
 - Prefix your pull request title with `PR  -`
 - Assign the task to yourself and the appropriate reviewer
 
@@ -187,9 +186,9 @@ For example:
 [8]: https://firebase.google.com/docs/functions
 [9]: https://xd.adobe.com/spec/d8902b2f-721b-4006-5b21-ffd8e4e42993-aea1/
 [10]: http://atomicdesign.bradfrost.com/chapter-2/
-[11]: https://github.com/preactjs/preact/releases/tag/10.0.0-alpha.0
+[11]: https://github.com/developit/unistore
 [12]: https://sass-lang.com/
 [13]: https://mockaroo.com/
 [14]: https://jestjs.io/docs/en/snapshot-testing
 [15]: https://jsdoc.app/
-[16]: https://gist.github.com/lexusdrumgold/47ca17fdc04739ffd85b0bf96d546ae7
+[16]: ./pull_request_template.md

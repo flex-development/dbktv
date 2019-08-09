@@ -10,7 +10,8 @@ previews, and advertisements - to various televisions on campus.
 
 [Getting Started](#getting-started)  
 [Usage](#usage)  
-[Contributing](#contributing)  
+[Contributing](docs/CONTRIBUTING.md)  
+[Deployment](docs/DEPLOYMENT.md)  
 [Built With](#built-with)
 
 ## Getting Started
@@ -29,11 +30,6 @@ A prototype of the project can be viewed at [this link][1].
 ## Usage
 
 **Attention: This section is under construction.**
-
-## Contributing
-
-If you're a current member of The Diamondback, or an outside contributor, please view
-our [Guide to Contributing](CONTRIBUTING.md).
 
 ## Built With
 
