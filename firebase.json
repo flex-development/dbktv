@@ -12,6 +12,7 @@
     "trailingSlash": false,
     "predeploy": [
       "NODE_ENV=production",
+      "npm run lint-components",
       "npm run build"
     ],
     "redirects": [
@@ -21,8 +22,18 @@
         "type": 301
       },
       {
+        "source": "/prototype",
+        "destination": "https://xd.adobe.com/view/e8f623a2-52e8-455d-7f57-05d9fa1ad038-9ec7",
+        "type": 301
+      },
+      {
         "source": "/repo",
         "destination": "https://github.com/The-Diamondback-Lab/dbktv",
+        "type": 301
+      },
+      {
+        "source": "/spec",
+        "destination": "https://xd.adobe.com/spec/d8902b2f-721b-4006-5b21-ffd8e4e42993-aea1/",
         "type": 301
       }
     ],
