@@ -172,7 +172,7 @@ For example:
 ## Submit for Review
 
 - Use [**this template**][16]
-- Label your pull request as `help wanted` and `pull request`
+- Label your pull request as `pull request` and `needs review`
 - Prefix your pull request title with `PR  -`
 - Assign the task to yourself and the appropriate reviewer
 
@@ -191,4 +191,4 @@ For example:
 [13]: https://mockaroo.com/
 [14]: https://jestjs.io/docs/en/snapshot-testing
 [15]: https://jsdoc.app/
-[16]: https://gist.github.com/lexusdrumgold/47ca17fdc04739ffd85b0bf96d546ae7
+[16]: ./pull_request_template.md
