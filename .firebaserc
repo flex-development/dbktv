@@ -1,5 +1,17 @@
 {
   "projects": {
     "default": "thedbktv"
+  },
+  "targets": {
+    "thedbktv": {
+      "hosting": {
+        "staging": [
+          "thedbktv"
+        ],
+        "production": [
+          "diamondbacktv"
+        ]
+      }
+    }
   }
 }
