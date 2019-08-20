@@ -4,23 +4,23 @@
   "slides": [
     {
       "component": "Multimedia",
-      "duration": 15000,
-      "id": "second-baseman-brandon-lowe-swings-at-a-pitch-in-the-terps-1-0-loss-to-cal-state-fullerton-at-bob-turtle-smith-field-on-april-19-2015",
+      "duration": 17000,
+      "id": "monster-smashed-a-single-page-scrolling-site-showcasing-spooky-drinks-from-the-book-monster-smashed",
       "next": 0,
-      "path": "/multimedia/second-baseman-brandon-lowe-swings-at-a-pitch-in-the-terps-1-0-loss-to-cal-state-fullerton-at-bob-turtle-smith-field-on-april-19-2015",
-      "title": "Second baseman Brandon Lowe swings at a pitch in the Terps’ 1-0 loss to Cal State Fullerton at Bob “Turtle” Smith Field on April 19, 2015",
+      "path": "/multimedia/monster-smashed-a-single-page-scrolling-site-showcasing-spooky-drinks-from-the-book-monster-smashed",
+      "title": "Monster Smashed: A single-page scrolling site showcasing spooky drinks from the book Monster Smashed.",
       "content": {
-        "category": "campus",
-        "credit": "Diamondback Staff",
+        "category": "special projects",
+        "credit": "The Diamondback",
         "media": {
-          "alt": "Second baseman Brandon Lowe swings at a pitch in the Terps’ 1-0 loss to Cal State Fullerton at Bob “Turtle” Smith Field on April 19, 2015",
-          "caption": "Second baseman Brandon Lowe swings at a pitch in the Terps’ 1-0 loss to Cal State Fullerton at Bob “Turtle” Smith Field on April 19, 2015",
-          "src": "https://d3gx1wgrn4cpnk.cloudfront.net/uploads/2019/05/2015-05-a9044ffdf577551e6704c6676420509f-1.jpg",
-          "video": false
+          "alt": "Monster Smashed: A single-page scrolling site showcasing spooky drinks from the book Monster Smashed.",
+          "caption": "Monster Smashed: A single-page scrolling site showcasing spooky drinks from the book Monster Smashed.",
+          "src": "https://firebasestorage.googleapis.com/v0/b/thedbktv.appspot.com/o/assets%2Fvideos%2Fmonster-smashed.mp4?alt=media&token=0973e1dd-54cd-4b08-8925-eaf12f169b4a",
+          "video": true
         },
         "related": {
-          "href": "https://dbknews.com/2019/07/03/brandon-lowe-mlb-all-star-game-tampa-bay-rays/",
-          "text": "Former Maryland baseball player Brandon Lowe selected to MLB All-Star Game"
+          "href": "https://dbknews.com/2017/10/24/monster-smashed-diamondback-special-project/",
+          "text": "‘Monster Smashed’: The Diamondback’s spookiest project yet"
         }
       }
     }

@@ -23,11 +23,14 @@ export default class Video extends Component {
    * @returns {HTMLVideoElement}
    */
   render(props, state) {
-    const { controls, className, events, id, src, type } = props
+    const { autoplay, controls, className, events, id, src, type } = props
     const style = (`ada-video ${className || ''}`).trim()
 
     return (
-      <video id={id} className={style} controls={controls || false} {...events}>
+      <video
+        id={id} className={style} autoPlay={autoplay}
+        controls={controls || false} {...events}
+      >
         <source src={src} type={type} />
         Your browser does not support the video tag.
       </video>

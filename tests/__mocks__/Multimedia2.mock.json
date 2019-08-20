@@ -4,23 +4,23 @@
   "slides": [
     {
       "component": "Multimedia",
-      "duration": 91000,
-      "id": "dbk-multimedia-montage",
-      "path": "/multimedia/dbk-multimedia-montage",
+      "duration": 15000,
+      "id": "testudo-excites-an-arena-of-fans-before-marylands-76-71-loss-to-no-4-virginia-at-xfinity-center-on-nov-28-2018",
+      "path": "/multimedia/testudo-excites-an-arena-of-fans-before-marylands-76-71-loss-to-no-4-virginia-at-xfinity-center-on-nov-28-2018",
       "next": 0,
-      "title": "DBK Multimedia Montage",
+      "title": "Testudo excites an arena of fans before Maryland’s 76-71 loss to No. 4 Virginia at Xfinity Center on Nov. 28, 2018",
       "content": {
         "category": "diversions",
-        "credit": "The Diamondback",
+        "credit": "andi wenck",
         "media": {
-          "alt": "DBK Multimedia Montage",
-          "caption": "DBK Multimedia Montage",
-          "src": "https://www.youtube.com/embed/OOrRXaD8Kx4?autoplay=1&controls=0&enablejsapi=1&loop=1&rel=0",
-          "video": true
+          "alt": "Testudo excites an arena of fans before Maryland’s 76-71 loss to No. 4 Virginia at Xfinity Center on Nov. 28, 2018",
+          "caption": "Testudo excites an arena of fans before Maryland’s 76-71 loss to No. 4 Virginia at Xfinity Center on Nov. 28, 2018",
+          "src": "https://firebasestorage.googleapis.com/v0/b/thedbktv.appspot.com/o/assets%2Fimages%2Ftestudo-excites-fans.jpeg?alt=media&token=9a4f1116-2c90-4566-bbb3-defb9774124a",
+          "video": false
         },
         "related": {
-          "href": "",
-          "text": ""
+          "href": "https://dbknews.com/2019/07/01/maryland-sports-best-moments-since-joining-big-ten/",
+          "text": "Looking back at Maryland’s best sports moments since joining the Big Ten five years ago"
         }
       }
     }

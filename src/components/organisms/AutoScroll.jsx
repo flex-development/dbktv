@@ -65,7 +65,7 @@ export default class AutoScroll extends Component {
     // Start scrollbar
     setTimeout(() => {
       const position = this.position()
-      $('.ado-autoscroll').animate({ scrollLeft: position }, 750)
+      $('.ado-autoscroll').animate({ scrollLeft: position }, 825)
       console.info('Scrolled', position)
     }, 1000)
 
