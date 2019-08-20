@@ -65,15 +65,12 @@ export default class AutoScroll extends Component {
     // Start scrollbar
     setTimeout(() => {
       const position = this.position()
-      $('.ado-autoscroll').animate({ scrollLeft: position }, 825)
-      console.info('Scrolled', position)
+      $('.ado-autoscroll').animate({ scrollLeft: position }, 600)
     }, 1000)
 
     return (
       <div id={id} className={(`ado-autoscroll ${className || ''}`).trim()}>
         {autoscroll.items.map((item, i) => {
-          // if (i === autoscroll.count - 1) return <Link {...item} />
-
           return (
             <Fragment>
               <Link {...item} />&nbsp;<SquareIcon />&nbsp;

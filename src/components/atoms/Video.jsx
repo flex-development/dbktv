@@ -32,7 +32,6 @@ export default class Video extends Component {
         controls={controls || false} {...events}
       >
         <source src={src} type={type} />
-        Your browser does not support the video tag.
       </video>
     )
   }
