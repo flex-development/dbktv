@@ -3,7 +3,7 @@ import { h, Component } from 'preact'
 
 // Components
 import {
-  Author, Category, Container, IFrame, Image, Headline, Related
+  Author, Category, Container, Image, Headline, Related, Video
 } from '../atoms'
 
 /**
@@ -30,11 +30,11 @@ export default class Figure extends Component {
     const { className, content, id } = props
 
     const { category, credit, media, related } = content
-    if (media.video) media.type = 'text/html'
+    if (media.video) media.type = 'video/mp4'
 
     return (
       <figure id={id} className={`adm-figure ${className || ''}`.trim()}>
-        {media.video ? <IFrame {...media} /> : <Image {...media} />}
+        {media.video ? <Video autoplay {...media} /> : <Image {...media} />}
         <figcaption className='ada-figcaption'>
           <Container>
             <div className='caption-header'>
