@@ -1,5 +1,5 @@
 // Packages
-import { h, Component } from 'preact'
+import React, { Component } from 'react'
 import $ from 'jquery'
 
 // Components
@@ -65,8 +65,8 @@ export default class Default extends Component {
    * @param {string} state.title - Slide title
    * @returns {HTMLElement} <section> element
    */
-  render(props, state) {
-    const { className, id } = props
+  render() {
+    const { className, id } = this.props
 
     return (
       <section id={id} className={`adt-default ${className || ''}`.trim()}>

@@ -1,5 +1,5 @@
 // Packages
-import { h, Component } from 'preact'
+import React, { Component } from 'react'
 import $ from 'jquery'
 
 // Components
@@ -54,12 +54,10 @@ export default class Multimedia extends Component {
   /**
    * Renders a <section> element representing the "Multimedia" template.
    *
-   * @param {object} props - Component properties
-   * @param {object} state - Component state
    * @returns {HTMLElement} <section> element
    */
   render(props, state) {
-    const { className, content, id } = props
+    const { className, content, id } = this.props
 
     return (
       <section id={id} className={`adt-multimedia ${className || ''}`.trim()}>

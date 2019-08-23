@@ -1,5 +1,5 @@
 // Packages
-import { h, Component } from 'preact'
+import React, { Component } from 'react'
 import { DFPSlotsProvider, AdSlot } from 'react-dfp'
 
 // Components
@@ -39,12 +39,10 @@ export default class Articles extends Component {
   /**
    * Renders a <section> element representing the "Articles" template.
    *
-   * @param {object} props - Component properties
-   * @param {object} state - Component state
    * @returns {HTMLElement} <section> element
    */
-  render(props, state) {
-    const { className, content, id } = props
+  render() {
+    const { className, content, id } = this.props
     const style = (`adt-articles ${className || ''}`).trim()
 
     const NETWORK_ID = '123934970'
@@ -56,8 +54,8 @@ export default class Articles extends Component {
           <div className='left-rail'>
             <Subheading heading='Continue Reading on <a class="ada-link" href="https://dbknews.com" target="_blank">dbknews.com</a>' />
             <div className='articles'>
-              {content.articles.map(article => {
-                return <Article class='group' {...article} />
+              {content.articles.map((article, i) => {
+                return <Article {...article} class='group' key={`a-${i}`} />
               })}
             </div>
 

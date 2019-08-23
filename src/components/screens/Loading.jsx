@@ -1,5 +1,5 @@
 // Packages
-import { h, Component } from 'preact'
+import React, { Component } from 'react'
 
 // Components
 import { Container } from '../atoms'
@@ -8,6 +8,7 @@ import { Loading as LoadingMolecule } from '../molecules'
 /**
  * Class representing the loading screen.
  *
+ * @todo Update documentation
  *
  * @class Loading
  * @extends Component
@@ -19,20 +20,20 @@ export default class Loading extends Component {
    *
    * @returns {undefined}
    */
-  componentDidMount() { document.title = 'DiamondbackTV' }
+  componentDidMount() {
+    document.title = 'Loading DiamondbackTV'
+  }
 
   /**
-   * Renders a <main> element representing the loading screen.
-   *
-   * Displays the DiamondbackTV logo, the dbknews.com plug, and a loading
-   * spinner.
+   * Renders a <main> element representing the loading screen. Displays the
+   * DiamondbackTV logo, the dbknews.com plug, and a loading spinner.
    *
    * @param {object} props - Component properties
    * @param {object} state - Component state
    * @returns {HTMLElement} <main> element
    */
-  render(props, state) {
-    const { className, id } = props
+  render() {
+    const { className, id } = this.props
 
     return (
       <main id={id} className={(`ads-loading ${className || ''}`).trim()}>

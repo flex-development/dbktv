@@ -2,38 +2,55 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Specially curated Diamondback content - feature stories, multimedia,
-  article previews, and advertisements - streamed to various televisions on
-  University of Maryland's campus.">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Specially curated Diamondback content - feature stories, multimedia, article previews, and advertisements - streamed to various televisions on University of Maryland's campus. />
 
-  <title>DiamondbackTV</title>
+  <link rel=" shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
+  <link rel="icon" type="image/png" href="/assets/icons/favicon-16x16.png" sizes="16x16">
+  <link rel="icon" type="image/png" href="/assets/icons/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="/assets/icons/pwa-192x192.png" sizes="192x192">
+  <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png" sizes="180x180">
+
+  <meta name="msapplication-config" content="%PUBLIC_URL%/browserconfig.xml">
+
+  <meta name="theme-color" content="#e51d37" />
+  <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. 
+      See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+  <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+  <title>Year in Review</title>
 </head>
 
-<!-- Content will be populated by Preact -->
-
 <body>
-  <!-- Preact CLI / webpack -->
-  <%= htmlWebpackPlugin.options.ssr() %>
-  <% if (webpack.assets.filter(entry => entry.name.match(/bundle(\.\w{5})?.esm.js$/)).length > 0) { %>
-  <% /* Fix for safari < 11 nomodule bug. TODO: Do the following only for safari. */ %>
-  <script>!function () { var e = document, t = e.createElement("script"); if (!("noModule" in t) && "onbeforeload" in t) { var n = !1; e.addEventListener("beforeload", function (e) { if (e.target === t) n = !0; else if (!e.target.hasAttribute("nomodule") || !n) return; e.preventDefault() }, !0), t.type = "module", t.src = ".", e.head.appendChild(t), t.remove() } }();</script>
-  <script crossorigin="anonymous"
-    src="<%= htmlWebpackPlugin.files.publicPath %><%= webpack.assets.filter(entry => entry.name.match(/bundle(\.\w{5})?.esm.js$/))[0].name %>"
-    type="module"></script>
-  <%
-  				/*Fetch and Promise polyfills are not needed for browsers that support type=module
-  				Please re-evaluate below line if adding more polyfills.*/
-  			%>
-  <script
-    nomodule>window.fetch || document.write('<script src="<%= htmlWebpackPlugin.files.chunks["polyfills"].entry %>"><\/script>')</script>
-  <script nomodule defer src="<%= htmlWebpackPlugin.files.chunks['bundle'].entry %>"></script>
-  <% } else { %>
-  <script <%= htmlWebpackPlugin.options.scriptLoading %>
-    src = "<%= htmlWebpackPlugin.files.chunks['bundle'].entry %>" ></script>
-  <script>window.fetch || document.write('<script src="<%= htmlWebpackPlugin.files.chunks["polyfills"].entry %>"><\/script>')</script>
-  <% } %>
+  <!-- JavaScript disabled warning -->
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+
+  <div id="root">
+    <!-- The application will be rendered inside of this container. -->
+  </div>
+
+  <!--
+    This HTML file is a template.
+    If you open it directly in the browser, you will see an empty page.
+    
+    You can add webfonts, meta tags, or analytics to this file.
+    The build step will place the bundled scripts into the <body> tag.
+    
+    To begin development, run `npm run dev`.
+    To create a production bundle, use `npm run build`.
+  -->
 </body>
 
 </html>
