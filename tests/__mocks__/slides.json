@@ -1,0 +1,132 @@
+[
+  {
+    "component": "News",
+    "duration": 15000,
+    "content": {
+      "author": "Jason Fontelieu",
+      "blurb": "Now you might ask: What is a hot girl summer? You may have seen several people caption their beach pictures with “hot girl summer” and some sort of emoji with its tongue out.\n\nBut before you can understand what a hot girl summer is, you must know the original hot girl herself: Megan Thee Stallion.\n\nMegan Thee Stallion is one of the biggest rappers at the moment — and on an amazingly swift come-up at that. You might have seen her recently on Jimmy Kimmel Live! performing her smash hit “Big Ole Freak” and the track “Realer” from her latest mixtape Fever. Her effortless moves and simple, yet stunning, costume are indicators of her swagger and showmanship.\n\nI won’t delve into a full-on review of Fever, but I’ll just say that there’s not a bad track on it. If you’re especially hoping to channel your inner hot girl, try “Simon Says” or “Shake That” to get the room dancing.",
+      "headline": {
+        "href": "https://dbknews.com/2019/07/16/hot-girl-summer-megan-thee-stallion-mixtape-rap-music/",
+        "text": "You’ve heard of hot girl summer — but have you heard about the girl who started it?"
+      },
+      "image": {
+        "alt": "Megan Thee Stallion has successfully branded Summer 2019 a hot girl summer (Photo via YouTube).\n",
+        "src": "https://d3gx1wgrn4cpnk.cloudfront.net/uploads/2019/07/Screen-Shot-2019-07-16-at-8.49.45-PM-e1563324747898.png"
+      }
+    }
+  },
+  {
+    "component": "Multimedia",
+    "duration": 15000,
+    "content": {
+      "category": "diversions",
+      "credit": "andi wenck",
+      "media": {
+        "alt": "Testudo excites an arena of fans before Maryland’s 76-71 loss to No. 4 Virginia at Xfinity Center on Nov. 28, 2018",
+        "caption": "Testudo excites an arena of fans before Maryland’s 76-71 loss to No. 4 Virginia at Xfinity Center on Nov. 28, 2018",
+        "src": "https://firebasestorage.googleapis.com/v0/b/thedbktv.appspot.com/o/assets%2Fimages%2Ftestudo-excites-fans.jpeg?alt=media&token=9a4f1116-2c90-4566-bbb3-defb9774124a",
+        "video": false
+      },
+      "related": {
+        "href": "https://dbknews.com/2019/07/01/maryland-sports-best-moments-since-joining-big-ten/",
+        "text": "Looking back at Maryland’s best sports moments since joining the Big Ten five years ago"
+      }
+    }
+  },
+  {
+    "component": "Articles",
+    "duration": 15000,
+    "content": {
+      "ads": [
+        "300x600_DBK_TV"
+      ],
+      "articles": [
+        {
+          "author": "Daisy Grant",
+          "blurb": "If you’ve ever wondered what the love child of a reality dating show and a logic puzzle would be, look no further than MTV’s <i>Are You The One</i>? And this year, the puzzle is getting even harder.",
+          "category": "tv",
+          "headline": {
+            "text": "Sexually fluid cast of MTV’s ‘Are You The One?’ shows surprisingly strong representation",
+            "href": "https://dbknews.com/2019/07/03/are-you-the-one-sexually-fluid-cast-mtv-dating-show/"
+          }
+        },
+        {
+          "author": "Christine Condon",
+          "blurb": "The University of Maryland’s Hornbake Library is planned to lose student study space this fall.\n\n",
+          "category": "campus",
+          "headline": {
+            "text": "UMD students will lose some study space in Hornbake Library this fall",
+            "href": "https://dbknews.com/2019/07/03/umd-hornbake-library-ischool-lose-study-space-students-remodel/"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "component": "Default",
+    "duration": 10000
+  },
+  {
+    "component": "News",
+    "duration": 15000,
+    "content": {
+      "author": "Jillian Atelsek",
+      "blurb": "Less than two weeks before it was scheduled to begin, the trial for the former University of Maryland student charged with murder and a hate crime in the death of 2nd. Lt. Richard Collins has been delayed for a fourth time.<br/><br/>Judge Lawrence Hill granted Sean Urbanski’s lawyers’ motion for more time Thursday, Prince George’s County State’s Attorney’s Office spokesperson Denise Roberts told The Diamondback. The trial will now begin Dec. 9, she said.<br/><br/>The defense claimed they needed more time for an expert to sort through evidence from Urbanski’s cell phone, Roberts said. Last month, Hill ruled that evidence — which included racist memes — was admissible in court, despite Urbanski’s lawyers’ efforts to bar it.",
+      "headline": {
+        "href": "https://dbknews.com/2019/07/11/umd-sean-urbanski-trial-delayed-richard-collins-fourth/",
+        "text": "Sean Urbanski’s murder trial has been delayed for a fourth time"
+      },
+      "image": {
+        "alt": "Sean Urbanski, the former University of Maryland student charged with murder and a hate crime in the fatal stabbing of Richard Collins, has had his trial postponed four times. (Courtesy of the University of Maryland Police Department)",
+        "src": "https://d3gx1wgrn4cpnk.cloudfront.net/uploads/2019/04/LRHK2IR6HMI6PMU76QH7Z3JN3M-1.jpg"
+      }
+    }
+  },
+  {
+    "component": "Multimedia",
+    "duration": 17000,
+    "content": {
+      "category": "special projects",
+      "credit": "The Diamondback",
+      "media": {
+        "alt": "Monster Smashed: A single-page scrolling site showcasing spooky drinks from the book Monster Smashed.",
+        "caption": "Monster Smashed: A single-page scrolling site showcasing spooky drinks from the book Monster Smashed.",
+        "src": "https://firebasestorage.googleapis.com/v0/b/thedbktv.appspot.com/o/assets%2Fvideos%2Fmonster-smashed.mp4?alt=media&token=0973e1dd-54cd-4b08-8925-eaf12f169b4a",
+        "video": true
+      },
+      "related": {
+        "href": "https://dbknews.com/2017/10/24/monster-smashed-diamondback-special-project/",
+        "text": "‘Monster Smashed’: The Diamondback’s spookiest project yet"
+      }
+    }
+  },
+  {
+    "component": "Articles",
+    "duration": 15000,
+    "content": {
+      "ads": [
+        "300x600_Banner_C"
+      ],
+      "articles": [
+        {
+          "author": "Daisy Grant",
+          "blurb": "Watching PRETTYMUCH perform at DAR Constitution Hall on Friday was weird. Seeing five skater boys jump around the same stage I walked across to receive my high school diploma left me with some cognitive dissonance.",
+          "category": "music",
+          "headline": {
+            "text": "Review: PRETTYMUCH’s ‘FOMO Tour’ revived my love for boy bands",
+            "href": "https://dbknews.com/2019/07/21/prettymuch-fomo-tour-boy-band-music-concert-review/"
+          }
+        },
+        {
+          "author": "Matthew Gilpin",
+          "blurb": "New Maryland football coach Mike Locksley spoke Thursday at Big Ten Media Days after a much quieter offseason for the Terps program than last year.",
+          "category": "sports",
+          "headline": {
+            "text": "Three takeaways from Maryland football coach Mike Locksley’s Big Ten Media Day",
+            "href": "https://dbknews.com/2019/07/18/maryland-football-mike-locksley-big-ten-media-day/"
+          }
+        }
+      ]
+    }
+  }
+]

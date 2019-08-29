@@ -5,6 +5,9 @@ import ReactDOM from 'react-dom'
 // Compiled Sass stylesheet
 import './sass/app.sass'
 
+// Firebase
+import { database, storage } from './api'
+
 // Application
 import App from './components/App'
 
@@ -20,7 +23,11 @@ import * as sw from './config/sw.config'
  */
 
 // Application will be rendered inside of <div id="root"></div>
-ReactDOM.render(<App />, document.getElementById('root'))
+// with the Firebase database and storage interfaces passed as props
+ReactDOM.render(
+  <App database={database} storage={storage} />,
+  document.getElementById('root')
+)
 
 /**
  * If you want your app to work offline and load faster, you can change

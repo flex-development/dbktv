@@ -43,6 +43,9 @@ export default class AutoScroll extends Component {
     // Adjust logo size
     const constrain = `${content.count}rem`
     $('.ado-footer > .adm-logo').css({ maxWidth: constrain, width: constrain })
+
+    // Start scrollbar
+    $('.ado-autoscroll').animate({ scrollLeft: 0 }, 750)
   }
 
   /**
@@ -66,22 +69,20 @@ export default class AutoScroll extends Component {
    *
    * @param {object} props - Component properties
    * @param {object} props.content - Autoscroll content
-   * @param {number} props.content.count - Number of items to scroll through
-   * @param {any[]} props.content.items - Scrolling items
    * @param {object | undefined} state
    */
   render() {
     const { className, content, id } = this.props
 
-    // Start scrollbar
+    // Scroll effect
     setTimeout(() => {
       const position = this.position()
-      $('.ado-autoscroll').animate({ scrollLeft: position }, 600)
+      $('.ado-autoscroll').animate({ scrollLeft: position }, 750)
     }, 1000)
 
     return (
       <div id={id} className={(`ado-autoscroll ${className || ''}`).trim()}>
-        {content.items.map((item, i) => {
+        {content.map((item, i) => {
           return (
             <Fragment key={`autoscroll-${i}`}>
               <Link {...item} />&nbsp;<SquareIcon />&nbsp;

@@ -1,14 +1,10 @@
 {
-  "count": 6,
-  "duration": 90000,
+  "count": 1,
+  "duration": 15000,
   "slides": [
     {
       "component": "News",
       "duration": 15000,
-      "id": "youve-heard-of-hot-girl-summer-but-have-you-heard-about-the-girl-who-started-it",
-      "next": 1,
-      "path": "/news/youve-heard-of-hot-girl-summer-but-have-you-heard-about-the-girl-who-started-it",
-      "title": "You’ve heard of hot girl summer — but have you heard about the girl who started it?",
       "content": {
         "author": "Jason Fontelieu",
         "blurb": "Now you might ask: What is a hot girl summer? You may have seen several people caption their beach pictures with “hot girl summer” and some sort of emoji with its tongue out.\n\nBut before you can understand what a hot girl summer is, you must know the original hot girl herself: Megan Thee Stallion.\n\nMegan Thee Stallion is one of the biggest rappers at the moment — and on an amazingly swift come-up at that. You might have seen her recently on Jimmy Kimmel Live! performing her smash hit “Big Ole Freak” and the track “Realer” from her latest mixtape Fever. Her effortless moves and simple, yet stunning, costume are indicators of her swagger and showmanship.\n\nI won’t delve into a full-on review of Fever, but I’ll just say that there’s not a bad track on it. If you’re especially hoping to channel your inner hot girl, try “Simon Says” or “Shake That” to get the room dancing.",
@@ -25,10 +21,6 @@
     {
       "component": "Multimedia",
       "duration": 15000,
-      "id": "testudo-excites-an-arena-of-fans-before-marylands-76-71-loss-to-no-4-virginia-at-xfinity-center-on-nov-28-2018",
-      "path": "/multimedia/testudo-excites-an-arena-of-fans-before-marylands-76-71-loss-to-no-4-virginia-at-xfinity-center-on-nov-28-2018",
-      "next": 2,
-      "title": "Testudo excites an arena of fans before Maryland’s 76-71 loss to No. 4 Virginia at Xfinity Center on Nov. 28, 2018",
       "content": {
         "category": "diversions",
         "credit": "andi wenck",
@@ -47,10 +39,6 @@
     {
       "component": "Articles",
       "duration": 15000,
-      "id": "sexually-fluid-cast-of-mt-vs-are-you-the-one-shows-surprisingly-strong-representation",
-      "next": 3,
-      "path": "/articles/sexually-fluid-cast-of-mt-vs-are-you-the-one-shows-surprisingly-strong-representation",
-      "title": "Continue Reading on dbknews.com",
       "content": {
         "ads": [
           "300x600_DBK_TV"
@@ -58,7 +46,7 @@
         "articles": [
           {
             "author": "Daisy Grant",
-            "blurb": "If you’ve ever wondered what the love child of a reality dating show and a logic puzzle would be, look no further than MTV’s _Are You The One_? And this year, the puzzle is getting even harder.",
+            "blurb": "If you’ve ever wondered what the love child of a reality dating show and a logic puzzle would be, look no further than MTV’s <i>Are You The One</i>? And this year, the puzzle is getting even harder.",
             "category": "tv",
             "headline": {
               "text": "Sexually fluid cast of MTV’s ‘Are You The One?’ shows surprisingly strong representation",
@@ -79,22 +67,14 @@
     },
     {
       "component": "Default",
-      "duration": 5000,
-      "id": "default1",
-      "next": 4,
-      "path": "/default/1",
-      "title": "DiamondbackTV"
+      "duration": 10000
     },
     {
       "component": "News",
       "duration": 15000,
-      "id": "sean-urbanskis-murder-trial-has-been-delayed-for-a-fourth-time",
-      "path": "/news/sean-urbanskis-murder-trial-has-been-delayed-for-a-fourth-time",
-      "next": 5,
-      "title": "Sean Urbanski’s murder trial has been delayed for a fourth time",
       "content": {
         "author": "Jillian Atelsek",
-        "blurb": "Less than two weeks before it was scheduled to begin, the trial for the former University of Maryland student charged with murder and a hate crime in the death of 2nd. Lt. Richard Collins has been delayed for a fourth time.\n\nJudge Lawrence Hill granted Sean Urbanski’s lawyers’ motion for more time Thursday, Prince George’s County State’s Attorney’s Office spokesperson Denise Roberts told The Diamondback. The trial will now begin Dec. 9, she said.\n\nThe defense claimed they needed more time for an expert to sort through evidence from Urbanski’s cell phone, Roberts said. Last month, Hill ruled that evidence — which included racist memes — was admissible in court, despite Urbanski’s lawyers’ efforts to bar it.",
+        "blurb": "Less than two weeks before it was scheduled to begin, the trial for the former University of Maryland student charged with murder and a hate crime in the death of 2nd. Lt. Richard Collins has been delayed for a fourth time.<br/><br/>Judge Lawrence Hill granted Sean Urbanski’s lawyers’ motion for more time Thursday, Prince George’s County State’s Attorney’s Office spokesperson Denise Roberts told The Diamondback. The trial will now begin Dec. 9, she said.<br/><br/>The defense claimed they needed more time for an expert to sort through evidence from Urbanski’s cell phone, Roberts said. Last month, Hill ruled that evidence — which included racist memes — was admissible in court, despite Urbanski’s lawyers’ efforts to bar it.",
         "headline": {
           "href": "https://dbknews.com/2019/07/11/umd-sean-urbanski-trial-delayed-richard-collins-fourth/",
           "text": "Sean Urbanski’s murder trial has been delayed for a fourth time"
@@ -106,12 +86,26 @@
       }
     },
     {
+      "component": "Multimedia",
+      "duration": 17000,
+      "content": {
+        "category": "special projects",
+        "credit": "The Diamondback",
+        "media": {
+          "alt": "Monster Smashed: A single-page scrolling site showcasing spooky drinks from the book Monster Smashed.",
+          "caption": "Monster Smashed: A single-page scrolling site showcasing spooky drinks from the book Monster Smashed.",
+          "src": "https://firebasestorage.googleapis.com/v0/b/thedbktv.appspot.com/o/assets%2Fvideos%2Fmonster-smashed.mp4?alt=media&token=0973e1dd-54cd-4b08-8925-eaf12f169b4a",
+          "video": true
+        },
+        "related": {
+          "href": "https://dbknews.com/2017/10/24/monster-smashed-diamondback-special-project/",
+          "text": "‘Monster Smashed’: The Diamondback’s spookiest project yet"
+        }
+      }
+    },
+    {
       "component": "Articles",
       "duration": 15000,
-      "id": "review-prettymuc-hs-fomo-tour-revived-my-love-for-boy-bands",
-      "path": "/articles/review-prettymuc-hs-fomo-tour-revived-my-love-for-boy-bands",
-      "next": 0,
-      "title": "Continue Reading on dbknews.com",
       "content": {
         "ads": [
           "300x600_Banner_C"

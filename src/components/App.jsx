@@ -1,17 +1,11 @@
 // Packages
 import React, { Component, Fragment } from 'react'
-import { BadRequest } from '@feathersjs/errors'
-import $ from 'jquery'
+import { GeneralError, NotFound } from '@feathersjs/errors'
 
 // Components
-import { SquareIcon } from './atoms'
 import { Logo } from './molecules'
-import { AutoScroll, Header, Footer, Navigation } from './organisms'
-import { Articles, Default, Multimedia, News } from './templates'
+import { Header, Deck } from './organisms'
 import { Error, Loading } from './screens'
-
-// Mock data
-import mock from '../config/test.json'
 
 /**
  * Class representing the web application.
@@ -28,85 +22,69 @@ export default class App extends Component {
    * Creates a new Diamondback TV web application.
    *
    * @param {object} props - Component properties
-   * @param {object} props.deck - Deck info and slides
-   * @param {number} props.deck.count - Total # of slides in deck
-   * @param {number} props.deck.duration - Deck duration in ms
-   * @param {object[]} props.deck.slides - Slide content
-   * @param {FeathersError | null} props.error - Current error
-   * @param {boolean} props.fetching - True if fetching content
-   * @param {object | string | null} props.info - Error info or stack
-   * @param {object} props.links - Autoscroll content
-   * @param {object[]} props.links.items - Autoscroll content objects
-   * @param {boolean} props.mobile - True if viewport width <= 768px
-   * @param {number} props.position - ID of current slide
    * @returns {App}
    */
   constructor(props) {
     super(props)
 
     /**
+     * @property {string} env - development | test | staging | production
+     * @instance
+     */
+    this.env = process.env.NODE_ENV
+
+    /**
      * @property {object} state - Internal component state
-     * @property {object} props.deck - Deck info and slides
-     * @property {number} props.deck.count - Total # of slides in deck
-     * @property {number} props.deck.duration - Deck duration in ms
-     * @property {object[]} props.deck.slides - Slide content
-     * @property {FeathersError | null} props.error - Current error
-     * @property {boolean} props.fetching - True if fetching content
-     * @property {object | string | null} props.info - Error info or stack
-     * @property {object} props.links - Autoscroll content
-     * @property {object[]} props.links.items - Autoscroll content objects
-     * @property {boolean} props.mobile - True if viewport width <= 768px
-     * @property {number} props.position - ID of current slide. Defaults to -1
+     * @property {string | null} state.current - Id of current deck
+     * @property {object | null} state.deck - Deck data
+     * @property {FeathersError | null} state.error - Current error
+     * @property {object} state.info - Error information
+     * @property {boolean} state.loading - True if fetching content
+     * @property {object | null} state.urls - Data download urls
      * @instance
      */
     this.state = {
+      current: null,
       deck: null,
       error: null,
-      fetching: true,
       info: null,
-      links: null,
-      mobile: false,
-      position: -1
+      loading: true
     }
+
+    /**
+     * @property {firebase.database.Reference} subscription - Reference to
+     * database location to watch for changes
+     * @instance
+     */
+    this.subscription = props.database.core.ref('current')
   }
 
   /**
-   * Retreives the initial slide deck content.
+   * In a 'development' Node environment where @see @param props.test is true,
+   * or in a 'test' Node environment, the internal component state can be set
+   * via @see @param props .
    *
-   * @todo Replace mock with API call
+   * @todo Update documentation
    *
-   * @async
-   * @returns {object}
-   */
-  static async fetch() {
-    console.warn('Fetching initial slide deck data...')
-
-    let fetch = { deck: null, links: null }
-
-    try {
-      fetch = await mock
-    } catch (err) {
-      throw new BadRequest('FETCH ERR  ->', err.message)
-    }
-
-    console.info('Retreived slide deck data ->', fetch)
-    return fetch
-  }
-
-  /**
-   * In a 'test' Node environment, this method will return an object to update
-   * the initial internal state for debugging / testing purposes. Otherwise,
-   * this method will return null.
-   *
-   * @param {object} props - @see @class App#constructor
-   * @param {object} state - @see @class App#constructor
-   * @returns {object | null}
+   * @param {object} props - Incoming props
+   * @param {object} state - Component state
+   * @returns {object | null} Object to update the state, or null to update
+   * nothing
    */
   static getDerivedStateFromProps(props, state) {
-    if (process.env.NODE_ENV !== 'test') return null
+    const {
+      current, database, deck, error, info, loading, mobile, position, storage, test, urls
+    } = props
 
-    const { deck, error, fetching, info, links, mobile, position } = props
-    return { deck, error, fetching, info, links, mobile, position }
+    const { NODE_ENV } = process.env
+
+    if ((NODE_ENV === 'development' && test) || NODE_ENV === 'test') {
+      return {
+        current, database, deck, error, info, loading, mobile, position, storage, urls
+      }
+    }
+
+    return null
   }
 
   /**
@@ -118,64 +96,37 @@ export default class App extends Component {
    * @returns {undefined}
    */
   componentDidCatch(error, info) {
-    return this.setState({ error, info }, () =>
-      console.error('!TV-ERR =>', error)
-    )
+    this.error(error, info)
   }
 
   /**
-   * Fetches the initial slide deck data and then subscribes to new data
-   * changes. When the slide deck has children added, removed, or rearranged,
-   * the internal state will be updated.
-   *
-   * @todo Subscribe to data changes from the API
+   * Retreieves the id of the current deck and updates the internal state. The
+   * application will subscribes to changes at the database node 'current'. The
+   * value of this node contains the id name of the current deck.
    *
    * @async
    * @returns {undefined}
+   * @throws {GeneralError | NotFound}
    */
   async componentDidMount() {
     console.info('Application mounted.')
 
-    try {
-      const fetch = await App.fetch()
-      const update = { ...fetch, fetching: false, position: 0 }
+    document.title = 'DiamondbackTV'
 
-      // TODO: Remove loading delay
-      setTimeout(() => this.setState(update), 1250)
-    } catch (err) {
-      this.handle_error(err)
-    }
+    // Get the current deck id and subscribe to data changes
+    await this.sync()
+    this.subscribe()
 
-    // TODO: Subscribe to data changes
-
-    // Update mobile state and attach window listener to update mobile state
-    this.resize()
-    $(window).resize(this.resize())
+    this.setState({ loading: false })
   }
 
   /**
-   * Remove window listeners and unsubscribes from data changes.
-   *
-   * @todo Unsubscribe from data changes
+   * Unsubscribes from data changes.
    *
    * @returns {undefined}
    */
   componentWillUnmount() {
-    // TODO: Unsubscribe from data changes
-
-    // Remove resize window listener
-    $(window).off('resize')
-  }
-
-  /**
-   * Updates @see state.error and @see state.info .
-   *
-   * @param {FeathersError | Error} error - Exception that was thrown
-   * @param {object} info - Error infomation+
-   * @returns {undefined}
-   */
-  handle_error = (error, info = null) => {
-    return this.setState({ error, info: (error.stack || info) || null })
+    this.subscription.off()
   }
 
   /**
@@ -185,90 +136,115 @@ export default class App extends Component {
    * @returns {<Fragment/>} <Deck> and <Navigation> components
    */
   render() {
-    const { deck, error, fetching, info, links, mobile, position } = this.state
+    const { current, deck, error, loading, info } = this.state
 
     // Handle error and loading states
     if (error) return <Error error={error} info={info} />
-    if (fetching) return <Loading />
-
-    // Handle successful API response
-    const curr = deck.slides[position]
-
-    let template = null
-    const dispatch = {
-      ...curr, catch: this.handle_error, slide: this.slide
-    }
-
-    switch (curr.component) {
-      case 'News':
-        template = <News {...dispatch} />
-        break
-      case 'Articles':
-        template = <Articles {...dispatch} />
-        break
-      case 'Multimedia':
-        template = <Multimedia {...dispatch} />
-        break
-      default:
-        template = <Default {...dispatch} />
-    }
-
-    // Get position of active slide
-    const active = pos => deck.slides.find((s, i) => {
-      const curr = deck.slides[position]
-      return pos === i && curr.next === s.next
-    })
+    if (loading) return <Loading />
 
     return (
       <Fragment>
         <Header container>
           <Logo />
         </Header>
-        <Navigation mobile={mobile} catch={this.handle_error}>
-          {deck.slides.map((slide, i) => {
-            return (
-              <SquareIcon
-                className={active(i) ? 'active' : ''} key={`si-${i}`}
-              />
-            )
-          })}
-        </Navigation>
-        <main id='deck' className='ado-deck'>
-          {template}
-          <Footer>
-            <Logo mini />
-            <AutoScroll content={links} />
-          </Footer>
-        </main>
+        <Deck error={this.error} fetch={this.fetch} id={current} deck={deck} />
       </Fragment>
     )
   }
 
-  /**
-   * Updates the internal mobile state.
-   *
-   * @returns {undefined}
-   */
-  resize = () => this.setState({ mobile: $(window).width() <= 768 })
+  // HELPERS
 
   /**
-   * Updates the current deck slide.
+   * Logs the error and updates the internal error state.
    *
-   * @param {number} next - ID of next slide
+   * @param {FeathersError | Error} error - Exception that was thrown
+   * @param {object} info - Error infomation
    * @returns {undefined}
    */
-  slide = () => {
-    const { deck, position } = this.state
-    const { slides } = deck
+  error = (error, info = null) => {
+    info = (error.stack || info) || null
 
-    // Slide currently being viewed
-    const curr = slides[position]
-    const next = slides[curr.next]
+    console.error(error.message, info)
+    return this.setState({ error, info })
+  }
 
-    console.warn('CHG ->', next.title)
+  /**
+   * Updates the internal loading state.
+   *
+   * @param {boolean} loading - True if fetching content, false otherwise
+   * @returns {boolean} @see @param loading
+   */
+  fetch = loading => this.setState({ loading }, () => loading)
 
-    return this.setState({ position: curr.next }, () =>
-      console.info('CURR ->', next.title)
-    )
+  /**
+   * Subscribes to changes at the database node 'current'. The value of this
+   * node contains the folder name of the current deck data.
+   *
+   * @returns {Promise<object>} Object containing the deck download URLs
+   */
+  subscribe = () => {
+    const { current } = this.state
+
+    try {
+      this.subscription.on('value', snapshot => {
+        const id = snapshot.val()
+
+        this.setState({ current: id }, async () => {
+          if (current && current !== id) {
+            console.info('SUBSCRIPTION - DECK CHANGE DETECTED ->', current, id)
+            return this.sync()
+          }
+        })
+      })
+    } catch (err) {
+      this.error(new GeneralError(`SUBSCRIPTION ERR -> ${err.message}`))
+    }
+  }
+
+  /**
+   * Retreives the id of the current deck and updates the internal state with
+   * the current id and data.
+   *
+   * @async
+   * @returns {Promise<string>} Name of current deck
+   */
+  sync = async () => {
+    this.fetch(true)
+    console.warn('Fetching current deck...')
+
+    let id = null
+
+    try {
+      // Get the id (folder name) of the current deck data
+      id = (await this.subscription.once('value')).val()
+    } catch (err) {
+      err.message = `SYNC ERR - CANNOT GET ID -> ${err.message}`
+      this.error(new GeneralError(err))
+    }
+
+    if (!id) {
+      this.error(new NotFound('SYNC ERR - ID DOES NOT EXIST', {
+        errors: { exists: false }
+      }))
+    } else {
+      this.setState({ current: id }, () => {
+        console.info('SYNC - RETREIVED DECK ID ->', id)
+      })
+    }
+
+    let deck = null
+
+    try {
+      const ref = this.props.database.decks.ref(id)
+      deck = (await ref.once('value')).val()
+
+      return this.setState({ deck }, () => {
+        console.info('SYNC - RETREIVED DECK DATA ->', deck)
+        return id
+      })
+    } catch (err) {
+      err.message = `SYNC ERR - CANNOT GET DECK DATA -> ${err.message}`
+      this.error(new GeneralError(err))
+    }
   }
 }

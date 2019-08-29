@@ -21,7 +21,7 @@ import { Container } from '../atoms'
  *
  * @param {object} props - Component properties
  * @param {*} props.children - Header elements
- * @param {string} props.class - Space delimitted list of extra classes
+ * @param {string} props.className - Space delimitted list of extra classes
  * @param {object} props.container - If defined, wrap children in container
  * @param {string} props.container.id - Container element id
  * @param {string} props.container.classes - Extra container classes
@@ -30,13 +30,15 @@ import { Container } from '../atoms'
  * @returns {HTMLElement} HTML <nav> element
  */
 const Navigation = props => {
-  const { id, children, container } = props
+  const { id, children, container, mobile } = props
+
+  const style = `ado-nav ${props.className || ''} ${mobile ? 'ui-mobile' : ''}`
 
   const c_props = typeof container === 'boolean'
     ? { children } : { ...container, children }
 
   return (
-    <nav id={id} className={(`ado-nav ${props.class || ''}`).trim()}>
+    <nav id={id} className={style.trim()}>
       {container ? <Container {...c_props} /> : children}
     </nav>
   )

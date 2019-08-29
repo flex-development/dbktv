@@ -21,7 +21,7 @@ export default {
    * @returns {FeathersError} Feathers error based on the status argument
    * @throws {BadRequest} If error is incorrect type
    */
-  feathers_error: (error, data, status = 500) => {
+  feathers: (error, data, status = 500) => {
     if (!error) {
       throw new BadRequest('Error argument is required.')
     }
@@ -70,7 +70,7 @@ export default {
    * @param {boolean} auth - True if error should be type NotAuthenticated
    * @returns {BadRequest | NotAuthenticated}
    */
-  get_model_error: (message, errors, auth = false) => {
+  model: (message, errors, auth = false) => {
     const { key, value } = errors[0].context
     const e = {}
     e[key] = value
@@ -86,38 +86,7 @@ export default {
    * @param {string} name - Function name
    * @param {object} param1 - Service method arguments
    */
-  method_preview: (name, { id, data, params }) => {
+  preview: (name, { id, data, params }) => {
     return { name, arguments: { id, data, params } }
-  },
-
-  /**
-   * Handles a service method error.
-   *
-   * @todo Implement error reporting. If report is true, an error will be thrown
-   * @param {Feathers.Context} context - Feathers context object
-   * @param {boolean} report - If true, send error report. Defaults to false
-   * @returns {Feathers.Context} Feathers context object
-   * @throws {BadRequest | NotImplemented} If missing context
-   */
-  service_error: async (context, report = false) => {
-    if (!context) throw new BadRequest('Feathers context is required.')
-
-    if (context.error.name === 'Error') {
-      let { message, data, errors } = context.error
-      context.error = new BadRequest(message.includes('data object must be provided') ? 'Payload required.' : message, { data, errors })
-    }
-
-    const { name, message, code, className, data, errors } = context.error
-
-    console.error(`${name} error on path /${context.path}: ${message} ->`, {
-      code, name, message, className, data, errors
-    })
-
-    if (report) {
-      // TODO: Send error report to error service
-      throw new NotImplemented('Error reporting in progress.')
-    }
-
-    return context
   }
 }

@@ -5,8 +5,8 @@
   "author": "Lexus Drumgold <lex@lexusdrumgold.design> (https://lexusdrumgold.design)",
   "scripts": {
     "preinstall": "rm -rf node_modules && npm run prebuild",
-    "lint": "eslint ./src/api/*.js ./src/components/*.jsx ./src/components/**/*.jsx ./src/controllers/*.js --fix",
-    "lint-watch": "esw -w ./src/api/*.js ./src/components/*.jsx ./src/components/**/*.js ./src/components/**/*.jsx ./src/controllers/*.js --fix",
+    "lint": "eslint ./src/api/*.js ./src/components/*.jsx ./src/components/**/*.jsx --fix",
+    "lint-watch": "esw -w ./src/api/*.js ./src/components/*.jsx ./src/components/**/*.js ./src/components/**/*.jsx --fix",
     "dev": "NODE_ENV=development cp .env.development .env && concurrently \"npm:lint-watch\" \"react-scripts start\"",
     "postdev": "rm -rf .env",
     "test": "NODE_ENV=test jest --detectOpenHandles",
@@ -37,6 +37,7 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.19",
     "@fortawesome/free-solid-svg-icons": "^5.9.0",
     "@fortawesome/react-fontawesome": "^0.1.4",
+    "axios": "^0.19.0",
     "concurrently": "^4.1.2",
     "firebase": "^6.4.1",
     "flamelink": "^1.0.0-alpha.19",
