@@ -113,9 +113,6 @@ export default class Deck extends Component {
       ...curr, catch: error, dispatch: this.dispatch, slide: this.next
     }
 
-    const { duration, next, slide } = curr
-    setTimeout(() => slide(next), duration)
-
     return (
       <Fragment>
         <Navigation mobile={mobile}>

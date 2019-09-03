@@ -64,10 +64,15 @@ export default class Slide extends Component {
    */
   render() {
     const { className, id } = this.props
-    const { component, template } = this.state
+    const { component, data, template } = this.state
     const style = `adt-slide ${className || ''}`
 
-    if (component) style.replace('adt-slide', `adt-slide ${component}`)
+    if (component) {
+      const { duration, next, slide } = data
+
+      style.replace('adt-slide', `adt-slide ${component}`)
+      setTimeout(() => slide(next), duration)
+    }
 
     return (
       <section id={id} className={style.trim()}>
