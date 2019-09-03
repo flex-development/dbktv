@@ -11,7 +11,7 @@
     "postwatch": "rm -rf .env",
     "dev": "NODE_ENV=development cp .env.development .env && react-scripts start",
     "postdev": "rm -rf .env",
-    "test": "NODE_ENV=test jest --detectOpenHandles",
+    "test": "NODE_ENV=test jest --detectOpenHandles --passWithNoTests",
     "prebuild": "rm -rf build/",
     "build": "react-scripts build",
     "start": "NODE_ENV=staging cp .env.production .env && npm run lint && npm run build && firebase serve --only hosting:staging",
