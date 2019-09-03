@@ -1,0 +1,26 @@
+[debug] [2019-09-03T20:18:02.981Z] ----------------------------------------------------------------------
+[debug] [2019-09-03T20:18:02.983Z] Command:       /usr/local/bin/node /Users/lex/Documents/projects/dbktv/node_modules/.bin/firebase serve --only hosting:staging
+[debug] [2019-09-03T20:18:02.983Z] CLI Version:   7.3.0
+[debug] [2019-09-03T20:18:02.983Z] Platform:      darwin
+[debug] [2019-09-03T20:18:02.983Z] Node Version:  v12.7.0
+[debug] [2019-09-03T20:18:02.984Z] Time:          Tue Sep 03 2019 16:18:02 GMT-0400 (Eastern Daylight Time)
+[debug] [2019-09-03T20:18:02.984Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-09-03T20:18:02.992Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-09-03T20:18:02.992Z] > authorizing via signed-in user
+[debug] [2019-09-03T20:18:02.992Z] [iam] checking project thedbktv for permissions ["firebase.projects.get"]
+[debug] [2019-09-03T20:18:02.993Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2019-09-03T20:18:02.994Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2019-09-03T20:18:03.945Z] <<< HTTP RESPONSE 200
+[debug] [2019-09-03T20:18:03.970Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/thedbktv:testIamPermissions  
+
+[debug] [2019-09-03T20:18:04.205Z] <<< HTTP RESPONSE 200
+[debug] [2019-09-03T20:18:04.206Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/thedbktv  
+ 
+[debug] [2019-09-03T20:18:04.467Z] <<< HTTP RESPONSE 200
+[debug] [2019-09-03T20:18:04.468Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/thedbktv/webApps/-/config  
+ 
+[debug] [2019-09-03T20:18:04.963Z] <<< HTTP RESPONSE 200
+[info] i  hosting[staging]: Serving hosting files from: build
+[info] ✔  hosting[staging]: Local server: http://localhost:5000

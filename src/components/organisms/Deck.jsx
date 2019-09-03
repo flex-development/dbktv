@@ -4,7 +4,7 @@ import $ from 'jquery'
 
 // Components
 import Navigation from './Navigation'
-import { Button, SquareIcon } from '../atoms'
+import { SquareIcon } from '../atoms'
 import { Slide } from '../templates'
 
 /**
@@ -105,7 +105,7 @@ export default class Deck extends Component {
    */
   render() {
     const { error } = this.props
-    const { dispatched, mobile, position, slides } = this.state
+    const { mobile, position, slides } = this.state
 
     // Get current slide
     const curr = slides[position]
@@ -113,28 +113,18 @@ export default class Deck extends Component {
       ...curr, catch: error, dispatch: this.dispatch, slide: this.next
     }
 
-    // Start timer if slide has been rendered
-    if (dispatched) {
-      const { duration, next, slide } = curr
-      this.timer = setTimeout(() => slide(next), duration)
-    }
+    const { duration, next, slide } = curr
+    setTimeout(() => slide(next), duration)
 
     return (
       <Fragment>
         <Navigation mobile={mobile}>
           {slides.map((slide, i) => {
-            /**
-             * TODO: Create onClick function that resets the timer as well.
-             * May
-             */
             return (
-              <Button
-                className='ui-borderless ui-transparent'
-                events={{ onClick: () => this.setState({ position: i }) }}
+              <SquareIcon
+                className={this.active(i) ? 'active' : ''}
                 key={`nav-btn-${i}`}
-              >
-                <SquareIcon className={this.active(i) ? 'active' : ''} />
-              </Button>
+              />
             )
           })}
         </Navigation>
