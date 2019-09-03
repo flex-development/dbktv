@@ -20,7 +20,7 @@ import $ from 'jquery'
  * @returns {Button}
  */
 const Button = props => {
-  const { className, children, disabled, events, id } = this.props
+  const { className, children, disabled, events, id } = props
   const style = (`ada-button ${className || ''}`).trim()
 
   return (

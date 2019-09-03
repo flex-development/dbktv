@@ -2,10 +2,6 @@
 // This file contains very basic styles.
 // ----------------------------------------------------------------------------
 
-// Variables
-$outer-container-height: 100%
-$outer-container-width: 100%
-
 // Set up a decent box model on the root element
 // Prevent scrolling
 html
@@ -38,13 +34,3 @@ body
   background-color: $dark
   color: $light
   margin: 0 !important
-
-// Make outer content containers full size
-main,
-section
-  +flex(row, center, center)
-  +size($outer-container-width, $outer-container-height)
-
-// Set template background color
-section
-  background-color: rgba($dark, 0.85)

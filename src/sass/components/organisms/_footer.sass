@@ -5,7 +5,7 @@
 // ----------------------------------------------------------------------------
 
 // Variables
-$footer-border: size(.5) solid $light
+$footer-border: size(0.5) solid $light
 $footer-height: size(90)
 $footer-padding: size(40) 0
 $footer-width: 100vw
@@ -19,14 +19,16 @@ $footer-width: 100vw
   +size($footer-width, $footer-height)
 
   background-color: $black
-  padding-left: 3.25%
+  padding: size(24) 0 size(24) 3.25%
 
   .adm-logo
-    +constrain(size(128))
+    +constrain(size(80))
 
+    background-color: $black
     border-right: $footer-border
     margin-right: size(16)
-    padding: 0 size(20)
+    padding-right: size(20)
+    z-index: 5
 
   &.multimedia-border
     border-top: $footer-border

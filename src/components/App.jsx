@@ -1,17 +1,15 @@
 // Packages
 import React, { Component, Fragment } from 'react'
+import ReactGA from 'react-ga'
 import { GeneralError, NotFound } from '@feathersjs/errors'
 
 // Components
 import { Logo } from './molecules'
-import { Header, Deck } from './organisms'
+import { Header, Deck, Footer, Ticker } from './organisms'
 import { Error, Loading } from './screens'
 
 /**
  * Class representing the web application.
- *
- * @todo Move template slide functionality to @see @class Slide (HOC)
- * @todo Implement data fetching and real time data streaming
  *
  * @class App
  * @extends Component
@@ -27,36 +25,59 @@ export default class App extends Component {
   constructor(props) {
     super(props)
 
+    const { NODE_ENV } = process.env
+
+    /**
+     * @todo Get tracking id
+     *
+     * @property {*[]} analytics - Google Analytics configuration options
+     * @property {string} analytics[0] - Google Analytics tracking id
+     * @property {object} analytics[1] - Additional config options
+     * @instance
+     */
+    this.analytics = ['', { debug: ['development', 'test'].includes(NODE_ENV) }]
+
     /**
      * @property {string} env - development | test | staging | production
      * @instance
      */
-    this.env = process.env.NODE_ENV
+    this.env = NODE_ENV
 
     /**
      * @property {object} state - Internal component state
-     * @property {string | null} state.current - Id of current deck
-     * @property {object | null} state.deck - Deck data
+     * @property {boolean} state.analytics - True if Google Analytics was
+     * initialized; this value will be updated in a production Node environment
+     * @property {string | null} state.deck - Id of current deck
      * @property {FeathersError | null} state.error - Current error
      * @property {object} state.info - Error information
      * @property {boolean} state.loading - True if fetching content
-     * @property {object | null} state.urls - Data download urls
+     * @property {object[] | null} state.slides - Slide content
+     * @property {object[] | null} state.ticker - Ticker content
      * @instance
      */
     this.state = {
-      current: null,
+      analytics: false,
       deck: null,
       error: null,
       info: null,
-      loading: true
+      loading: true,
+      slides: null,
+      ticker: null
     }
 
     /**
-     * @property {firebase.database.Reference} subscription - Reference to
-     * database location to watch for changes
+     * @property {object} subscriptions - Database subscriptions
+     * @property {firebase.database.Reference | null} subscriptions.deck - Ref
+     * to deck to watch for changes
+     * @property {firebase.database.Reference} subscriptions.id - Ref to id of
+     * deck to watch for changes
      * @instance
      */
-    this.subscription = props.database.core.ref('current')
+    this.subscriptions = {
+      current: null,
+      data: id => props.database.decks.ref(id),
+      id: props.database.core.ref('current')
+    }
   }
 
   /**
@@ -73,14 +94,14 @@ export default class App extends Component {
    */
   static getDerivedStateFromProps(props, state) {
     const {
-      current, database, deck, error, info, loading, mobile, position, storage, test, urls
+      database, deck, error, info, loading, mobile, slides, test, ticker
     } = props
 
     const { NODE_ENV } = process.env
 
     if ((NODE_ENV === 'development' && test) || NODE_ENV === 'test') {
       return {
-        current, database, deck, error, info, loading, mobile, position, storage, urls
+        database, deck, error, info, loading, mobile, slides, test, ticker
       }
     }
 
@@ -104,6 +125,9 @@ export default class App extends Component {
    * application will subscribes to changes at the database node 'current'. The
    * value of this node contains the id name of the current deck.
    *
+   * In a 'production' Node environment, Google Analytics and Pageview tracking
+   * will be initialized.
+   *
    * @async
    * @returns {undefined}
    * @throws {GeneralError | NotFound}
@@ -111,32 +135,46 @@ export default class App extends Component {
   async componentDidMount() {
     console.info('Application mounted.')
 
-    document.title = 'DiamondbackTV'
-
     // Get the current deck id and subscribe to data changes
     await this.sync()
     this.subscribe()
 
-    this.setState({ loading: false })
+    // Google Analytics and Pageview tracking
+    this.tracking()
+
+    // Update loading state
+    this.fetch(false)
   }
 
   /**
-   * Unsubscribes from data changes.
+   * Before the component unmounts, our deck subscriptions will be removed.
    *
    * @returns {undefined}
    */
   componentWillUnmount() {
-    this.subscription.off()
+    const { current, id } = this.subscriptions
+    const subscriptions = [current, id]
+
+    subscriptions.forEach(s => { if (s) s.off() })
   }
 
   /**
    * Returns the web application.
-   * If an error is caught, the Application will push to an error screen.
+   *
+   * If an error is caught, the Error screen component will be rendered,
+   * displaying the error name, message, and stack information.
+   *
+   * While the application is loading, the Loading screen component will be
+   * rendered, displaying the DiamondbackTV logo with 'Continuing reading on
+   * dbknews.com' below it.
+   *
+   * After the application has finished loading, the Header, Deck, Footer, and
+   * child components will be rendered.
    *
    * @returns {<Fragment/>} <Deck> and <Navigation> components
    */
   render() {
-    const { current, deck, error, loading, info } = this.state
+    const { deck, error, info, loading, slides, ticker } = this.state
 
     // Handle error and loading states
     if (error) return <Error error={error} info={info} />
@@ -147,7 +185,13 @@ export default class App extends Component {
         <Header container>
           <Logo />
         </Header>
-        <Deck error={this.error} fetch={this.fetch} id={current} deck={deck} />
+        <Deck
+          error={this.error} fetch={this.fetch} id={deck} slides={slides}
+        />
+        <Footer>
+          <Logo mini />
+          <Ticker items={ticker} />
+        </Footer>
       </Fragment>
     )
   }
@@ -177,24 +221,42 @@ export default class App extends Component {
   fetch = loading => this.setState({ loading }, () => loading)
 
   /**
-   * Subscribes to changes at the database node 'current'. The value of this
-   * node contains the folder name of the current deck data.
+   * If @see @param deck_id is defined, the method will update the internal
+   * state with new slide and ticker data when changes are detected in the
+   * dbktv-decks database.
    *
-   * @returns {Promise<object>} Object containing the deck download URLs
+   * If undefined, the method will update the internal state the new deck id.
+   * The method will then call @see @method App#sync to fetch the new slide and
+   * ticker data and update the internal state.
+   *
+   * @param {string} deck_id - Id of deck to watch for changes
+   * @returns {object | string} New deck data or deck id
    */
-  subscribe = () => {
-    const { current } = this.state
+  subscribe = deck_id => {
+    const { data, id } = this.subscriptions
 
     try {
-      this.subscription.on('value', snapshot => {
-        const id = snapshot.val()
+      const subscription = deck_id ? data(deck_id) : id
+      subscription.on('value', snapshot => {
+        snapshot = snapshot.val()
 
-        this.setState({ current: id }, async () => {
-          if (current && current !== id) {
-            console.info('SUBSCRIPTION - DECK CHANGE DETECTED ->', current, id)
-            return this.sync()
-          }
-        })
+        if (deck_id) {
+          const { slides, ticker } = snapshot
+
+          return this.setState({ slides, ticker }, () => {
+            console.info('SUBSCRIPTION - NEW DATA DETECTED ->', snapshot)
+            return snapshot
+          })
+        } else {
+          const { deck } = this.state
+
+          return this.setState({ deck: snapshot }, async () => {
+            if (deck && deck !== snapshot) {
+              console.info('SUBSCRIPTION - NEW ID DETECTED ->', deck, snapshot)
+              return this.sync()
+            }
+          })
+        }
       })
     } catch (err) {
       this.error(new GeneralError(`SUBSCRIPTION ERR -> ${err.message}`))
@@ -202,49 +264,74 @@ export default class App extends Component {
   }
 
   /**
-   * Retreives the id of the current deck and updates the internal state with
-   * the current id and data.
+   * Updates the internal state with id of the current deck, slide data, and
+   * ticker data.
    *
    * @async
-   * @returns {Promise<string>} Name of current deck
+   * @returns {Promise<string>} Id of the current deck
    */
   sync = async () => {
     this.fetch(true)
-    console.warn('Fetching current deck...')
-
-    let id = null
-
-    try {
-      // Get the id (folder name) of the current deck data
-      id = (await this.subscription.once('value')).val()
-    } catch (err) {
-      err.message = `SYNC ERR - CANNOT GET ID -> ${err.message}`
-      this.error(new GeneralError(err))
-    }
-
-    if (!id) {
-      this.error(new NotFound('SYNC ERR - ID DOES NOT EXIST', {
-        errors: { exists: false }
-      }))
-    } else {
-      this.setState({ current: id }, () => {
-        console.info('SYNC - RETREIVED DECK ID ->', id)
-      })
-    }
+    console.warn('SYNC - STARTING')
 
     let deck = null
 
-    try {
-      const ref = this.props.database.decks.ref(id)
-      deck = (await ref.once('value')).val()
+    /*
+     * Retreive the id of the current deck data.
+     * A GeneralError will be thrown if we can't get the id from Firebase.
+     * A NotFound error will be thrown if the deck id doesn't exist.
+     */
 
-      return this.setState({ deck }, () => {
-        console.info('SYNC - RETREIVED DECK DATA ->', deck)
-        return id
+    try {
+      deck = (await this.subscriptions.id.once('value')).val()
+      if (!deck) throw new NotFound('SYNC ERR - DECK ID DOES NOT EXIST')
+    } catch (err) {
+      if (err.name === 'NotFound') this.error(err)
+      err.message = `SYNC ERR - CANNOT GET DECK ID -> ${err.message}`
+      this.error(new GeneralError(err))
+    }
+
+    console.info('SYNC - RETREIVED DECK ID ->', deck)
+
+    /*
+     * Retreive the deck data from the decks database.
+     * A GeneralError will be thrown if we're unable to get the data.
+     */
+
+    try {
+      const { data } = this.subscriptions
+      const { slides, ticker } = (await data(deck).once('value')).val()
+
+      this.setState({ deck, loading: false, slides, ticker }, () => {
+        console.info('SYNC - RETREIVED DECK DATA ->', { slides, ticker })
+        return deck
       })
     } catch (err) {
       err.message = `SYNC ERR - CANNOT GET DECK DATA -> ${err.message}`
       this.error(new GeneralError(err))
     }
+  }
+
+  /**
+   * In a production Node environment, Google Analytics and Pageview tracking
+   * will be initialized.
+   *
+   * @returns {boolean} True if production Node environment and Google Analytics
+   * was successfully initialized
+   */
+  tracking = () => {
+    let analytics = false
+
+    if (this.env === 'production') {
+      const { pathname, search } = window.location
+
+      // Initialize Google Analytics and pageview tracking
+      ReactGA.initialize(...this.analytics)
+      ReactGA.pageview(pathname + search)
+
+      analytics = true
+    }
+
+    return this.setState({ analytics }, () => analytics)
   }
 }

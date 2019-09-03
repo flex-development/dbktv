@@ -57,8 +57,8 @@
 =inside($context, $child: null)
   @if $child != null
     #{$context}
-      & #{$child}
-        @content
+    &#{$child}
+      @content
   @else
     #{$context} &
       @content

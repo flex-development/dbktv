@@ -7,8 +7,7 @@ import { Figure } from '../molecules'
 
 /**
  * Class representing the Multimedia template.
- *
- * @todo Update documentation
+ * This template should be used to display an image or video.
  *
  * @class Multimedia
  * @extends Component
@@ -16,53 +15,47 @@ import { Figure } from '../molecules'
  */
 export default class Multimedia extends Component {
   /**
-   * If an error is caught, the component the error will be handed off to the
-   * @see @class App component.
-   *
-   * @param {FeathersError | Error} error - Current error
-   * @param {object} info - Error information
-   * @returns {undefined}
-   */
-  componentDidCatch(error, info) { return this.props.catch(error, info) }
-
-  /**
-   * Updates the document title and adds a top border to the footer.
+   * After the component has mounted, the document title and ui will be updated.
+   * The footer will have a border applied, and the navigation will disappear.
    *
    * @returns {undefined}
    */
   componentDidMount() {
-    const { duration, next, slide, title } = this.props
+    const { content } = this.props
+    const { media } = content
 
-    document.title = `Gallery: ${title}`
+    document.title = `Gallery: ${media.video ? media.caption : media.alt}`
 
+    $('.ado-deck').css('height', '92.5%')
     $('.ado-footer').addClass('multimedia-border')
-    $('.ado-nav').addClass('ui-hide')
-
-    setTimeout(() => slide(next), duration)
+    // $('.ado-nav').addClass('ui-hide')
   }
 
   /**
-   * Removes the footer border.
+   * Before the component unmounts, the ui will be reset to its default state.
+   * The footer border will be removed and the navigation will reappear.
    *
    * @returns {undefined}
    */
   componentWillUnmount() {
+    $('.ado-deck').css('height', 'inherit')
     $('.ado-footer').removeClass('multimedia-border')
-    $('.ado-nav').removeClass('ui-hide')
+    // $('.ado-nav').removeClass('ui-hide')
   }
 
   /**
    * Renders a <section> element representing the "Multimedia" template.
    *
+   * @todo Update documentation
    * @returns {HTMLElement} <section> element
    */
-  render(props, state) {
+  render() {
     const { className, content, id } = this.props
 
     return (
-      <section id={id} className={`adt-multimedia ${className || ''}`.trim()}>
+      <div id={id} className={`adt-multimedia ${className || ''}`.trim()}>
         <Figure content={content} />
-      </section>
+      </div>
     )
   }
 }

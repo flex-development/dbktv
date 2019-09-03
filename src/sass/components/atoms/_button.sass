@@ -46,6 +46,10 @@ $button-font-sizes: ('small': 14, 'regular': 16, 'large': 18)
   &.ui-accent-light
     +set-bkg-color-and-hover($accent-light)
 
+  // Remove default border
+  &.ui-borderless
+    border: none
+    
   // Background color = Dark base color
   &.ui-dark
     +set-bkg-color-and-hover($dark)

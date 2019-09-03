@@ -1,0 +1,59 @@
+// ----------------------------------------------------------------------------
+// Ticker specific styles, variables, placeholders, mixins and functions
+// @see components/organisms/Ticker.jsx
+// @author Lexus Drumgold
+// ----------------------------------------------------------------------------
+
+// Variables
+$ticker-duration: 30s
+$ticker-width: 100%
+
+.ado-ticker
+  +constrain($ticker-width)
+  +flex(row, center, center)
+  +fixed(null, null, null, null)
+
+  box-sizing: content-box
+  overflow: hidden
+  padding-left: $ticker-width
+
+  > .items
+    animation:
+      iteration-count: infinite
+      name: ui-ticker
+      timing-function: linear
+
+    // box-sizing: content-box
+    display: inline-block
+
+    // height: size(64)
+    // line-height: size(64)
+    padding-right: $ticker-width
+    white-space: nowrap
+
+.ticker-item
+  +flex(row, center, center)
+
+  display: inline-flex
+
+  .ada-link,
+  .square
+    margin: 0 size(7.5)
+
+  .ada-link
+    +respond-to($breakpoint-xxl, min)
+      font-size: size(18)
+
+
+    +respond-to($breakpoint-xxxl, min)
+      font-size: size(22.5)
+
+
+    color: $light
+    font-size: size(13.5)
+    font-weight: 600
+    min-width: max-content
+
+  .square
+    color: $accent-light
+    font-size: size(13)

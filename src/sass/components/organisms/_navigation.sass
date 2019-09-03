@@ -13,11 +13,14 @@
     flex-direction: row
     height: auto
 
+
   +respond-to($breakpoint-xxl, min)
     height: size(380)
 
+
   +respond-to($breakpoint-xxxl, min)
     height: size(506.667)
+
 
   height: size(285)
   z-index: 15
@@ -27,16 +30,23 @@
 
     display: none
 
-  > .square
-    +respond-to($breakpoint-xxl, min)
-      font-size: size(15)
+  > .ada-button
+    +event
+      .square
+        color: $accent-light
 
-    +respond-to($breakpoint-xxxl, min)
-      font-size: size(20)
+    .square
+      +respond-to($breakpoint-xxl, min)
+        font-size: size(16)
 
-    color: $accent-med
-    font-size: size(11.25)
-    transform: rotate(45deg)
+  
+      +respond-to($breakpoint-xxxl, min)
+        font-size: size(20)
 
-    &.active
-      color: $accent-light
+
+      color: $accent-med
+      font-size: size(11.25)
+      transform: rotate(45deg)
+
+      &.active
+        color: $accent-light

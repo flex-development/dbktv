@@ -32,13 +32,16 @@ const Video = props => {
   /* eslint-disable jsx-a11y/media-has-caption */
 
   return (
-    <video
-      id={id} className={style}
-      autoPlay={autoplay} controls={controls || false} {...events}
-    >
-      <source src={src} type={type} />
-      {track ? <track {...track} /> : null}
-    </video>
+    <div id={id} className={(`ada-video ${className || ''}`).trim()}>
+      <video
+        className={style}
+        autoPlay={autoplay || false} controls={controls || false} {...events}
+      >
+        <source src={src} type={type} />
+        {track ? <track {...track} /> : null}
+      </video>
+    </div>
+
   )
 
   /* eslint-enable jsx-a11y/media-has-caption */

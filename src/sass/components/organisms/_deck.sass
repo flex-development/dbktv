@@ -4,18 +4,16 @@
 // @author Lexus Drumgold
 // ----------------------------------------------------------------------------
 
+// Variables
+$deck-height: 100%
+$deck-width: 100%
+
 .ado-deck
   +flex(column, center, space-between)
+  +size($deck-width, $deck-height)
 
   background:
     position: center center
     repeat: no-repeat
     size: cover
-
-  > footer
-    max-height: 7.5%
-
-  > section
-    max-height: 92.5%
-
-
+  height: 92.5%

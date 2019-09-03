@@ -1,4 +1,5 @@
 // Components
+import Advertisement from './Advertisement'
 import Button, { SmoothScrollButton } from './Button'
 import Container from './Container'
 import Figcaption from './Figcaption'
@@ -16,5 +17,5 @@ import Video from './Video'
  */
 
 export {
-  Button, SmoothScrollButton, Container, Figcaption, Heading, Icon, Image, Link, LoadingIcon, SquareIcon, Headline, Related, Paragraph, Author, Blurb, Category, Subheading, Video
+  Advertisement, Button, SmoothScrollButton, Container, Figcaption, Heading, Icon, Image, Link, LoadingIcon, SquareIcon, Headline, Related, Paragraph, Author, Blurb, Category, Subheading, Video
 }

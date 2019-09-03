@@ -30,7 +30,9 @@
   font-size: size(15)
   text-transform: uppercase
 
-.blurb
+// ! Showdown creates multiple paragraphs
+.blurb,
+.blurb > p
   +respond-to($breakpoint-xxl, min)
     font-size: size(22)
 

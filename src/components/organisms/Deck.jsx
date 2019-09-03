@@ -1,18 +1,11 @@
 // Packages
 import React, { Component, Fragment } from 'react'
-import axios from 'axios'
 import $ from 'jquery'
 
 // Components
-import { SquareIcon } from '../atoms'
-import { Logo } from '../molecules'
-import AutoScroll from './AutoScroll'
-import Footer from './Footer'
 import Navigation from './Navigation'
-import { Articles, Default, Multimedia, News } from '../templates'
-
-// Utilities
-import error_utils from '../../utils/error.util'
+import { Button, SquareIcon } from '../atoms'
+import { Slide } from '../templates'
 
 /**
  * Component representing the slide deck
@@ -37,34 +30,23 @@ export default class Deck extends Component {
     /**
      * @property {object} state - Internal component state
      * @property {number} state.count - Total # of slides in deck
+     * @property {boolean} state.dispatched - True if slide was rendered
      * @property {number} state.duration - Deck duration in ms
      * @property {boolean} state.mobile - True if viewport width <= 768px
      * @property {boolean} state.paused - True if deck is paused
      * @property {number} state.position - ID of current slide. Defaults to -1
      * @property {object[]} state.slides - Slide content
-     * @property {object[]} state.ticker - Autoscroll content objects
      * @instance
      */
     this.state = {
       count: 0,
+      dispatched: false,
       duration: 0,
       mobile: false,
       paused: false,
       position: 0,
-      slides: null,
-      ticker: null
+      slides: null
     }
-
-    // Add Axios interceptor
-    axios.interceptors.response.use(response => response, error => {
-      const { feathers } = error_utils
-      let data = null
-
-      if (error.response) data = error.response.data
-      if (error.request) data = error.request
-
-      return feathers(error, data, error.response ? error.response.status : 500)
-    })
   }
 
   /**
@@ -78,17 +60,17 @@ export default class Deck extends Component {
    * nothing
    */
   static getDerivedStateFromProps(props, state) {
-    const { deck } = props
+    const { slides } = props
 
-    const count = deck.slides.length
+    const count = slides.length
 
     return {
       count,
-      slides: deck.slides.map((slide, i) => {
+      slides: slides.map((slide, i) => {
+        slide.id = `slide-${i}`
         slide.next = i === count - 1 ? 0 : i + 1
         return slide
-      }),
-      ticker: deck.ticker
+      })
     }
   }
 
@@ -107,66 +89,79 @@ export default class Deck extends Component {
   }
 
   /**
+   * Clears the slide timer.
+   *
+   * @returns {undefined}
+   */
+  componentWillUnmount() {
+    clearInterval(this.timer)
+  }
+
+  /**
    * Renders a <main> element with the id 'deck' and the class name 'ado-deck'.
    * Inside the container, the Navigation and Ticker will be rendered as well.
    *
    * @returns {HTMLElement} <main id='deck' class='ado-deck'>
    */
   render() {
-    const { deck } = this.props
-    const { mobile, position } = this.state
+    const { error } = this.props
+    const { dispatched, mobile, position, slides } = this.state
 
     // Get current slide
-    const curr = deck.slides[position]
-
-    const props = {
-      ...curr, catch: this.props.error, slide: this.slide
+    const curr = slides[position]
+    const dispatch = {
+      ...curr, catch: error, dispatch: this.dispatch, slide: this.next
     }
 
-    let template = null
-
-    switch (curr.component) {
-      case 'News':
-        template = <News {...props} />
-        break
-      case 'Articles':
-        template = <Articles {...props} />
-        break
-      case 'Multimedia':
-        template = <Multimedia {...props} />
-        break
-      default:
-        template = <Default {...props} />
+    // Start timer if slide has been rendered
+    if (dispatched) {
+      const { duration, next, slide } = curr
+      this.timer = setTimeout(() => slide(next), duration)
     }
-
-    // Get position of active slide
-    const active = pos => deck.slides.find((s, i) => (
-      pos === i && curr.next === s.next
-    ))
 
     return (
       <Fragment>
         <Navigation mobile={mobile}>
-          {deck.slides.map((slide, i) => {
+          {slides.map((slide, i) => {
+            /**
+             * TODO: Create onClick function that resets the timer as well.
+             * May
+             */
             return (
-              <SquareIcon
-                className={active(i) ? 'active' : ''} key={`si-${i}`}
-              />
+              <Button
+                className='ui-borderless ui-transparent'
+                events={{ onClick: () => this.setState({ position: i }) }}
+                key={`nav-btn-${i}`}
+              >
+                <SquareIcon className={this.active(i) ? 'active' : ''} />
+              </Button>
             )
           })}
         </Navigation>
         <main id='deck' className='ado-deck'>
-          {template}
-          <Footer>
-            <Logo mini />
-            <AutoScroll content={deck.ticker} />
-          </Footer>
+          <Slide {...dispatch} />
         </main>
       </Fragment>
     )
   }
 
   // HELPERS
+
+  /**
+   * Gets the position of the current slide.
+   *
+   * @todo Update documentation
+   *
+   * @returns {boolean}
+   */
+  active = pos => {
+    const { position, slides } = this.state
+    const curr = slides[position]
+
+    return slides.find((s, i) => curr.next === s.next && pos === i)
+  }
+
+  dispatch = dispatched => this.setState({ dispatched }, () => dispatched)
 
   /**
    * The space key can be pressed to stop and start the deck. The internal pause
@@ -189,13 +184,6 @@ export default class Deck extends Component {
   }
 
   /**
-   * Updates the internal mobile state.
-   *
-   * @returns {undefined}
-   */
-  resize = () => this.setState({ mobile: $(window).width() <= 768 })
-
-  /**
    * Updates the current deck slide. If @param id is defined, the internal deck
    * position will be updated. If undefined, the deck will handle slide
    * transitions.
@@ -203,27 +191,23 @@ export default class Deck extends Component {
    * @param {number | undefined} id - ID of next slide
    * @returns {undefined}
    */
-  slide = id => {
+  next = id => {
     const { position } = this.state
-    const { deck } = this.props
-    const { slides } = deck
+    const { slides } = this.props
 
     let curr = null
-    let title = null
     let pos = -1
 
     if (id) {
       /** Get next slide based on @param id */
       curr = slides[id]
       pos = id
-      title = curr.title
     } else {
       /** Get current slide and next slide based on internal state  */
       curr = slides[position]
       pos = curr.next
 
       const next = slides[pos]
-      title = next.title
 
       /** Update current slide */
       curr = next
@@ -231,10 +215,17 @@ export default class Deck extends Component {
 
     // Log the change
     if (!['staging', 'production'].includes(this.env)) {
-      console.warn('CHG ->', title)
+      console.warn('CHG ->', curr)
     }
 
     // Update internal state
     this.setState({ position: pos }, () => pos)
   }
+
+  /**
+   * Updates the internal mobile state.
+   *
+   * @returns {undefined}
+   */
+  resize = () => this.setState({ mobile: $(window).width() <= 768 })
 }
