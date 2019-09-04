@@ -10,10 +10,14 @@ $deck-width: 100%
 
 .ado-deck
   +flex(column, center, space-between)
+
+  +respond-to($breakpoint-schmedium, min)
+    height: 92.5%
+
   +size($deck-width, $deck-height)
 
   background:
     position: center center
     repeat: no-repeat
     size: cover
-  height: 92.5%
+  

@@ -17,7 +17,14 @@ $slide-width: 100%
 .adt-slide
   @extend %full-row-flex
 
+  +respond-to($breakpoint-schmedium)
+    background-color: $black
+
   background-color: rgba($dark, 0.75)
+  height: 100%
 
   > div
     @extend %full-row-flex
+
+    +respond-to($breakpoint-schmedium)
+      align-items: flex-end

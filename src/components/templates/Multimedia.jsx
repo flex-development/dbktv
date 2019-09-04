@@ -38,7 +38,7 @@ export default class Multimedia extends Component {
    * @returns {undefined}
    */
   componentWillUnmount() {
-    $('.ado-deck').css('height', 'inherit')
+    $('.ado-deck').css('height', '100%')
     $('.ado-footer').removeClass('multimedia-border')
     // $('.ado-nav').removeClass('ui-hide')
   }

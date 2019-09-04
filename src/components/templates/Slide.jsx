@@ -44,7 +44,7 @@ export default class Slide extends Component {
    */
   componentDidMount() {
     this.choose()
-    this.start(true)
+    // this.start(true)
   }
 
   /**
