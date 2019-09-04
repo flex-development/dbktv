@@ -47,6 +47,11 @@ export default class Deck extends Component {
       position: 0,
       slides: null
     }
+
+    /**
+     * @property {string} timer - Interval id
+     */
+    this.timer = ''
   }
 
   /**
@@ -63,8 +68,10 @@ export default class Deck extends Component {
     const { slides } = props
 
     const count = slides.length
+    const durations = slides.map(slide => slide.duration)
 
     return {
+      duration: durations.reduce((total, value) => total + value),
       count,
       slides: slides.map((slide, i) => {
         slide.id = `slide-${i}`
@@ -88,13 +95,8 @@ export default class Deck extends Component {
     $(window).resize(this.resize())
   }
 
-  /**
-   * Clears the slide timer.
-   *
-   * @returns {undefined}
-   */
   componentWillUnmount() {
-    clearInterval(this.timer)
+    this.time(false)
   }
 
   /**
@@ -110,7 +112,7 @@ export default class Deck extends Component {
     // Get current slide
     const curr = slides[position]
     const dispatch = {
-      ...curr, catch: error, dispatch: this.dispatch, slide: this.next
+      ...curr, catch: error, slide: this.next, time: this.time
     }
 
     return (
@@ -215,4 +217,13 @@ export default class Deck extends Component {
    * @returns {undefined}
    */
   resize = () => this.setState({ mobile: $(window).width() <= 768 })
+
+  time = time => {
+    if (time) {
+      const { duration, next, slide } = this.props
+      this.timer = setTimeout(() => slide(next), duration)
+    } else {
+      clearInterval(this.timer)
+    }
+  }
 }

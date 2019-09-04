@@ -29,17 +29,61 @@ export default class Slide extends Component {
   }
 
   /**
-   * Determines the template to render based on the incoming props.
+   * Based on
    *
    * @todo Update documentation
    *
    * @param {object} props - Incoming props
-   * @param {object} state - @see App#state
+   * @param {object} state - Component state
    * @returns {object | null} Object to update the state, or null to update
    * nothing
    */
-  static getDerivedStateFromProps(props, state) {
-    const { dispatch, className, component, id, ...data } = props
+  // static getDerivedStateFromProps(props, state) {
+
+  // }
+
+  /**
+   * After the component has mounted, the internal state will be updated with
+   * the name of the current template component, the template to render, and the
+   * data associated with it.
+   *
+   * @returns {undefined}
+   */
+  componentDidMount() {
+    this.choose()
+  }
+
+  /**
+   * Renders <section> element with the base class 'adt-slide'.
+   *
+   * @todo Update documentation
+   * @returns {HTMLElement}
+   */
+  render() {
+    const { className, id } = this.props
+    const { component, template } = this.state
+    const style = `adt-slide ${component} ${className || ''}`
+
+    if (component) style.replace('adt-slide', `adt-slide ${component}`)
+
+    return (
+      <section id={id} className={style.trim()}>
+        {template}
+      </section>
+    )
+  }
+
+  // Helpers
+
+  /**
+   * Based on the current component properties, the method updates the internal
+   * state with the name of the component in lowercase and the template
+   * component to be rendered.
+   *
+   * @returns {string} Name of component in lowercase
+   */
+  choose = () => {
+    const { className, component, id, ...data } = this.props
 
     let template = null
 
@@ -53,31 +97,7 @@ export default class Slide extends Component {
       template = <Default />
     }
 
-    return { component: component.toLowerCase(), data, template }
-  }
-
-  /**
-   * Renders <section> element with the base class 'adt-slide'.
-   *
-   * @todo Update documentation
-   * @returns {HTMLElement}
-   */
-  render() {
-    const { className, id } = this.props
-    const { component, data, template } = this.state
-    const style = `adt-slide ${className || ''}`
-
-    if (component) {
-      const { duration, next, slide } = data
-
-      style.replace('adt-slide', `adt-slide ${component}`)
-      setTimeout(() => slide(next), duration)
-    }
-
-    return (
-      <section id={id} className={style.trim()}>
-        {template}
-      </section>
-    )
+    const state = { component: component.toLowerCase(), data, template }
+    return this.setState(state, () => state.component)
   }
 }
