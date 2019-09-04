@@ -30,7 +30,7 @@
 
     display: none
 
-  > .ada-button
+  > .ada-link
     +event
       .square
         color: $accent-light
@@ -48,5 +48,6 @@
       font-size: size(11.25)
       transform: rotate(45deg)
 
-      &.active
+    &.active
+      > .square
         color: $accent-light

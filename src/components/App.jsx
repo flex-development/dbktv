@@ -1,5 +1,6 @@
 // Packages
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
+import { BrowserRouter as Router } from 'react-router-dom'
 import ReactGA from 'react-ga'
 import { GeneralError, NotFound } from '@feathersjs/errors'
 
@@ -133,6 +134,10 @@ export default class App extends Component {
    * @throws {GeneralError | NotFound}
    */
   async componentDidMount() {
+    if (window.location.pathname !== '/slides/1') {
+      window.location.pathname = '/slides/1'
+    }
+
     console.info('Application mounted.')
 
     // Get the current deck id and subscribe to data changes
@@ -141,9 +146,6 @@ export default class App extends Component {
 
     // Google Analytics and Pageview tracking
     this.tracking()
-
-    // Update loading state
-    this.fetch(false)
   }
 
   /**
@@ -171,7 +173,7 @@ export default class App extends Component {
    * After the application has finished loading, the Header, Deck, Footer, and
    * child components will be rendered.
    *
-   * @returns {<Fragment/>} <Deck> and <Navigation> components
+   * @returns {<Router/>}
    */
   render() {
     const { deck, error, info, loading, slides, ticker } = this.state
@@ -181,7 +183,7 @@ export default class App extends Component {
     if (loading) return <Loading />
 
     return (
-      <Fragment>
+      <Router>
         <Header container>
           <Logo />
         </Header>
@@ -192,7 +194,7 @@ export default class App extends Component {
           <Logo mini />
           <Ticker items={ticker} />
         </Footer>
-      </Fragment>
+      </Router>
     )
   }
 
@@ -268,7 +270,7 @@ export default class App extends Component {
    * ticker data.
    *
    * @async
-   * @returns {Promise<string>} Id of the current deck
+   * @returns {Promise<object>} Id of the current deck, slides, and ticker data
    */
   sync = async () => {
     this.fetch(true)
@@ -300,16 +302,51 @@ export default class App extends Component {
 
     try {
       const { data } = this.subscriptions
-      const { slides, ticker } = (await data(deck).once('value')).val()
+      let { slides, ticker } = (await data(deck).once('value')).val()
 
       this.setState({ deck, loading: false, slides, ticker }, () => {
         console.info('SYNC - RETREIVED DECK DATA ->', { slides, ticker })
-        return deck
+        return { deck, slides, ticker }
       })
     } catch (err) {
       err.message = `SYNC ERR - CANNOT GET DECK DATA -> ${err.message}`
       this.error(new GeneralError(err))
     }
+  }
+
+  /**
+   * Prepares @see @param slides to be parsed as dual slide and route objects.
+   *
+   * @param {object[]} slides - Array to slides to sanitize
+   * @returns {object[]} - Routified slide objects
+   */
+  routing = slides => {
+    const patherize = text => text.toLowerCase().replace(/ /g, '-').replace(/[-]+/g, '-').replace(/[^\w-]+/g, '')
+
+    return slides.map((slide, i) => {
+      const { component, content } = slide
+
+      slide.next = { id: i === slides.length - 1 ? 0 : i + 1 }
+
+      switch (component) {
+        case 'Articles':
+          const { articles } = content
+          slide.path = `/articles/${patherize(articles[0].headline.text)}`
+          break
+        case 'Multimedia':
+          const { alt, caption, video } = content.media
+          slide.path = `/multimedia/${patherize(video ? caption : alt)}`
+          break
+        case 'News':
+          const { headline } = content
+          slide.path = `/news/${patherize(headline.text)}`
+          break
+        default:
+          slide.path = `/default`
+      }
+
+      return slide
+    })
   }
 
   /**

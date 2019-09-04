@@ -7,7 +7,7 @@
 // Variables
 $figure-height: 100%
 $figure-width: 100%
-$image-magic-number: 85.75%
+$image-magic-number: 85%
 $video-magic-number: 84.625%
 
 // Styles
@@ -46,6 +46,9 @@ $video-magic-number: 84.625%
         font-size: size(21) !important
         margin: 0 size(10) size(5) 0
 
+  > .ada-image
+    max-height: $image-magic-number
+    
   > .ada-video
     height: 100%
     max-height: $video-magic-number

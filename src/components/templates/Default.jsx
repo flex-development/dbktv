@@ -14,26 +14,12 @@ import { Logo } from '../molecules'
  */
 export default class Default extends Component {
   /**
-   * After the component has mounted, the window title will be updated and the
-   * @see @class Deck timer will be started.
+   * After the component has mounted, the window title will be updated.
    *
    * @returns {undefined}
    */
   componentDidMount() {
-    const { time } = this.props
-
     document.title = `Continue reading on dbknews.com`
-    time()
-  }
-
-  /**
-   * Before the component unmounts, the @see @class Deck timer will be stopped.
-   *
-   * @returns {undefined}
-   */
-  componentWillUnmount() {
-    const { time } = this.props
-    time(false)
   }
 
   /**

@@ -16,17 +16,16 @@ import Article from './Article'
 export default class News extends Component {
   /**
    * After the component has mounted, the document title and deck background
-   * image will be updated and the @see @class Deck timer will be started.
+   * image will be updated.
    *
    * @returns {undefined}
    */
   componentDidMount() {
-    const { content, time } = this.props
+    const { content } = this.props
     const { headline, image } = content
 
     document.title = `Top News: ${headline.text}`
     $('.ado-deck').css('background-image', `url(${image.src})`)
-    time()
   }
 
   /**
@@ -36,10 +35,7 @@ export default class News extends Component {
    * @returns {undefined}
    */
   componentWillUnmount() {
-    const { time } = this.props
-
     $('.ado-deck').css('background-image', 'none')
-    time(false)
   }
 
   /**

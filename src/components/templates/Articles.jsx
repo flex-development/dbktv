@@ -23,20 +23,7 @@ export default class Articles extends Component {
    * @returns {undefined}
    */
   componentDidMount() {
-    const { time } = this.props
-
     document.title = `Continue reading on dbknews.com`
-    time()
-  }
-
-  /**
-   * Before the component unmounts, the deck background image will be removed.
-   *
-   * @returns {undefined}
-   */
-  componentWillUnmount() {
-    const { time } = this.props
-    time(false)
   }
 
   /**

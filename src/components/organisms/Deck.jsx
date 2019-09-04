@@ -1,5 +1,6 @@
 // Packages
 import React, { Component, Fragment } from 'react'
+import { NavLink, Route } from 'react-router-dom'
 import $ from 'jquery'
 
 // Components
@@ -47,11 +48,6 @@ export default class Deck extends Component {
       position: 0,
       slides: null
     }
-
-    /**
-     * @property {string} timer - Interval id
-     */
-    this.timer = ''
   }
 
   /**
@@ -73,9 +69,11 @@ export default class Deck extends Component {
     return {
       duration: durations.reduce((total, value) => total + value),
       count,
+      position: 0,
       slides: slides.map((slide, i) => {
-        slide.id = `slide-${i}`
-        slide.next = i === count - 1 ? 0 : i + 1
+        slide.id = `/slides/${i + 1}`
+        slide.next = i === count - 1 ? `/slides/1` : `/slides/${i + 2}`
+        slide.position = i
         return slide
       })
     }
@@ -88,15 +86,9 @@ export default class Deck extends Component {
   componentDidMount() {
     console.info('Deck mounted.')
 
+    // Update internal mobile state and attach window listener to update it
     this.resize()
-
-    // Attach window listeners to update internal paused and mobile state
-    $(window).keyup(event => this.pause(event))
     $(window).resize(this.resize())
-  }
-
-  componentWillUnmount() {
-    this.time(false)
   }
 
   /**
@@ -106,29 +98,32 @@ export default class Deck extends Component {
    * @returns {HTMLElement} <main id='deck' class='ado-deck'>
    */
   render() {
-    const { error } = this.props
-    const { mobile, position, slides } = this.state
-
-    // Get current slide
-    const curr = slides[position]
-    const dispatch = {
-      ...curr, catch: error, slide: this.next, time: this.time
-    }
+    const { mobile, slides } = this.state
 
     return (
       <Fragment>
         <Navigation mobile={mobile}>
           {slides.map((slide, i) => {
             return (
-              <SquareIcon
-                className={this.active(i) ? 'active' : ''}
-                key={`nav-btn-${i}`}
-              />
+              <NavLink
+                to={slide.id} key={`nav-btn-${i}`}
+                className='ada-link' isActive={() => this.active(i)}
+              >
+                <SquareIcon />
+              </NavLink>
             )
           })}
         </Navigation>
         <main id='deck' className='ado-deck'>
-          <Slide {...dispatch} />
+          {slides.map((slide, i) => {
+            return (
+              <Route
+                exact={i === 0} key={slide.id} path={slide.id}
+                render={props =>
+                  <Slide {...props} {...slide} push={this.push} />}
+              />
+            )
+          })}
         </main>
       </Fragment>
     )
@@ -137,79 +132,33 @@ export default class Deck extends Component {
   // HELPERS
 
   /**
-   * Gets the position of the current slide.
+   * Returns true if the window path matches the path of the current slide.
    *
-   * @todo Update documentation
-   *
+   * @param {number} position - Position of slide
    * @returns {boolean}
    */
-  active = pos => {
+  active = position => {
+    const { slides } = this.state
+    return window.location.pathname === slides[position].id
+  }
+
+  /**
+   * Returns the data for the current slide.
+   *
+   * @returns {object | null} - Data for current slide
+   */
+  current = () => {
     const { position, slides } = this.state
-    const curr = slides[position]
-
-    return slides.find((s, i) => curr.next === s.next && pos === i)
-  }
-
-  dispatch = dispatched => this.setState({ dispatched }, () => dispatched)
-
-  /**
-   * The space key can be pressed to stop and start the deck. The internal pause
-   * state will be updated.
-   *
-   * @param {Event} event - Key event
-   * @returns {number} 1 if the state was updated, -1 otherwise
-   */
-  pause = event => {
-    const { code } = event
-
-    let paused = -1
-
-    if (code === 'Space') {
-      this.setState(state => ({ paused: state.paused !== true }))
-      paused = 1
-    }
-
-    return paused
+    return slides ? slides[position] : null
   }
 
   /**
-   * Updates the current deck slide. If @param id is defined, the internal deck
-   * position will be updated. If undefined, the deck will handle slide
-   * transitions.
+   * Updates the internal deck position state.
    *
-   * @param {number | undefined} id - ID of next slide
-   * @returns {undefined}
+   * @param {number} position - Position of current slide
+   * @returns {number} @see @param position
    */
-  next = id => {
-    const { position } = this.state
-    const { slides } = this.props
-
-    let curr = null
-    let pos = -1
-
-    if (id) {
-      /** Get next slide based on @param id */
-      curr = slides[id]
-      pos = id
-    } else {
-      /** Get current slide and next slide based on internal state  */
-      curr = slides[position]
-      pos = curr.next
-
-      const next = slides[pos]
-
-      /** Update current slide */
-      curr = next
-    }
-
-    // Log the change
-    if (!['staging', 'production'].includes(this.env)) {
-      console.warn('CHG ->', curr)
-    }
-
-    // Update internal state
-    this.setState({ position: pos }, () => pos)
-  }
+  push = position => this.setState({ position }, () => position)
 
   /**
    * Updates the internal mobile state.
@@ -217,13 +166,4 @@ export default class Deck extends Component {
    * @returns {undefined}
    */
   resize = () => this.setState({ mobile: $(window).width() <= 768 })
-
-  time = time => {
-    if (time) {
-      const { duration, next, slide } = this.props
-      this.timer = setTimeout(() => slide(next), duration)
-    } else {
-      clearInterval(this.timer)
-    }
-  }
 }

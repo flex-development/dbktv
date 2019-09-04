@@ -20,27 +20,20 @@ export default class Slide extends Component {
 
     /**
     * @property {object} state - Internal component state
-    * @property {string | null} state.component - Name of component in lowercase
     * @property {object | null} state.data - Slide data
     * @property {Component | null} state.template - Template component
+     * @property {string | null} state.type - Name of template component in
+     * lowercase
     * @instance
     */
-    this.state = { component: null, data: null, template: null }
+    this.state = { data: null, template: null, type: null }
+
+    /**
+     * @property {string} timer - Interval id of current slide timer
+     * @instance
+     */
+    this.timer = ''
   }
-
-  /**
-   * Based on
-   *
-   * @todo Update documentation
-   *
-   * @param {object} props - Incoming props
-   * @param {object} state - Component state
-   * @returns {object | null} Object to update the state, or null to update
-   * nothing
-   */
-  // static getDerivedStateFromProps(props, state) {
-
-  // }
 
   /**
    * After the component has mounted, the internal state will be updated with
@@ -51,6 +44,14 @@ export default class Slide extends Component {
    */
   componentDidMount() {
     this.choose()
+    this.start(true)
+  }
+
+  /**
+   * Clears the slide timer
+   */
+  componentWillUnmount() {
+    this.start(false)
   }
 
   /**
@@ -61,10 +62,10 @@ export default class Slide extends Component {
    */
   render() {
     const { className, id } = this.props
-    const { component, template } = this.state
-    const style = `adt-slide ${component} ${className || ''}`
+    const { template, type } = this.state
+    const style = `adt-slide ${type} ${className || ''}`
 
-    if (component) style.replace('adt-slide', `adt-slide ${component}`)
+    if (type) style.replace('adt-slide', `adt-slide ${type}`)
 
     return (
       <section id={id} className={style.trim()}>
@@ -97,7 +98,28 @@ export default class Slide extends Component {
       template = <Default />
     }
 
-    const state = { component: component.toLowerCase(), data, template }
-    return this.setState(state, () => state.component)
+    const state = { data, template, type: component.toLowerCase() }
+    return this.setState(state, () => {
+      return state.type
+    })
+  }
+
+  /**
+   * Starts the slide timer if @see @param start is true. Otherwise, the
+   * interval will be cleared.
+   *
+   * @param {boolean} start - True to start timer. False to clear interval
+   * @returns {string | undefined}
+   */
+  start = start => {
+    const { duration, next } = this.props
+
+    if (start) {
+      this.timer = setTimeout(() => {
+        window.location.pathname = next
+      }, process.env.NODE_ENV === 'development' ? 5000 : duration)
+    } else {
+      return clearInterval(this.timer)
+    }
   }
 }

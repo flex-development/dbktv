@@ -18,12 +18,10 @@ export default class Multimedia extends Component {
    * After the component has mounted, the document title and ui will be updated.
    * The footer will have a border applied.
    *
-   * The @see @class Deck timer will be also started.
-   *
    * @returns {undefined}
    */
   componentDidMount() {
-    const { content, time } = this.props
+    const { content } = this.props
     const { media } = content
 
     document.title = `Gallery: ${media.video ? media.caption : media.alt}`
@@ -31,25 +29,18 @@ export default class Multimedia extends Component {
     $('.ado-deck').css('height', '92.5%')
     $('.ado-footer').addClass('multimedia-border')
     // $('.ado-nav').addClass('ui-hide')
-
-    time()
   }
 
   /**
    * Before the component unmounts, the ui will be reset to its default state.
-   * The footer border will be removed and the @see @class Deck timer will be
-   * stopped.
+   * The footer border will be removed.
    *
    * @returns {undefined}
    */
   componentWillUnmount() {
-    const { time } = this.props
-
     $('.ado-deck').css('height', 'inherit')
     $('.ado-footer').removeClass('multimedia-border')
     // $('.ado-nav').removeClass('ui-hide')
-
-    time(false)
   }
 
   /**
