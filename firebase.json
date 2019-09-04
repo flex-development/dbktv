@@ -32,6 +32,16 @@
           "source": "/spec",
           "destination": "https://xd.adobe.com/spec/d8902b2f-721b-4006-5b21-ffd8e4e42993-aea1/",
           "type": 301
+        },
+        {
+          "source": "/slides",
+          "destination": "/slides/1",
+          "type": 301
+        },
+        {
+          "source": "/",
+          "destination": "/slides/1",
+          "type": 301
         }
       ],
       "rewrites": [
@@ -81,6 +91,16 @@
         {
           "source": "/spec",
           "destination": "https://xd.adobe.com/spec/d8902b2f-721b-4006-5b21-ffd8e4e42993-aea1/",
+          "type": 301
+        },
+        {
+          "source": "/slides",
+          "destination": "/slides/1",
+          "type": 301
+        },
+        {
+          "source": "/",
+          "destination": "/slides/1",
           "type": 301
         }
       ],

@@ -134,11 +134,15 @@ export default class App extends Component {
    * @throws {GeneralError | NotFound}
    */
   async componentDidMount() {
-    if (window.location.pathname !== '/slides/1') {
+    console.info('Application mounted.')
+
+    // Redirect if necessary
+    const { pathname } = window.location
+    const redirect = ['/', '/slides']
+
+    if (this.env === 'development' && redirect.includes(pathname)) {
       window.location.pathname = '/slides/1'
     }
-
-    console.info('Application mounted.')
 
     // Get the current deck id and subscribe to data changes
     await this.sync()
