@@ -21,13 +21,16 @@ You'll need to have Node, Git, and Firebase CLI set up on your local machine.
 - [Install Git](https://git-scm.com/downloads)
 - [Setup Firebase CLI](https://firebase.google.com/docs/cli)
 
+Next, you'll need to install run-script-os globally if it isn't already.
+Run the command `npm i -g run-script-os` to do so.
+
 ## Installing
 
 Follow the steps below to get your development environment set up.
 
 1. Open the terminal and and run the following:
 
-    `git clone https://github.com/The-Diamondback-Lab/dbktv.git`
+    `git clone https://github.com/flex-development/dbktv.git`
 
 2. Run `npm install` to install the project dependencies.
 
