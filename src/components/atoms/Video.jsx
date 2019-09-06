@@ -23,7 +23,6 @@ import React from 'react'
  */
 const Video = props => {
   const { autoplay, controls, className, events, id, src, track, type } = props
-  const style = (`ada-video ${className || ''}`).trim()
 
   // Receiving the following ESLint error: "Media elements such as <audio> and
   // <video> must have a <track> for captions."
@@ -34,7 +33,6 @@ const Video = props => {
   return (
     <div id={id} className={(`ada-video ${className || ''}`).trim()}>
       <video
-        className={style}
         autoPlay={autoplay || false} controls={controls || false} {...events}
       >
         <source src={src} type={type} />

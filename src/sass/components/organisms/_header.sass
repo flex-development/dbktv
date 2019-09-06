@@ -26,7 +26,7 @@ $header-width: 100vw
     padding: $header-padding
 
     .adm-logo
-      width: size(125)
+      +constrain(size(137.5))
 
   &.ui-sticky
     background-color: $light
@@ -34,6 +34,4 @@ $header-width: 100vw
     position: fixed
 
     > .ada-container
-      // border-bottom: $border
       padding: size(16) 0
-  

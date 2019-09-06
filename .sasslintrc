@@ -8,7 +8,7 @@ options:
   merge-default-rules: false
 # File Options
 files:
-  include: 'src/style/**/*.s+(a|c)ss'
+  include: 'src/sass/**/*.s+(a|c)ss'
   ignore:
     - 'node_modules/**/*.*'
 # Rule Configuration

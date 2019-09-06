@@ -4,6 +4,14 @@
 // @author Lexus Drumgold
 // ----------------------------------------------------------------------------
 
+// Variables
+$image-height: 100%
+$image-width: auto
+
+// Styles
+
 .ada-image
-  max-width: 100%
-  width: auto
+  +size($image-width, $image-height)
+
+  > img
+    max-height: $image-height

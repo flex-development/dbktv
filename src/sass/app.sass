@@ -18,13 +18,16 @@
 // Styles
 
 #root
-  +flex(column, center, space-around)
+  +flex(column, center, space-between)
   
-  +respond-to($breakpoint-schmedium)
-    height: 90%
-
   height: 100vh
   width: 100vw
+
+  > .ado-deck
+    height: 95%
+
+  > .ado-footer
+    height: 5% !important
 
 
 

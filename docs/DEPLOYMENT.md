@@ -18,8 +18,10 @@ You'll also need to have [Firebase CLI][1] setup.
 
 Before deploying, be sure to:
 
-1. Set up [Deploy Targets][2] if necessary
-2. Review the [Firebase Launch Checklist][3]
+1. Check with an administrator to confirm the project is ready to be deployed
+2. Gather any necessary deployment files
+3. Set up [Deploy Targets][2] if necessary
+4. Review the [Firebase Launch Checklist][3]
 
 When ready to deploy, you have a few options:
 

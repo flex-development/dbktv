@@ -1,9 +1,11 @@
+// Utilities
+import error from './error.util.js'
+import ui from './ui.util.js'
+
 /**
- * @file Utilities entry point
+ * @file Application utilities
  * @module utilities
  * @author Lexus Drumgold <lex@lexusdrumgold.design>
  */
 
-module.exports = {
-  error: require('./error.util.js')
-}
+export default { ...error, ...ui }

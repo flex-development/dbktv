@@ -12,7 +12,6 @@ module.exports = {
     'jsx'
   ],
   moduleNameMapper: {
-    '^react-native$': 'react-native-web',
     '^.+\\.module\\.(css|sass|scss)$': 'identity-obj-proxy'
   },
   roots: [
@@ -26,6 +25,6 @@ module.exports = {
     '<rootDir>/tests/__mocks__/*',
     '<rootDir>/tests/__snaps__/*'
   ],
-  testURL: 'http://localhost:3000',
+  testURL: 'http://localhost:5000',
   verbose: true
 }

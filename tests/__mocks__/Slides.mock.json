@@ -36,7 +36,10 @@
     "component": "Articles",
     "duration": 15000,
     "content": {
-      "ad": "300x600_DBK_TV",
+      "ads": [
+        "300x600_DBK_TV",
+        "300x600_Banner_C"
+      ],
       "articles": [
         {
           "author": "Daisy Grant",
@@ -100,7 +103,10 @@
     "component": "Articles",
     "duration": 15000,
     "content": {
-      "ad": "300x600_Banner_C",
+      "ads": [
+        "300x600_DBK_TV",
+        "300x600_Banner_C"
+      ],
       "articles": [
         {
           "author": "Daisy Grant",

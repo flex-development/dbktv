@@ -34,7 +34,14 @@
   +constrain(max-content)
   +flex(row, center, center)
 
-  padding-right: size(16 * 4)
+  padding-right: size(16 * 2.5)
 
-  > .ada-advertisement
-    +size(size(300), size(600))
+  > div
+    +flex(row, center, center)
+
+    margin: 0 auto
+
+    .ada-advertisement
+      +size(size(300), size(600))
+
+      margin-left: size(16)

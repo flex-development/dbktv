@@ -27,16 +27,19 @@ export default class Articles extends Component {
   }
 
   /**
-   * Renders a <section> element representing the "Articles" template.
+   * Renders a <div> element representing the "Articles" template.
    *
-   * @returns {HTMLElement} <section> element
+   * The "Articles" template displays two article previews in the left rail, and
+   * at most 2 300x600 advertisements in the right rail.
+   *
+   * @returns {HTMLDivElement} <div class="adt-articles">
    */
   render() {
     const { className, content, id } = this.props
+    const { ads, articles } = content
     const style = (`adt-articles ${className || ''}`).trim()
 
     const NETWORK_ID = '123934970'
-    const ad = { adUnit: content.ad, fetchNow: true, sizes: [[300, 600]] }
 
     return (
       <div id={id} className={style}>
@@ -44,8 +47,8 @@ export default class Articles extends Component {
           <div className='left-rail'>
             <Subheading heading={this.subheading} />
             <div className='articles'>
-              {content.articles.map((article, i) => {
-                return <Article {...article} class='group' key={`a-${i}`} />
+              {articles.map((article, i) => {
+                return <Article {...article} className='group' key={`a-${i}`} />
               })}
             </div>
 
@@ -55,7 +58,10 @@ export default class Articles extends Component {
           </div>
           <div className='right-rail'>
             <DFPSlotsProvider dfpNetworkId={NETWORK_ID}>
-              {ad.adUnit ? <Advertisement {...ad} /> : null}
+              {ads.map((ad, i) => {
+                ad = { adUnit: ad, fetchNow: true, sizes: [[300, 600]] }
+                return <Advertisement {...ad} key={`ad-${i}`} />
+              })}
             </DFPSlotsProvider>
           </div>
         </Container>

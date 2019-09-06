@@ -6,7 +6,7 @@ import { GeneralError, NotFound } from '@feathersjs/errors'
 
 // Components
 import { Logo } from './molecules'
-import { Header, Deck, Footer, Ticker } from './organisms'
+import { Deck, Footer, Header, Ticker } from './organisms'
 import { Error, Loading } from './screens'
 
 /**
@@ -95,14 +95,14 @@ export default class App extends Component {
    */
   static getDerivedStateFromProps(props, state) {
     const {
-      database, deck, error, info, loading, mobile, slides, test, ticker
+      database, deck, error, info, loading, mobile, slides, test, ticker, utils
     } = props
 
     const { NODE_ENV } = process.env
 
     if ((NODE_ENV === 'development' && test) || NODE_ENV === 'test') {
       return {
-        database, deck, error, info, loading, mobile, slides, test, ticker
+        database, deck, error, info, loading, mobile, slides, test, ticker, utils
       }
     }
 
@@ -191,11 +191,9 @@ export default class App extends Component {
         <Header container>
           <Logo />
         </Header>
-        <Deck
-          error={this.error} fetch={this.fetch} id={deck} slides={slides}
-        />
+        <Deck error={this.error} fetch={this.fetch} id={deck} slides={slides} />
         <Footer>
-          <Logo mini />
+          <Logo />
           <Ticker items={ticker} />
         </Footer>
       </Router>

@@ -2,17 +2,20 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-// Compiled Sass stylesheet
-import './sass/app.sass'
-
 // Firebase
-import { database, storage } from './api'
+import { database } from './api'
+
+// Service worker
+import * as sw from './config/sw.config'
 
 // Application
 import App from './components/App'
 
-// Service worker
-import * as sw from './config/sw.config'
+// Utility functions
+import utils from './utils'
+
+// Compiled Sass stylesheet
+import './sass/app.sass'
 
 /**
  * @file Application entry point
@@ -23,9 +26,9 @@ import * as sw from './config/sw.config'
  */
 
 // Application will be rendered inside of <div id="root"></div>
-// with the Firebase database and storage interfaces passed as props
+// with the Firebase database interface and utility functions passed as props
 ReactDOM.render(
-  <App database={database} storage={storage} />,
+  <App database={database} utils={utils} />,
   document.getElementById('root')
 )
 

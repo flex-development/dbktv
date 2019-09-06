@@ -16,7 +16,7 @@ import { Figure } from '../molecules'
 export default class Multimedia extends Component {
   /**
    * After the component has mounted, the document title and ui will be updated.
-   * The footer will have a border applied.
+   * The header will be hidden and the footer will have a border applied.
    *
    * @returns {undefined}
    */
@@ -26,21 +26,19 @@ export default class Multimedia extends Component {
 
     document.title = `Gallery: ${media.video ? media.caption : media.alt}`
 
-    $('.ado-deck').css('height', '92.5%')
+    $('.ado-header').addClass('ui-hide')
     $('.ado-footer').addClass('multimedia-border')
-    // $('.ado-nav').addClass('ui-hide')
   }
 
   /**
    * Before the component unmounts, the ui will be reset to its default state.
-   * The footer border will be removed.
+   * The header will reappear and the footer border will be removed.
    *
    * @returns {undefined}
    */
   componentWillUnmount() {
-    $('.ado-deck').css('height', '100%')
+    $('.ado-header').removeClass('ui-hide')
     $('.ado-footer').removeClass('multimedia-border')
-    // $('.ado-nav').removeClass('ui-hide')
   }
 
   /**
