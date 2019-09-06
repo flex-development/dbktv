@@ -1,28 +1,17 @@
 {
-  "count": 1,
+  "component": "Multimedia",
   "duration": 15000,
-  "slides": [
-    {
-      "component": "Multimedia",
-      "duration": 17000,
-      "id": "monster-smashed-a-single-page-scrolling-site-showcasing-spooky-drinks-from-the-book-monster-smashed",
-      "next": 0,
-      "path": "/multimedia/monster-smashed-a-single-page-scrolling-site-showcasing-spooky-drinks-from-the-book-monster-smashed",
-      "title": "Monster Smashed: A single-page scrolling site showcasing spooky drinks from the book Monster Smashed.",
-      "content": {
-        "category": "special projects",
-        "credit": "The Diamondback",
-        "media": {
-          "alt": "Monster Smashed: A single-page scrolling site showcasing spooky drinks from the book Monster Smashed.",
-          "caption": "Monster Smashed: A single-page scrolling site showcasing spooky drinks from the book Monster Smashed.",
-          "src": "https://firebasestorage.googleapis.com/v0/b/thedbktv.appspot.com/o/assets%2Fvideos%2Fmonster-smashed.mp4?alt=media&token=0973e1dd-54cd-4b08-8925-eaf12f169b4a",
-          "video": true
-        },
-        "related": {
-          "href": "https://dbknews.com/2017/10/24/monster-smashed-diamondback-special-project/",
-          "text": "‘Monster Smashed’: The Diamondback’s spookiest project yet"
-        }
-      }
+  "content": {
+    "category": "diversions",
+    "credit": "andi wenck",
+    "media": {
+      "alt": "Testudo excites an arena of fans before Maryland’s 76-71 loss to No. 4 Virginia at Xfinity Center on Nov. 28, 2018",
+      "src": "https://d3gx1wgrn4cpnk.cloudfront.net/uploads/2019/04/IMG_0497-copy-e1562021153539.jpg",
+      "video": false
+    },
+    "related": {
+      "href": "https://dbknews.com/2019/07/01/maryland-sports-best-moments-since-joining-big-ten/",
+      "text": "Looking back at Maryland’s best sports moments since joining the Big Ten five years ago"
     }
-  ]
+  }
 }

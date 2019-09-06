@@ -1,0 +1,34 @@
+// -----------------------------------------------------------------------------
+// Styles entry point
+// @author Lexus Drumgold
+// -----------------------------------------------------------------------------
+
+// Charset
+@charset 'utf-8'
+
+// Import global font
+@import url(https://fonts.googleapis.com/css?family=IBM+Plex+Sans:300,300i,400,400i,500,500i,600,600i,700,700i&display=swap)
+
+// Directories
+@import abstracts/abstracts
+@import vendors/vendors
+@import base/base
+@import components/components
+
+// Styles
+
+#root
+  +flex(column, center, space-between)
+  
+  height: 100vh
+  width: 100vw
+
+  > .ado-deck
+    height: 95%
+
+  > .ado-footer
+    height: 5% !important
+
+
+
+

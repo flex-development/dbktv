@@ -1,0 +1,66 @@
+// ----------------------------------------------------------------------------
+// Multimedia specific styles, variables, placeholders, mixins and functions
+// @see components/templates/Multimedia.jsx
+// @author Lexus Drumgold
+// ----------------------------------------------------------------------------
+
+// Variables
+$figure-height: 100%
+$figure-width: 100%
+$image-magic-number: 85%
+$video-magic-number: 84.625%
+
+// Styles
+.adt-multimedia
+  +flex(column, center, center)
+
+  > .adm-figure
+    height: $figure-height
+    width: $figure-width
+
+    .ada-figcaption
+      background-color: $black
+      border-top: $border
+      padding: size(24) 0
+      width: 100%
+
+      > .ada-container
+        +flex(column)
+
+        > .ada-paragraph
+          font-weight: 600
+
+        > .headline
+          +respond-to($breakpoint-xxl, min)
+            font-size: size(28) !important
+
+
+          +respond-to($breakpoint-xxxl, min)
+            font-size: size(32)
+
+
+          +respond-to($breakpoint-4k, min)
+            font-size: size(37.333)
+
+
+          font-size: size(21) !important
+          margin: 0 size(10) size(5) 0
+
+    .ada-image
+      max-height: $image-magic-number
+      
+    .ada-video
+      height: 100%
+      max-height: $video-magic-number
+
+.caption-header
+  +flex(row, center)
+
+  margin-bottom: size(5)
+  width: 100%
+
+  > .ada-paragraph
+    margin-right: size(5)
+
+    &.author
+      font-weight: 300 !important

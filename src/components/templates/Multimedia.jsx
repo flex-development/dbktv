@@ -1,5 +1,5 @@
 // Packages
-import { h, Component } from 'preact'
+import React, { Component } from 'react'
 import $ from 'jquery'
 
 // Components
@@ -7,8 +7,7 @@ import { Figure } from '../molecules'
 
 /**
  * Class representing the Multimedia template.
- *
- * @todo Update documentation
+ * This template should be used to display an image or video.
  *
  * @class Multimedia
  * @extends Component
@@ -16,55 +15,45 @@ import { Figure } from '../molecules'
  */
 export default class Multimedia extends Component {
   /**
-   * If an error is caught, the component the error will be handed off to the
-   * @see @class App component.
-   *
-   * @param {FeathersError | Error} error - Current error
-   * @param {object} info - Error information
-   * @returns {undefined}
-   */
-  componentDidCatch(error, info) { return this.props.catch(error, info) }
-
-  /**
-   * Updates the document title and adds a top border to the footer.
+   * After the component has mounted, the document title and ui will be updated.
+   * The header will be hidden and the footer will have a border applied.
    *
    * @returns {undefined}
    */
   componentDidMount() {
-    const { duration, next, slide, title } = this.props
+    const { content } = this.props
+    const { media } = content
 
-    document.title = `Gallery: ${title}`
+    document.title = `Gallery: ${media.video ? media.caption : media.alt}`
 
+    $('.ado-header').addClass('ui-hide')
     $('.ado-footer').addClass('multimedia-border')
-    $('.ado-nav').addClass('ui-hide')
-
-    setTimeout(() => slide(next), duration)
   }
 
   /**
-   * Removes the footer border.
+   * Before the component unmounts, the ui will be reset to its default state.
+   * The header will reappear and the footer border will be removed.
    *
    * @returns {undefined}
    */
   componentWillUnmount() {
+    $('.ado-header').removeClass('ui-hide')
     $('.ado-footer').removeClass('multimedia-border')
-    $('.ado-nav').removeClass('ui-hide')
   }
 
   /**
    * Renders a <section> element representing the "Multimedia" template.
    *
-   * @param {object} props - Component properties
-   * @param {object} state - Component state
+   * @todo Update documentation
    * @returns {HTMLElement} <section> element
    */
-  render(props, state) {
-    const { className, content, id } = props
+  render() {
+    const { className, content, id } = this.props
 
     return (
-      <section id={id} className={`adt-multimedia ${className || ''}`.trim()}>
+      <div id={id} className={`adt-multimedia ${className || ''}`.trim()}>
         <Figure content={content} />
-      </section>
+      </div>
     )
   }
 }

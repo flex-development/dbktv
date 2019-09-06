@@ -1,39 +1,27 @@
 {
-  "count": 1,
+  "component": "Articles",
   "duration": 15000,
-  "slides": [
-    {
-      "component": "Articles",
-      "duration": 15000,
-      "id": "sexually-fluid-cast-of-mt-vs-are-you-the-one-shows-surprisingly-strong-representation",
-      "next": 0,
-      "path": "/articles/sexually-fluid-cast-of-mt-vs-are-you-the-one-shows-surprisingly-strong-representation",
-      "title": "Continue Reading on dbknews.com",
-      "content": {
-        "ads": [
-          "300x600_DBK_TV"
-        ],
-        "articles": [
-          {
-            "author": "Daisy Grant",
-            "blurb": "If you’ve ever wondered what the love child of a reality dating show and a logic puzzle would be, look no further than MTV’s _Are You The One_? And this year, the puzzle is getting even harder.",
-            "category": "tv",
-            "headline": {
-              "text": "Sexually fluid cast of MTV’s ‘Are You The One?’ shows surprisingly strong representation",
-              "href": "https://dbknews.com/2019/07/03/are-you-the-one-sexually-fluid-cast-mtv-dating-show/"
-            }
-          },
-          {
-            "author": "Christine Condon",
-            "blurb": "The University of Maryland’s Hornbake Library is planned to lose student study space this fall.\n\n",
-            "category": "campus",
-            "headline": {
-              "text": "UMD students will lose some study space in Hornbake Library this fall",
-              "href": "https://dbknews.com/2019/07/03/umd-hornbake-library-ischool-lose-study-space-students-remodel/"
-            }
-          }
-        ]
+  "content": {
+    "ad": "300x600_DBK_TV",
+    "articles": [
+      {
+        "author": "Daisy Grant",
+        "blurb": "If you’ve ever wondered what the love child of a reality dating show and a logic puzzle would be, look no further than MTV’s _Are You The One_? And this year, the puzzle is getting even harder.",
+        "category": "tv",
+        "headline": {
+          "text": "Sexually fluid cast of MTV’s ‘Are You The One?’ shows surprisingly strong representation",
+          "href": "https://dbknews.com/2019/07/03/are-you-the-one-sexually-fluid-cast-mtv-dating-show/"
+        }
+      },
+      {
+        "author": "Christine Condon",
+        "blurb": "The University of Maryland’s Hornbake Library is planned to lose student study space this fall.\n\n",
+        "category": "campus",
+        "headline": {
+          "text": "UMD students will lose some study space in Hornbake Library this fall",
+          "href": "https://dbknews.com/2019/07/03/umd-hornbake-library-ischool-lose-study-space-students-remodel/"
+        }
       }
-    }
-  ]
+    ]
+  }
 }

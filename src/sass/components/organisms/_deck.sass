@@ -1,0 +1,18 @@
+// ----------------------------------------------------------------------------
+// Deck page specific styles, variables, placeholders, mixins and functions
+// @see components/organisms/Deck.jsx
+// @author Lexus Drumgold
+// ----------------------------------------------------------------------------
+
+// Variables
+$deck-height: 100%
+$deck-width: 100%
+
+.ado-deck
+  +constrain($deck-width)
+  +flex(column, center, space-between)
+
+  background:
+    position: center center
+    repeat: no-repeat
+    size: cover

@@ -1,0 +1,52 @@
+// -----------------------------------------------------------------------------
+// This file contains all application-wide animations.
+// -----------------------------------------------------------------------------
+
+// Makes an element increase its opacity over time
+.ui-reveal
+  +keyframes(ui-reveal)
+    0%
+      +opacity(0)
+
+    25%
+      +opacity(0.25)
+
+    50%
+      +opacity(0.5)
+
+    75%
+      +opacity(0.75)
+
+    100%
+      +opacity(1)
+
+// Ticker effect
+.ui-ticker
+  +keyframes(ui-ticker)
+    0%
+      transform: translate3d(0, 0, 0)
+      visibility: visible
+
+    50%
+      transform: translate3d(-50%, 0, 0)
+
+    100%
+      transform: translate3d(-100%, 0, 0)
+
+// Makes an element decrease its opacity over time
+.ui-vanish
+  +keyframes(ui-vanish)
+    0%
+      +opacity(1)
+
+    25%
+      +opacity(0.75)
+
+    50%
+      +opacity(0.5)
+
+    75%
+      +opacity(0.25)
+
+    100%
+      +opacity(0)

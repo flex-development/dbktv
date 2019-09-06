@@ -1,14 +1,13 @@
 // Packages
-import { h, Component } from 'preact'
+import React, { Component } from 'react'
 import $ from 'jquery'
 
 // Components
 import Article from './Article'
 
 /**
- * Class representing the "Top News" template.
- *
- * @todo Update documentation
+ * Component representing the "Top News" template.
+ * This template should be used to display a feature article.
  *
  * @class News
  * @extends Component
@@ -16,32 +15,22 @@ import Article from './Article'
  */
 export default class News extends Component {
   /**
-   * If an error is caught, the component the error will be handed off to the
-   * @see @class App component.
-   *
-   * @param {FeathersError | Error} error - Current error
-   * @param {object} info - Error information
-   * @returns {undefined}
-   */
-  componentDidCatch(error, info) {
-    return this.props.catch(error, info)
-  }
-
-  /**
-   * Updates the document title and deck background image.
+   * After the component has mounted, the document title and deck background
+   * image will be updated.
    *
    * @returns {undefined}
    */
   componentDidMount() {
-    const { content, duration, next, title, slide } = this.props
+    const { content } = this.props
+    const { headline, image } = content
 
-    document.title = `Top News: ${title}`
-    $('.ado-deck').css('background-image', `url(${content.image.src})`)
-    setTimeout(() => slide(next), duration)
+    document.title = `Top News: ${headline.text}`
+    $('.ado-deck').css('background-image', `url(${image.src})`)
   }
 
   /**
-   * Removes the deck background image.
+   * Before the component unmounts, the deck background image will be removed
+   * and the @see @class Deck timer will be stopped.
    *
    * @returns {undefined}
    */
@@ -52,17 +41,16 @@ export default class News extends Component {
   /**
    * Renders a <section> element representing the "Top News" template.
    *
-   * @param {object} props - Component properties
-   * @param {object} state - Component state
+   * @todo Update documentation
    * @returns {HTMLElement} <section> element
    */
-  render(props, state) {
-    const { className, content, id } = props
+  render() {
+    const { className, content, id } = this.props
 
     return (
-      <section id={id} className={`adt-news ${className || ''}`.trim()}>
+      <div id={id} className={`adt-news ${className || ''}`.trim()}>
         <Article category='top news' {...content} feature />
-      </section>
+      </div>
     )
   }
 }

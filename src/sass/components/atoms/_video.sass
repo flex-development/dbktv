@@ -1,0 +1,17 @@
+// ----------------------------------------------------------------------------
+// Video specific styles, variables, placeholders, mixins and functions
+// @see components/atoms/Video.jsx
+// @author Lexus Drumgold
+// ----------------------------------------------------------------------------
+
+// Variables
+$video-height: 100%
+$video-width: auto
+
+// Styles
+
+.ada-video
+  +size($video-width, $video-height)
+
+  > video
+    max-height: $video-height

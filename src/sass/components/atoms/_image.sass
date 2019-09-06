@@ -1,0 +1,17 @@
+// ----------------------------------------------------------------------------
+// Image specific styles, variables, placeholders, mixins and functions
+// @see components/atoms/Image.jsx
+// @author Lexus Drumgold
+// ----------------------------------------------------------------------------
+
+// Variables
+$image-height: 100%
+$image-width: auto
+
+// Styles
+
+.ada-image
+  +size($image-width, $image-height)
+
+  > img
+    max-height: $image-height

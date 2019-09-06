@@ -8,9 +8,11 @@
   },
   "extends": [
     "plugin:jest/recommended",
+    "plugin:jsx-a11y/recommended",
     "plugin:react/recommended",
+    "react-app",
     "standard",
-    "standard-preact",
+    "standard-react",
     "standard-jsx"
   ],
   "parser": "babel-eslint",
@@ -20,14 +22,17 @@
       "jsx": true
     },
     "ecmaVersion": 6,
-    "requireConfigFile": false,
+    "requireConfigFile": true,
     "sourceType": "module"
   },
+  "plugins": [
+    "jsx-a11y"
+  ],
   "root": true,
   "rules": {
     "camelcase": 0,
-    "react/jsx-key": 0,
     "react/prop-types": 0,
+    "react/jsx-fragments": 0,
     "space-before-function-paren": 0
   }
 }

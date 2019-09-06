@@ -1,63 +1,54 @@
 // Packages
-import { h, Component } from 'preact'
-import { DFPSlotsProvider, AdSlot } from 'react-dfp'
+import React, { Component } from 'react'
+import { DFPSlotsProvider } from 'react-dfp'
 
 // Components
-import { Container, Subheading } from '../atoms'
+import { Advertisement, Container, Subheading } from '../atoms'
 import Article from './Article'
 
 /**
- * Class representing the "Articles" template.
+ * Component representing the "Top News" template.
+ * This template should be used to display two articles and an advertisment.
  *
  * @class Articles
  * @extends Component
  * @author Lexus Drumgold <lex@lexusdrumgold.design>
  */
 export default class Articles extends Component {
-  /**
-   * If an error is caught, the component the error will be handed off to the
-   * @see @class App component.
-   *
-   * @param {FeathersError | Error} error - Current error
-   * @param {object} info - Error information
-   * @returns {undefined}
-   */
-  componentDidCatch(error, info) { return this.props.catch(error, info) }
+  subheading = 'Continue Reading on <a class="ada-link" href="https://dbknews.com" target="_blank">dbknews.com</a>'
 
   /**
-   * Updates the document title.
+   * After the component has mounted, the document title will be updated.
    *
    * @returns {undefined}
    */
   componentDidMount() {
-    const { duration, next, slide } = this.props
-
     document.title = `Continue reading on dbknews.com`
-    setTimeout(() => slide(next), duration)
   }
 
   /**
-   * Renders a <section> element representing the "Articles" template.
+   * Renders a <div> element representing the "Articles" template.
    *
-   * @param {object} props - Component properties
-   * @param {object} state - Component state
-   * @returns {HTMLElement} <section> element
+   * The "Articles" template displays two article previews in the left rail, and
+   * at most 2 300x600 advertisements in the right rail.
+   *
+   * @returns {HTMLDivElement} <div class="adt-articles">
    */
-  render(props, state) {
-    const { className, content, id } = props
+  render() {
+    const { className, content, id } = this.props
+    const { ads, articles } = content
     const style = (`adt-articles ${className || ''}`).trim()
 
     const NETWORK_ID = '123934970'
-    const UNIT = content.ads[0]
 
     return (
-      <section id={id} className={style}>
+      <div id={id} className={style}>
         <Container>
           <div className='left-rail'>
-            <Subheading heading='Continue Reading on <a class="ada-link" href="https://dbknews.com" target="_blank">dbknews.com</a>' />
+            <Subheading heading={this.subheading} />
             <div className='articles'>
-              {content.articles.map(article => {
-                return <Article class='group' {...article} />
+              {articles.map((article, i) => {
+                return <Article {...article} className='group' key={`a-${i}`} />
               })}
             </div>
 
@@ -66,20 +57,15 @@ export default class Articles extends Component {
             </div>
           </div>
           <div className='right-rail'>
-            {
-              UNIT
-                ? (
-                  <div id={`ad-${UNIT}`} className='ada-advertisement'>
-                    <DFPSlotsProvider dfpNetworkId={NETWORK_ID} >
-                      <AdSlot adUnit={UNIT} sizes={[300, 600]} fetchNow />
-                    </DFPSlotsProvider>
-                  </div>
-                )
-                : null
-            }
+            <DFPSlotsProvider dfpNetworkId={NETWORK_ID}>
+              {ads.map((ad, i) => {
+                ad = { adUnit: ad, fetchNow: true, sizes: [[300, 600]] }
+                return <Advertisement {...ad} key={`ad-${i}`} />
+              })}
+            </DFPSlotsProvider>
           </div>
         </Container>
-      </section>
+      </div>
     )
   }
 }

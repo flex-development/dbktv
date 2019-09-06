@@ -1,21 +1,16 @@
 {
-  "functions": {
-    "source": "functions",
-    "predeploy": [
-      "NODE_ENV=production",
-      "npm run lint-functions"
-    ]
-  },
   "hosting": [
     {
       "target": "staging",
       "public": "build",
-      "cleanUrls": true,
-      "trailingSlash": false,
       "predeploy": [
-        "NODE_ENV=production",
-        "npm run lint-components",
+        "npm run lint",
+        "npm test",
+        "NODE_ENV=staging",
         "npm run build"
+      ],
+      "postdeploy": [
+        "rm -rf build/"
       ],
       "redirects": [
         {
@@ -37,6 +32,16 @@
           "source": "/spec",
           "destination": "https://xd.adobe.com/spec/d8902b2f-721b-4006-5b21-ffd8e4e42993-aea1/",
           "type": 301
+        },
+        {
+          "source": "/slides",
+          "destination": "/slides/1",
+          "type": 301
+        },
+        {
+          "source": "/",
+          "destination": "/slides/1",
+          "type": 301
         }
       ],
       "rewrites": [
@@ -45,26 +50,27 @@
           "destination": "/index.html"
         }
       ],
+      "cleanUrls": true,
+      "trailingSlash": false,
       "ignore": [
-        "babel.config.js",
-        "firebase.json",
-        "jest.config.js",
-        "preact.config.js",
-        "prerender-urls.json",
         "**/.*",
         "**/node_modules/**",
-        "**/tests/**"
+        "babel.config.js",
+        "firebase.json",
+        "jest.config.js"
       ]
     },
     {
       "target": "production",
       "public": "build",
-      "cleanUrls": true,
-      "trailingSlash": false,
       "predeploy": [
+        "npm run lint",
+        "npm test",
         "NODE_ENV=production",
-        "npm run lint-components",
         "npm run build"
+      ],
+      "postdeploy": [
+        "rm -rf build/"
       ],
       "redirects": [
         {
@@ -86,6 +92,16 @@
           "source": "/spec",
           "destination": "https://xd.adobe.com/spec/d8902b2f-721b-4006-5b21-ffd8e4e42993-aea1/",
           "type": 301
+        },
+        {
+          "source": "/slides",
+          "destination": "/slides/1",
+          "type": 301
+        },
+        {
+          "source": "/",
+          "destination": "/slides/1",
+          "type": 301
         }
       ],
       "rewrites": [
@@ -94,15 +110,14 @@
           "destination": "/index.html"
         }
       ],
+      "cleanUrls": true,
+      "trailingSlash": false,
       "ignore": [
-        "babel.config.js",
-        "firebase.json",
-        "jest.config.js",
-        "preact.config.js",
-        "prerender-urls.json",
         "**/.*",
         "**/node_modules/**",
-        "**/tests/**"
+        "babel.config.js",
+        "firebase.json",
+        "jest.config.js"
       ]
     }
   ]

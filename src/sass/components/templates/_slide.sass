@@ -1,0 +1,30 @@
+// ----------------------------------------------------------------------------
+// Slide screen specific styles, variables, placeholders, mixins and functions
+// @see components/screens/Slide.jsx
+// @author Lexus Drumgold
+// ----------------------------------------------------------------------------
+
+// Variables
+$slide-height: 100%
+$slide-width: 100%
+
+// Abstract Classes
+%full-row-flex
+  +flex(row, center, center)
+  +size($slide-width, $slide-height)
+
+// Styles
+.adt-slide
+  @extend %full-row-flex
+
+  +respond-to($breakpoint-schmedium)
+    background-color: $black
+
+  background-color: rgba($dark, 0.75)
+  height: 100%
+
+  > div
+    @extend %full-row-flex
+
+    +respond-to($breakpoint-schmedium)
+      align-items: flex-end

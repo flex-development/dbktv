@@ -1,34 +1,33 @@
 // Packages
-import { h, Component } from 'preact'
+import React from 'react'
 
 /**
- * Component representing an <p> element.
- *
- * @extends Component
+ * @file Components representing an <p> elements.
  * @author Lexus Drumgold <lex@lexusdrumgold.design>
  */
-export default class Paragraph extends Component {
-  /**
-   * Renders a paragraph element with the base class 'ada-paragraph'.
-   *
-   * @param {object} props - Component properties
-   * @param {*} props.children - Child elements to render
-   * @param {string} props.className - Space delimitted list of extra classes
-   * @param {string} props.id - Element id
-   * @param {object | undefined} state - Component state
-   * @param {object | undefined} context - Component context
-   * @returns {HTMLParagraphElement}
-   */
-  render(props, state, context) {
-    const { className, children, id } = props
-    const style = (`ada-paragraph ${className || ''}`).trim()
 
-    return (
-      <p id={id} className={style} dangerouslySetInnerHTML={{
+/**
+ * Renders a paragraph element with the base class 'ada-paragraph'.
+ *
+ * @param {object} props - Component properties
+ * @param {*} props.children - Child elements to render
+ * @param {string} props.className - Space delimitted list of extra classes
+ * @param {string} props.id - Element id
+ * @param {object | undefined} state - Component state
+ * @param {object | undefined} context - Component context
+ * @returns {HTMLParagraphElement}
+ */
+const Paragraph = props => {
+  const { className, children, id } = props
+  const style = (`ada-paragraph ${className || ''}`).trim()
+
+  return (
+    <p
+      id={id} className={style} dangerouslySetInnerHTML={{
         __html: children
-      }} />
-    )
-  }
+      }}
+    />
+  )
 }
 
 /**
@@ -75,4 +74,4 @@ const Subheading = ({ heading }) => (
   <Paragraph className='subheading'>{heading}</Paragraph>
 )
 
-export { Author, Blurb, Category, Subheading }
+export { Paragraph as default, Author, Blurb, Category, Subheading }

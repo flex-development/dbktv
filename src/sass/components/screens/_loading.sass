@@ -1,0 +1,30 @@
+// ----------------------------------------------------------------------------
+// Loading screen specific styles, variables, placeholders, mixins and functions
+// @see components/screens/Loading.jsx
+// @author Lexus Drumgold
+// ----------------------------------------------------------------------------
+
+// Variables
+$loading-screen-height: 100%
+$loading-screen-width: 100%
+
+// Styles
+
+// Position inner content in the center
+.ads-loading
+  +flex(row, center, center)
+  +size($loading-screen-width, $loading-screen-height)
+
+  > .ada-container
+    +flex(row, center, center)
+
+    .adm-logo
+      +respond-to($breakpoint-xxl, min)
+        width: size(800)
+
+
+      +respond-to($breakpoint-xxxl, min)
+        font-size: size(1000)
+
+
+      width: size(600)

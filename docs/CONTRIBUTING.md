@@ -33,9 +33,20 @@ Follow the steps below to get your development environment set up.
 
 ## Making Changes
 
-This project uses [Flamelink][1] for its Content Management System, [Google Firebase][2]
-on the backend, and [Preact][3], a smaller alternative to [React][4], on the
-frontend.
+This project uses [Google Firebase][2], [React][2], [Sass][3], and [Babel][4].
+
+### Create Your Development Branch
+
+**Branch Naming Convention**
+**`<your_initials>/`**, followed by: **`feature-`**, **`issue-`**, **`hotfix-`**, or **`release-`**.
+
+For example:
+
+```bash
+  git checkout -b ld/feature-docs
+  git commit -am "added documentation"
+  git push
+```
 
 ### JavaScript Style
 
@@ -51,84 +62,60 @@ For a detailed overview of our JavaScript style, visit [**StandardJS**][5].
 You'll find not only an overview of Standard Style, but a list of editor plugins
 as well.
 
-### Cloud Functions
+To configure the linting options for this project, make changes to
+`.eslintrc.json` and `.eslintignore` in the project root.
 
-Make your changes under the `functions` directory.
+Reference: [Configuring ESLint](https://eslint.org/docs/user-guide/configuring)
 
-1. Retreive the `credentials.firebase.json` file from a team leader. Place it
-   under in the the `functions/cms` directory.
-2. Run `npm run dev-functions` to begin emulating Cloud Functions in a
-   `development` Node environment.
-3. After running the command, you'll see something similar to the following in
-   your terminal:
+### Babel
 
-   ```bash
-    wireless-10-105-182-92:dbktv LexusDrumgold$ npm run dev-functions
+To configure the Babel options for this project, make changes to
+`babel.config.js` in the project root.
 
-    > @thedbklab/diamondbacktv@1.0.0 dev-functions /Users/LexusDrumgold/Documents/projects/dbktv
-    > npm run --prefix functions dev
-
-
-    > @thedbklab/dbktvcloud@1.0.0 dev /Users/LexusDrumgold/Documents/projects/dbktv/functions
-    > NODE_ENV=development firebase serve --only functions
-
-    ⚠  Your requested "node" version "10" doesn't match your global version "12"
-    ✔  functions: Emulator started at http://localhost:5000
-    i  functions: Watching "/Users/LexusDrumgold/Documents/projects/dbktv/functions" for Cloud Functions...
-    >  Initialized Documentation service on http://localhost:5000/thedbktv/us-central1/cloud/docs
-    >  Node environment: development -> Cloud services started on http://localhost:5000
-    i  functions: HTTP trigger initialized at http://localhost:5000/thedbktv/us-central1/cloud
-   ```
-
-#### Cloud Functions: Directories & Files
-
-- `functions/cms`: Flamelink and Firebase configuration. Exports a configured CMS client
-- `functions/config`: Contains our Feathers configuration files, as well as our
-  Firebase Admin credentials. To learn more about Feathers configuration, visit
-  [this link][6]
-- `functions/controllers`: Application controllers
-- `functions/feathers`: [Feathers][7] application, services, hooks, models, and
-  utility functions
-- `functions/triggers`: [Firebase Cloud Function][8] triggers
-- `functions/index.js`: Exports our cloud functions
+Reference: [Configure Babel - babel.config.js](https://babeljs.io/docs/en/configuration#babelconfigjs)
 
 ### User Interface
 
-The design spec can be found [here][9]. When ready, make your changes under the
-`src` directory.
+Make your changes under the `src` directory.
 
-1. Run `npm run dev-components` to launch the DBKTV frontend in a `development`
-   Node environment. This command will compile both your JSX and Sass files, as
-   watch your files for changes you develop.
+1. Run `npm run dev` to view the site in `development` Node environment. Your
+   JSX and Sass files will be compiled and watched for changes, and ESLint will
+   lint your code as you develop.
 2. If successful, you'll see something similar to the following in your terminal:
 
    ```bash
     Compiled successfully!
 
-    You can view the application in browser.
+    You can now view @thedbklab/diamondbacktv in the browser.
 
-    Local:            http://localhost:3000
-    On Your Network:  http://10.105.182.92:3000
+      Local:            http://localhost:3000/
+      On Your Network:  http://10.105.184.99:3000/
+
+    Note that the development build is not optimized.
+    To create a production build, use npm run build.
    ```
 
-#### User Interface: Directories & Files
+To learn more about using Sass with React, please consult [Adding a Sass Stylesheet](https://create-react-app.dev/docs/adding-a-sass-stylesheet) from the React docs.
 
+#### Directories & Files
+
+- `public/index.html`: HTML template
+- `src/api`: Firebase configuration. Exports the database
 - `src/assets`: Project fonts, images, and icons
-- `src/components`: Preact components, organized in an [Atomic Design][10] pattern
-- `src/components/index.js`: Main application
-- `src/style`: Application stylesheets, built with [Sass][12], and organized in an [Atomic Design][10] pattern
+- `src/components`: React components, organized in an [Atomic Design][6] pattern
+- `src/config`: Configuration files
+- `src/sass`: Application stylesheets, built with [Sass][3], and organized in an [Atomic Design][6] pattern
 - `src/utils`: Frontend utility functions
-- `src/index.html`: HTML template
 - `src/index.js`: Exports our web app
-- `./preact.config.js`: Preact configuration
+- `src/manifest.json`: Web application config
 
 ## Testing
 
-For generating sample test data, use [**Mockaroo**][13].
+For generating sample test data, use [**Mockaroo**][7].
 
 **Snapshot Testing**
 Under `tests/__snapshots__`, add `*.snap` file to test your component spec
-against. For information on creating Jest Snapshots, please visit [this link][14].
+against. For information on creating Jest Snapshots, please visit [this link][8].
 
 **Running Tests**
 When you're ready to test your changes, you have two options:
@@ -140,55 +127,35 @@ When you're ready to test your changes, you have two options:
 
 ## Documentation
 
-Following [JSDoc][15] standards, be sure to document any
+Following [JSDoc][9] standards, be sure to document any
 functions, classes, and other code you write. It will be reviewed by a reviewer
 during your code review, and your pull request will be denied if any code is
 improperly documented.
 
 ## Creating a Pull Request
 
-**Note: Before creating a new branch and creating a pull request for your
-changes, make sure your build passes all unit tests. If you need help, please
-create a test file and leave a comment in the test body, making note of any
-issues in their respective files. Make sure to label your pull request "help
-wanted."**
+**Note: Before creating a pull request for your changes, make sure your build
+passes all unit tests. If you need help, please create a test file and leave a
+comment in the test body, making note of any issues in their respective files.
+Make sure to label your pull request "help wanted."**
 
 If you're ready to have your changes reviewed, make sure your code is well
-documented, run `npm run lint` to check your code for syntax + styling errors,
-and then create a branch for your changes.
+documented and run `npm run lint` to check your code for syntax + styling errors.
 
-### Branch Naming Convention
+### Submit for Review
 
-**`<your_initials>/`**, followed by: **`feature-`**, **`issue-`**, **`hotfix-`**, or **`release-`**.
-
-For example:
-
-```bash
-  git checkout -b ld/feature-docs
-  git commit -am "added documentation"
-  git push
-```
-
-## Submit for Review
-
-- Use [**this template**][16]
+- Use [**this template**][10]
 - Label your pull request as `pull request` and `needs review`
 - Prefix your pull request title with `PR  -`
 - Assign the task to yourself and the appropriate reviewer
 
-[1]: https://flamelink.github.io/flamelink/
-[2]: https://firebase.google.com/
-[3]: https://preactjs.com/
-[4]: https://reactjs.org/
+[1]: https://firebase.google.com/
+[2]: https://reactjs.org/
+[3]: https://sass-lang.com/
+[4]: https://babeljs.io/docs/en/#jsx-and-react
 [5]: https://standardjs.com
-[6]: https://docs.feathersjs.com/api/configuration.html
-[7]: https://docs.feathersjs.com/
-[8]: https://firebase.google.com/docs/functions
-[9]: https://xd.adobe.com/spec/d8902b2f-721b-4006-5b21-ffd8e4e42993-aea1/
-[10]: http://atomicdesign.bradfrost.com/chapter-2/
-[11]: https://github.com/developit/unistore
-[12]: https://sass-lang.com/
-[13]: https://mockaroo.com/
-[14]: https://jestjs.io/docs/en/snapshot-testing
-[15]: https://jsdoc.app/
-[16]: ./pull_request_template.md
+[6]: http://atomicdesign.bradfrost.com/chapter-2/
+[7]: https://mockaroo.com/
+[8]: https://jestjs.io/docs/en/snapshot-testing
+[9]: https://jsdoc.app/
+[10]: ./pull_request_template.md
