@@ -1,8 +1,9 @@
 // Packages
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 
 // Components
-import { Container } from '../atoms'
+import { Container, SquareIcon } from '../atoms'
 
 /**
  * @file Component representing a <nav> element.
@@ -44,4 +45,32 @@ const Navigation = props => {
   )
 }
 
-export default Navigation
+const DeckNavigation = ({ slides }) => {
+  /**
+   * Returns true if the window path matches the path of the current slide.
+   *
+   * @param {number} position - Position of slide
+   * @returns {boolean}
+   */
+  const active = position => {
+    const { slides } = this.state
+    return window.location.pathname === slides[position].id
+  }
+
+  return (
+    <Navigation>
+      {slides.map((slide, i) => {
+        return (
+          <NavLink
+            to={slide.id} key={`nav-btn-${i}`}
+            className='ada-link' isActive={() => active(i)}
+          >
+            <SquareIcon />
+          </NavLink>
+        )
+      })}
+    </Navigation>
+  )
+}
+
+export { Navigation as default, DeckNavigation }

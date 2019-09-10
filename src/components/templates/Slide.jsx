@@ -19,13 +19,12 @@ export default class Slide extends Component {
     super(props)
 
     /**
-    * @property {object} state - Internal component state
-    * @property {object | null} state.data - Slide data
-    * @property {Component | null} state.template - Template component
-     * @property {string | null} state.type - Name of template component in
-     * lowercase
-    * @instance
-    */
+     * @property {object} state - Internal component state
+     * @property {object | null} state.data - Slide data
+     * @property {Component | null} state.template - Template component
+     * @property {string | null} state.type - Name of template in lowercase
+     * @instance
+     */
     this.state = { data: null, template: null, type: null }
 
     /**
@@ -99,9 +98,7 @@ export default class Slide extends Component {
     }
 
     const state = { data, template, type: component.toLowerCase() }
-    return this.setState(state, () => {
-      return state.type
-    })
+    return this.setState(state, () => state.type)
   }
 
   /**

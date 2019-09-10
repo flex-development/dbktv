@@ -2,7 +2,7 @@
 import Deck from './Deck'
 import Footer from './Footer'
 import Header from './Header'
-import Navigation from './Navigation'
+import Navigation, { DeckNavigation } from './Navigation'
 import Ticker from './Ticker'
 
 /**
@@ -11,4 +11,4 @@ import Ticker from './Ticker'
  * @author Lexus Drumgold <lex@lexusdrumgold.design>
  */
 
-export { Deck, Footer, Header, Navigation, Ticker }
+export { Deck, DeckNavigation, Footer, Header, Navigation, Ticker }

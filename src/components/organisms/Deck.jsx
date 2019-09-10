@@ -1,11 +1,10 @@
 // Packages
 import React, { Component, Fragment } from 'react'
-import { NavLink, Route } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 import $ from 'jquery'
 
 // Components
-import Navigation from './Navigation'
-import { SquareIcon } from '../atoms'
+import { DeckNavigation } from './Navigation'
 import { Slide } from '../templates'
 
 /**
@@ -100,20 +99,11 @@ export default class Deck extends Component {
   render() {
     const { mobile, slides } = this.state
 
+    // TODO: Return MobileDeck component when device width is <= 768px
+
     return (
       <Fragment>
-        <Navigation mobile={mobile}>
-          {slides.map((slide, i) => {
-            return (
-              <NavLink
-                to={slide.id} key={`nav-btn-${i}`}
-                className='ada-link' isActive={() => this.active(i)}
-              >
-                <SquareIcon />
-              </NavLink>
-            )
-          })}
-        </Navigation>
+        <DeckNavigation slides={slides} />
         <main id='deck' className='ado-deck'>
           {slides.map((slide, i) => {
             return (
@@ -130,17 +120,6 @@ export default class Deck extends Component {
   }
 
   // HELPERS
-
-  /**
-   * Returns true if the window path matches the path of the current slide.
-   *
-   * @param {number} position - Position of slide
-   * @returns {boolean}
-   */
-  active = position => {
-    const { slides } = this.state
-    return window.location.pathname === slides[position].id
-  }
 
   /**
    * Returns the data for the current slide.
