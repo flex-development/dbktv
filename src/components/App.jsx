@@ -1,12 +1,12 @@
 // Packages
 import React, { Component } from 'react'
-import { BrowserRouter as Router } from 'react-router-dom'
+import { MemoryRouter as Router } from 'react-router'
 import ReactGA from 'react-ga'
-import { GeneralError, NotFound } from '@feathersjs/errors'
+import $ from 'jquery'
 
 // Components
 import { Logo } from './molecules'
-import { Deck, Footer, Header, Ticker } from './organisms'
+import { Deck, DeckNavigation, Footer, Header, Ticker } from './organisms'
 import { Error, Loading } from './screens'
 
 /**
@@ -20,6 +20,7 @@ export default class App extends Component {
   /**
    * Creates a new Diamondback TV web application.
    *
+   * @todo Update documentation
    * @param {object} props - Component properties
    * @returns {App}
    */
@@ -45,6 +46,13 @@ export default class App extends Component {
     this.env = NODE_ENV
 
     /**
+     * @property {boolean} logging - For general messages, logging should be
+     * enabled if the Node environment is 'development' or 'test'
+     * @instance
+     */
+    this.logging = ['development', 'test'].includes(NODE_ENV)
+
+    /**
      * @property {object} state - Internal component state
      * @property {boolean} state.analytics - True if Google Analytics was
      * initialized; this value will be updated in a production Node environment
@@ -52,6 +60,7 @@ export default class App extends Component {
      * @property {FeathersError | null} state.error - Current error
      * @property {object} state.info - Error information
      * @property {boolean} state.loading - True if fetching content
+     * @property {boolean} state.mobile - True if viewport width <= 768px
      * @property {object[] | null} state.slides - Slide content
      * @property {object[] | null} state.ticker - Ticker content
      * @instance
@@ -62,113 +71,97 @@ export default class App extends Component {
       error: null,
       info: null,
       loading: true,
+      mobile: false,
       slides: null,
       ticker: null
     }
 
     /**
      * @property {object} subscriptions - Database subscriptions
-     * @property {firebase.database.Reference | null} subscriptions.deck - Ref
-     * to deck to watch for changes
-     * @property {firebase.database.Reference} subscriptions.id - Ref to id of
-     * deck to watch for changes
      * @instance
      */
-    this.subscriptions = {
-      current: null,
-      data: id => props.database.decks.ref(id),
-      id: props.database.core.ref('current')
-    }
+    this.subscriptions = {}
   }
 
   /**
-   * In a 'development' Node environment where @see @param props.test is true,
-   * or in a 'test' Node environment, the internal component state can be set
-   * via @see @param props .
+   * getDerivedStateFromProps is invoked right before calling the render method,
+   * both on the initial mount and on subsequent updates. It should return an
+   * object to update the state, or null to update nothing.
    *
-   * @todo Update documentation
+   * Until a client side Feathers application is set up, component will update
+   * the internal state deck data based on the incoming props.
    *
-   * @param {object} props - Incoming props
-   * @param {object} state - Component state
-   * @returns {object | null} Object to update the state, or null to update
-   * nothing
+   * The internal mobile state will also be updated.
+   *
+   * @todo Setup Feathers via component props
+   *
+   * @param {object} props - Incoming component properties
+   * @param {object} state - Incoming component state
+   * @returns {object | null}
    */
   static getDerivedStateFromProps(props, state) {
-    const {
-      database, deck, error, info, loading, mobile, slides, test, ticker, utils
-    } = props
-
-    const { NODE_ENV } = process.env
-
-    if ((NODE_ENV === 'development' && test) || NODE_ENV === 'test') {
-      return {
-        database, deck, error, info, loading, mobile, slides, test, ticker, utils
-      }
-    }
-
-    return null
+    const { mock, utils } = props
+    return { ...mock, mobile: utils.ui.is_mobile() }
   }
 
   /**
-   * If an error is caught, the component's internal error state will be
-   * updated. Afterwards, the error will be logged with the prefix '!TV-ERR =>'.
+   * Invoked after an error has been thrown by a descendant component.
    *
-   * @param {Error | FeathersError} error - Current error
+   * The error will transformed into a FeathersError if it isn't already of that
+   * type. Afterwards, the internal error state will be updated.
+   *
+   * @param {FeathersError | Error} error - Current error
    * @param {object} info - Error information
    * @returns {undefined}
    */
   componentDidCatch(error, info) {
-    this.error(error, info)
+    // Transform error and update internal state
+    this.setState({ error: this.error(error), info })
   }
 
   /**
-   * Retreieves the id of the current deck and updates the internal state. The
-   * application will subscribes to changes at the database node 'current'. The
-   * value of this node contains the id name of the current deck.
-   *
-   * In a 'production' Node environment, Google Analytics and Pageview tracking
-   * will be initialized.
+   * Subscribes to deck data changes and attaches a window listener to update
+   * the internal mobile state. In a 'production' Node environment, Google
+   * Analytics and Pageview tracking will be initialized.
    *
    * @async
    * @returns {undefined}
    * @throws {GeneralError | NotFound}
    */
   async componentDidMount() {
-    console.info('Application mounted.')
+    if (this.logging) console.info('Application mounted.')
 
-    // Redirect if necessary
-    const { pathname } = window.location
-    const redirect = ['/', '/slides']
+    // TODO: Subscribe to deck changes and update internal state
 
-    if (this.env === 'development' && redirect.includes(pathname)) {
-      window.location.pathname = '/slides/1'
-    }
-
-    // Get the current deck id and subscribe to data changes
-    await this.sync()
-    this.subscribe()
+    // Update internal mobile state and attach window listener to update it
+    this.resize()
+    $(window).resize(this.resize())
 
     // Google Analytics and Pageview tracking
     this.tracking()
+
+    // Update loading state
+    this.fetch(false)
   }
 
   /**
-   * Before the component unmounts, our deck subscriptions will be removed.
+   * Before the component unmounts, our deck subscriptions will be removed and
+   * the window listener to update the mobile state will be removed.
    *
    * @returns {undefined}
    */
   componentWillUnmount() {
-    const { current, id } = this.subscriptions
-    const subscriptions = [current, id]
+    // TODO: Unsubscribe from deck changes
 
-    subscriptions.forEach(s => { if (s) s.off() })
+    // Remove window listener
+    $(window).off('resize')
   }
 
   /**
    * Returns the web application.
    *
    * If an error is caught, the Error screen component will be rendered,
-   * displaying the error name, message, and stack information.
+   * displaying the error name, message, and additional error information.
    *
    * While the application is loading, the Loading screen component will be
    * rendered, displaying the DiamondbackTV logo with 'Continuing reading on
@@ -177,21 +170,30 @@ export default class App extends Component {
    * After the application has finished loading, the Header, Deck, Footer, and
    * child components will be rendered.
    *
-   * @returns {<Router/>}
+   * On mobile devices, a list of the deck slides will be displayed.
+   *
+   * @returns {<Fragment/>}
    */
   render() {
-    const { deck, error, info, loading, slides, ticker } = this.state
+    const { error, id, info, loading, slides, ticker } = this.state
+    const { utils } = this.props
 
     // Handle error and loading states
-    if (error) return <Error error={error} info={info} />
+    if (error) return <Error error={error} info={info} transform={this.error} />
     if (loading) return <Loading />
 
+    // Gather Deck component properties
+    const routes = this.routes(slides)
+    const deck = { error: this.error, fetch: this.fetch, slides: routes, utils }
+
+    // Render application
     return (
-      <Router>
+      <Router initialEntries={routes} initialIndex={0}>
         <Header container>
           <Logo />
         </Header>
-        <Deck error={this.error} fetch={this.fetch} id={deck} slides={slides} />
+        <DeckNavigation active={id} slides={routes} />
+        <Deck {...deck} />
         <Footer>
           <Logo />
           <Ticker items={ticker} />
@@ -203,17 +205,26 @@ export default class App extends Component {
   // HELPERS
 
   /**
-   * Logs the error and updates the internal error state.
+   * Transform the incoming error into a FeathersError.
    *
    * @param {FeathersError | Error} error - Exception that was thrown
    * @param {object} info - Error infomation
-   * @returns {undefined}
+   * @returns {FeathersError}
+   * @see {@link https://docs.feathersjs.com/api/errors.html#feathers-errors}
    */
-  error = (error, info = null) => {
-    info = (error.stack || info) || null
+  error = error => {
+    const { name } = error
 
-    console.error(error.message, info)
-    return this.setState({ error, info })
+    const feathers_errors = [
+      'BadGateway', 'BadRequest', 'Conflict', 'Forbidden', 'GeneralError', 'LengthRequired', 'NotAuthenticated', 'NotFound', 'NotImplemented', 'PaymentError', 'MethodNotAllowed', 'NotAcceptable', 'Timeout', 'TooManyRequests', 'Unavailable', 'Unprocessable'
+    ]
+
+    // Return error already a FeathersError
+    if (feathers_errors.includes(name)) return error
+
+    // Return transformed error
+    const { utils } = this.props
+    return utils.error.feathers(error, { data: { errors: { origin: name } } })
   }
 
   /**
@@ -225,129 +236,48 @@ export default class App extends Component {
   fetch = loading => this.setState({ loading }, () => loading)
 
   /**
-   * If @see @param deck_id is defined, the method will update the internal
-   * state with new slide and ticker data when changes are detected in the
-   * dbktv-decks database.
+   * Updates the internal slide id state.
    *
-   * If undefined, the method will update the internal state the new deck id.
-   * The method will then call @see @method App#sync to fetch the new slide and
-   * ticker data and update the internal state.
-   *
-   * @param {string} deck_id - Id of deck to watch for changes
-   * @returns {object | string} New deck data or deck id
+   * @param {number} id - Index of current slide
+   * @returns {number} @see @param id
    */
-  subscribe = deck_id => {
-    const { data, id } = this.subscriptions
-
-    try {
-      const subscription = deck_id ? data(deck_id) : id
-      subscription.on('value', snapshot => {
-        snapshot = snapshot.val()
-
-        if (deck_id) {
-          const { slides, ticker } = snapshot
-
-          return this.setState({ slides, ticker }, () => {
-            console.info('SUBSCRIPTION - NEW DATA DETECTED ->', snapshot)
-            return snapshot
-          })
-        } else {
-          const { deck } = this.state
-
-          return this.setState({ deck: snapshot }, async () => {
-            if (deck && deck !== snapshot) {
-              console.info('SUBSCRIPTION - NEW ID DETECTED ->', deck, snapshot)
-              return this.sync()
-            }
-          })
-        }
-      })
-    } catch (err) {
-      this.error(new GeneralError(`SUBSCRIPTION ERR -> ${err.message}`))
-    }
-  }
+  id = id => this.setState({ id }, () => id)
 
   /**
-   * Updates the internal state with id of the current deck, slide data, and
-   * ticker data.
+   * Updates the internal mobile state.
    *
-   * @async
-   * @returns {Promise<object>} Id of the current deck, slides, and ticker data
+   * @returns {undefined}
    */
-  sync = async () => {
-    this.fetch(true)
-    console.warn('SYNC - STARTING')
-
-    let deck = null
-
-    /*
-     * Retreive the id of the current deck data.
-     * A GeneralError will be thrown if we can't get the id from Firebase.
-     * A NotFound error will be thrown if the deck id doesn't exist.
-     */
-
-    try {
-      deck = (await this.subscriptions.id.once('value')).val()
-      if (!deck) throw new NotFound('SYNC ERR - DECK ID DOES NOT EXIST')
-    } catch (err) {
-      if (err.name === 'NotFound') this.error(err)
-      err.message = `SYNC ERR - CANNOT GET DECK ID -> ${err.message}`
-      this.error(new GeneralError(err))
-    }
-
-    console.info('SYNC - RETREIVED DECK ID ->', deck)
-
-    /*
-     * Retreive the deck data from the decks database.
-     * A GeneralError will be thrown if we're unable to get the data.
-     */
-
-    try {
-      const { data } = this.subscriptions
-      let { slides, ticker } = (await data(deck).once('value')).val()
-
-      this.setState({ deck, loading: false, slides, ticker }, () => {
-        console.info('SYNC - RETREIVED DECK DATA ->', { slides, ticker })
-        return { deck, slides, ticker }
-      })
-    } catch (err) {
-      err.message = `SYNC ERR - CANNOT GET DECK DATA -> ${err.message}`
-      this.error(new GeneralError(err))
-    }
-  }
+  resize = () => this.setState({ mobile: this.props.utils.ui.is_mobile() })
 
   /**
-   * Prepares @see @param slides to be parsed as dual slide and route objects.
+   * Transforms an array of slide objects into an array of route objects.
+   * This is necessary for our MemoryRouter.
    *
-   * @param {object[]} slides - Array to slides to sanitize
-   * @returns {object[]} - Routified slide objects
+   * If @param slides is undefined, the internal error state will be updated
+   * with a NotFound error and the method will return undefined.
+   *
+   * @todo slide.pathname = slide.slug
+   *
+   * @param {object[]} slides - Array of slide objects
+   * @returns {object[]} Array of route objects
+   * @throws {NotFound}
    */
-  routing = slides => {
-    const patherize = text => text.toLowerCase().replace(/ /g, '-').replace(/[-]+/g, '-').replace(/[^\w-]+/g, '')
+  routes = slides => {
+    if (this.logging) console.warn('ROUTING -> Getting routes...')
 
+    if (!slides) {
+      const { error } = this.props.utils
+      return this.setState({
+        error: error.feathers('ROUTING ERR -> Slides not found.', null, 404)
+      })
+    }
+
+    // Turn slide object into route objects
     return slides.map((slide, i) => {
-      const { component, content } = slide
-
-      slide.next = { id: i === slides.length - 1 ? 0 : i + 1 }
-
-      switch (component) {
-        case 'Articles':
-          const { articles } = content
-          slide.path = `/articles/${patherize(articles[0].headline.text)}`
-          break
-        case 'Multimedia':
-          const { alt, caption, video } = content.media
-          slide.path = `/multimedia/${patherize(video ? caption : alt)}`
-          break
-        case 'News':
-          const { headline } = content
-          slide.path = `/news/${patherize(headline.text)}`
-          break
-        default:
-          slide.path = `/default`
-      }
-
-      return slide
+      slide.position = i
+      // TODO: slide.pathname = slide.slug
+      return { pathname: `/slides/${i + 1}`, pos: this.id, state: { slide } }
     })
   }
 
@@ -360,6 +290,10 @@ export default class App extends Component {
    */
   tracking = () => {
     let analytics = false
+
+    if (this.logging) {
+      console.warn('Google Analytics and Pageview tracking will not be initialized in development or test environments.')
+    }
 
     if (this.env === 'production') {
       const { pathname, search } = window.location

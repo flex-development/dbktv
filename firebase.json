@@ -25,7 +25,7 @@
         },
         {
           "source": "/repo",
-          "destination": "https://github.com/The-Diamondback-Lab/dbktv",
+          "destination": "https://github.com/flex-development/dbktv",
           "type": 301
         },
         {
@@ -48,6 +48,14 @@
         {
           "source": "**",
           "destination": "/index.html"
+        },
+        {
+          "source": "/admin",
+          "destination": "/admin/index.html"
+        },
+        {
+          "source": "/api/**",
+          "destination": "/content/**"
         }
       ],
       "cleanUrls": true,
@@ -85,7 +93,7 @@
         },
         {
           "source": "/repo",
-          "destination": "https://github.com/The-Diamondback-Lab/dbktv",
+          "destination": "https://github.com/flex-development/dbktv",
           "type": 301
         },
         {

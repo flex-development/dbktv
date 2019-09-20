@@ -1,0 +1,114 @@
+# NetlifyCMS Configuration
+# Ex: https://github.com/netlify/netlify-cms/blob/master/dev-test/config.yml
+# Reference: https://www.netlifycms.org/docs/configuration-options/
+
+# Specifies how to access the content for your site, including authentication.
+backend:
+  name: git-gateway
+  accept_roles:
+    - admin
+    - editor
+
+# "Editorial Workflow" mode for more control over the content publishing phases.
+# All unpublished entries will be arranged in a board according to their status,
+# and they can be further reviewed and edited before going live.
+# The workflow translates editor UI actions into common Git commands
+publish_mode: editorial_workflow
+
+# Folder where uploaded files should be saved, relative to the base of the repo
+media_folder: "public/content/static/"
+
+# Folder where uploaded files will be accessed, relative to the build site base
+public_folder: "content/"
+
+# URL of published site
+site_url: https://thedbktv.web.app
+
+# Custom logo url
+logo_url: https://firebasestorage.googleapis.com/v0/b/diamondbackcloud.appspot.com/o/assets%2Fimages%2Flogos%2Ftv%2Fsvg%2Fdbktv-logo-mini.svg?alt=media
+
+# Show preview links
+show_preview_links: true
+
+# Change how filenames for entries are created and sanitized
+slug:
+  encoding: "ascii"
+  clean_accents: true
+  sanitize_replacement: "-"
+
+# Collections - Determines how content types and editor fields in the UI
+# generate files and content in your repository
+collections: # A list of collections the CMS should be able to edit
+  - name: "news" # Used in routes, ie.: /admin/collections/:slug/edit
+    label: "News" # Used in the UI
+    label_singular: "Top News" # Used in the UI, ie: "New Post"
+    description: >
+      Use this template to create a "Top News" deck slide. The template renders
+      a feature article with a cover image and article preview.
+    folder: "functions/content/decks/slides/news"
+    slug: "/news/{{slug}}"
+    summary: "{{headline.text}}"
+    identifier_field: summary
+    create: true # Allow users to create new documents in this collection
+    delete: false # Allow users to delete "Top News" slides
+    extension: json # File extension to match to existing entries
+    format: json # Determines how collection files are parsed and saved
+    editor: # Disables the preview pane for this collection
+      preview: false
+    fields: # The fields each document in this collection have
+      - label: "Headline"
+        name: "headline"
+        widget: "object"
+        fields:
+          - label: "Article Title"
+            hint: "Title of feature article"
+            name: "text"
+            widget: "string"
+            pattern: [".{1,}", "Must have at least 1 character"]
+          - label: "Article URL"
+            hint: "URL of feature article"
+            name: "href"
+            widget: "string"
+            pattern:
+              [
+                '^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$',
+                "Must be a valid URL",
+              ]
+      - label: "Author"
+        hint: "Author of feature article"
+        name: "text"
+        widget: "string"
+        pattern: [".{1,}", "Must have at least 1 character"]
+        default: "Diamondback Staff"
+      - label: "Sponsored Article?"
+        hint: "True if sponsosred article"
+        name: "sponsored"
+        widget: "boolean"
+        default: false
+      - label: "Blurb"
+        name: "blurb"
+        widget: "markdown"
+      - label: "Image"
+        name: "image"
+        widget: "object"
+        fields:
+          - label: "Caption"
+            hint: "Image caption"
+            name: "text"
+            widget: "string"
+            pattern: [".{1,}", "Must have at least 1 character"]
+          - label: "Source"
+            hint: "URL of image"
+            name: "src"
+            widget: "string"
+            pattern:
+              [
+                '^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$',
+                "Must be a valid URL",
+              ]
+      - label: "Slide Duration (milliseconds)"
+        name: "duration"
+        widget: "number"
+        default: 10000
+        valueType: "int"
+        min: 5000

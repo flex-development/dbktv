@@ -2,7 +2,7 @@
   "name": "@flexdevelopment/dbktv",
   "description": "DiamondbackTV (DBKTV) is a digital signage project with the goal of streaming specially curated Diamondback content - feature stories, multimedia, article previews, and advertisements - to various televisions on campus.",
   "version": "1.0.0",
-  "author": "Lexus Drumgold <lex@lexusdrumgold.design> (https://lexusdrumgold.design)",
+  "author": "Lexus Drumgold <lex@lexusdrumgold.design> (https://flexdevelopmentllc.web.app)",
   "scripts": {
     "preinstall": "run-script-os",
     "preinstall:win32": "(IF EXIST node_modules\\ (RMDIR /Q /S node_modules > NUL)) && npm run prebuild",

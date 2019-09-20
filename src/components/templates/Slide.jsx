@@ -35,6 +35,41 @@ export default class Slide extends Component {
   }
 
   /**
+   * getDerivedStateFromProps is invoked right before calling the render method,
+   * both on the initial mount and on subsequent updates. It should return an
+   * object to update the state, or null to update nothing.
+   *
+   * Based on @see @param props.location, the internal slide state will be
+   * updated.
+   *
+   * The internal mobile state will also be updated.
+   *
+   * @todo Update documentation
+   *
+   * @param {object} props - Incoming component properties
+   * @param {object} state - Incoming component state
+   * @returns {object | null}
+   */
+  static getDerivedStateFromProps(props, state) {
+    const { next, slide } = props.location.state
+    const { component, content, duration } = slide
+
+    let template = null
+
+    if (component === 'Articles') {
+      template = <Articles content={content} />
+    } else if (component === 'Multimedia') {
+      template = <Multimedia content={content} />
+    } else if (component === 'News') {
+      template = <News content={content} />
+    } else {
+      template = <Default />
+    }
+
+    return { content, duration, next, template, type: component.toLowerCase() }
+  }
+
+  /**
    * After the component has mounted, the internal state will be updated with
    * the name of the current template component, the template to render, and the
    * data associated with it.
@@ -42,15 +77,16 @@ export default class Slide extends Component {
    * @returns {undefined}
    */
   componentDidMount() {
-    this.choose()
-    this.start(true)
+    const { pos, state } = this.props.location
+    pos(state.slide.position)
+    // this.start(true)
   }
 
   /**
    * Clears the slide timer
    */
   componentWillUnmount() {
-    this.start(false)
+    // this.start(false)
   }
 
   /**
@@ -109,11 +145,11 @@ export default class Slide extends Component {
    * @returns {string | undefined}
    */
   start = start => {
-    const { duration, next } = this.props
+    const { duration } = this.state
 
     if (start) {
       this.timer = setTimeout(() => {
-        window.location.pathname = next
+        this.props.history.goForward()
       }, process.env.NODE_ENV === 'development' ? 5000 : duration)
     } else {
       return clearInterval(this.timer)

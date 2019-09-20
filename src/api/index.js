@@ -1,10 +1,12 @@
-// Firebase
-import { database, storage } from './firebase'
+// Mock Deck
+import * as deck from './mock/deck.json'
 
 /**
- * @file API: Database, storage, and content management system
+ * @file Feathers initialization and mock data
+ * @todo Set up client side Feathers application
+ *
  * @module api
  * @author Lexus Drumgold <lex@lexusdrumgold.design>
  */
 
-export { database, storage }
+export { deck }

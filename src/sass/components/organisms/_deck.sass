@@ -10,9 +10,12 @@ $deck-width: 100%
 
 .ado-deck
   +constrain($deck-width)
-  +flex(column, center, space-between)
 
   background:
     position: center center
     repeat: no-repeat
     size: cover
+
+.deck-slides
+  +flex(column, center, space-between)
+  +size($deck-width, $deck-height)

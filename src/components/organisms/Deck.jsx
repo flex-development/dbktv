@@ -1,10 +1,8 @@
 // Packages
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import { Route } from 'react-router-dom'
-import $ from 'jquery'
 
 // Components
-import { DeckNavigation } from './Navigation'
 import { Slide } from '../templates'
 
 /**
@@ -30,9 +28,7 @@ export default class Deck extends Component {
     /**
      * @property {object} state - Internal component state
      * @property {number} state.count - Total # of slides in deck
-     * @property {boolean} state.dispatched - True if slide was rendered
      * @property {number} state.duration - Deck duration in ms
-     * @property {boolean} state.mobile - True if viewport width <= 768px
      * @property {boolean} state.paused - True if deck is paused
      * @property {number} state.position - ID of current slide. Defaults to -1
      * @property {object[]} state.slides - Slide content
@@ -40,11 +36,8 @@ export default class Deck extends Component {
      */
     this.state = {
       count: 0,
-      dispatched: false,
       duration: 0,
-      mobile: false,
-      paused: false,
-      position: 0,
+      position: -1,
       slides: null
     }
   }
@@ -66,83 +59,49 @@ export default class Deck extends Component {
     const durations = slides.map(slide => slide.duration)
 
     return {
-      duration: durations.reduce((total, value) => total + value),
       count,
+      duration: durations.reduce((total, value) => total + value),
       position: 0,
       slides: slides.map((slide, i) => {
-        slide.id = `/slides/${i + 1}`
-        slide.next = i === count - 1 ? `/slides/1` : `/slides/${i + 2}`
-        slide.position = i
+        slide.state.id = slide.pathname
+        slide.state.next = i === count - 1 ? `/slides/1` : `/slides/${i + 2}`
         return slide
       })
     }
   }
 
-  componentDidCatch(error, info) {
-    return this.props.error(error, info)
-  }
-
-  componentDidMount() {
-    console.info('Deck mounted.')
-
-    // Update internal mobile state and attach window listener to update it
-    this.resize()
-    $(window).resize(this.resize())
-  }
-
   /**
    * Renders a <main> element with the id 'deck' and the class name 'ado-deck'.
-   * Inside the container, the Navigation and Ticker will be rendered as well.
+   * The deck slides will be rendered inside of the container.
    *
-   * @returns {HTMLElement} <main id='deck' class='ado-deck'>
+   * @returns {HTMLElement} <main id="deck" class="ado-deck">
    */
   render() {
-    const { mobile, slides } = this.state
-
-    // TODO: Return MobileDeck component when device width is <= 768px
+    const { slides } = this.state
 
     return (
-      <Fragment>
-        <DeckNavigation slides={slides} />
-        <main id='deck' className='ado-deck'>
-          {slides.map((slide, i) => {
-            return (
-              <Route
-                exact={i === 0} key={slide.id} path={slide.id}
-                render={props =>
-                  <Slide {...props} {...slide} push={this.push} />}
-              />
-            )
-          })}
-        </main>
-      </Fragment>
+      <main id='deck' className='ado-deck'>
+        <DeckSlides slides={slides} />
+      </main>
     )
   }
+}
 
-  // HELPERS
-
-  /**
-   * Returns the data for the current slide.
-   *
-   * @returns {object | null} - Data for current slide
-   */
-  current = () => {
-    const { position, slides } = this.state
-    return slides ? slides[position] : null
-  }
-
-  /**
-   * Updates the internal deck position state.
-   *
-   * @param {number} position - Position of current slide
-   * @returns {number} @see @param position
-   */
-  push = position => this.setState({ position }, () => position)
-
-  /**
-   * Updates the internal mobile state.
-   *
-   * @returns {undefined}
-   */
-  resize = () => this.setState({ mobile: $(window).width() <= 768 })
+/**
+ * Renders a <div> element with the class 'deck-slides'.
+ *
+ * @param {object} param0 - Component properties
+ * @param {object[]} param0.slides - Slide objects
+ * @returns {HTMLDivElement} <div class="deck-slides">
+ */
+const DeckSlides = ({ slides }) => {
+  return (
+    <div className='deck-slides'>
+      {slides.map((slide, i) => {
+        return (
+          <Route component={Slide} path={slide.pathname} key={slide.pathname} />
+        )
+      })}
+    </div>
+  )
 }

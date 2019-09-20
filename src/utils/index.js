@@ -1,4 +1,5 @@
 // Utilities
+import app from './app.util.js'
 import error from './error.util.js'
 import ui from './ui.util.js'
 
@@ -8,4 +9,4 @@ import ui from './ui.util.js'
  * @author Lexus Drumgold <lex@lexusdrumgold.design>
  */
 
-export default { ...error, ...ui }
+export default { app, error, ui }

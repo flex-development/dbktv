@@ -45,25 +45,14 @@ const Navigation = props => {
   )
 }
 
-const DeckNavigation = ({ slides }) => {
-  /**
-   * Returns true if the window path matches the path of the current slide.
-   *
-   * @param {number} position - Position of slide
-   * @returns {boolean}
-   */
-  const active = position => {
-    const { slides } = this.state
-    return window.location.pathname === slides[position].id
-  }
-
+const DeckNavigation = ({ active, slides }) => {
   return (
     <Navigation>
       {slides.map((slide, i) => {
         return (
           <NavLink
-            to={slide.id} key={`nav-btn-${i}`}
-            className='ada-link' isActive={() => active(i)}
+            className='ada-link' isActive={() => active === i}
+            to={slide.pathname} key={`nav-btn-${i}`}
           >
             <SquareIcon />
           </NavLink>
