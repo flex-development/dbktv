@@ -2,8 +2,11 @@
 import React, { Component } from 'react'
 import { Route } from 'react-router-dom'
 
+// Context
+import { MobileContext } from '../context'
+
 // Components
-import { Slide } from '../templates'
+import { Preview, Slide } from '../templates'
 
 /**
  * Component representing the slide deck
@@ -74,6 +77,7 @@ export default class Deck extends Component {
    * Renders a <main> element with the id 'deck' and the class name 'ado-deck'.
    * The deck slides will be rendered inside of the container.
    *
+   * @todo Update documentation
    * @returns {HTMLElement} <main id="deck" class="ado-deck">
    */
   render() {
@@ -81,27 +85,23 @@ export default class Deck extends Component {
 
     return (
       <main id='deck' className='ado-deck'>
-        <DeckSlides slides={slides} />
+        <div className='deck-slides'>
+          <MobileContext.Consumer>
+            {({ mobile }) => {
+              return slides.map((slide, i) => {
+                const { pathname, state } = slide
+
+                if (mobile) {
+                  return <Preview data={state.slide} key={pathname} />
+                } else {
+                  const props = { component: Slide, path: pathname }
+                  return <Route {...props} key={pathname} />
+                }
+              })
+            }}
+          </MobileContext.Consumer>
+        </div>
       </main>
     )
   }
-}
-
-/**
- * Renders a <div> element with the class 'deck-slides'.
- *
- * @param {object} param0 - Component properties
- * @param {object[]} param0.slides - Slide objects
- * @returns {HTMLDivElement} <div class="deck-slides">
- */
-const DeckSlides = ({ slides }) => {
-  return (
-    <div className='deck-slides'>
-      {slides.map((slide, i) => {
-        return (
-          <Route component={Slide} path={slide.pathname} key={slide.pathname} />
-        )
-      })}
-    </div>
-  )
 }

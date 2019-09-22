@@ -1,7 +1,9 @@
 // Packages
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSpinner, faSquareFull } from '@fortawesome/free-solid-svg-icons'
+import {
+  faNewspaper, faPhotoVideo, faSpinner, faSquareFull, faStar
+} from '@fortawesome/free-solid-svg-icons'
 
 /**
  * @file Icon components
@@ -23,6 +25,20 @@ const LoadingIcon = props => {
   return <Icon id={id} className={style} icon={faSpinner} spin={spin} />
 }
 
+const NewspaperIcon = props => {
+  const { className, id, spin } = props
+  const style = (`newspaper ${className || ''}`).trim()
+
+  return <Icon id={id} className={style} icon={faNewspaper} spin={spin} />
+}
+
+const PhotoVideoIcon = props => {
+  const { className, id, spin } = props
+  const style = (`photo-video ${className || ''}`).trim()
+
+  return <Icon id={id} className={style} icon={faPhotoVideo} spin={spin} />
+}
+
 const SquareIcon = props => {
   const { className, id, spin } = props
   const style = (`square ${className || ''}`).trim()
@@ -30,4 +46,13 @@ const SquareIcon = props => {
   return <Icon id={id} className={style} icon={faSquareFull} spin={spin} />
 }
 
-export { Icon as default, LoadingIcon, SquareIcon }
+const StarIcon = props => {
+  const { className, id, spin } = props
+  const style = (`star ${className || ''}`).trim()
+
+  return <Icon id={id} className={style} icon={faStar} spin={spin} />
+}
+
+export {
+  Icon as default, LoadingIcon, NewspaperIcon, PhotoVideoIcon, SquareIcon, StarIcon
+}

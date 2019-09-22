@@ -2,6 +2,9 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 
+// Context
+import { MobileContext } from '../context'
+
 // Components
 import { Container, SquareIcon } from '../atoms'
 
@@ -47,18 +50,26 @@ const Navigation = props => {
 
 const DeckNavigation = ({ active, slides }) => {
   return (
-    <Navigation>
-      {slides.map((slide, i) => {
+    <MobileContext.Consumer>
+      {({ mobile }) => {
+        if (mobile) return null
+
         return (
-          <NavLink
-            className='ada-link' isActive={() => active === i}
-            to={slide.pathname} key={`nav-btn-${i}`}
-          >
-            <SquareIcon />
-          </NavLink>
+          <Navigation>
+            {slides.map((slide, i) => {
+              return (
+                <NavLink
+                  className='ada-link' isActive={() => active === i}
+                  to={slide.pathname} key={`nav-btn-${i}`}
+                >
+                  <SquareIcon />
+                </NavLink>
+              )
+            })}
+          </Navigation>
         )
-      })}
-    </Navigation>
+      }}
+    </MobileContext.Consumer>
   )
 }
 

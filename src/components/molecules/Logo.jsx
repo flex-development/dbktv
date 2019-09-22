@@ -4,10 +4,6 @@ import React, { Component } from 'react'
 // Components
 import { Heading, Image, Link } from '../atoms'
 
-// Assets
-import diamondback from '../../assets/images/diamondbacktv-logo-light.svg'
-import dbk from '../../assets/images/dbktv-logo-light.svg'
-
 /**
  * Class representing the Diamondback TV logo.
  *
@@ -38,9 +34,25 @@ export default class Logo extends Component {
      * @property {svg} state.image.src - Logo
      * @property {boolean} state.plug - @see props.mini = F, @see props.plug = T
      */
-    this.state = {
-      image: { alt: 'DiamondbackTV logo', src: diamondback }, plug: false
+    this.logos = {
+      full: {
+        alt: 'DiamondbackTV logo full white',
+        src: 'https://firebasestorage.googleapis.com/v0/b/diamondbackcloud.appspot.com/o/assets%2Fimages%2Flogos%2Ftv%2Fsvg%2Fdbktv-logo-full-white.svg?alt=media'
+      },
+      mini: {
+        alt: 'DiamondbackTV logo mini white',
+        src: 'https://firebasestorage.googleapis.com/v0/b/diamondbackcloud.appspot.com/o/assets%2Fimages%2Flogos%2Ftv%2Fsvg%2Fdbktv-logo-mini-white.svg?alt=media'
+      }
     }
+
+    /**
+     * @property {object} state - Component state
+     * @property {object} state.image - Logo image properties
+     * @property {string} state.image.alt - Logo description
+     * @property {svg} state.image.src - Logo
+     * @property {boolean} state.plug - @see props.mini = F, @see props.plug = T
+     */
+    this.state = { image: this.logos.full, plug: false }
   }
 
   /**
@@ -60,7 +72,7 @@ export default class Logo extends Component {
     const { mini, plug } = props
 
     state.plug = !mini && plug
-    if (mini) state.image = { alt: 'DBKTV logo', src: dbk }
+    if (mini) state.image = this.logos.mini
 
     return state
   }

@@ -1,8 +1,11 @@
 // Packages
 import React, { Component } from 'react'
-import { MemoryRouter as Router } from 'react-router'
+import { MemoryRouter } from 'react-router'
 import ReactGA from 'react-ga'
 import $ from 'jquery'
+
+// Context
+import { MobileContext } from './context'
 
 // Components
 import { Logo } from './molecules'
@@ -71,7 +74,7 @@ export default class App extends Component {
       error: null,
       info: null,
       loading: true,
-      mobile: false,
+      mobile: $(window).width() <= 768,
       slides: null,
       ticker: null
     }
@@ -133,15 +136,41 @@ export default class App extends Component {
 
     // TODO: Subscribe to deck changes and update internal state
 
-    // Update internal mobile state and attach window listener to update it
+    // Attach window listener to update internal mobile state
     this.resize()
-    $(window).resize(this.resize())
+    $(window).resize(() => this.resize())
 
     // Google Analytics and Pageview tracking
     this.tracking()
 
     // Update loading state
     this.fetch(false)
+  }
+
+  /**
+   * componentDidUpdate() is invoked immediately after updating occurs.
+   * This method is not called for the initial render, and it will not be
+   * invoked if shouldComponentUpdate() returns false.
+   *
+   * @see @method getSnapshotBeforeUpdate returns an object containing the last
+   * values of the internal slide position and mobile states.
+   *
+   * After the application has been reloaded, the internal slide position and
+   * mobile states will be updated.
+   *
+   * @param {object} props - Previous component props
+   * @param {object} state - Previous component state
+   * @param {object} snapshot - @see @method getSnapshotBeforeUpdate
+   * @returns {undefined}
+   *
+   * @see
+   * {@link https://reactjs.org/docs/react-component.html#componentdidupdate}
+   */
+  componentDidUpdate(props, state, snapshot) {
+    const { id, mobile } = snapshot
+    if (state.id !== id || state.mobile !== mobile) {
+      this.setState({ id, mobile })
+    }
   }
 
   /**
@@ -155,6 +184,25 @@ export default class App extends Component {
 
     // Remove window listener
     $(window).off('resize')
+  }
+
+  /**
+   * getSnapshotBeforeUpdate() is invoked right before the most recently
+   * rendered output is committed to e.g. the DOM.
+   *
+   * It enables your component to capture some information from the DOM (e.g.
+   * scroll position) before it is potentially changed.
+   *
+   * Any value returned by this lifecycle will be passed as
+   * a parameter to @see @method componentDidUpdate().
+   *
+   * @param {object} props - Previous component props
+   * @param {object} state - Previous component state
+   * @returns {object} Object containing position of current slide and a boolean
+   * value indicating if the user is on a mobile device
+   */
+  getSnapshotBeforeUpdate(props, state) {
+    return { id: state.id, mobile: $(window).width() <= 768 }
   }
 
   /**
@@ -172,10 +220,10 @@ export default class App extends Component {
    *
    * On mobile devices, a list of the deck slides will be displayed.
    *
-   * @returns {<Fragment/>}
+   * @returns {<MemoryRouter/>}
    */
   render() {
-    const { error, id, info, loading, slides, ticker } = this.state
+    const { error, id, info, loading, mobile, slides, ticker } = this.state
     const { utils } = this.props
 
     // Handle error and loading states
@@ -188,17 +236,19 @@ export default class App extends Component {
 
     // Render application
     return (
-      <Router initialEntries={routes} initialIndex={0}>
-        <Header container>
-          <Logo />
-        </Header>
-        <DeckNavigation active={id} slides={routes} />
-        <Deck {...deck} />
-        <Footer>
-          <Logo />
-          <Ticker items={ticker} />
-        </Footer>
-      </Router>
+      <MemoryRouter initialEntries={routes} initialIndex={0}>
+        <MobileContext.Provider value={{ mobile }}>
+          <Header container>
+            <Logo />
+          </Header>
+          <DeckNavigation active={id} slides={routes} />
+          <Deck {...deck} />
+          <Footer>
+            <Logo />
+            <Ticker items={ticker} />
+          </Footer>
+        </MobileContext.Provider>
+      </MemoryRouter>
     )
   }
 
@@ -248,7 +298,7 @@ export default class App extends Component {
    *
    * @returns {undefined}
    */
-  resize = () => this.setState({ mobile: this.props.utils.ui.is_mobile() })
+  resize = () => this.setState({ mobile: $(window).width() <= 768 })
 
   /**
    * Transforms an array of slide objects into an array of route objects.
@@ -276,6 +326,7 @@ export default class App extends Component {
     // Turn slide object into route objects
     return slides.map((slide, i) => {
       slide.position = i
+      slide.mobile = this.state.mobile
       // TODO: slide.pathname = slide.slug
       return { pathname: `/slides/${i + 1}`, pos: this.id, state: { slide } }
     })

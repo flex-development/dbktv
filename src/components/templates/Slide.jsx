@@ -2,7 +2,7 @@
 import React, { Component } from 'react'
 
 // Components
-import { Articles, Default, Multimedia, News } from '.'
+import { Articles, Default, Multimedia, News, Preview } from '.'
 
 /**
  * @file Component representing a deck slide.
@@ -52,18 +52,22 @@ export default class Slide extends Component {
    */
   static getDerivedStateFromProps(props, state) {
     const { next, slide } = props.location.state
-    const { component, content, duration } = slide
+    const { component, content, duration, mobile } = slide
 
     let template = null
 
-    if (component === 'Articles') {
-      template = <Articles content={content} />
-    } else if (component === 'Multimedia') {
-      template = <Multimedia content={content} />
-    } else if (component === 'News') {
-      template = <News content={content} />
+    if (mobile) {
+      template = <Preview data={{ component, content }} />
     } else {
-      template = <Default />
+      if (component === 'Articles') {
+        template = <Articles content={content} />
+      } else if (component === 'Multimedia') {
+        template = <Multimedia content={content} />
+      } else if (component === 'News') {
+        template = <News content={content} />
+      } else {
+        template = <Default />
+      }
     }
 
     return { content, duration, next, template, type: component.toLowerCase() }
@@ -110,32 +114,6 @@ export default class Slide extends Component {
   }
 
   // Helpers
-
-  /**
-   * Based on the current component properties, the method updates the internal
-   * state with the name of the component in lowercase and the template
-   * component to be rendered.
-   *
-   * @returns {string} Name of component in lowercase
-   */
-  choose = () => {
-    const { className, component, id, ...data } = this.props
-
-    let template = null
-
-    if (component === 'Articles') {
-      template = <Articles {...data} />
-    } else if (component === 'Multimedia') {
-      template = <Multimedia {...data} />
-    } else if (component === 'News') {
-      template = <News {...data} />
-    } else {
-      template = <Default />
-    }
-
-    const state = { data, template, type: component.toLowerCase() }
-    return this.setState(state, () => state.type)
-  }
 
   /**
    * Starts the slide timer if @see @param start is true. Otherwise, the

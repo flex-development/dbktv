@@ -17,6 +17,11 @@ $header-width: 100vw
 // Add space on the top and bottom of header
 .ado-header
   +absolute(0, null, null, 0)
+  +respond-to($breakpoint-schmedium)
+    position: relative
+    z-index: 0
+
+
   +size($header-width, $header-height)
 
   height: max-content

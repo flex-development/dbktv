@@ -4,7 +4,9 @@ import Button, { SmoothScrollButton } from './Button'
 import Container from './Container'
 import Figcaption from './Figcaption'
 import Heading from './Heading'
-import Icon, { LoadingIcon, SquareIcon } from './Icon'
+import Icon, {
+  LoadingIcon, NewspaperIcon, PhotoVideoIcon, SquareIcon, StarIcon
+} from './Icon'
 import Image from './Image'
 import Link, { Headline, Related } from './Link'
 import Paragraph, { Author, Blurb, Category, Subheading } from './Paragraph'
@@ -17,5 +19,5 @@ import Video from './Video'
  */
 
 export {
-  Advertisement, Button, SmoothScrollButton, Container, Figcaption, Heading, Icon, Image, Link, LoadingIcon, SquareIcon, Headline, Related, Paragraph, Author, Blurb, Category, Subheading, Video
+  Advertisement, Button, SmoothScrollButton, Container, Figcaption, Heading, Icon, Image, Link, LoadingIcon, NewspaperIcon, PhotoVideoIcon, SquareIcon, StarIcon, Headline, Related, Paragraph, Author, Blurb, Category, Subheading, Video
 }
