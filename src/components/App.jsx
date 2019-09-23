@@ -236,7 +236,7 @@ export default class App extends Component {
 
     // Render application
     return (
-      <MemoryRouter initialEntries={routes} initialIndex={1}>
+      <MemoryRouter initialEntries={routes} initialIndex={0}>
         <MobileContext.Provider value={{ mobile }}>
           <Header container>
             <Logo />

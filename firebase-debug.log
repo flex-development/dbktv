@@ -1,0 +1,44 @@
+[debug] [2019-09-23T05:25:20.707Z] ----------------------------------------------------------------------
+[debug] [2019-09-23T05:25:20.709Z] Command:       /usr/local/bin/node /Users/lex/Documents/projects/dbktv/node_modules/.bin/firebase serve --only hosting:staging
+[debug] [2019-09-23T05:25:20.709Z] CLI Version:   7.3.0
+[debug] [2019-09-23T05:25:20.709Z] Platform:      darwin
+[debug] [2019-09-23T05:25:20.709Z] Node Version:  v12.7.0
+[debug] [2019-09-23T05:25:20.710Z] Time:          Mon Sep 23 2019 01:25:20 GMT-0400 (Eastern Daylight Time)
+[debug] [2019-09-23T05:25:20.710Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-09-23T05:25:20.717Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-09-23T05:25:20.718Z] > authorizing via signed-in user
+[debug] [2019-09-23T05:25:20.718Z] [iam] checking project thedbktv for permissions ["firebase.projects.get"]
+[debug] [2019-09-23T05:25:20.719Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/thedbktv:testIamPermissions  
+
+[debug] [2019-09-23T05:25:21.742Z] <<< HTTP RESPONSE 200
+[debug] [2019-09-23T05:25:21.744Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/thedbktv  
+ 
+[debug] [2019-09-23T05:25:21.965Z] <<< HTTP RESPONSE 200
+[debug] [2019-09-23T05:25:21.966Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/thedbktv/webApps/-/config  
+ 
+[debug] [2019-09-23T05:25:22.258Z] <<< HTTP RESPONSE 200
+[info] i  hosting[staging]: Serving hosting files from: build
+[info] ✔  hosting[staging]: Local server: http://localhost:5000
+[debug] [2019-09-23T05:27:40.205Z] ----------------------------------------------------------------------
+[debug] [2019-09-23T05:27:40.208Z] Command:       /usr/local/bin/node /Users/lex/Documents/projects/dbktv/node_modules/.bin/firebase serve --only hosting:staging
+[debug] [2019-09-23T05:27:40.208Z] CLI Version:   7.3.0
+[debug] [2019-09-23T05:27:40.208Z] Platform:      darwin
+[debug] [2019-09-23T05:27:40.208Z] Node Version:  v12.7.0
+[debug] [2019-09-23T05:27:40.210Z] Time:          Mon Sep 23 2019 01:27:40 GMT-0400 (Eastern Daylight Time)
+[debug] [2019-09-23T05:27:40.210Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-09-23T05:27:40.222Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-09-23T05:27:40.222Z] > authorizing via signed-in user
+[debug] [2019-09-23T05:27:40.222Z] [iam] checking project thedbktv for permissions ["firebase.projects.get"]
+[debug] [2019-09-23T05:27:40.225Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/thedbktv:testIamPermissions  
+
+[debug] [2019-09-23T05:27:42.227Z] <<< HTTP RESPONSE 200
+[debug] [2019-09-23T05:27:42.230Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/thedbktv  
+ 
+[debug] [2019-09-23T05:27:42.421Z] <<< HTTP RESPONSE 200
+[debug] [2019-09-23T05:27:42.423Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/thedbktv/webApps/-/config  
+ 
+[debug] [2019-09-23T05:27:42.671Z] <<< HTTP RESPONSE 200
+[info] i  hosting[staging]: Serving hosting files from: build
+[info] ✔  hosting[staging]: Local server: http://localhost:5000

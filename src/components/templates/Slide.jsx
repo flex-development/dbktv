@@ -83,14 +83,14 @@ export default class Slide extends Component {
   componentDidMount() {
     const { pos, state } = this.props.location
     pos(state.slide.position)
-    // this.start(true)
+    this.start(true)
   }
 
   /**
    * Clears the slide timer
    */
   componentWillUnmount() {
-    // this.start(false)
+    this.start(false)
   }
 
   /**
