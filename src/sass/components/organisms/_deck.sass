@@ -6,16 +6,20 @@
 
 // Variables
 $deck-height: 100%
+$deck-padding: size(20) 3.75%
 $deck-width: 100%
 
 .ado-deck
   +constrain($deck-width)
+  +flex(column, center, space-between)
+  +respond-to($breakpoint-schmedium)
+    align-items: flex-start
+    overflow-y: scroll
+    padding: $deck-padding
+
 
   background:
     position: center center
     repeat: no-repeat
     size: cover
 
-.deck-slides
-  +flex(column, center, space-between)
-  +size($deck-width, $deck-height)

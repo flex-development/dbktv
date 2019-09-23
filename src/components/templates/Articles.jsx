@@ -40,6 +40,7 @@ export default class Articles extends Component {
     const style = (`adt-articles ${className || ''}`).trim()
 
     const NETWORK_ID = '123934970'
+    const ad = { adUnit: ads[0], fetchNow: true, sizes: [[300, 600]] }
 
     return (
       <div id={id} className={style}>
@@ -58,10 +59,7 @@ export default class Articles extends Component {
           </div>
           <div className='right-rail'>
             <DFPSlotsProvider dfpNetworkId={NETWORK_ID}>
-              {ads.map((ad, i) => {
-                ad = { adUnit: ad, fetchNow: true, sizes: [[300, 600]] }
-                return <Advertisement {...ad} key={`ad-${i}`} />
-              })}
+              <Advertisement {...ad} />
             </DFPSlotsProvider>
           </div>
         </Container>

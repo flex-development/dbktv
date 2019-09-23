@@ -128,7 +128,7 @@ export default class Slide extends Component {
     if (start) {
       this.timer = setTimeout(() => {
         this.props.history.goForward()
-      }, process.env.NODE_ENV === 'development' ? 5000 : duration)
+      }, process.env.NODE_ENV === 'development' ? 7500 : duration)
     } else {
       return clearInterval(this.timer)
     }

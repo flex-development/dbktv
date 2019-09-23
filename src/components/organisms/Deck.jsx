@@ -85,22 +85,20 @@ export default class Deck extends Component {
 
     return (
       <main id='deck' className='ado-deck'>
-        <div className='deck-slides'>
-          <MobileContext.Consumer>
-            {({ mobile }) => {
-              return slides.map((slide, i) => {
-                const { pathname, state } = slide
+        <MobileContext.Consumer>
+          {({ mobile }) => {
+            return slides.map((slide, i) => {
+              const { pathname, state } = slide
 
-                if (mobile) {
-                  return <Preview data={state.slide} key={pathname} />
-                } else {
-                  const props = { component: Slide, path: pathname }
-                  return <Route {...props} key={pathname} />
-                }
-              })
-            }}
-          </MobileContext.Consumer>
-        </div>
+              if (mobile) {
+                return <Preview data={state.slide} key={pathname} />
+              } else {
+                const props = { component: Slide, path: pathname }
+                return <Route {...props} key={pathname} />
+              }
+            })
+          }}
+        </MobileContext.Consumer>
       </main>
     )
   }

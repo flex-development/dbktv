@@ -92,14 +92,13 @@ export default class Preview extends Component {
 
     return (
       <div id={id} className={`adt-preview ${type} ${className || ''}`.trim()}>
-        <Category category={category} />
+        <div className='preview-header'>
+          {icon}<Category category={category} />
+        </div>
         <div className='headlines'>
           {headlines.map((headline, i) => {
-            return (
-              <div className='preview-headline' key={`ph-${i}`}>
-                {icon} <Headline {...headline} />
-              </div>
-            )
+            headline.className = 'preview-headline'
+            return <Headline {...headline} key={`ph-${i}`} />
           })}
         </div>
       </div>
