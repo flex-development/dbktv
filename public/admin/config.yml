@@ -138,7 +138,7 @@ collections: # A list of collections the CMS should be able to edit
       Use this template to create a "Group Articles" deck slide. The template
       renders two articles and a 300x600 advertisement.
     folder: public/content/slides/group
-    slug: "group-{{year}}-{{month}}-{{day}}-{{slug}}"
+    slug: "group-{{slug}}"
     preview_path: "content/slides/group/{{slug}}.json"
     create: true
     extension: json
@@ -152,7 +152,7 @@ collections: # A list of collections the CMS should be able to edit
         min: 5000
       - name: "title"
         label: "Slide title"
-        hint: "This won't be displayed -- it's only here to act as a slide id"
+        hint: "Headline from either article"
         widget: "string"
       - name: "ad"
         label: "Advertisement"
