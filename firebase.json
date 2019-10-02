@@ -40,10 +40,6 @@
           "destination": "/index.html"
         },
         {
-          "source": "/admin/**",
-          "destination": "/admin/**"
-        },
-        {
           "source": "/api/**",
           "destination": "/content/**"
         }
