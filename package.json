@@ -16,7 +16,8 @@
     "serve": "firebase serve --only hosting:staging",
     "prestart": "npm run preserve",
     "start": "firebase serve --only hosting:production",
-    "poststart": "rm -rf .env"
+    "poststart": "rm -rf .env",
+    "netlify-deploy": "npm run preserve && firebase deploy"
   },
   "repository": {
     "type": "git",
