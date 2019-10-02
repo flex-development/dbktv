@@ -5,9 +5,7 @@
 # Specifies how to access the content for your site, including authentication.
 backend:
   name: git-gateway
-  accept_roles:
-    - admin
-    - editor
+  branch: master
 
 # "Editorial Workflow" mode for more control over the content publishing phases.
 # All unpublished entries will be arranged in a board according to their status,
@@ -19,7 +17,7 @@ publish_mode: editorial_workflow
 media_folder: "src/assets/static/"
 
 # Folder where uploaded files will be accessed, relative to the build site base
-public_folder: "src/content/"
+public_folder: "/src/content/"
 
 # URL of published site
 site_url: https://dbktv.netlify.com
