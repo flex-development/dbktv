@@ -74,10 +74,11 @@ collections: # A list of collections the CMS should be able to edit
             label: "Media URL"
             widget: "string"
           - name: "alt"
-            label: "Alternate Text"
+            label: "Media caption"
             widget: "string"
       - name: "body"
         label: "Article blurb"
+        hint: "Max 3 graphs!"
         widget: "markdown"
   - name: "multimedia"
     label: "Multimedia Slides"
@@ -131,14 +132,14 @@ collections: # A list of collections the CMS should be able to edit
             label: "Article URL"
             widget: "string"
   - name: "group"
-    label: "Group Articles Slide"
-    label_singular: "Multimedia Slide"
+    label: "Group Articles Slides"
+    label_singular: "Group Articles Slide"
     description: >
       Use this template to create a "Group Articles" deck slide. The template
       renders two articles and a 300x600 advertisement.
     folder: public/content/slides/group
     slug: "group-{{year}}-{{month}}-{{day}}-{{slug}}"
-    preview_path: "content/group/{{slug}}.json"
+    preview_path: "content/slides/group/{{slug}}.json"
     create: true
     extension: json
     fields:
