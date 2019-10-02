@@ -1,8 +1,8 @@
 {
-  "name": "@flexdevelopment/dbktv",
+  "name": "@thedbklab/dbktv",
   "description": "DiamondbackTV (DBKTV) is a digital signage project with the goal of streaming specially curated Diamondback content - feature stories, multimedia, article previews, and advertisements - to various televisions on campus.",
   "version": "1.0.0",
-  "author": "Lexus Drumgold <lex@lexusdrumgold.design> (https://flexdevelopmentllc.web.app)",
+  "author": "The Diamondback Lab",
   "scripts": {
     "preinstall": "rm -rf node_modules && npm run prebuild",
     "lint": "eslint ./src/api/*.js ./src/components/*.jsx ./src/components/**/*.jsx --fix",
@@ -12,15 +12,12 @@
     "test": "NODE_ENV=test jest --detectOpenHandles --passWithNoTests",
     "prebuild": "rm -rf build/",
     "build": "npm run lint && react-scripts build",
-    "preserve": "NODE_ENV=production cp .env.production .env && npm run build",
-    "serve": "firebase serve --only hosting:staging",
-    "prestart": "npm run preserve",
-    "start": "firebase serve --only hosting:production",
-    "poststart": "rm -rf .env"
+    "prestart": "NODE_ENV=production cp .env.production .env && npm run build",
+    "start": "serve -s build"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/flex-development/dbktv.git"
+    "url": "git+https://github.com/The-Diamondback-Lab/dbktv.git"
   },
   "keywords": [
     "the diamondback",
@@ -32,7 +29,7 @@
   ],
   "license": "BSD-3-Clause",
   "bugs": {
-    "url": "https://github.com/flex-development/dbktv/issues"
+    "url": "https://github.com/The-Diamondback-Lab/dbktv/issues"
   },
   "dependencies": {
     "@feathersjs/errors": "^3.3.6",
