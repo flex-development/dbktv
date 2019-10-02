@@ -6,6 +6,7 @@
 
 // Variables
 $figure-height: 100%
+$figcaption-height: 15.375%
 $figure-width: 100%
 $image-magic-number: 85%
 $video-magic-number: 84.625%
@@ -21,6 +22,8 @@ $video-magic-number: 84.625%
     .ada-figcaption
       background-color: $black
       border-top: $border
+      height: 15.375%
+      max-height: $figcaption-height
       padding: size(24) 0
       width: 100%
 
@@ -48,7 +51,7 @@ $video-magic-number: 84.625%
 
     .ada-image
       max-height: $image-magic-number
-      
+
     .ada-video
       height: 100%
       max-height: $video-magic-number

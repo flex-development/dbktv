@@ -3,16 +3,16 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 // Firebase
-import { database } from './api'
-
-// Service worker
-import * as sw from './config/sw.config'
-
-// Application
-import App from './components/App'
+import { deck } from './api'
 
 // Utility functions
 import utils from './utils'
+
+// React application
+import App from './components/App'
+
+// Service worker
+import * as sw from './config/sw.config'
 
 // Compiled Sass stylesheet
 import './sass/app.sass'
@@ -20,17 +20,26 @@ import './sass/app.sass'
 /**
  * @file Application entry point
  *
- * @todo Slide HOC
+ * @todo Feathers client application
+ * @todo Slack reporting
  *
  * @author Lexus Drumgold <lex@lexusdrumgold.design>
  */
 
-// Application will be rendered inside of <div id="root"></div>
-// with the Firebase database interface and utility functions passed as props
-ReactDOM.render(
-  <App database={database} utils={utils} />,
-  document.getElementById('root')
-)
+/**
+ * Component that connects the Feathers application to our React application.
+ *
+ * Until a client side Feathers app is initialized, we will pass the mock data
+ * as a component property. Our utility functions will also be passed as
+ * component properties.
+ *
+ * @todo Replace api prop with Feathers application
+ * @returns {<App/>}
+ */
+const FeathersApp = () => <App api={{}} mock={deck} utils={utils} />
+
+// Render connected Feathers application into <div id="root"></div>
+ReactDOM.render(<FeathersApp />, document.getElementById('root'))
 
 /**
  * If you want your app to work offline and load faster, you can change

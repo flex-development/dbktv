@@ -1,0 +1,53 @@
+// ----------------------------------------------------------------------------
+// Preview specific styles, variables, placeholders, mixins and functions
+// @see components/templates/Preview.jsx
+// @author Lexus Drumgold
+// ----------------------------------------------------------------------------
+
+// Variables
+$preview-border: size(1) solid $accent-light
+$preview-width: 100%
+
+// Styles
+
+.adt-preview
+  +constrain($preview-width)
+
+  padding: size(16) 0
+
+  &:first-of-type
+    padding-top: 0
+
+  &:not(:last-of-type)
+    border-bottom: $preview-border
+
+.preview-header
+  +constrain(max-content)
+  +flex(row, stretch, center)
+
+  background-color: $accent-med
+  margin-bottom: size(8)
+  padding: size(8)
+
+  > .ada-icon,
+  > .category
+    color: $light
+
+  > .ada-icon
+    font-size: size(16)
+    margin: 0 size(8) 0 0
+
+  > .category
+    font-weight: 500
+
+.headlines
+  > .headline
+    +respond-to($breakpoint-xxl, min)
+      font-size: size(27.5)
+
+
+    +respond-to($breakpoint-xxxl, min)
+      font-size: size(37.5)
+
+
+    font-size: size(20)

@@ -1,0 +1,94 @@
+# NetlifyCMS Configuration
+# Ex: https://github.com/netlify/netlify-cms/blob/master/dev-test/config.yml
+# Reference: https://www.netlifycms.org/docs/configuration-options/
+
+# Specifies how to access the content for your site, including authentication.
+backend:
+  name: git-gateway
+  accept_roles:
+    - admin
+    - editor
+
+# "Editorial Workflow" mode for more control over the content publishing phases.
+# All unpublished entries will be arranged in a board according to their status,
+# and they can be further reviewed and edited before going live.
+# The workflow translates editor UI actions into common Git commands
+publish_mode: editorial_workflow
+
+# Folder where uploaded files should be saved, relative to the base of the repo
+media_folder: "public/content/static/"
+
+# Folder where uploaded files will be accessed, relative to the build site base
+public_folder: "content/"
+
+# URL of published site
+site_url: https://thedbktv.web.app
+
+# Custom logo url
+logo_url: https://firebasestorage.googleapis.com/v0/b/diamondbackcloud.appspot.com/o/assets%2Fimages%2Flogos%2Ftv%2Fsvg%2Fdbktv-logo-full.svg?alt=media
+
+# Show preview links
+show_preview_links: true
+
+# Change how filenames for entries are created and sanitized
+slug:
+  encoding: "ascii"
+  clean_accents: true
+  sanitize_replacement: "-"
+
+# Collections - Determines how content types and editor fields in the UI
+# generate files and content in your repository
+collections: # A list of collections the CMS should be able to edit
+  - name: "news" # Used in routes, ie.: /admin/collections/:slug/edit
+    label: "News" # Used in the UI
+    label_singular: "Top News" # Used in the UI, ie: "New Post"
+    description: >
+      Use this template to create a "Top News" deck slide. The template renders a feature article with a cover image and article preview.
+    folder: "public/content/slides/news"
+    slug: "/news/{{slug}}"
+    create: true # Allow users to create new documents in this collection
+    delete: false # Allow users to delete "Top News" slides
+    extension: json # File extension to match to existing entries
+    format: json # Determines how collection files are parsed and saved
+    editor: # Disables the preview pane for this collection
+      preview: false
+    identifier_field: "text"
+    fields: # The fields each document in this collection have
+      - name: "duration"
+        label: "Slide duration"
+        hint: "Time in milliseconds"
+        widget: "number"
+        default: 15000
+        valueType: "int"
+        min: 5000
+      - name: "sponsored"
+        label: "Sponsored Article?"
+        hint: "True if sponsosred article"
+        widget: "boolean"
+        default: false
+      - name: "headline"
+        label: "Headline"
+        widget: "object"
+        fields:
+          - name: "href"
+            label: "Article URL"
+            widget: "string"
+          - name: "text"
+            label: "Article Title"
+            widget: "string"
+      - name: "author"
+        label: "Amazing person (or persons!!) who wrote this article! :)"
+        widget: "string"
+      - name: "image"
+        label: "Background Image"
+        widget: "object"
+        fields:
+          - name: "src"
+            label: "Media URL"
+            widget: "string"
+          - name: "alt"
+            label: "Alternate Text"
+            widget: "string"
+      - name: "body"
+        label: "Article blurb"
+        widget: "markdown"

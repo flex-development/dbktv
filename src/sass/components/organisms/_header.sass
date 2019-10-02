@@ -17,16 +17,31 @@ $header-width: 100vw
 // Add space on the top and bottom of header
 .ado-header
   +absolute(0, null, null, 0)
+  +respond-to($breakpoint-schmedium)
+    background-color: $black
+    border-bottom: size(1) solid $accent-light
+    position: relative
+    z-index: 0
+
+
   +size($header-width, $header-height)
 
   height: max-content
   z-index: 10
 
   > .ada-container
+    +respond-to($breakpoint-schmedium)
+      +flex(row, center, center)
+
+      padding-bottom: size(20)
+
+
     padding: $header-padding
 
     .adm-logo
       +constrain(size(137.5))
+      +respond-to($breakpoint-schmedium)
+        +constrain(size(150))
 
   &.ui-sticky
     background-color: $light

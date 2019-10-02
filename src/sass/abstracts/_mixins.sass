@@ -57,6 +57,7 @@
 =inside($context, $child: null)
   @if $child != null
     #{$context}
+
     &#{$child}
       @content
   @else
@@ -128,6 +129,16 @@
   @else
     +position(relative)
 
+/// Shorthand for sticky positioning.
+/// @requires {mixin} position
+/// @param {Arglist} $args - Offsets
+/// @example sass
+///  @include sticky($top: 0, $right: 0, $bottom: 0, $left: 0)
+=sticky($args...)
+  @if $args
+    +position(sticky, $args...)
+  @else
+    +position(sticky)
 
 /// Mixin to prefix properties
 /// @group cross-browser-support

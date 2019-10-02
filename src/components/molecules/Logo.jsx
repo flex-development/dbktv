@@ -4,10 +4,6 @@ import React, { Component } from 'react'
 // Components
 import { Heading, Image, Link } from '../atoms'
 
-// Assets
-import diamondback from '../../assets/images/diamondbacktv-logo-light.svg'
-import dbk from '../../assets/images/dbktv-logo-light.svg'
-
 /**
  * Class representing the Diamondback TV logo.
  *
@@ -25,7 +21,7 @@ export default class Logo extends Component {
    * @param {boolean} props.mini - If true, returns DBKTV logo instead of the
    * DiamondbackTV logo
    * @param {boolean} props.plug - If true, display 'Continue reading on
-   * dbknews.com' beneath the logo
+   * dbknews.com' beneath the logo (only if @see @param props.mini is false)
    * @returns {Logo}
    */
   constructor(props) {
@@ -33,13 +29,27 @@ export default class Logo extends Component {
 
     /**
      * @property {object} state - Component state
-     * @property {object} state.image - Logo image properties
-     * @property {string} state.image.alt - Logo description
-     * @property {svg} state.image.src - Logo
+     * @property {object | null} state.current - Current logo image properties
+     * @property {string | undefined} state.current.alt - Logo description
+     * @property {string | undefined} state.current.src - Logo source url
+     * @property {object} state.logos - Full / mini logo image objects
+     * @property {object} state.logos.full - Full size logo image properties
+     * @property {object} state.logos.mini - Mini logo image properties
      * @property {boolean} state.plug - @see props.mini = F, @see props.plug = T
      */
     this.state = {
-      image: { alt: 'DiamondbackTV logo', src: diamondback }, plug: false
+      current: null,
+      logos: {
+        full: {
+          alt: 'DiamondbackTV logo full white',
+          src: 'https://firebasestorage.googleapis.com/v0/b/diamondbackcloud.appspot.com/o/assets%2Fimages%2Flogos%2Ftv%2Fsvg%2Fdbktv-logo-full-white.svg?alt=media'
+        },
+        mini: {
+          alt: 'DiamondbackTV logo mini white',
+          src: 'https://firebasestorage.googleapis.com/v0/b/diamondbackcloud.appspot.com/o/assets%2Fimages%2Flogos%2Ftv%2Fsvg%2Fdbktv-logo-mini-white.svg?alt=media'
+        }
+      },
+      plug: false
     }
   }
 
@@ -60,7 +70,7 @@ export default class Logo extends Component {
     const { mini, plug } = props
 
     state.plug = !mini && plug
-    if (mini) state.image = { alt: 'DBKTV logo', src: dbk }
+    state.current = mini ? state.logos.mini : state.logos.full
 
     return state
   }
@@ -73,12 +83,13 @@ export default class Logo extends Component {
    * @returns {HTMLDivElement}
    */
   render() {
-    const { className, id } = this.props
-    const { image, plug } = this.state
+    const { className, id, mini } = this.props
+    const { current, plug } = this.state
+    const style = `adm-logo ${mini ? 'mini' : 'full'} ${className || ''}`
 
     return (
-      <div id={id} className={(`adm-logo ${className || ''}`).trim()}>
-        <Image {...image} />
+      <div id={id} className={style.trim()}>
+        <Image {...current} />
         {
           plug
             ? (

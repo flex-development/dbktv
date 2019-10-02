@@ -4,6 +4,7 @@ import Articles from './Articles'
 import Default from './Default'
 import Multimedia from './Multimedia'
 import News from './News'
+import Preview from './Preview'
 import Slide from './Slide'
 
 /**
@@ -12,4 +13,4 @@ import Slide from './Slide'
  * @author Lexus Drumgold <lex@lexusdrumgold.design>
  */
 
-export { Article, Articles, Default, Multimedia, News, Slide }
+export { Article, Articles, Default, Multimedia, News, Preview, Slide }

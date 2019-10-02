@@ -29,19 +29,16 @@
 .left-rail
   +constrain(42.5%)
   +flex(column, flex-start, center)
+  +respond-to($breakpoint-medium)
+    +constrain(60%)
 
 .right-rail
   +constrain(max-content)
   +flex(row, center, center)
+  +respond-to($breakpoint-medium)
+    padding: 0 7.5%
 
-  padding-right: size(16 * 2.5)
+  padding: 0 5%
 
-  > div
-    +flex(row, center, center)
-
-    margin: 0 auto
-
-    .ada-advertisement
-      +size(size(300), size(600))
-
-      margin-left: size(16)
+  .ada-advertisement
+    +size(size(300), size(600))

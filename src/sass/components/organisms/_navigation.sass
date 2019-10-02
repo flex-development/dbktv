@@ -9,21 +9,6 @@
   +constrain(max-content)
   +flex(column, center, space-between)
 
-  // +respond-to($breakpoint-schmedium)
-  //   background-color: $black
-  //   bottom: 0
-  //   flex-direction: row
-  //   height: 10%
-  //   justify-content: space-evenly
-  //   max-width: 100%
-  //   padding: 0 size(24)
-  //   top: inherit
-  //   right: inherit
-  //   width: 100%
-
-  //   > .ada-link > .square
-  //     font-size: size(18)
-
   height: size(285)
   z-index: 15
 
@@ -37,19 +22,18 @@
       .square
         color: $accent-light
 
-    .square
-      +respond-to($breakpoint-xxl, min)
-        font-size: size(16)
-
-  
-      +respond-to($breakpoint-xxxl, min)
-        font-size: size(20)
+  .square
+    +respond-to($breakpoint-xxl, min)
+      font-size: size(16)
 
 
-      color: $accent-med
-      font-size: size(11.25)
-      transform: rotate(45deg)
+    +respond-to($breakpoint-xxxl, min)
+      font-size: size(20)
+
+
+    color: $accent-med
+    font-size: size(11.25)
+    transform: rotate(45deg)
 
     &.active
-      > .square
-        color: $accent-light
+      color: $accent-light

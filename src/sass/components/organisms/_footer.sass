@@ -9,25 +9,33 @@ $footer-border: size(0.5) solid $light
 $footer-height: auto
 $footer-padding: size(40) 0
 $footer-width: 100vw
+$footer-logo-spacing: size(16)
 
 // Styles
 
 // Make footer full width
 // Add space on the top and bottom of footer
 .ado-footer
+  +sticky(null, 0, 0, null)
   +constrain($footer-width)
   +flex(row, center)
+  +respond-to($breakpoint-schmedium)
+    border-top: size(1) solid $accent-light
+
 
   background-color: $black
-  padding: size(32) 0 size(32) 3.25%
+  padding: size(32) 0 size(32) 2.5%
 
   .adm-logo
     +constrain(size(137.5))
+    +respond-to($breakpoint-schmedium)
+      +constrain(size(65))
+
 
     background-color: $black
     border-right: size(1.5) solid $light
-    margin-right: size(16)
-    padding-right: size(16)
+    margin-right: $footer-logo-spacing
+    padding-right: $footer-logo-spacing
     z-index: 5
 
   &.multimedia-border

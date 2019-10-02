@@ -1,8 +1,11 @@
 // Packages
 import React from 'react'
 
+// Context
+import { MobileContext } from '../context'
+
 // Components
-import { Container } from '../atoms'
+import { Container, SquareIcon } from '../atoms'
 
 /**
  * @file Component representing a <nav> element.
@@ -44,4 +47,23 @@ const Navigation = props => {
   )
 }
 
-export default Navigation
+const DeckNavigation = ({ active, slides }) => {
+  return (
+    <MobileContext.Consumer>
+      {({ mobile }) => {
+        if (mobile) return null
+
+        return (
+          <Navigation>
+            {slides.map((slide, i) => {
+              const style = active === i ? 'active' : ''
+              return <SquareIcon className={style} key={`sq-${i}`} />
+            })}
+          </Navigation>
+        )
+      }}
+    </MobileContext.Consumer>
+  )
+}
+
+export { Navigation as default, DeckNavigation }
