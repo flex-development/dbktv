@@ -43,13 +43,11 @@ collections: # A list of collections the CMS should be able to edit
     description: >
       Use this template to create a "Top News" deck slide. The template renders a feature article with a cover image and article preview.
     folder: "public/content/slides/news"
-    slug: "/news/{{slug}}"
+    slug: "news-{{slug}}"
     create: true # Allow users to create new documents in this collection
-    delete: false # Allow users to delete "Top News" slides
     extension: json # File extension to match to existing entries
-    format: json # Determines how collection files are parsed and saved
     editor: # Disables the preview pane for this collection
-      preview: false
+      preview: true
     identifier_field: "text"
     fields: # The fields each document in this collection have
       - name: "duration"
