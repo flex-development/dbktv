@@ -39,15 +39,16 @@ slug:
 collections: # A list of collections the CMS should be able to edit
   - name: "news" # Used in routes, ie.: /admin/collections/:slug/edit
     label: "News" # Used in the UI
-    label_singular: "Top News" # Used in the UI, ie: "New Post"
+    label_singular: "Top News Slide" # Used in the UI, ie: "New Post"
     description: >
       Use this template to create a "Top News" deck slide. The template renders a feature article with a cover image and article preview.
-    folder: "public/content/slides/news"
-    slug: "news/{{slug}}"
-    preview_path: /preview/{{slug}}
+    folder: public/content/slides/news
+    slug: "news-{{slug}}"
+    preview_path: "content/news/{{slug}}.json"
     create: true # Allow users to create new documents in this collection
     extension: json # File extension to match to existing entries
     identifier_field: "text"
+    summary: "text"
     fields: # The fields each document in this collection have
       - name: "duration"
         label: "Slide duration"
@@ -56,20 +57,17 @@ collections: # A list of collections the CMS should be able to edit
         default: 15000
         valueType: "int"
         min: 5000
-      - name: "sponsored"
-        label: "Sponsored Article?"
-        hint: "True if sponsosred article"
-        widget: "boolean"
-        default: false
-      - name: "href"
-        label: "Article URL"
-        widget: "string"
       - name: "text"
         label: "Headline"
         widget: "string"
-      - name: "author"
-        label: "Amazing person (or persons!!) who wrote this article! :)"
+      - name: "href"
+        label: "Article URL"
         widget: "string"
+      - name: "author"
+        label: "Author"
+        hint: "Amazing person (or persons!!) who wrote this article! :)"
+        widget: "string"
+        default: "The Diamondback"
       - name: "image"
         label: "Background Image"
         widget: "object"
@@ -83,3 +81,53 @@ collections: # A list of collections the CMS should be able to edit
       - name: "body"
         label: "Article blurb"
         widget: "markdown"
+  - name: "multimedia"
+    label: "Multimedia"
+    label_singular: "Multimedia Slide"
+    description: >
+      Use this template to create a "Multimedia" deck slide. The template
+      renders an image or video.
+    folder: public/content/slides/multimedia
+    slug: "multimedia-{{slug}}"
+    preview_path: "content/multimedia/{{slug}}.json"
+    create: true # Allow users to create new documents in this collection
+    extension: json # File extension to match to existing entries
+    summary: "text"
+    fields:
+      - name: "title"
+        hint: "Media caption -- this will be displayed"
+        label: "Media caption"
+        widget: "string"
+      - name: "category"
+        label: "Category"
+        widget: "string"
+      - name: "credit"
+        label: "Credit"
+        hint: "Who took this?"
+        widget: "string"
+        default: "The Diamondback"
+      - name: "media"
+        label: "Media"
+        widget: "object"
+        fields:
+          - name: "alt"
+            label: "Media caption"
+            hint: "Media caption -- this will not be displayed"
+            widget: "string"
+          - name: "src"
+            label: "Media URL"
+            widget: "string"
+          - name: "video"
+            label: "Is this a video?"
+            widget: "boolean"
+      - name: "related"
+        label: "Related Article"
+        widget: "object"
+        required: false
+        fields:
+          - name: "text"
+            label: "Article Headline"
+            widget: "string"
+          - name: "href"
+            label: "Article URL"
+            widget: "string"
