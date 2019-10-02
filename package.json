@@ -10,11 +10,12 @@
     "dev": "react-scripts start",
     "postdev": "rm -rf .env",
     "test": "NODE_ENV=test jest --detectOpenHandles --passWithNoTests",
-    "serve": "firebase serve --only hosting:staging",
     "prebuild": "rm -rf build/",
-    "build": "npm run lint-client && react-scripts build",
-    "prestart": "NODE_ENV=staging cp .env.production .env",
-    "start": "npm run build && firebase serve --only hosting:staging",
+    "build": "npm run lint && react-scripts build",
+    "preserve": "NODE_ENV=production cp .env.production .env && npm run build",
+    "serve": "firebase serve --only hosting:staging",
+    "prestart": "npm run preserve",
+    "start": "firebase serve --only hosting:production",
     "poststart": "rm -rf .env"
   },
   "repository": {

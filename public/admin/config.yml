@@ -16,13 +16,13 @@ backend:
 publish_mode: editorial_workflow
 
 # Folder where uploaded files should be saved, relative to the base of the repo
-media_folder: "public/content/static/"
+media_folder: "src/assets/static/"
 
 # Folder where uploaded files will be accessed, relative to the build site base
-public_folder: "content/"
+public_folder: "src/content/"
 
 # URL of published site
-site_url: https://thedbktv.web.app
+site_url: https://thedbktv.netlify.com
 
 # Custom logo url
 logo_url: https://firebasestorage.googleapis.com/v0/b/diamondbackcloud.appspot.com/o/assets%2Fimages%2Flogos%2Ftv%2Fsvg%2Fdbktv-logo-full.svg?alt=media
