@@ -94,6 +94,13 @@ collections: # A list of collections the CMS should be able to edit
     extension: json # File extension to match to existing entries
     summary: "text"
     fields:
+      - name: "duration"
+        label: "Slide duration"
+        hint: "Time in milliseconds"
+        widget: "number"
+        default: 15000
+        valueType: "int"
+        min: 5000
       - name: "title"
         hint: "Media caption -- this will be displayed"
         label: "Media caption"
