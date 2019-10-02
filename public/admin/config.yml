@@ -38,7 +38,7 @@ slug:
 # generate files and content in your repository
 collections: # A list of collections the CMS should be able to edit
   - name: "news" # Used in routes, ie.: /admin/collections/:slug/edit
-    label: "News" # Used in the UI
+    label: "Top News Slides" # Used in the UI
     label_singular: "Top News Slide" # Used in the UI, ie: "New Post"
     description: >
       Use this template to create a "Top News" deck slide. The template renders a feature article with a cover image and article preview.
@@ -80,7 +80,7 @@ collections: # A list of collections the CMS should be able to edit
         label: "Article blurb"
         widget: "markdown"
   - name: "multimedia"
-    label: "Multimedia"
+    label: "Multimedia Slides"
     label_singular: "Multimedia Slide"
     description: >
       Use this template to create a "Multimedia" deck slide. The template
@@ -131,7 +131,7 @@ collections: # A list of collections the CMS should be able to edit
             label: "Article URL"
             widget: "string"
   - name: "group"
-    label: "Articles & Ads Slide"
+    label: "Group Articles Slide"
     label_singular: "Multimedia Slide"
     description: >
       Use this template to create a "Group Articles" deck slide. The template
@@ -152,6 +152,12 @@ collections: # A list of collections the CMS should be able to edit
       - name: "title"
         label: "Slide title"
         hint: "This won't be displayed -- it's only here to act as a slide id"
+        widget: "string"
+      - name: "ad"
+        label: "Advertisement"
+        hint: "Should begin with 300x600_"
+        widget: "string"
+        required: false
       - name: "article1"
         label: "First article"
         widget: "object"

@@ -131,9 +131,3 @@ typings/
 .dynamodb/
 
 # End of https://www.gitignore.io/api/node,macos,firebase
-
-# Build files
-build/
-
-# Credentials
-functions/config/credentials.firebase.json
