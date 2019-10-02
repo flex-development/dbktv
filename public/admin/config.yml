@@ -22,7 +22,7 @@ media_folder: "src/assets/static/"
 public_folder: "src/content/"
 
 # URL of published site
-site_url: https://thedbktv.netlify.com
+site_url: https://dbktv.netlify.com
 
 # Custom logo url
 logo_url: https://firebasestorage.googleapis.com/v0/b/diamondbackcloud.appspot.com/o/assets%2Fimages%2Flogos%2Ftv%2Fsvg%2Fdbktv-logo-full.svg?alt=media
