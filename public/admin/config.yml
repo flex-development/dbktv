@@ -25,7 +25,7 @@ public_folder: "content/"
 site_url: https://thedbktv.web.app
 
 # Custom logo url
-logo_url: https://firebasestorage.googleapis.com/v0/b/diamondbackcloud.appspot.com/o/assets%2Fimages%2Flogos%2Ftv%2Fsvg%2Fdbktv-logo-mini.svg?alt=media
+logo_url: https://firebasestorage.googleapis.com/v0/b/diamondbackcloud.appspot.com/o/assets%2Fimages%2Flogos%2Ftv%2Fsvg%2Fdbktv-logo-full.svg?alt=media
 
 # Show preview links
 show_preview_links: true
@@ -43,72 +43,52 @@ collections: # A list of collections the CMS should be able to edit
     label: "News" # Used in the UI
     label_singular: "Top News" # Used in the UI, ie: "New Post"
     description: >
-      Use this template to create a "Top News" deck slide. The template renders
-      a feature article with a cover image and article preview.
-    folder: "functions/content/decks/slides/news"
+      Use this template to create a "Top News" deck slide. The template renders a feature article with a cover image and article preview.
+    folder: "public/content/slides/news"
     slug: "/news/{{slug}}"
-    summary: "{{headline.text}}"
-    identifier_field: summary
     create: true # Allow users to create new documents in this collection
     delete: false # Allow users to delete "Top News" slides
     extension: json # File extension to match to existing entries
     format: json # Determines how collection files are parsed and saved
     editor: # Disables the preview pane for this collection
       preview: false
+    identifier_field: "text"
     fields: # The fields each document in this collection have
-      - label: "Headline"
-        name: "headline"
-        widget: "object"
-        fields:
-          - label: "Article Title"
-            hint: "Title of feature article"
-            name: "text"
-            widget: "string"
-            pattern: [".{1,}", "Must have at least 1 character"]
-          - label: "Article URL"
-            hint: "URL of feature article"
-            name: "href"
-            widget: "string"
-            pattern:
-              [
-                '^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$',
-                "Must be a valid URL",
-              ]
-      - label: "Author"
-        hint: "Author of feature article"
-        name: "text"
-        widget: "string"
-        pattern: [".{1,}", "Must have at least 1 character"]
-        default: "Diamondback Staff"
-      - label: "Sponsored Article?"
-        hint: "True if sponsosred article"
-        name: "sponsored"
-        widget: "boolean"
-        default: false
-      - label: "Blurb"
-        name: "blurb"
-        widget: "markdown"
-      - label: "Image"
-        name: "image"
-        widget: "object"
-        fields:
-          - label: "Caption"
-            hint: "Image caption"
-            name: "text"
-            widget: "string"
-            pattern: [".{1,}", "Must have at least 1 character"]
-          - label: "Source"
-            hint: "URL of image"
-            name: "src"
-            widget: "string"
-            pattern:
-              [
-                '^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$',
-                "Must be a valid URL",
-              ]
-      - label: "Slide Duration (milliseconds)"
-        name: "duration"
+      - name: "duration"
+        label: "Slide duration"
+        hint: "Time in milliseconds"
         widget: "number"
-        default: 10000
+        default: 15000
         valueType: "int"
         min: 5000
+      - name: "sponsored"
+        label: "Sponsored Article?"
+        hint: "True if sponsosred article"
+        widget: "boolean"
+        default: false
+      - name: "headline"
+        label: "Headline"
+        widget: "object"
+        fields:
+          - name: "href"
+            label: "Article URL"
+            widget: "string"
+          - name: "text"
+            label: "Article Title"
+            widget: "string"
+      - name: "author"
+        label: "Amazing person (or persons!!) who wrote this article! :)"
+        widget: "string"
+      - name: "image"
+        label: "Background Image"
+        widget: "object"
+        fields:
+          - name: "src"
+            label: "Media URL"
+            widget: "string"
+          - name: "alt"
+            label: "Alternate Text"
+            widget: "string"
+      - name: "body"
+        label: "Article blurb"
+        widget: "markdown"

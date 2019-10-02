@@ -2,7 +2,7 @@
   "hosting": [
     {
       "target": "staging",
-      "public": "build",
+      "public": "public",
       "predeploy": [
         "npm run lint",
         "npm test",
@@ -40,8 +40,8 @@
           "destination": "/index.html"
         },
         {
-          "source": "/admin",
-          "destination": "/admin/index.html"
+          "source": "/admin/**",
+          "destination": "/admin/**"
         },
         {
           "source": "/api/**",

@@ -1,6 +1,5 @@
 // Packages
 import React from 'react'
-import { NavLink } from 'react-router-dom'
 
 // Context
 import { MobileContext } from '../context'
@@ -57,14 +56,8 @@ const DeckNavigation = ({ active, slides }) => {
         return (
           <Navigation>
             {slides.map((slide, i) => {
-              return (
-                <NavLink
-                  className='ada-link' isActive={() => active === i}
-                  to={slide.pathname} key={`nav-btn-${i}`}
-                >
-                  <SquareIcon />
-                </NavLink>
-              )
+              const style = active === i ? 'active' : ''
+              return <SquareIcon className={style} key={`sq-${i}`} />
             })}
           </Navigation>
         )

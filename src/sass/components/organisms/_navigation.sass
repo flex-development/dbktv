@@ -22,19 +22,18 @@
       .square
         color: $accent-light
 
-    .square
-      +respond-to($breakpoint-xxl, min)
-        font-size: size(16)
-
-  
-      +respond-to($breakpoint-xxxl, min)
-        font-size: size(20)
+  .square
+    +respond-to($breakpoint-xxl, min)
+      font-size: size(16)
 
 
-      color: $accent-med
-      font-size: size(11.25)
-      transform: rotate(45deg)
+    +respond-to($breakpoint-xxxl, min)
+      font-size: size(20)
+
+
+    color: $accent-med
+    font-size: size(11.25)
+    transform: rotate(45deg)
 
     &.active
-      > .square
-        color: $accent-light
+      color: $accent-light
