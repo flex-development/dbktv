@@ -47,8 +47,6 @@ collections: # A list of collections the CMS should be able to edit
     preview_path: "content/news/{{slug}}.json"
     create: true # Allow users to create new documents in this collection
     extension: json # File extension to match to existing entries
-    identifier_field: "text"
-    summary: "text"
     fields: # The fields each document in this collection have
       - name: "duration"
         label: "Slide duration"
@@ -57,7 +55,7 @@ collections: # A list of collections the CMS should be able to edit
         default: 15000
         valueType: "int"
         min: 5000
-      - name: "text"
+      - name: "title"
         label: "Headline"
         widget: "string"
       - name: "href"
@@ -90,9 +88,8 @@ collections: # A list of collections the CMS should be able to edit
     folder: public/content/slides/multimedia
     slug: "multimedia-{{slug}}"
     preview_path: "content/multimedia/{{slug}}.json"
-    create: true # Allow users to create new documents in this collection
-    extension: json # File extension to match to existing entries
-    summary: "text"
+    create: true
+    extension: json
     fields:
       - name: "duration"
         label: "Slide duration"
@@ -102,7 +99,6 @@ collections: # A list of collections the CMS should be able to edit
         valueType: "int"
         min: 5000
       - name: "title"
-        hint: "Media caption -- this will be displayed"
         label: "Media caption"
         widget: "string"
       - name: "category"
@@ -117,10 +113,6 @@ collections: # A list of collections the CMS should be able to edit
         label: "Media"
         widget: "object"
         fields:
-          - name: "alt"
-            label: "Media caption"
-            hint: "Media caption -- this will not be displayed"
-            widget: "string"
           - name: "src"
             label: "Media URL"
             widget: "string"
@@ -138,3 +130,77 @@ collections: # A list of collections the CMS should be able to edit
           - name: "href"
             label: "Article URL"
             widget: "string"
+  - name: "group"
+    label: "Articles & Ads Slide"
+    label_singular: "Multimedia Slide"
+    description: >
+      Use this template to create a "Group Articles" deck slide. The template
+      renders two articles and a 300x600 advertisement.
+    folder: public/content/slides/group
+    slug: "group-{{year}}-{{month}}-{{day}}-{{slug}}"
+    preview_path: "content/group/{{slug}}.json"
+    create: true
+    extension: json
+    fields:
+      - name: "duration"
+        label: "Slide duration"
+        hint: "Time in milliseconds"
+        widget: "number"
+        default: 15000
+        valueType: "int"
+        min: 5000
+      - name: "title"
+        label: "Slide title"
+        hint: "This won't be displayed -- it's only here to act as a slide id"
+      - name: "article1"
+        label: "First article"
+        widget: "object"
+        fields:
+          - name: "headline"
+            label: "Headline"
+            widget: "object"
+            fields:
+              - name: "text"
+                label: "Article Title"
+                widget: "string"
+              - name: "href"
+                label: "Article URL"
+                widget: "string"
+          - name: "author"
+            label: "Author"
+            hint: "Amazing person (or persons!!) who wrote this article! :)"
+            widget: "string"
+            default: "The Diamondback"
+          - name: "category"
+            label: "Category"
+            widget: "string"
+          - name: "blurb"
+            label: "Article blurb"
+            hint: "1 to 2 sentences!"
+            widget: "markdown"
+      - name: "article2"
+        label: "Second article"
+        widget: "object"
+        fields:
+          - name: "headline"
+            label: "Headline"
+            widget: "object"
+            fields:
+              - name: "text"
+                label: "Article Title"
+                widget: "string"
+              - name: "href"
+                label: "Article URL"
+                widget: "string"
+          - name: "author"
+            label: "Author"
+            hint: "Amazing person (or persons!!) who wrote this article! :)"
+            widget: "string"
+            default: "The Diamondback"
+          - name: "category"
+            label: "Category"
+            widget: "string"
+          - name: "blurb"
+            label: "Article blurb"
+            hint: "1 to 2 sentences!"
+            widget: "markdown"
