@@ -37,6 +37,7 @@ slug:
 # Collections - Determines how content types and editor fields in the UI
 # generate files and content in your repository
 collections: # A list of collections the CMS should be able to edit
+  # News slide form
   - name: "news" # Used in routes, ie.: /admin/collections/:slug/edit
     label: "Top News Slides" # Used in the UI
     label_singular: "Top News Slide" # Used in the UI, ie: "New Post"
@@ -80,6 +81,7 @@ collections: # A list of collections the CMS should be able to edit
         label: "Article blurb"
         hint: "Max 3 graphs!"
         widget: "markdown"
+  # Multimedia slide form
   - name: "multimedia"
     label: "Multimedia Slides"
     label_singular: "Multimedia Slide"
@@ -131,6 +133,7 @@ collections: # A list of collections the CMS should be able to edit
           - name: "href"
             label: "Article URL"
             widget: "string"
+  # Group slide form
   - name: "group"
     label: "Group Articles Slides"
     label_singular: "Group Articles Slide"
