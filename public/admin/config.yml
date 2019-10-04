@@ -211,34 +211,34 @@ collections: # A list of collections the CMS should be able to edit
             label: "Article blurb"
             hint: "1 to 2 sentences!"
             widget: "markdown"
-  - name: "ticker"
-    label: "Deck Tickers"
-    label_singular: "Deck Ticker"
-    description: >
-      Use this template to create the deck ticker. It will autoscroll at the
-      bottom of the screen.
-    folder: public/api/content/tickers
-    slug: "ticker-{{slug}}"
-    preview_path: "/api/content/tickers/{{slug}}.json"
-    create: true
-    extension: json
-    fields:
-      - name: "title"
-        label: "Ticker title"
-        hint: "This will not be displayed"
-        widget: "string"
-      - name: "ticks"
-        label: "Ticker content"
-        hint: "This will not be displayed"
-        widget: "list"
-        fields:
-          - name: "Tick"
-            label: "tick"
-            widget: "object"
-            fields:
-              - name: "text"
-                label: "Ticker Content Text"
-                widget: "string"
-              - name: "href"
-                label: "Ticker Content URL"
-                widget: "string"
+  # - name: "ticker"
+  #   label: "Deck Tickers"
+  #   label_singular: "Deck Ticker"
+  #   description: >
+  #     Use this template to create the deck ticker. It will autoscroll at the
+  #     bottom of the screen.
+  #   folder: public/api/content/tickers
+  #   slug: "ticker-{{slug}}"
+  #   preview_path: "/api/content/tickers/{{slug}}.json"
+  #   create: true
+  #   extension: json
+  #   fields:
+  #     - name: "title"
+  #       label: "Ticker title"
+  #       hint: "This will not be displayed"
+  #       widget: "string"
+  #     - name: "ticks"
+  #       label: "Ticker content"
+  #       hint: "This will not be displayed"
+  #       widget: "list"
+  #       fields:
+  #         - name: "Tick"
+  #           label: "tick"
+  #           widget: "object"
+  #           fields:
+  #             - name: "text"
+  #               label: "Ticker Content Text"
+  #               widget: "string"
+  #             - name: "href"
+  #               label: "Ticker Content URL"
+  #               widget: "string"
