@@ -42,9 +42,9 @@ collections: # A list of collections the CMS should be able to edit
     label_singular: "Top News Slide" # Used in the UI, ie: "New Post"
     description: >
       Use this template to create a "Top News" deck slide. The template renders a feature article with a cover image and article preview.
-    folder: public/api/content/slides
+    folder: public/api/content/slides/news
     slug: "news-{{slug}}"
-    preview_path: "/api/content/slides/{{slug}}.json"
+    preview_path: "/api/content/slides/news/{{slug}}.json"
     create: true # Allow users to create new documents in this collection
     extension: json # File extension to match to existing entries
     fields: # The fields each document in this collection have
@@ -86,9 +86,9 @@ collections: # A list of collections the CMS should be able to edit
     description: >
       Use this template to create a "Multimedia" deck slide. The template
       renders an image or video.
-    folder: public/api/content/slides
+    folder: public/api/content/slides/multimedia
     slug: "multimedia-{{slug}}"
-    preview_path: "/api/content/slides/{{slug}}.json"
+    preview_path: "/api/content/slides/multimedia/{{slug}}.json"
     create: true
     extension: json
     fields:
@@ -137,9 +137,9 @@ collections: # A list of collections the CMS should be able to edit
     description: >
       Use this template to create a "Group Articles" deck slide. The template
       renders two articles and a 300x600 advertisement.
-    folder: public/api/content/slides
+    folder: public/api/content/slides/group
     slug: "group-{{slug}}"
-    preview_path: "/api/content/slides/{{slug}}.json"
+    preview_path: "/api/content/slides/group/{{slug}}.json"
     create: true
     extension: json
     fields:
@@ -217,7 +217,7 @@ collections: # A list of collections the CMS should be able to edit
     description: >
       Use this template to create the deck ticker. It will autoscroll at the
       bottom of the screen.
-    folder: public/api/content/ticker
+    folder: public/api/content/tickers
     slug: "ticker-{{slug}}"
     preview_path: "/api/content/tickers/{{slug}}.json"
     create: true
