@@ -2,7 +2,7 @@
 # Displays a single article with a background image.
 
 - name: "news"
-  label: "Top News Slides"
+  label: "Top News"
   label_singular: "Top News Slide"
   description: >
     Use this template to create a "Top News" deck slide. The template renders a feature article with a cover image and article preview.
@@ -19,12 +19,13 @@
       default: 15000
       valueType: "int"
       min: 5000
-    - name: "title"
-      label: "Headline"
-      widget: "string"
     - name: "href"
       label: "Article URL"
       widget: "string"
+    - name: "title"
+      label: "Article Headline"
+      widget: "string"
+      pattern: [".{1,}", "Must have at least 1 character"]
     - name: "author"
       label: "Author"
       hint: "Amazing person (or persons!!) who wrote this article! :)"
@@ -44,3 +45,4 @@
       label: "Article blurb"
       hint: "Max 3 graphs!"
       widget: "markdown"
+      buttons: ["bold", "bulled-list", "italic", "link", "numbered-list"]

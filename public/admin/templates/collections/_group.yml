@@ -3,7 +3,7 @@
 # in the right rail
 
 - name: "group"
-  label: "Group Articles Slides"
+  label: "Group Articles"
   label_singular: "Group Articles Slide"
   description: >
     Use this template to create a "Group Articles" deck slide. The template
@@ -57,6 +57,7 @@
           label: "Article blurb"
           hint: "2 to 3 sentences!"
           widget: "markdown"
+          buttons: ["bold", "bulled-list", "italic", "link", "numbered-list"]
     - name: "article2"
       label: "Second article"
       widget: "object"
@@ -83,3 +84,4 @@
           label: "Article blurb"
           hint: "2 to 3 sentences!"
           widget: "markdown"
+          buttons: ["bold", "bulled-list", "italic", "link", "numbered-list"]

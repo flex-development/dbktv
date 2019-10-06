@@ -23,8 +23,8 @@
       hint: "List of slides to display"
       widget: "list"
       fields:
-        - name: "Slide"
-          label: "slide"
+        - name: "slide"
+          label: "Slide"
           widget: "object"
           fields:
             - name: "href"
