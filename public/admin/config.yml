@@ -37,102 +37,39 @@ slug:
 # Collections - Determines how content types and editor fields in the UI
 # generate files and content in your repository
 collections: # A list of collections the CMS should be able to edit
-  - name: "news" # Used in routes, ie.: /admin/collections/:slug/edit
-    label: "Top News Slides" # Used in the UI
-    label_singular: "Top News Slide" # Used in the UI, ie: "New Post"
+  - name: "deck" # Used in routes, ie.: /admin/collections/:slug/edit
+    label: "Decks" # Used in the UI
+    label_singular: "Deck" # Used in the UI, ie: "New Post"
     description: >
-      Use this template to create a "Top News" deck slide. The template renders a feature article with a cover image and article preview.
-    folder: public/api/content/slides/news
-    slug: "news-{{slug}}"
-    preview_path: "/api/content/slides/news/{{slug}}.json"
+      Use this template to create a new slide deck. Have your list of preview
+      links ready.
+    folder: public/api/content/decks
+    slug: "ticker-{{slug}}"
+    preview_path: "/api/content/decks/{{slug}}.json"
     create: true # Allow users to create new documents in this collection
     extension: json # File extension to match to existing entries
     fields: # The fields each document in this collection have
-      - name: "duration"
-        label: "Slide duration"
-        hint: "Time in milliseconds"
-        widget: "number"
-        default: 15000
-        valueType: "int"
-        min: 5000
       - name: "title"
-        label: "Headline"
+        label: "Deck title"
+        hint: "This will not be displayed"
         widget: "string"
-      - name: "href"
-        label: "Article URL"
-        widget: "string"
-      - name: "author"
-        label: "Author"
-        hint: "Amazing person (or persons!!) who wrote this article! :)"
-        widget: "string"
-        default: "The Diamondback"
-      - name: "image"
-        label: "Background Image"
-        widget: "object"
+      - name: "slides"
+        label: "Deck slides"
+        hint: "List of slides to display"
+        widget: "list"
         fields:
-          - name: "src"
-            label: "Media URL"
-            widget: "string"
-          - name: "alt"
-            label: "Media caption"
-            widget: "string"
-      - name: "body"
-        label: "Article blurb"
-        hint: "Max 3 graphs!"
-        widget: "markdown"
-  - name: "multimedia"
-    label: "Multimedia Slides"
-    label_singular: "Multimedia Slide"
-    description: >
-      Use this template to create a "Multimedia" deck slide. The template
-      renders an image or video.
-    folder: public/api/content/slides/multimedia
-    slug: "multimedia-{{slug}}"
-    preview_path: "/api/content/slides/multimedia/{{slug}}.json"
-    create: true
-    extension: json
-    fields:
-      - name: "duration"
-        label: "Slide duration"
-        hint: "Time in milliseconds"
-        widget: "number"
-        default: 15000
-        valueType: "int"
-        min: 5000
-      - name: "title"
-        label: "Media caption"
-        widget: "string"
-      - name: "category"
-        label: "Category"
-        widget: "string"
-      - name: "credit"
-        label: "Credit"
-        hint: "Who took this?"
-        widget: "string"
-        default: "The Diamondback"
-      - name: "media"
-        label: "Media"
-        widget: "object"
-        fields:
-          - name: "src"
-            label: "Media URL"
-            widget: "string"
-          - name: "video"
-            label: "Is this a video?"
-            widget: "boolean"
-      - name: "related"
-        label: "Related Article"
-        widget: "object"
-        required: false
-        fields:
-          - name: "text"
-            label: "Article Headline"
-            widget: "string"
-          - name: "href"
-            label: "Article URL"
-            widget: "string"
+          - name: "Slide"
+            label: "slide"
+            widget: "object"
+            fields:
+              - name: "preview"
+                label: "Slide Preview Link"
+                widget: "string"
+              - name: "text"
+                label: "Slide data"
+                widget: "string"
   - name: "group"
-    label: "Group Articles Slides"
+    label: "Group Articles"
     label_singular: "Group Articles Slide"
     description: >
       Use this template to create a "Group Articles" deck slide. The template
@@ -211,37 +148,73 @@ collections: # A list of collections the CMS should be able to edit
             label: "Article blurb"
             hint: "2 to 3 sentences!"
             widget: "markdown"
-  - name: "deck"
-    label: "Deck"
-    label_singular: "Deck"
+  - name: "multimedia"
+    label: "Multimedia"
+    label_singular: "Multimedia Slide"
     description: >
-      Use this template to create a new slide deck. Have your list of preview
-      links ready.
-    folder: public/api/content/decks
-    slug: "ticker-{{slug}}"
-    preview_path: "/api/content/decks/{{slug}}.json"
+      Use this template to create a "Multimedia" deck slide. The template
+      renders an image or video.
+    folder: public/api/content/slides/multimedia
+    slug: "multimedia-{{slug}}"
+    preview_path: "/api/content/slides/multimedia/{{slug}}.json"
     create: true
     extension: json
     fields:
+      - name: "duration"
+        label: "Slide duration"
+        hint: "Time in milliseconds"
+        widget: "number"
+        default: 15000
+        valueType: "int"
+        min: 5000
       - name: "title"
-        label: "Deck title"
-        hint: "This will not be displayed"
+        label: "Media caption"
         widget: "string"
-      - name: "slides"
-        label: "Deck slides"
-        hint: "List of slides to display"
-        widget: "list"
+      - name: "category"
+        label: "Category"
+        widget: "string"
+      - name: "credit"
+        label: "Credit"
+        hint: "Who took this?"
+        widget: "string"
+        default: "The Diamondback"
+      - name: "media"
+        label: "Media"
+        widget: "object"
         fields:
-          - name: "Slide"
-            label: "slide"
-            widget: "object"
-            fields:
-              - name: "preview"
-                label: "Slide Preview Link"
-                widget: "string"
-              - name: "text"
-                label: "Slide data"
-                widget: "string"
+          - name: "src"
+            label: "Media URL"
+            widget: "string"
+          - name: "video"
+            label: "Is this a video?"
+            widget: "boolean"
+      - name: "related"
+        label: "Related Article"
+        widget: "object"
+        required: false
+        fields:
+          - name: "text"
+            label: "Article Headline"
+            widget: "string"
+          - name: "href"
+            label: "Article URL"
+            widget: "string"
+  - name: "pages"
+    label: "Pages"
+    create: false
+    files:
+      - label: "Settings"
+        name: "settings"
+        file: "public/api/pages/settings.json"
+        fields:
+          - name: deck
+            label: "Current deck"
+            hint: "Preview URL of the current deck"
+            widget: string
+          - name: ticker
+            label: "Current Ticker"
+            hint: "Preview URL of the current ticker"
+            widget: string
   - name: "ticker"
     label: "Tickers"
     label_singular: "Ticker"
@@ -273,19 +246,46 @@ collections: # A list of collections the CMS should be able to edit
               - name: "href"
                 label: "Ticker Content URL"
                 widget: "string"
-  - name: "pages"
-    label: "Pages"
-    create: false
-    files:
-      - label: "Settings"
-        name: "settings"
-        file: "public/api/pages/settings.json"
+  - name: "news"
+    label: "Top News"
+    label_singular: "Top News Slide"
+    description: >
+      Use this template to create a "Top News" deck slide. The template renders a feature article with a cover image and article preview.
+    folder: public/api/content/slides/news
+    slug: "news-{{slug}}"
+    preview_path: "/api/content/slides/news/{{slug}}.json"
+    create: true
+    extension: json
+    fields:
+      - name: "duration"
+        label: "Slide duration"
+        hint: "Time in milliseconds"
+        widget: "number"
+        default: 15000
+        valueType: "int"
+        min: 5000
+      - name: "title"
+        label: "Headline"
+        widget: "string"
+      - name: "href"
+        label: "Article URL"
+        widget: "string"
+      - name: "author"
+        label: "Author"
+        hint: "Amazing person (or persons!!) who wrote this article! :)"
+        widget: "string"
+        default: "The Diamondback"
+      - name: "image"
+        label: "Background Image"
+        widget: "object"
         fields:
-          - name: deck
-            label: "Current deck"
-            hint: "Preview URL of the current deck"
-            widget: text
-          - name: ticker
-            label: "Current Ticker"
-            hint: "Preview URL of the current ticker"
-            widget: text
+          - name: "src"
+            label: "Media URL"
+            widget: "string"
+          - name: "alt"
+            label: "Media caption"
+            widget: "string"
+      - name: "body"
+        label: "Article blurb"
+        hint: "Max 3 graphs!"
+        widget: "markdown"
