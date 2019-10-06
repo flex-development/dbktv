@@ -1,0 +1,14 @@
+{
+  "duration": 41000,
+  "title": "Hear ye ghouls and goblins, Halloween is upon us. Let’s get spooky.",
+  "category": "special projects",
+  "credit": "The Diamondback",
+  "media": {
+    "src": "https://d3gx1wgrn4cpnk.cloudfront.net/uploads/2019/08/monster-smashed.mp4",
+    "video": true
+  },
+  "related": {
+    "text": "https://dbknews.com/2019/08/27/a-year-in-review-remembering-the-2018-2019-school-year-at-umd/",
+    "href": "A Year in Review: Remembering the 2018-19 school year at UMD"
+  }
+}
