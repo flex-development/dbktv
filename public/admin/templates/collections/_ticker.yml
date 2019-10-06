@@ -12,6 +12,10 @@
   create: true
   extension: json
   fields:
+    - name: "last_edited_by"
+      label: "Lasted Edited By"
+      hint: "Who worked on this last?"
+      widget: "string"
     - name: "title"
       label: "Ticker title"
       hint: "This will not be displayed, but make it meaningful :)"
@@ -27,9 +31,9 @@
           label: "item"
           widget: "object"
           fields:
-            - name: "text"
-              label: "Item text"
-              widget: "string"
             - name: "href"
               label: "Item URL"
+              widget: "string"
+            - name: "text"
+              label: "Item Title"
               widget: "string"

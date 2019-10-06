@@ -12,6 +12,10 @@
   create: true
   extension: json
   fields:
+    - name: "last_edited_by"
+      label: "Lasted Edited By"
+      hint: "Who worked on this last?"
+      widget: "string"
     - name: "duration"
       label: "Slide duration"
       hint: "Time in milliseconds"
@@ -25,7 +29,6 @@
     - name: "title"
       label: "Article Headline"
       widget: "string"
-      pattern: [".{1,}", "Must have at least 1 character"]
     - name: "author"
       label: "Author"
       hint: "Amazing person (or persons!!) who wrote this article! :)"
@@ -35,13 +38,13 @@
       label: "Background Image"
       widget: "object"
       fields:
+        - name: "alt"
+          label: "Media caption"
+          widget: "text"
         - name: "src"
           label: "Media URL"
           widget: "string"
-        - name: "alt"
-          label: "Media caption"
-          widget: "string"
-    - name: "body"
+    - name: "blurb"
       label: "Article blurb"
       hint: "Max 3 graphs!"
       widget: "markdown"

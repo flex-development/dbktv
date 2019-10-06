@@ -14,6 +14,10 @@
   create: true
   extension: json
   fields:
+    - name: "last_edited_by"
+      label: "Lasted Edited By"
+      hint: "Who worked on this last?"
+      widget: "string"
     - name: "duration"
       label: "Slide duration"
       hint: "Time in milliseconds"
@@ -25,7 +29,6 @@
       label: "Slide title"
       hint: "This will not be displayed, but make it meaningful :)"
       widget: "string"
-      pattern: [".{1,}", "Must have at least 1 character"]
     - name: "category"
       label: "Category"
       widget: "string"
@@ -57,6 +60,5 @@
           label: "Article URL"
           widget: "string"
         - name: "text"
-          label: "Article Headline"
+          label: "Article Title"
           widget: "string"
-          pattern: [".{1,}", "Must have at least 1 character"]

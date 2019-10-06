@@ -7,16 +7,19 @@
     Use this template to create a new slide deck. Have your list of preview
     links ready.
   folder: public/api/content/decks
-  slug: "ticker-{{slug}}"
+  slug: "deck-{{slug}}"
   preview_path: "/api/content/decks/{{slug}}.json"
   create: true
   extension: json
   fields:
+    - name: "last_edited_by"
+      label: "Lasted Edited By"
+      hint: "Who worked on this last?"
+      widget: "string"
     - name: "title"
       label: "Deck title"
       hint: "This will not be displayed, but make it meaningful :)"
       widget: "string"
-      pattern: [".{1,}", "Must have at least 1 character"]
     - name: "slides"
       label: "Deck slides"
       label_singular: "Deck slide"
