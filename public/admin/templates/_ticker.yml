@@ -18,6 +18,7 @@
       widget: "string"
     - name: "items"
       label: "Ticker items"
+      label_singular: "Ticker item"
       hint: "List of links to autoscroll at the bottom of the screen"
       widget: "list"
       fields:

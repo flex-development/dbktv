@@ -18,6 +18,7 @@
       widget: "string"
     - name: "slides"
       label: "Deck slides"
+      label_singular: "Deck slide"
       hint: "List of slides to display"
       widget: "list"
       fields:
