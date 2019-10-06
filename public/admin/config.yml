@@ -120,6 +120,9 @@ collections: # A list of collections the CMS should be able to edit
               - name: "text"
                 label: "Article Title"
                 widget: "string"
+          - name: "sponsored"
+            label: "Is this a sponsored article?"
+            widget: "boolean"
           - name: "author"
             label: "Author"
             hint: "Amazing person (or persons!!) who wrote this article! :)"
@@ -147,6 +150,9 @@ collections: # A list of collections the CMS should be able to edit
               - name: "text"
                 label: "Article Title"
                 widget: "string"
+          - name: "sponsored"
+            label: "Is this a sponsored article?"
+            widget: "boolean"
           - name: "author"
             label: "Author"
             hint: "Amazing person (or persons!!) who wrote this article! :)"
@@ -256,7 +262,6 @@ collections: # A list of collections the CMS should be able to edit
         label: "Ticker title"
         hint: "This will not be displayed, but make it meaningful :)"
         widget: "string"
-        pattern: [".{1,}", "Must have at least 1 character"]
       - name: "items"
         label: "Ticker items"
         label_singular: "Ticker item"
@@ -277,7 +282,7 @@ collections: # A list of collections the CMS should be able to edit
     label: "Top News"
     label_singular: "Top News Slide"
     description: >
-      Use this template to create a "Top News" deck slide. The template renders a feature article with a cover image and article preview.
+      Use this template to create a "Top News" deck slide. The template renders a feature article with a background image and article preview.
     folder: public/api/content/slides/news
     slug: "news-{{slug}}"
     preview_path: "/api/content/slides/news/{{slug}}.json"
@@ -306,6 +311,9 @@ collections: # A list of collections the CMS should be able to edit
         hint: "Amazing person (or persons!!) who wrote this article! :)"
         widget: "string"
         default: "The Diamondback"
+      - name: "sponsored"
+        label: "Is this a sponsored article?"
+        widget: "boolean"
       - name: "image"
         label: "Background Image"
         widget: "object"

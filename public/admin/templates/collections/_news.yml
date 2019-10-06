@@ -5,7 +5,7 @@
   label: "Top News"
   label_singular: "Top News Slide"
   description: >
-    Use this template to create a "Top News" deck slide. The template renders a feature article with a cover image and article preview.
+    Use this template to create a "Top News" deck slide. The template renders a feature article with a background image and article preview.
   folder: public/api/content/slides/news
   slug: "news-{{slug}}"
   preview_path: "/api/content/slides/news/{{slug}}.json"
@@ -34,6 +34,9 @@
       hint: "Amazing person (or persons!!) who wrote this article! :)"
       widget: "string"
       default: "The Diamondback"
+    - name: "sponsored"
+      label: "Is this a sponsored article?"
+      widget: "boolean"
     - name: "image"
       label: "Background Image"
       widget: "object"
