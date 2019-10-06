@@ -152,7 +152,7 @@ collections: # A list of collections the CMS should be able to edit
         min: 5000
       - name: "title"
         label: "Slide title"
-        hint: "Headline from either article"
+        hint: "Headline from either article (this will not be displayed)"
         widget: "string"
       - name: "ad"
         label: "Advertisement"
@@ -183,7 +183,7 @@ collections: # A list of collections the CMS should be able to edit
             widget: "string"
           - name: "blurb"
             label: "Article blurb"
-            hint: "1 to 2 sentences!"
+            hint: "2 to 3 sentences!"
             widget: "markdown"
       - name: "article2"
         label: "Second article"
@@ -209,36 +209,83 @@ collections: # A list of collections the CMS should be able to edit
             widget: "string"
           - name: "blurb"
             label: "Article blurb"
-            hint: "1 to 2 sentences!"
+            hint: "2 to 3 sentences!"
             widget: "markdown"
-  # - name: "ticker"
-  #   label: "Deck Tickers"
-  #   label_singular: "Deck Ticker"
-  #   description: >
-  #     Use this template to create the deck ticker. It will autoscroll at the
-  #     bottom of the screen.
-  #   folder: public/api/content/tickers
-  #   slug: "ticker-{{slug}}"
-  #   preview_path: "/api/content/tickers/{{slug}}.json"
-  #   create: true
-  #   extension: json
-  #   fields:
-  #     - name: "title"
-  #       label: "Ticker title"
-  #       hint: "This will not be displayed"
-  #       widget: "string"
-  #     - name: "ticks"
-  #       label: "Ticker content"
-  #       hint: "This will not be displayed"
-  #       widget: "list"
-  #       fields:
-  #         - name: "Tick"
-  #           label: "tick"
-  #           widget: "object"
-  #           fields:
-  #             - name: "text"
-  #               label: "Ticker Content Text"
-  #               widget: "string"
-  #             - name: "href"
-  #               label: "Ticker Content URL"
-  #               widget: "string"
+  - name: "deck"
+    label: "Deck"
+    label_singular: "Deck"
+    description: >
+      Use this template to create a new slide deck. Have your list of preview
+      links ready.
+    folder: public/api/content/decks
+    slug: "ticker-{{slug}}"
+    preview_path: "/api/content/decks/{{slug}}.json"
+    create: true
+    extension: json
+    fields:
+      - name: "title"
+        label: "Deck title"
+        hint: "This will not be displayed"
+        widget: "string"
+      - name: "slides"
+        label: "Deck slides"
+        hint: "List of slides to display"
+        widget: "list"
+        fields:
+          - name: "Slide"
+            label: "slide"
+            widget: "object"
+            fields:
+              - name: "preview"
+                label: "Slide Preview Link"
+                widget: "string"
+              - name: "text"
+                label: "Slide data"
+                widget: "string"
+  - name: "ticker"
+    label: "Tickers"
+    label_singular: "Ticker"
+    description: >
+      Use this template to create the deck ticker. It will autoscroll at the
+      bottom of the screen.
+    folder: public/api/content/tickers
+    slug: "ticker-{{slug}}"
+    preview_path: "/api/content/tickers/{{slug}}.json"
+    create: true
+    extension: json
+    fields:
+      - name: "title"
+        label: "Ticker title"
+        hint: "This will not be displayed"
+        widget: "string"
+      - name: "items"
+        label: "Ticker items"
+        hint: "List of links to autoscroll at the bottom of the screen"
+        widget: "list"
+        fields:
+          - name: "Item"
+            label: "item"
+            widget: "object"
+            fields:
+              - name: "text"
+                label: "Ticker Content Text"
+                widget: "string"
+              - name: "href"
+                label: "Ticker Content URL"
+                widget: "string"
+  - name: "pages"
+    label: "Pages"
+    create: false
+    files:
+      - label: "Settings"
+        name: "settings"
+        file: "api/pages/settings.json"
+        fields:
+          - name: deck
+            label: "Current deck"
+            hint: "Preview URL of the current deck"
+            widget: text
+          - name: ticker
+            label: "Current Ticker"
+            hint: "Preview URL of the current ticker"
+            widget: text

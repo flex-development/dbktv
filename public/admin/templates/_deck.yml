@@ -1,0 +1,33 @@
+# Deck Template
+
+- name: "deck"
+  label: "Deck"
+  label_singular: "Deck"
+  description: >
+    Use this template to create a new slide deck. Have your list of preview
+    links ready.
+  folder: public/api/content/decks
+  slug: "ticker-{{slug}}"
+  preview_path: "/api/content/decks/{{slug}}.json"
+  create: true
+  extension: json
+  fields:
+    - name: "title"
+      label: "Deck title"
+      hint: "This will not be displayed"
+      widget: "string"
+    - name: "slides"
+      label: "Deck slides"
+      hint: "List of slides to display"
+      widget: "list"
+      fields:
+        - name: "Slide"
+          label: "slide"
+          widget: "object"
+          fields:
+            - name: "preview"
+              label: "Slide Preview Link"
+              widget: "string"
+            - name: "text"
+              label: "Slide data"
+              widget: "string"

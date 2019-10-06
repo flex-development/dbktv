@@ -1,0 +1,46 @@
+# Top News Template
+# Displays a single article with a background image.
+
+- name: "news"
+  label: "Top News Slides"
+  label_singular: "Top News Slide"
+  description: >
+    Use this template to create a "Top News" deck slide. The template renders a feature article with a cover image and article preview.
+  folder: public/api/content/slides/news
+  slug: "news-{{slug}}"
+  preview_path: "/api/content/slides/news/{{slug}}.json"
+  create: true
+  extension: json
+  fields:
+    - name: "duration"
+      label: "Slide duration"
+      hint: "Time in milliseconds"
+      widget: "number"
+      default: 15000
+      valueType: "int"
+      min: 5000
+    - name: "title"
+      label: "Headline"
+      widget: "string"
+    - name: "href"
+      label: "Article URL"
+      widget: "string"
+    - name: "author"
+      label: "Author"
+      hint: "Amazing person (or persons!!) who wrote this article! :)"
+      widget: "string"
+      default: "The Diamondback"
+    - name: "image"
+      label: "Background Image"
+      widget: "object"
+      fields:
+        - name: "src"
+          label: "Media URL"
+          widget: "string"
+        - name: "alt"
+          label: "Media caption"
+          widget: "string"
+    - name: "body"
+      label: "Article blurb"
+      hint: "Max 3 graphs!"
+      widget: "markdown"

@@ -1,0 +1,55 @@
+# Multimedia Template
+# Displays an image or video with a caption (required) and a link to a related
+# article (optional)
+
+- name: "multimedia"
+  label: "Multimedia Slides"
+  label_singular: "Multimedia Slide"
+  description: >
+    Use this template to create a "Multimedia" deck slide. The template
+    renders an image or video.
+  folder: public/api/content/slides/multimedia
+  slug: "multimedia-{{slug}}"
+  preview_path: "/api/content/slides/multimedia/{{slug}}.json"
+  create: true
+  extension: json
+  fields:
+    - name: "duration"
+      label: "Slide duration"
+      hint: "Time in milliseconds"
+      widget: "number"
+      default: 15000
+      valueType: "int"
+      min: 5000
+    - name: "title"
+      label: "Media caption"
+      widget: "string"
+    - name: "category"
+      label: "Category"
+      widget: "string"
+    - name: "credit"
+      label: "Credit"
+      hint: "Who took this?"
+      widget: "string"
+      default: "The Diamondback"
+    - name: "media"
+      label: "Media"
+      widget: "object"
+      fields:
+        - name: "src"
+          label: "Media URL"
+          widget: "string"
+        - name: "video"
+          label: "Is this a video?"
+          widget: "boolean"
+    - name: "related"
+      label: "Related Article"
+      widget: "object"
+      required: false
+      fields:
+        - name: "text"
+          label: "Article Headline"
+          widget: "string"
+        - name: "href"
+          label: "Article URL"
+          widget: "string"

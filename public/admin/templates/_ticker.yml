@@ -1,0 +1,33 @@
+# Ticker Template
+
+- name: "ticker"
+  label: "Tickers"
+  label_singular: "Ticker"
+  description: >
+    Use this template to create the deck ticker. It will autoscroll at the
+    bottom of the screen.
+  folder: public/api/content/tickers
+  slug: "ticker-{{slug}}"
+  preview_path: "/api/content/tickers/{{slug}}.json"
+  create: true
+  extension: json
+  fields:
+    - name: "title"
+      label: "Ticker title"
+      hint: "This will not be displayed"
+      widget: "string"
+    - name: "items"
+      label: "Ticker items"
+      hint: "List of links to autoscroll at the bottom of the screen"
+      widget: "list"
+      fields:
+        - name: "Item"
+          label: "item"
+          widget: "object"
+          fields:
+            - name: "text"
+              label: "Ticker Content Text"
+              widget: "string"
+            - name: "href"
+              label: "Ticker Content URL"
+              widget: "string"
