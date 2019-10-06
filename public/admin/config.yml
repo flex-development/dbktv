@@ -207,6 +207,8 @@ collections: # A list of collections the CMS should be able to edit
         fields:
           - name: "alt"
             label: "Media caption"
+            hint: >
+              "Make sure to remove the attribution and insert in the credit field"
             widget: "markdown"
             buttons: ["italic"]
           - name: "src"
@@ -268,8 +270,8 @@ collections: # A list of collections the CMS should be able to edit
         hint: "List of links to autoscroll at the bottom of the screen"
         widget: "list"
         fields:
-          - name: "Item"
-            label: "item"
+          - name: "item"
+            label: "Ticker Item"
             widget: "object"
             fields:
               - name: "href"
