@@ -235,6 +235,7 @@ collections: # A list of collections the CMS should be able to edit
       - label: "Settings"
         name: "settings"
         file: "public/api/pages/settings.json"
+        preview_path: "/api/pages/settings.json"
         fields:
           - name: deck
             label: "Current deck"
