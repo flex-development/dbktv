@@ -64,12 +64,12 @@ collections: # A list of collections the CMS should be able to edit
             widget: "object"
             fields:
               - name: "href"
-                label: "Slide Preview Link"
+                label: "Preview Link"
                 widget: "string"
               - name: "raw"
-                label: "Slide data"
+                label: "Data"
                 widget: "markdown"
-                buttons: ["code", "code-block"]
+                buttons: ["code"]
   - name: "group"
     label: "Group Articles"
     label_singular: "Group Articles Slide"
