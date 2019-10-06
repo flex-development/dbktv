@@ -126,6 +126,7 @@ collections: # A list of collections the CMS should be able to edit
             label: "Article blurb"
             hint: "2 to 3 sentences!"
             widget: "markdown"
+            buttons: ["bold", "bulled-list", "italic", "link", "numbered-list"]
       - name: "article2"
         label: "Second article"
         widget: "object"
@@ -152,6 +153,7 @@ collections: # A list of collections the CMS should be able to edit
             label: "Article blurb"
             hint: "2 to 3 sentences!"
             widget: "markdown"
+            buttons: ["bold", "bulled-list", "italic", "link", "numbered-list"]
   - name: "multimedia"
     label: "Multimedia"
     label_singular: "Multimedia Slide"
@@ -190,8 +192,8 @@ collections: # A list of collections the CMS should be able to edit
         fields:
           - name: "alt"
             label: "Media caption"
-            widget: "string"
-            pattern: [".{1,}", "Must have at least 1 character"]
+            widget: "markdown"
+            buttons: ["italic"]
           - name: "src"
             label: "Media URL"
             widget: "string"
@@ -303,3 +305,4 @@ collections: # A list of collections the CMS should be able to edit
         label: "Article blurb"
         hint: "Max 3 graphs!"
         widget: "markdown"
+        buttons: ["bold", "bulled-list", "italic", "link", "numbered-list"]
