@@ -49,6 +49,11 @@ collections: # A list of collections the CMS should be able to edit
     create: true # Allow users to create new documents in this collection
     extension: json # File extension to match to existing entries
     fields: # The fields each document in this collection have
+      - name: "last_edited_by"
+        label: "Lasted Edited By"
+        hint: "Who worked on this last?"
+        widget: "string"
+        pattern: [".{1,}", "Must have at least 1 character"]
       - name: "title"
         label: "Deck title"
         hint: "This will not be displayed, but make it meaningful :)"
@@ -67,6 +72,8 @@ collections: # A list of collections the CMS should be able to edit
               - name: "href"
                 label: "Preview Link"
                 widget: "string"
+                pattern: >
+                  ['^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$', "Must be a valid URL"]
               - name: "raw"
                 label: "Data"
                 widget: "markdown"
@@ -83,6 +90,11 @@ collections: # A list of collections the CMS should be able to edit
     create: true
     extension: json
     fields:
+      - name: "last_edited_by"
+        label: "Lasted Edited By"
+        hint: "Who worked on this last?"
+        widget: "string"
+        pattern: [".{1,}", "Must have at least 1 character"]
       - name: "duration"
         label: "Slide duration"
         hint: "Time in milliseconds"
@@ -108,12 +120,15 @@ collections: # A list of collections the CMS should be able to edit
             label: "Headline"
             widget: "object"
             fields:
-              - name: "text"
-                label: "Article Title"
-                widget: "string"
               - name: "href"
                 label: "Article URL"
                 widget: "string"
+                pattern: >
+                  ['^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$', "Must be a valid URL"]
+              - name: "text"
+                label: "Article Title"
+                widget: "string"
+                pattern: [".{1,}", "Must have at least 1 character"]
           - name: "author"
             label: "Author"
             hint: "Amazing person (or persons!!) who wrote this article! :)"
@@ -135,12 +150,15 @@ collections: # A list of collections the CMS should be able to edit
             label: "Headline"
             widget: "object"
             fields:
-              - name: "text"
-                label: "Article Title"
-                widget: "string"
               - name: "href"
                 label: "Article URL"
                 widget: "string"
+                pattern: >
+                  ['^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$', "Must be a valid URL"]
+              - name: "text"
+                label: "Article Title"
+                widget: "string"
+                pattern: [".{1,}", "Must have at least 1 character"]
           - name: "author"
             label: "Author"
             hint: "Amazing person (or persons!!) who wrote this article! :)"
@@ -166,6 +184,11 @@ collections: # A list of collections the CMS should be able to edit
     create: true
     extension: json
     fields:
+      - name: "last_edited_by"
+        label: "Lasted Edited By"
+        hint: "Who worked on this last?"
+        widget: "string"
+        pattern: [".{1,}", "Must have at least 1 character"]
       - name: "duration"
         label: "Slide duration"
         hint: "Time in milliseconds"
@@ -208,8 +231,10 @@ collections: # A list of collections the CMS should be able to edit
           - name: "href"
             label: "Article URL"
             widget: "string"
+            pattern: >
+              ['^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$', "Must be a valid URL"]
           - name: "text"
-            label: "Article Headline"
+            label: "Article Title"
             widget: "string"
             pattern: [".{1,}", "Must have at least 1 character"]
   - name: "pages"
@@ -223,11 +248,15 @@ collections: # A list of collections the CMS should be able to edit
           - name: deck
             label: "Current deck"
             hint: "Preview URL of the current deck"
-            widget: string
+            widget: "string"
+            pattern: >
+              ['^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$', "Must be a valid URL"]
           - name: ticker
             label: "Current Ticker"
             hint: "Preview URL of the current ticker"
-            widget: string
+            widget: "string"
+            pattern: >
+              ['^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$', "Must be a valid URL"]
   - name: "ticker"
     label: "Tickers"
     label_singular: "Ticker"
@@ -240,6 +269,11 @@ collections: # A list of collections the CMS should be able to edit
     create: true
     extension: json
     fields:
+      - name: "last_edited_by"
+        label: "Lasted Edited By"
+        hint: "Who worked on this last?"
+        widget: "string"
+        pattern: [".{1,}", "Must have at least 1 character"]
       - name: "title"
         label: "Ticker title"
         hint: "This will not be displayed, but make it meaningful :)"
@@ -255,12 +289,15 @@ collections: # A list of collections the CMS should be able to edit
             label: "item"
             widget: "object"
             fields:
-              - name: "text"
-                label: "Item text"
-                widget: "string"
               - name: "href"
                 label: "Item URL"
                 widget: "string"
+                pattern: >
+                  ['^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$', "Must be a valid URL"]
+              - name: "text"
+                label: "Item Title"
+                widget: "string"
+                pattern: [".{1,}", "Must have at least 1 character"]
   - name: "news"
     label: "Top News"
     label_singular: "Top News Slide"
@@ -272,6 +309,11 @@ collections: # A list of collections the CMS should be able to edit
     create: true
     extension: json
     fields:
+      - name: "last_edited_by"
+        label: "Lasted Edited By"
+        hint: "Who worked on this last?"
+        widget: "string"
+        pattern: [".{1,}", "Must have at least 1 character"]
       - name: "duration"
         label: "Slide duration"
         hint: "Time in milliseconds"
@@ -282,6 +324,8 @@ collections: # A list of collections the CMS should be able to edit
       - name: "href"
         label: "Article URL"
         widget: "string"
+        pattern: >
+          ['^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$', "Must be a valid URL"]
       - name: "title"
         label: "Article Headline"
         widget: "string"
