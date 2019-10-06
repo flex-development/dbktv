@@ -345,7 +345,7 @@ collections: # A list of collections the CMS should be able to edit
           - name: "alt"
             label: "Media caption"
             widget: "string"
-      - name: "body"
+      - name: "blurb"
         label: "Article blurb"
         hint: "Max 3 graphs!"
         widget: "markdown"
