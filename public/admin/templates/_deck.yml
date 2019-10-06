@@ -14,8 +14,9 @@
   fields:
     - name: "title"
       label: "Deck title"
-      hint: "This will not be displayed"
+      hint: "This will not be displayed, but make it meaningful :)"
       widget: "string"
+      pattern: [".{1,}", "Must have at least 1 character"]
     - name: "slides"
       label: "Deck slides"
       label_singular: "Deck slide"

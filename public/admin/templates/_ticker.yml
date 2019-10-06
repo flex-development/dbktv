@@ -26,9 +26,9 @@
           label: "item"
           widget: "object"
           fields:
-            - name: "text"
-              label: "Ticker Content Text"
-              widget: "string"
             - name: "href"
-              label: "Ticker Content URL"
+              label: "Item URL"
+              widget: "string"
+            - name: "text"
+              label: "Item text"
               widget: "string"

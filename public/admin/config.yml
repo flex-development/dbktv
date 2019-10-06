@@ -53,6 +53,7 @@ collections: # A list of collections the CMS should be able to edit
         label: "Deck title"
         hint: "This will not be displayed, but make it meaningful :)"
         widget: "string"
+        pattern: [".{1,}", "Must have at least 1 character"]
       - name: "slides"
         label: "Deck slides"
         label_singular: "Deck slide"
@@ -91,8 +92,9 @@ collections: # A list of collections the CMS should be able to edit
         min: 5000
       - name: "title"
         label: "Slide title"
-        hint: "Headline from either article (this will not be displayed)"
+        hint: "This will not be displayed, but make it meaningful :)"
         widget: "string"
+        pattern: [".{1,}", "Must have at least 1 character"]
       - name: "ad"
         label: "Advertisement"
         hint: "Should begin with 300x600_"
@@ -170,8 +172,10 @@ collections: # A list of collections the CMS should be able to edit
         valueType: "int"
         min: 5000
       - name: "title"
-        label: "Media caption"
+        label: "Slide title"
+        hint: "This will not be displayed, but make it meaningful :)"
         widget: "string"
+        pattern: [".{1,}", "Must have at least 1 character"]
       - name: "category"
         label: "Category"
         widget: "string"
@@ -184,6 +188,10 @@ collections: # A list of collections the CMS should be able to edit
         label: "Media"
         widget: "object"
         fields:
+          - name: "alt"
+            label: "Media caption"
+            widget: "string"
+            pattern: [".{1,}", "Must have at least 1 character"]
           - name: "src"
             label: "Media URL"
             widget: "string"
@@ -195,12 +203,13 @@ collections: # A list of collections the CMS should be able to edit
         widget: "object"
         required: false
         fields:
-          - name: "text"
-            label: "Article Headline"
-            widget: "string"
           - name: "href"
             label: "Article URL"
             widget: "string"
+          - name: "text"
+            label: "Article Headline"
+            widget: "string"
+            pattern: [".{1,}", "Must have at least 1 character"]
   - name: "pages"
     label: "Pages"
     create: false
@@ -231,8 +240,9 @@ collections: # A list of collections the CMS should be able to edit
     fields:
       - name: "title"
         label: "Ticker title"
-        hint: "This will not be displayed"
+        hint: "This will not be displayed, but make it meaningful :)"
         widget: "string"
+        pattern: [".{1,}", "Must have at least 1 character"]
       - name: "items"
         label: "Ticker items"
         label_singular: "Ticker item"
@@ -244,10 +254,10 @@ collections: # A list of collections the CMS should be able to edit
             widget: "object"
             fields:
               - name: "text"
-                label: "Ticker Content Text"
+                label: "Item text"
                 widget: "string"
               - name: "href"
-                label: "Ticker Content URL"
+                label: "Item URL"
                 widget: "string"
   - name: "news"
     label: "Top News"
@@ -267,12 +277,13 @@ collections: # A list of collections the CMS should be able to edit
         default: 15000
         valueType: "int"
         min: 5000
-      - name: "title"
-        label: "Headline"
-        widget: "string"
       - name: "href"
         label: "Article URL"
         widget: "string"
+      - name: "title"
+        label: "Article Headline"
+        widget: "string"
+        pattern: [".{1,}", "Must have at least 1 character"]
       - name: "author"
         label: "Author"
         hint: "Amazing person (or persons!!) who wrote this article! :)"

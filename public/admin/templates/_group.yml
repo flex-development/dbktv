@@ -23,8 +23,9 @@
       min: 5000
     - name: "title"
       label: "Slide title"
-      hint: "Headline from either article (this will not be displayed)"
+      hint: "This will not be displayed, but make it meaningful :)"
       widget: "string"
+      pattern: [".{1,}", "Must have at least 1 character"]
     - name: "ad"
       label: "Advertisement"
       hint: "Should begin with 300x600_"
