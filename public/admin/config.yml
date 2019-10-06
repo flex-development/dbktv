@@ -279,7 +279,7 @@ collections: # A list of collections the CMS should be able to edit
     files:
       - label: "Settings"
         name: "settings"
-        file: "api/pages/settings.json"
+        file: "public/api/pages/settings.json"
         fields:
           - name: deck
             label: "Current deck"
