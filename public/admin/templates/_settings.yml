@@ -2,7 +2,7 @@
 
 - label: "Settings"
   name: "settings"
-  file: "api/pages/settings.json"
+  file: "public/api/pages/settings.json"
   fields:
     - name: deck
       label: "Current deck"
