@@ -10,22 +10,22 @@ import { Articles, Default, Multimedia, News, Preview } from '.'
  */
 export default class Slide extends Component {
   /**
-   * Creates a new deck slide.
+   * Creates a new deck slide component
    *
    * @param {object} props - Component properties
-   * @returns {slide}
+   * @returns {Slide}
    */
   constructor(props) {
     super(props)
 
     /**
      * @property {object} state - Internal component state
-     * @property {object | null} state.data - Slide data
+     * @property {object | null} state.content - Slide data
      * @property {Component | null} state.template - Template component
      * @property {string | null} state.type - Name of template in lowercase
      * @instance
      */
-    this.state = { data: null, template: null, type: null }
+    this.state = { content: null, next: null, template: null, type: null }
 
     /**
      * @property {string} timer - Interval id of current slide timer
@@ -51,21 +51,26 @@ export default class Slide extends Component {
    * @returns {object | null}
    */
   static getDerivedStateFromProps(props, state) {
-    const { next, slide } = props.location.state
-    const { component, content, duration, mobile } = slide
+    const { content, filepath, mobile, next } = props.location.state
+    const { duration } = content
 
     let template = null
+    let component
 
     if (mobile) {
       template = <Preview data={{ component, content }} />
     } else {
-      if (component === 'Articles') {
+      if (filepath.includes('/content/slides/group')) {
+        component = 'Articles'
         template = <Articles content={content} />
-      } else if (component === 'Multimedia') {
+      } else if (filepath.includes('/content/slides/multimedia')) {
+        component = 'Multimedia'
         template = <Multimedia content={content} />
-      } else if (component === 'News') {
+      } else if (filepath.includes('/content/slides/news')) {
+        component = 'News'
         template = <News content={content} />
       } else {
+        component = 'Default'
         template = <Default />
       }
     }
@@ -81,8 +86,8 @@ export default class Slide extends Component {
    * @returns {undefined}
    */
   componentDidMount() {
-    const { pos, state } = this.props.location
-    pos(state.slide.position)
+    const { pos, position } = this.props.location.state
+    pos(position)
     this.start(true)
   }
 
@@ -123,11 +128,13 @@ export default class Slide extends Component {
    * @returns {string | undefined}
    */
   start = start => {
-    const { duration } = this.state
+    const { duration, next } = this.state
 
     if (start) {
+      const { content, path } = next
+
       this.timer = setTimeout(() => {
-        this.props.history.goForward()
+        this.props.history.push(path, content.state)
       }, process.env.NODE_ENV === 'development' ? 7500 : duration)
     } else {
       return clearInterval(this.timer)

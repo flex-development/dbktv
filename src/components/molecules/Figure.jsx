@@ -32,9 +32,7 @@ const Figure = props => {
             <Category category={category} />
             <Author author={credit} />
           </div>
-          <Headline
-            href={media.src} text={media.video ? media.caption : media.alt}
-          />
+          <Headline href={media.src} text={media.alt} />
           {related ? <Related {...related} target='_blank' /> : null}
         </Container>
       </figcaption>

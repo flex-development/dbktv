@@ -2,9 +2,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-// Firebase
-import { deck } from './api'
-
 // Utility functions
 import utils from './utils'
 
@@ -22,14 +19,15 @@ import './sass/app.sass'
 
 /**
  * @file Application entry point
+ *
+ * @todo Clean codebase
+ * @todo Add Socket.io for realtime listening
  * @author Lexus Drumgold <lex@lexusdrumgold.design>
  */
 
 // Render connected application into <div id="root"></div>
-ReactDOM.render(
-  <App api={axios} mock={deck} utils={utils} />,
-  document.getElementById('root')
-)
+const container = document.getElementById('root')
+ReactDOM.render(<App api={axios} utils={utils} />, container)
 
 /**
  * If you want your app to work offline and load faster, you can change
