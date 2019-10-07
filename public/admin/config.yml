@@ -67,6 +67,26 @@ collections: # A list of collections the CMS should be able to edit
             label: "Slide URL"
             hint: "Make sure this begins with https://dbktv.netlify.com/api/"
             widget: "string"
+  - name: "default"
+    label: "Default"
+    label_singular: "Default Slide"
+    folder: public/api/content/slides/default
+    slug: "default-{{slug}}"
+    preview_path: "/api/content/slides/default/{{slug}}.json"
+    create: false
+    extension: json
+    fields:
+      - name: "title"
+        label: "Slide title"
+        hint: "This will not be displayed, but make it meaningful :)"
+        widget: "string"
+      - name: "duration"
+        label: "Slide duration"
+        hint: "Time in milliseconds"
+        widget: "number"
+        default: 15000
+        valueType: "int"
+        min: 5000
   - name: "group"
     label: "Group Articles"
     label_singular: "Group Articles Slide"
@@ -231,12 +251,12 @@ collections: # A list of collections the CMS should be able to edit
         preview_path: "/api/pages/settings.json"
         fields:
           - name: deck
-            label: "Current deck"
-            hint: "Preview URL of the current deck"
+            label: "Current Deck URL"
+            hint: "Make sure this begins with https://dbktv.netlify.com/api/"
             widget: "string"
           - name: ticker
-            label: "Current Ticker"
-            hint: "Preview URL of the current ticker"
+            label: "Current Ticker URL"
+            hint: "Make sure this begins with https://dbktv.netlify.com/api/"
             widget: "string"
   - name: "ticker"
     label: "Tickers"

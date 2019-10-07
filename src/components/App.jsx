@@ -262,15 +262,20 @@ export default class App extends Component {
   // HELPERS
 
   deck = async url => {
+    console.warn('Fetching slide deck...')
+
     const { api, utils } = this.props
 
-    console.warn('Fetching slide deck...')
-    url = (new URI(url)).pathname().replace('/api', '')
-
+    url = this.filename(url)
     let deck
 
     try {
       deck = await api.get(url)
+
+      deck.slides = await Promise.all(deck.slides.map(async slide => {
+        slide = { filename: this.filename(slide.slide) }
+        return { ...slide, ...(await api.get(slide.filename)) }
+      }))
     } catch (err) {
       let { message } = err
       const { error } = utils
@@ -280,10 +285,6 @@ export default class App extends Component {
       return this.setState({ error: error.feathers(message, null, 404) })
     }
 
-    deck.slides = deck.slides.map(slide => {
-      slide = slide.slide
-      return slide
-    })
     console.info('Retreived slide deck ->', deck)
   }
 
@@ -317,6 +318,8 @@ export default class App extends Component {
    * @returns {boolean} @see @param loading
    */
   fetch = loading => this.setState({ loading }, () => loading)
+
+  filename = url => (new URI(url)).pathname().replace('/api', '')
 
   /**
    * Updates the internal slide id state.
