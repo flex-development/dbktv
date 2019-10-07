@@ -74,6 +74,7 @@ collections: # A list of collections the CMS should be able to edit
     slug: "default-{{slug}}"
     preview_path: "/api/content/slides/default/{{slug}}.json"
     create: false
+    delete: false
     extension: json
     fields:
       - name: "title"
