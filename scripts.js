@@ -34,15 +34,16 @@ function rmdir(dir) {
   }
 }
 
-let cmd = null
-
-if (args[0] === 'rmdir') {
-  cmd = rmdir(args[1])
-} else {
-  throw new Error(`Unknown task ${args[0]}`)
+let tasks = {
+  rmdir
 }
 
-if (cmd) {
+let task = tasks[args[0]]
+
+if (!task) {
+  throw new Error(`Unknown task ${args[0]}`)
+} else {
+  let cmd = task(...args.slice(1))
   exec(cmd, (err, stdout, stderr) => {
     if (err) {
       console.error(stderr)
