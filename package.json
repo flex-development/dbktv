@@ -5,7 +5,7 @@
   "author": "The Diamondback Lab",
   "scripts": {
     "preinstall": "rm -rf node_modules && npm run prebuild",
-    "lint": "eslint ./src/api/*.js ./src/components/*.jsx ./src/components/**/*.jsx --fix",
+    "lint": "eslint ./src/components/*.jsx ./src/components/**/*.jsx --fix",
     "predev": "NODE_ENV=development cp .env.development .env",
     "dev": "react-scripts start",
     "postdev": "rm -rf .env",
