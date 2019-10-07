@@ -14,32 +14,22 @@ import App from './components/App'
 // Service worker
 import * as sw from './config/sw.config'
 
+// Axios
+import axios from './config/axios'
+
 // Compiled Sass stylesheet
 import './sass/app.sass'
 
 /**
  * @file Application entry point
- *
- * @todo Feathers client application
- * @todo Slack reporting
- *
  * @author Lexus Drumgold <lex@lexusdrumgold.design>
  */
 
-/**
- * Component that connects the Feathers application to our React application.
- *
- * Until a client side Feathers app is initialized, we will pass the mock data
- * as a component property. Our utility functions will also be passed as
- * component properties.
- *
- * @todo Replace api prop with Feathers application
- * @returns {<App/>}
- */
-const FeathersApp = () => <App api={{}} mock={deck} utils={utils} />
-
-// Render connected Feathers application into <div id="root"></div>
-ReactDOM.render(<FeathersApp />, document.getElementById('root'))
+// Render connected application into <div id="root"></div>
+ReactDOM.render(
+  <App api={axios} mock={deck} utils={utils} />,
+  document.getElementById('root')
+)
 
 /**
  * If you want your app to work offline and load faster, you can change

@@ -2,6 +2,7 @@
 import React, { Component } from 'react'
 import { MemoryRouter } from 'react-router'
 import ReactGA from 'react-ga'
+import URI from 'urijs'
 import $ from 'jquery'
 
 // Context
@@ -75,6 +76,7 @@ export default class App extends Component {
       info: null,
       loading: true,
       mobile: $(window).width() <= 768,
+      settings: null,
       slides: null,
       ticker: null
     }
@@ -134,7 +136,14 @@ export default class App extends Component {
   async componentDidMount() {
     if (this.logging) console.info('Application mounted.')
 
-    // TODO: Subscribe to deck changes and update internal state
+    try {
+      const settings = await this.settings()
+
+      console.info('Retreived TV settings ->', settings)
+      await this.deck(settings.deck)
+    } catch (err) {
+      throw err
+    }
 
     // Attach window listener to update internal mobile state
     this.resize()
@@ -167,10 +176,8 @@ export default class App extends Component {
    * {@link https://reactjs.org/docs/react-component.html#componentdidupdate}
    */
   componentDidUpdate(props, state, snapshot) {
-    const { id, mobile } = snapshot
-    if (state.id !== id || state.mobile !== mobile) {
-      this.setState({ id, mobile })
-    }
+    const { mobile } = snapshot
+    if (state.mobile !== mobile) this.setState({ mobile })
   }
 
   /**
@@ -198,11 +205,11 @@ export default class App extends Component {
    *
    * @param {object} props - Previous component props
    * @param {object} state - Previous component state
-   * @returns {object} Object containing position of current slide and a boolean
-   * value indicating if the user is on a mobile device
+   * @returns {object} Object containing a boolean value indicating if the user
+   * is on a mobile device
    */
   getSnapshotBeforeUpdate(props, state) {
-    return { id: state.id, mobile: $(window).width() <= 768 }
+    return { mobile: $(window).width() <= 768 }
   }
 
   /**
@@ -253,6 +260,32 @@ export default class App extends Component {
   }
 
   // HELPERS
+
+  deck = async url => {
+    const { api, utils } = this.props
+
+    console.warn('Fetching slide deck...')
+    url = (new URI(url)).pathname().replace('/api', '')
+
+    let deck
+
+    try {
+      deck = await api.get(url)
+    } catch (err) {
+      let { message } = err
+      const { error } = utils
+
+      message = `DECK ERR -> UNABLE TO RETREIVE SLIDE DECK -> ${message}`
+
+      return this.setState({ error: error.feathers(message, null, 404) })
+    }
+
+    deck.slides = deck.slides.map(slide => {
+      slide = slide.slide
+      return slide
+    })
+    console.info('Retreived slide deck ->', deck)
+  }
 
   /**
    * Transform the incoming error into a FeathersError.
@@ -330,6 +363,18 @@ export default class App extends Component {
       // TODO: slide.pathname = slide.slug
       return { pathname: `/slides/${i + 1}`, pos: this.id, state: { slide } }
     })
+  }
+
+  settings = async () => {
+    const { api, utils } = this.props
+
+    console.warn('Fetching TV settings...')
+
+    try {
+      return await api.get('pages/settings.json')
+    } catch (err) {
+      return this.setState({ error: utils.error.feathers(`SETTINGS ERR -> UNABLE TO RETREIVE TV SETTINGS -> ${err.message}`, null, 404) })
+    }
   }
 
   /**
