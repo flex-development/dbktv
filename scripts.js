@@ -41,7 +41,7 @@ let tasks = {
 let task = tasks[args[0]]
 
 if (!task) {
-  throw new Error(`Unknown task ${args[0]}`)
+  throw new Error(`Unknown task ${args[0]}. Ensure the task is defined in the tasks object.`)
 } else {
   let cmd = task(...args.slice(1))
   exec(cmd, (err, stdout, stderr) => {
