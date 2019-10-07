@@ -41,8 +41,8 @@ collections: # A list of collections the CMS should be able to edit
     label: "Decks" # Used in the UI
     label_singular: "Deck" # Used in the UI, ie: "New Post"
     description: >
-      Use this template to create a new slide deck. Have your list of preview
-      links ready.
+      Use this template to create a new slide deck. 
+      Have your list of preview links ready.
     folder: public/api/content/decks
     slug: "deck-{{slug}}"
     preview_path: "/api/content/decks/{{slug}}.json"
