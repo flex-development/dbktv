@@ -12,18 +12,32 @@ if (args.length < 1) {
   throw new Error('Must provide a task name')
 }
 
-let cmd = null
+/**
+ * Genereates a shell command equivalent to "rm -rf" for multiple
+ * platforms
+ * @param {string} dir name of directory
+ * @returns {string} command to recursively remove directory
+ */
+function rmdir(dir) {
+  if (!dir) {
+    throw new Error('Must provide a folder name')
+  }
 
-if (args[0] === 'rmdir') {
   if (args.length < 2) {
     throw new Error('Must provide a folder name')
   }
 
   if (process.platform === 'win32') {
-    cmd = `RMDIR /Q /S "${args[1]}"`
+    return `RMDIR /Q /S "${args[1]}"`
   } else if (process.platform === 'darwin' || process.platform === 'linux') {
-    cmd = `rm -rf "${args[1]}"`
+    return `rm -rf "${args[1]}"`
   }
+}
+
+let cmd = null
+
+if (args[0] === 'rmdir') {
+  cmd = rmdir(args[1])
 } else {
   throw new Error(`Unknown task ${args[0]}`)
 }
