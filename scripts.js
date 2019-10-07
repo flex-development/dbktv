@@ -33,7 +33,7 @@ if (cmd) {
     if (err) {
       console.error(stderr)
     } else {
-      console.log(err)
+      console.log(stdout)
     }
   })
 }
