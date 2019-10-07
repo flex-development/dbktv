@@ -64,15 +64,9 @@ collections: # A list of collections the CMS should be able to edit
         widget: "list"
         fields:
           - name: "slide"
-            label: "Slide"
-            widget: "object"
-            fields:
-              - name: "href"
-                label: "Preview Link"
-                widget: "string"
-              - name: "raw"
-                label: "Data"
-                widget: "string"
+            label: "Slide URL"
+            hint: "Make sure this begins with https://dbktv.netlify.com/api/"
+            widget: "string"
   - name: "group"
     label: "Group Articles"
     label_singular: "Group Articles Slide"
