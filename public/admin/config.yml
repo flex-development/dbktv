@@ -72,8 +72,7 @@ collections: # A list of collections the CMS should be able to edit
                 widget: "string"
               - name: "raw"
                 label: "Data"
-                widget: "markdown"
-                buttons: ["code"]
+                widget: "text"
   - name: "group"
     label: "Group Articles"
     label_singular: "Group Articles Slide"

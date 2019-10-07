@@ -32,6 +32,7 @@
     "url": "https://github.com/The-Diamondback-Lab/dbktv/issues"
   },
   "dependencies": {
+    "@feathersjs/configuration": "^4.3.4",
     "@feathersjs/errors": "^3.3.6",
     "@fortawesome/fontawesome-svg-core": "^1.2.19",
     "@fortawesome/free-solid-svg-icons": "^5.9.0",
@@ -39,6 +40,7 @@
     "axios": "^0.19.0",
     "firebase": "^6.4.1",
     "jquery": "^3.4.1",
+    "md-2-json": "^1.0.6",
     "netlify-identity-widget": "^1.5.5",
     "react": "^16.9.0",
     "react-dfp": "^0.13.0",
@@ -46,7 +48,8 @@
     "react-ga": "^2.6.0",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.1.1",
-    "showdown": "^1.9.0"
+    "showdown": "^1.9.0",
+    "urijs": "^1.19.1"
   },
   "devDependencies": {
     "@babel/core": "^7.5.5",
@@ -56,7 +59,7 @@
     "@babel/plugin-proposal-throw-expressions": "^7.2.0",
     "@babel/preset-env": "^7.5.5",
     "@babel/preset-react": "^7.0.0",
-    "@feathersjs/feathers": "^4.3.3",
+    "@feathersjs/feathers": "^4.3.4",
     "babel-eslint": "^11.0.0-beta.0",
     "babel-jest": "^24.9.0",
     "concurrently": "^4.1.2",
