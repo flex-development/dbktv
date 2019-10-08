@@ -1,4 +1,5 @@
 const { exec } = require('child_process')
+const fs = require('fs')
 
 const supportedPlatforms = ['win32', 'darwin', 'linux']
 
@@ -34,8 +35,23 @@ function rmdir(dir) {
   }
 }
 
+/**
+ * Copies one file to another destination.
+ * @param {string} src source file
+ * @param {string} dest destination file
+ * @returns {void}
+ */
+function cp(src, dest) {
+  fs.copyFile(src, dest, (err) => {
+    if (err) {
+      throw err
+    }
+  })
+}
+
 let tasks = {
-  rmdir
+  rmdir,
+  cp
 }
 
 let task = tasks[args[0]]
@@ -44,11 +60,16 @@ if (!task) {
   throw new Error(`Unknown task ${args[0]}. Ensure the task is defined in the tasks object.`)
 } else {
   let cmd = task(...args.slice(1))
-  exec(cmd, (err, stdout, stderr) => {
-    if (err) {
-      console.error(stderr)
-    } else {
-      console.log(stdout)
-    }
-  })
+
+  if (!cmd) {
+    console.info(`${args[0]} didn't return a command. Assuming it executed a JS command`)
+  } else {
+    exec(cmd, (err, stdout, stderr) => {
+      if (err) {
+        console.error(stderr)
+      } else {
+        console.log(stdout)
+      }
+    })
+  }
 }
