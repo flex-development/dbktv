@@ -36,12 +36,19 @@
   +respond-to($breakpoint-xxl, min)
     font-size: size(22)
 
+
   +respond-to($breakpoint-xxxl, min)
     font-size: size(29.333)
+
 
   font-size: size(16.5)
   margin: size(10) 0 size(20)
   width: 100%
+
+.blurb > p > a
+  color: $accent-med
+  font-weight: 600
+  text-decoration: none
 
 .category
   color: $accent-med
@@ -52,8 +59,10 @@
   +respond-to($breakpoint-xxl, min)
     font-size: size(24)
 
+
   +respond-to($breakpoint-xxxl, min)
     font-size: size(32)
+
 
   font:
     size: size(18) !important
