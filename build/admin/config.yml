@@ -14,10 +14,10 @@ backend:
 publish_mode: editorial_workflow
 
 # Folder where uploaded files should be saved, relative to the base of the repo
-media_folder: "src/assets/static/"
+media_folder: "public/uploads/"
 
 # Folder where uploaded files will be accessed, relative to the build site base
-public_folder: "/src/content/"
+public_folder: "public/uploads/"
 
 # URL of published site
 site_url: https://dbktv.netlify.com
@@ -38,16 +38,15 @@ slug:
 # generate files and content in your repository
 collections: # A list of collections the CMS should be able to edit
   - name: "news" # Used in routes, ie.: /admin/collections/:slug/edit
-    label: "News" # Used in the UI
-    label_singular: "Top News" # Used in the UI, ie: "New Post"
+    label: "Top News Slides" # Used in the UI
+    label_singular: "Top News Slide" # Used in the UI, ie: "New Post"
     description: >
       Use this template to create a "Top News" deck slide. The template renders a feature article with a cover image and article preview.
-    folder: public/content/slides/news
-    slug: news-{{slug}}
-    preview_path: /preview/{{slug}}
+    folder: public/api/content/slides
+    slug: "news-{{slug}}"
+    preview_path: "/api/content/slides/{{slug}}.json"
     create: true # Allow users to create new documents in this collection
     extension: json # File extension to match to existing entries
-    identifier_field: "text"
     fields: # The fields each document in this collection have
       - name: "duration"
         label: "Slide duration"
@@ -56,20 +55,17 @@ collections: # A list of collections the CMS should be able to edit
         default: 15000
         valueType: "int"
         min: 5000
-      - name: "sponsored"
-        label: "Sponsored Article?"
-        hint: "True if sponsosred article"
-        widget: "boolean"
-        default: false
+      - name: "title"
+        label: "Headline"
+        widget: "string"
       - name: "href"
         label: "Article URL"
         widget: "string"
-      - name: "text"
-        label: "Headline"
-        widget: "string"
       - name: "author"
-        label: "Amazing person (or persons!!) who wrote this article! :)"
+        label: "Author"
+        hint: "Amazing person (or persons!!) who wrote this article! :)"
         widget: "string"
+        default: "The Diamondback"
       - name: "image"
         label: "Background Image"
         widget: "object"
@@ -78,8 +74,140 @@ collections: # A list of collections the CMS should be able to edit
             label: "Media URL"
             widget: "string"
           - name: "alt"
-            label: "Alternate Text"
+            label: "Media caption"
             widget: "string"
       - name: "body"
         label: "Article blurb"
+        hint: "Max 3 graphs!"
         widget: "markdown"
+  - name: "multimedia"
+    label: "Multimedia Slides"
+    label_singular: "Multimedia Slide"
+    description: >
+      Use this template to create a "Multimedia" deck slide. The template
+      renders an image or video.
+    folder: public/api/content/slides
+    slug: "multimedia-{{slug}}"
+    preview_path: "/api/content/slides/{{slug}}.json"
+    create: true
+    extension: json
+    fields:
+      - name: "duration"
+        label: "Slide duration"
+        hint: "Time in milliseconds"
+        widget: "number"
+        default: 15000
+        valueType: "int"
+        min: 5000
+      - name: "title"
+        label: "Media caption"
+        widget: "string"
+      - name: "category"
+        label: "Category"
+        widget: "string"
+      - name: "credit"
+        label: "Credit"
+        hint: "Who took this?"
+        widget: "string"
+        default: "The Diamondback"
+      - name: "media"
+        label: "Media"
+        widget: "object"
+        fields:
+          - name: "src"
+            label: "Media URL"
+            widget: "string"
+          - name: "video"
+            label: "Is this a video?"
+            widget: "boolean"
+      - name: "related"
+        label: "Related Article"
+        widget: "object"
+        required: false
+        fields:
+          - name: "text"
+            label: "Article Headline"
+            widget: "string"
+          - name: "href"
+            label: "Article URL"
+            widget: "string"
+  - name: "group"
+    label: "Group Articles Slides"
+    label_singular: "Group Articles Slide"
+    description: >
+      Use this template to create a "Group Articles" deck slide. The template
+      renders two articles and a 300x600 advertisement.
+    folder: public/api/content/slides
+    slug: "group-{{slug}}"
+    preview_path: "/api/content/slides/{{slug}}.json"
+    create: true
+    extension: json
+    fields:
+      - name: "duration"
+        label: "Slide duration"
+        hint: "Time in milliseconds"
+        widget: "number"
+        default: 15000
+        valueType: "int"
+        min: 5000
+      - name: "title"
+        label: "Slide title"
+        hint: "Headline from either article"
+        widget: "string"
+      - name: "ad"
+        label: "Advertisement"
+        hint: "Should begin with 300x600_"
+        widget: "string"
+        required: false
+      - name: "article1"
+        label: "First article"
+        widget: "object"
+        fields:
+          - name: "headline"
+            label: "Headline"
+            widget: "object"
+            fields:
+              - name: "text"
+                label: "Article Title"
+                widget: "string"
+              - name: "href"
+                label: "Article URL"
+                widget: "string"
+          - name: "author"
+            label: "Author"
+            hint: "Amazing person (or persons!!) who wrote this article! :)"
+            widget: "string"
+            default: "The Diamondback"
+          - name: "category"
+            label: "Category"
+            widget: "string"
+          - name: "blurb"
+            label: "Article blurb"
+            hint: "1 to 2 sentences!"
+            widget: "markdown"
+      - name: "article2"
+        label: "Second article"
+        widget: "object"
+        fields:
+          - name: "headline"
+            label: "Headline"
+            widget: "object"
+            fields:
+              - name: "text"
+                label: "Article Title"
+                widget: "string"
+              - name: "href"
+                label: "Article URL"
+                widget: "string"
+          - name: "author"
+            label: "Author"
+            hint: "Amazing person (or persons!!) who wrote this article! :)"
+            widget: "string"
+            default: "The Diamondback"
+          - name: "category"
+            label: "Category"
+            widget: "string"
+          - name: "blurb"
+            label: "Article blurb"
+            hint: "1 to 2 sentences!"
+            widget: "markdown"

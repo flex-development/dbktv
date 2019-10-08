@@ -2,6 +2,7 @@
 import React, { Component } from 'react'
 import { MemoryRouter } from 'react-router'
 import ReactGA from 'react-ga'
+import URI from 'urijs'
 import $ from 'jquery'
 
 // Context
@@ -72,18 +73,13 @@ export default class App extends Component {
       analytics: false,
       deck: null,
       error: null,
+      id: null,
       info: null,
       loading: true,
       mobile: $(window).width() <= 768,
-      slides: null,
+      settings: null,
       ticker: null
     }
-
-    /**
-     * @property {object} subscriptions - Database subscriptions
-     * @instance
-     */
-    this.subscriptions = {}
   }
 
   /**
@@ -103,8 +99,8 @@ export default class App extends Component {
    * @returns {object | null}
    */
   static getDerivedStateFromProps(props, state) {
-    const { mock, utils } = props
-    return { ...mock, mobile: utils.ui.is_mobile() }
+    const { utils } = props
+    return { mobile: utils.ui.is_mobile() }
   }
 
   /**
@@ -134,7 +130,20 @@ export default class App extends Component {
   async componentDidMount() {
     if (this.logging) console.info('Application mounted.')
 
-    // TODO: Subscribe to deck changes and update internal state
+    try {
+      const settings = await this.settings()
+
+      console.info('Retreived TV settings ->', settings)
+
+      const deck = await this.deck(settings.deck)
+      const ticker = await this.ticker(settings.ticker)
+
+      this.setState({ deck, settings, ticker })
+    } catch (err) {
+      throw err
+    }
+
+    // TODO: Listen for changes
 
     // Attach window listener to update internal mobile state
     this.resize()
@@ -167,10 +176,8 @@ export default class App extends Component {
    * {@link https://reactjs.org/docs/react-component.html#componentdidupdate}
    */
   componentDidUpdate(props, state, snapshot) {
-    const { id, mobile } = snapshot
-    if (state.id !== id || state.mobile !== mobile) {
-      this.setState({ id, mobile })
-    }
+    const { mobile } = snapshot
+    if (state.mobile !== mobile) this.setState({ mobile })
   }
 
   /**
@@ -198,11 +205,11 @@ export default class App extends Component {
    *
    * @param {object} props - Previous component props
    * @param {object} state - Previous component state
-   * @returns {object} Object containing position of current slide and a boolean
-   * value indicating if the user is on a mobile device
+   * @returns {object} Object containing a boolean value indicating if the user
+   * is on a mobile device
    */
   getSnapshotBeforeUpdate(props, state) {
-    return { id: state.id, mobile: $(window).width() <= 768 }
+    return { mobile: $(window).width() <= 768 }
   }
 
   /**
@@ -223,7 +230,7 @@ export default class App extends Component {
    * @returns {<MemoryRouter/>}
    */
   render() {
-    const { error, id, info, loading, mobile, slides, ticker } = this.state
+    const { deck, error, id, info, loading, mobile, ticker } = this.state
     const { utils } = this.props
 
     // Handle error and loading states
@@ -231,21 +238,21 @@ export default class App extends Component {
     if (loading) return <Loading />
 
     // Gather Deck component properties
-    const routes = this.routes(slides)
-    const deck = { error: this.error, fetch: this.fetch, slides: routes, utils }
+    const { slides } = deck
+    const props = { error: this.error, fetch: this.fetch, slides, utils }
 
     // Render application
     return (
-      <MemoryRouter initialEntries={routes} initialIndex={0}>
+      <MemoryRouter initialEntries={deck.slides} initialIndex={id}>
         <MobileContext.Provider value={{ mobile }}>
           <Header container>
             <Logo />
           </Header>
-          <DeckNavigation active={id} slides={routes} />
-          <Deck {...deck} />
+          <DeckNavigation active={id} slides={slides} />
+          <Deck {...props} />
           <Footer>
             <Logo mini={mobile} />
-            <Ticker items={ticker} />
+            <Ticker items={ticker.items} />
           </Footer>
         </MobileContext.Provider>
       </MemoryRouter>
@@ -253,6 +260,42 @@ export default class App extends Component {
   }
 
   // HELPERS
+
+  deck = async url => {
+    console.warn('Fetching slide deck...')
+
+    const { api, utils } = this.props
+    let deck
+
+    try {
+      deck = await api.get(this.filepath(url))
+
+      deck.slides = await Promise.all(deck.slides.map(async (slide, i) => {
+        slide = { filepath: this.filepath(slide.slide) }
+
+        return {
+          pathname: `/slides/${i + 1}`,
+          state: {
+            ...slide,
+            content: await api.get(slide.filepath),
+            mobile: this.state.mobile,
+            position: i,
+            pos: this.id
+          }
+        }
+      }))
+    } catch (err) {
+      let { message } = err
+      const { error } = utils
+
+      message = `DECK ERR -> UNABLE TO RETREIVE SLIDE DECK -> ${message}`
+
+      return this.setState({ error: error.feathers(message, null, 404) })
+    }
+
+    console.info('Retreived slide deck ->', deck)
+    return deck
+  }
 
   /**
    * Transform the incoming error into a FeathersError.
@@ -285,6 +328,8 @@ export default class App extends Component {
    */
   fetch = loading => this.setState({ loading }, () => loading)
 
+  filepath = url => (new URI(url)).pathname().replace('/api', '')
+
   /**
    * Updates the internal slide id state.
    *
@@ -300,36 +345,38 @@ export default class App extends Component {
    */
   resize = () => this.setState({ mobile: $(window).width() <= 768 })
 
-  /**
-   * Transforms an array of slide objects into an array of route objects.
-   * This is necessary for our MemoryRouter.
-   *
-   * If @param slides is undefined, the internal error state will be updated
-   * with a NotFound error and the method will return undefined.
-   *
-   * @todo slide.pathname = slide.slug
-   *
-   * @param {object[]} slides - Array of slide objects
-   * @returns {object[]} Array of route objects
-   * @throws {NotFound}
-   */
-  routes = slides => {
-    if (this.logging) console.warn('ROUTING -> Getting routes...')
+  settings = async () => {
+    const { api, utils } = this.props
 
-    if (!slides) {
-      const { error } = this.props.utils
-      return this.setState({
-        error: error.feathers('ROUTING ERR -> Slides not found.', null, 404)
-      })
+    console.warn('Fetching TV settings...')
+
+    try {
+      return await api.get('pages/settings.json')
+    } catch (err) {
+      return this.setState({ error: utils.error.feathers(`SETTINGS ERR -> UNABLE TO RETREIVE TV SETTINGS -> ${err.message}`, null, 404) })
+    }
+  }
+
+  ticker = async url => {
+    console.warn('Fetching ticker...')
+
+    const { api, utils } = this.props
+    let ticker
+
+    try {
+      ticker = await api.get(this.filepath(url))
+    } catch (err) {
+      let { message } = err
+      const { error } = utils
+
+      message = `TICKER ERR -> UNABLE TO RETREIVE TICKER DATA -> ${message}`
+
+      return this.setState({ error: error.feathers(message, null, 404) })
     }
 
-    // Turn slide object into route objects
-    return slides.map((slide, i) => {
-      slide.position = i
-      slide.mobile = this.state.mobile
-      // TODO: slide.pathname = slide.slug
-      return { pathname: `/slides/${i + 1}`, pos: this.id, state: { slide } }
-    })
+    ticker.items = await Promise.all(ticker.items.map(item => item.item))
+    console.info('Retreived ticker ->', ticker)
+    return ticker
   }
 
   /**

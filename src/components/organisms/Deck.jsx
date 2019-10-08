@@ -59,15 +59,21 @@ export default class Deck extends Component {
     const { slides } = props
 
     const count = slides.length
-    const durations = slides.map(slide => slide.duration)
+    const durations = slides.map(slide => slide.state.content.duration)
 
     return {
       count,
       duration: durations.reduce((total, value) => total + value),
       position: 0,
       slides: slides.map((slide, i) => {
+        const end = i === count - 1
+
         slide.state.id = slide.pathname
-        slide.state.next = i === count - 1 ? `/slides/1` : `/slides/${i + 2}`
+        slide.state.next = {
+          content: end ? slides[0] : slides[i + 1],
+          path: end ? `/slides/1` : `/slides/${i + 2}`
+        }
+
         return slide
       })
     }
