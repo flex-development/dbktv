@@ -4,13 +4,13 @@
   "version": "1.0.0",
   "author": "The Diamondback Lab",
   "scripts": {
-    "preinstall": "node scripts.js rmdir node_modules/ && npm run prebuild",
+    "preinstall": "node scripts.js rm node_modules/ && npm run prebuild",
     "lint": "eslint ./src/api/*.js ./src/components/*.jsx ./src/components/**/*.jsx --fix",
     "predev": "cross-env NODE_ENV=development node cp .env.development .env",
     "dev": "react-scripts start",
-    "postdev": "node scripts.js rmdir .env/",
+    "postdev": "node scripts.js rm .env",
     "test": "cross-env NODE_ENV=test jest --detectOpenHandles --passWithNoTests",
-    "prebuild": "node scripts.js rmdir build/",
+    "prebuild": "node scripts.js rm build/",
     "build": "npm run lint && react-scripts build",
     "prestart": "cross-env NODE_ENV=production cp .env.production .env && npm run build",
     "start": "serve -s build"

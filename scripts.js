@@ -28,7 +28,7 @@ function rmdir(dir) {
   }
 
   if (process.platform === 'win32') {
-    return `RMDIR /Q /S "${args[1]}"`
+    return `DEL /F /Q /S "${args[1]}"`
   } else if (process.platform === 'darwin' || process.platform === 'linux') {
     return `rm -rf "${args[1]}"`
   }
