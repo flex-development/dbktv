@@ -19,7 +19,7 @@ if (args.length < 1) {
  * @param {string} dir name of directory
  * @returns {string} command to recursively remove directory
  */
-function rmdir(dir) {
+function rm(dir) {
   if (!dir) {
     throw new Error('Must provide a folder name')
   }
@@ -50,7 +50,7 @@ function cp(src, dest) {
 }
 
 let tasks = {
-  rmdir,
+  rm,
   cp
 }
 
