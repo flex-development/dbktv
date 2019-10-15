@@ -1,0 +1,16 @@
+{
+  "last_edited_by": "Manuela",
+  "duration": 15000,
+  "title": "mr kitty",
+  "category": "Multimedia",
+  "credit": "The Diamondback",
+  "media": {
+    "alt": "A look into UMD’s premiere cat-man duo.",
+    "src": "https://www.youtube.com/watch?v=oH7ZO3CkwvA&t=1s",
+    "video": true
+  },
+  "related": {
+    "href": "https://dbknews.com/2019/10/11/umd-cat-on-leash-hyper-and-sam-campus/",
+    "text": "Meet Hyper and Sam, the pair you’ve definitely seen around campus"
+  }
+}
