@@ -1,0 +1,96 @@
+# Group Articles Template
+# Displays two article previews in the left rail, and one 300x600 advertisement
+# in the right rail
+
+- name: "group"
+  label: "Group Articles"
+  label_singular: "Group Articles Slide"
+  description: >
+    Use this template to create a "Group Articles" deck slide. The template
+    renders two articles and a 300x600 advertisement.
+  folder: public/api/content/slides/group
+  slug: "group-{{slug}}"
+  preview_path: "/api/content/slides/group/{{slug}}.json"
+  create: true
+  extension: json
+  fields:
+    - name: "last_edited_by"
+      label: "Lasted Edited By"
+      hint: "Who worked on this last?"
+      widget: "string"
+    - name: "duration"
+      label: "Slide duration"
+      hint: "Time in milliseconds"
+      widget: "number"
+      default: 15000
+      valueType: "int"
+      min: 5000
+    - name: "title"
+      label: "Slide title"
+      hint: "This will not be displayed, but make it meaningful :)"
+      widget: "string"
+    - name: "ad"
+      label: "Advertisement"
+      hint: "Should begin with 300x600_"
+      widget: "string"
+      required: false
+    - name: "article1"
+      label: "First article"
+      widget: "object"
+      fields:
+        - name: "headline"
+          label: "Headline"
+          widget: "object"
+          fields:
+            - name: "href"
+              label: "Article URL"
+              widget: "string"
+            - name: "text"
+              label: "Article Title"
+              widget: "string"
+        - name: "sponsored"
+          label: "Is this a sponsored article?"
+          widget: "boolean"
+        - name: "author"
+          label: "Author"
+          hint: "Amazing person (or persons!!) who wrote this article! :)"
+          widget: "string"
+          default: "The Diamondback"
+        - name: "category"
+          label: "Category"
+          widget: "string"
+        - name: "blurb"
+          label: "Article blurb"
+          hint: "2 to 3 sentences!"
+          widget: "markdown"
+          buttons: ["bold", "italic", "link"]
+    - name: "article2"
+      label: "Second article"
+      widget: "object"
+      fields:
+        - name: "headline"
+          label: "Headline"
+          widget: "object"
+          fields:
+            - name: "href"
+              label: "Article URL"
+              widget: "string"
+            - name: "text"
+              label: "Article Title"
+              widget: "string"
+        - name: "sponsored"
+          label: "Is this a sponsored article?"
+          widget: "boolean"
+        - name: "author"
+          label: "Author"
+          hint: "Amazing person (or persons!!) who wrote this article! :)"
+          widget: "string"
+          default: "The Diamondback"
+        - name: "category"
+          label: "Category"
+          widget: "string"
+        - name: "blurb"
+          label: "Article blurb"
+          hint: "2 to 3 sentences!"
+          widget: "markdown"
+          buttons: ["bold", "italic", "link"]

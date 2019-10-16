@@ -1,0 +1,27 @@
+{
+  "last_edited_by": "Lex",
+  "title": "Test Deck",
+  "slides": [
+    {
+      "slide": "https://dbktv.netlify.com/api/content/slides/news/news-sponsored-article-cava-welcomes-harissa-honey-chicken-to-restaurants-september-30th.json"
+    },
+    {
+      "slide": "https://dbktv.netlify.com/api/content/slides/multimedia/multimedia-running-back-javon-leake-runs-downfield-during-maryland-football-s-48-7-win-over-rutgers-on-oct-5-2019-in-piscataway-new-jersey-julia-nikhinson-the-diamondback.json"
+    },
+    {
+      "slide": "https://dbktv.netlify.com/api/content/slides/group/group-airpods-are-expensive-here-s-five-earphones-and-headphones-that-aren-t.json"
+    },
+    {
+      "slide": "https://dbktv.netlify.com/api/content/slides/default/default-five-seconds.json"
+    },
+    {
+      "slide": "https://dbktv.netlify.com/api/content/slides/news/news-pgpd-investigates-death-following-struggle-on-college-avenue.json"
+    },
+    {
+      "slide": "https://dbktv.netlify.com/api/content/slides/multimedia/multimedia-lets-get-spooky.json"
+    },
+    {
+      "slide": "https://dbktv.netlify.com/api/content/slides/group/group-can-t-be-overlooked-study-says-college-voter-turnout-doubled-from-2014-to-2018.json"
+    }
+  ]
+}

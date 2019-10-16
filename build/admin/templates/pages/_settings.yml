@@ -1,0 +1,14 @@
+# Deck Settings Template
+
+- label: "Settings"
+  name: "settings"
+  file: "public/api/pages/settings.json"
+  fields:
+    - name: deck
+      label: "Current deck"
+      hint: "Preview URL of the current deck"
+      widget: "string"
+    - name: ticker
+      label: "Current Ticker"
+      hint: "Preview URL of the current ticker"
+      widget: "string"
