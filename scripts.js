@@ -61,7 +61,7 @@ if (!task) {
 } else {
   let cmd = task(...args.slice(1))
 
-  if (!cmd) {
+  if (cmd == null) {
     console.info(`${args[0]} didn't return a command. Assuming it executed a JS command`)
   } else {
     exec(cmd, (err, stdout, stderr) => {
