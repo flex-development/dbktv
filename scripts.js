@@ -4,7 +4,7 @@ const fs = require('fs')
 const supportedPlatforms = ['win32', 'darwin', 'linux']
 
 if (supportedPlatforms.indexOf(process.platform)) {
-  console.warn(`Your platform (${process.platform}) may be unsupported.`)
+  throw new Error(`Your platform (${process.platform}) may be unsupported.`)
 }
 
 let args = process.argv.slice(2)
