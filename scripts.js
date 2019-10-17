@@ -24,10 +24,6 @@ function rm(dir) {
     throw new Error('Must provide a folder name')
   }
 
-  if (args.length < 2) {
-    throw new Error('Must provide a folder name')
-  }
-
   if (process.platform === 'win32') {
     return `DEL /F /Q /S "${args[1]}"`
   } else if (process.platform === 'darwin' || process.platform === 'linux') {
@@ -42,6 +38,12 @@ function rm(dir) {
  * @returns {void}
  */
 function cp(src, dest) {
+  if (src == null) {
+    throw new Error('Must provide a source path to copy')
+  } else if (dest == null) {
+    throw new Error('Must provide a destination path where to copy to')
+  }
+
   fs.copyFile(src, dest, (err) => {
     if (err) {
       throw err
