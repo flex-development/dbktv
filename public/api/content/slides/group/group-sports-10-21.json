@@ -1,0 +1,25 @@
+{
+  "last_edited_by": "Rachel Hunt",
+  "duration": 15000,
+  "title": "Sports 10/21",
+  "article1": {
+    "headline": {
+      "href": "https://dbknews.com/2019/10/20/maryland-football-indiana-halftime-touchdown-nick-westbrook-tom-allen/",
+      "text": "“That was the difference”: Indiana’s touchdown before halftime sank Maryland football"
+    },
+    "sponsored": false,
+    "author": "Andy Kostka",
+    "category": "Sports",
+    "blurb": "Indiana coach Tom Allen was on the sideline in College Park two seasons ago, in another close matchup against Maryland football, and saw the momentum swing entering the locker room. \n\nBack then, with 37 seconds left before halftime, a 2-yard touchdown pass from Max Bortenschlager to D.J. Moore gave the Terps their first lead, erasing a 14-point first-quarter deficit in an eventual 42-39 win."
+  },
+  "article2": {
+    "headline": {
+      "href": "As Nebraska dominated, Maryland volleyball plagued itself with service errors",
+      "text": "https://dbknews.com/2019/10/20/maryland-volleyball-nebraska-service-errors-samantha-burgio-adam-hughes/"
+    },
+    "sponsored": false,
+    "author": "Kevin F. McNully",
+    "category": "Sports",
+    "blurb": "In front of a record crowd at Xfinity Pavilion, defensive specialist Samantha Burgio’s first serve of Maryland volleyball’s Saturday match against Nebraska sailed straight into the net.\n\nBurgio’s serve would set the tone for the rest of the night, as the Terps’ miscues from behind the endline dug themselves into frequent holes. The same problem that hurt Maryland during the nonconference season resurfaced, and it let nine serves go awry for Cornhuskers points."
+  }
+}
