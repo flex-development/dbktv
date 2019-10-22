@@ -2,10 +2,12 @@
 # Created by https://www.gitignore.io/api/node,macos,firebase
 # Edit at https://www.gitignore.io/?templates=node,macos,firebase
 
+**/node_modules/*
+build/*
+
 ### Firebase ###
 .idea
 /functions/firebase-debug.log
-**/node_modules/*
 # **/.firebaserc
 
 ### Firebase Patch ###
