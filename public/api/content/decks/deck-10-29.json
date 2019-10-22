@@ -3,13 +3,13 @@
   "title": "10/22 Test",
   "slides": [
     {
-      "slide": "https://dbktv.netlify.com/admin/#/collections/news/entries/news-umd-announces-james-clapper-as-winter-commencement-speaker"
+      "slide": "https://dbktv.netlify.com/api/content/slides/news/news-umd-announces-james-clapper-as-winter-commencement-speaker.json"
     },
     {
-      "slide": "https://dbktv.netlify.com/admin/#/collections/group/entries/group-sports-10-21"
+      "slide": "https://dbktv.netlify.com/api/content/slides/group/group-sports-10-21.json"
     },
     {
-      "slide": "https://dbktv.netlify.com/admin/#/collections/ticker/entries/ticker-10-21-ticker"
+      "slide": "https://dbktv.netlify.com/api/content/tickers/ticker-10-21-ticker.json"
     }
   ]
 }
