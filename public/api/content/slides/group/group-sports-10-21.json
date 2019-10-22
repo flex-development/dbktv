@@ -1,25 +1,25 @@
 {
-  "last_edited_by": "Rachel Hunt",
+  "last_edited_by": "Alexander Dacy",
   "duration": 15000,
-  "title": "Sports 10/21",
+  "title": "Sports 10/22",
   "article1": {
     "headline": {
-      "href": "https://dbknews.com/2019/10/20/maryland-football-indiana-halftime-touchdown-nick-westbrook-tom-allen/",
-      "text": "“That was the difference”: Indiana’s touchdown before halftime sank Maryland football"
+      "href": "https://dbknews.com/2019/10/21/maryland-mens-soccer-yale-game-score-recap-result-johannes-bergmann/",
+      "text": "Johannes Bergmann’s OT goal gives No. 25 Maryland men’s soccer 1-0 win over No. 24 Yale"
+    },
+    "sponsored": false,
+    "author": "Eric Myers",
+    "category": "Sports",
+    "blurb": "With the clock running down on an uneventful overtime session, forward Justin Gielen nearly had a chance to end the game. Instead, a Yale defender deflected the cross past the endline.\n\nMidfielder Eli Crognale sprinted to the corner to take the set piece as time rapidly ticked under one minute. He floated his cross toward the back post, where defender Johannes Bergmann patiently waited out his chance to spring into the air for a header.\n\nFor the second consecutive game, Bergmann was on the receiving end of a Crognale pass and headed the cross into the back of the net. This time, it was a finish in the 100th minute that gave the No. 25 Terps a 1-0 victory over No. 24 Yale on Monday night at Ludwig Field."
+  },
+  "article2": {
+    "headline": {
+      "href": "https://dbknews.com/2019/10/21/maryland-mens-basketball-ranking-rank-ap-poll-mark-turgeon-anthony-cowan/",
+      "text": "Maryland men’s basketball slots in at No. 7 in preseason AP Top 25 poll"
     },
     "sponsored": false,
     "author": "Andy Kostka",
     "category": "Sports",
-    "blurb": "Indiana coach Tom Allen was on the sideline in College Park two seasons ago, in another close matchup against Maryland football, and saw the momentum swing entering the locker room. \n\nBack then, with 37 seconds left before halftime, a 2-yard touchdown pass from Max Bortenschlager to D.J. Moore gave the Terps their first lead, erasing a 14-point first-quarter deficit in an eventual 42-39 win."
-  },
-  "article2": {
-    "headline": {
-      "href": "As Nebraska dominated, Maryland volleyball plagued itself with service errors",
-      "text": "https://dbknews.com/2019/10/20/maryland-volleyball-nebraska-service-errors-samantha-burgio-adam-hughes/"
-    },
-    "sponsored": false,
-    "author": "Kevin F. McNully",
-    "category": "Sports",
-    "blurb": "In front of a record crowd at Xfinity Pavilion, defensive specialist Samantha Burgio’s first serve of Maryland volleyball’s Saturday match against Nebraska sailed straight into the net.\n\nBurgio’s serve would set the tone for the rest of the night, as the Terps’ miscues from behind the endline dug themselves into frequent holes. The same problem that hurt Maryland during the nonconference season resurfaced, and it let nine serves go awry for Cornhuskers points."
+    "blurb": "After an offseason of mounting expectations and top-10 rankings in offseason polls, the Maryland men’s basketball team now knows where it stands to begin the 2019-20 slate: 7th, according to the preseason AP Poll released Monday.\n\nThe Terps are returning many of their key players from last year — barring forward Bruno Fernando, who is now with the Atlanta Hawks in the NBA — and coach Mark Turgeon has raved about the depth his squad now has."
   }
 }
