@@ -4,6 +4,9 @@
   "slides": [
     {
       "slide": "https://dbktv.netlify.com/api/content/slides/news/news-facing-low-customer-turnout-the-downtown-college-park-farmers-market-s-future-is-unclear.json"
+    },
+    {
+      "slide": "https://dbktv.netlify.com/api/content/slides/group/group-local-developments.json"
     }
   ]
 }
