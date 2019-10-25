@@ -10,6 +10,9 @@
     },
     {
       "slide": "https://dbktv.netlify.com/api/content/slides/news/news-maryland-women-s-soccer-tops-michigan-state-1-0-for-first-ever-big-ten-tournament-berth.json"
+    },
+    {
+      "slide": "https://dbktv.netlify.com/api/content/tickers/ticker-10-25-ticker.json"
     }
   ]
 }
