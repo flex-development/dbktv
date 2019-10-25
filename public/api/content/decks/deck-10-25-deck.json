@@ -1,0 +1,18 @@
+{
+  "last_edited_by": "Camryn DeLuca",
+  "title": "10/25 deck",
+  "slides": [
+    {
+      "slide": "https://dbktv.netlify.com/api/content/slides/news/news-facing-low-customer-turnout-the-downtown-college-park-farmers-market-s-future-is-unclear.json"
+    },
+    {
+      "slide": "https://dbktv.netlify.com/api/content/slides/group/group-local-developments.json"
+    },
+    {
+      "slide": "https://dbktv.netlify.com/api/content/slides/news/news-maryland-women-s-soccer-tops-michigan-state-1-0-for-first-ever-big-ten-tournament-berth.json"
+    },
+    {
+      "slide": "https://dbktv.netlify.com/api/content/tickers/ticker-10-25-ticker.json"
+    }
+  ]
+}
