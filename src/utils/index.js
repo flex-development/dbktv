@@ -1,6 +1,6 @@
 // Utilities
 import app from './app.util.js'
-import error from './error.util.js'
+import * as error from './error.util.js'
 import ui from './ui.util.js'
 
 /**

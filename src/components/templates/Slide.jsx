@@ -2,11 +2,16 @@
 import React, { Component } from 'react'
 
 // Components
-import { Articles, Default, Multimedia, News, Preview } from '.'
+import { Articles, Default, Multimedia, News } from '.'
 
 /**
- * @file Component representing a deck slide.
- * @author Lexus Drumgold <lex@lexusdrumgold.design>
+ * Component representing a deck slide.
+ *
+ * @todo Update documentation
+ *
+ * @class Slide
+ * @extends Component
+ * @author Lexus Drumgold <lex@flexdevelopment.llc>
  */
 export default class Slide extends Component {
   /**
@@ -20,12 +25,9 @@ export default class Slide extends Component {
 
     /**
      * @property {object} state - Internal component state
-     * @property {object | null} state.content - Slide data
-     * @property {Component | null} state.template - Template component
-     * @property {string | null} state.type - Name of template in lowercase
      * @instance
      */
-    this.state = { content: null, next: null, template: null, type: null }
+    this.state = { duration: 0, next: -1, template: null, type: '' }
 
     /**
      * @property {string} timer - Interval id of current slide timer
@@ -39,10 +41,8 @@ export default class Slide extends Component {
    * both on the initial mount and on subsequent updates. It should return an
    * object to update the state, or null to update nothing.
    *
-   * Based on @see @param props.location, the internal slide state will be
+   * Based on @see @param props.data, the internal slide state will be
    * updated.
-   *
-   * The internal mobile state will also be updated.
    *
    * @todo Update documentation
    *
@@ -51,51 +51,55 @@ export default class Slide extends Component {
    * @returns {object | null}
    */
   static getDerivedStateFromProps(props, state) {
-    const { content, filepath, mobile, next } = props.location.state
+    const { component, content, next, position } = props.data
     const { duration } = content
 
     let template = null
-    let component
 
-    if (mobile) {
-      template = <Preview data={{ component, content }} />
+    if (component === 'Articles') {
+      template = <Articles content={content} />
+    } else if (component === 'Multimedia') {
+      template = <Multimedia content={content} />
+    } else if (component === 'News') {
+      template = <News content={content} />
     } else {
-      if (filepath.includes('/content/slides/group')) {
-        component = 'Articles'
-        template = <Articles content={content} />
-      } else if (filepath.includes('/content/slides/multimedia')) {
-        component = 'Multimedia'
-        template = <Multimedia content={content} />
-      } else if (filepath.includes('/content/slides/news')) {
-        component = 'News'
-        template = <News content={content} />
-      } else {
-        component = 'Default'
-        template = <Default />
-      }
+      template = <Default />
     }
 
-    return { content, duration, next, template, type: component.toLowerCase() }
+    return {
+      duration,
+      next,
+      position,
+      template,
+      type: component.toLowerCase()
+    }
   }
 
   /**
-   * After the component has mounted, the internal state will be updated with
-   * the name of the current template component, the template to render, and the
-   * data associated with it.
+   * Once the component has mounted, the current slide position and data will
+   * be synced with the @see @class Deck component. Afterwards, a slide timer
+   * will be set to push to the next slide.
    *
    * @returns {undefined}
    */
   componentDidMount() {
-    const { pos, position } = this.props.location.state
-    pos(position)
-    this.start(true)
+    // const { context, sync } = this.props
+    // const { duration, next, position } = this.state
+
+    // sync({ data: context[position], position })
+
+    // this.timer = setTimeout(() => {
+    //   sync({ data: context[next], position: next })
+    // }, process.env.NODE_ENV === 'development' ? 5000 : duration)
   }
 
   /**
-   * Clears the slide timer
+   * Clears the current slide timer.
+   *
+   * @returns {undefined}
    */
   componentWillUnmount() {
-    this.start(false)
+    // clearInterval(this.timer)
   }
 
   /**
@@ -116,28 +120,5 @@ export default class Slide extends Component {
         {template}
       </section>
     )
-  }
-
-  // Helpers
-
-  /**
-   * Starts the slide timer if @see @param start is true. Otherwise, the
-   * interval will be cleared.
-   *
-   * @param {boolean} start - True to start timer. False to clear interval
-   * @returns {string | undefined}
-   */
-  start = start => {
-    const { duration, next } = this.state
-
-    if (start) {
-      const { content, path } = next
-
-      this.timer = setTimeout(() => {
-        this.props.history.push(path, content.state)
-      }, process.env.NODE_ENV === 'development' ? 7500 : duration)
-    } else {
-      return clearInterval(this.timer)
-    }
   }
 }

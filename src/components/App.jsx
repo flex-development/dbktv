@@ -1,8 +1,7 @@
 // Packages
 import React, { Component } from 'react'
-import { MemoryRouter } from 'react-router'
+import { BrowserRouter, Switch } from 'react-router'
 import ReactGA from 'react-ga'
-import URI from 'urijs'
 import $ from 'jquery'
 
 // Context
@@ -16,6 +15,9 @@ import { Error, Loading } from './screens'
 /**
  * Class representing the web application.
  *
+ * @todo Get Analytics tracking id
+ * @todo Update documentation
+ *
  * @class App
  * @extends Component
  * @author Lexus Drumgold <lex@lexusdrumgold.design>
@@ -24,83 +26,66 @@ export default class App extends Component {
   /**
    * Creates a new Diamondback TV web application.
    *
-   * @todo Update documentation
    * @param {object} props - Component properties
+   * @param {AxiosInstance} props.api - Configured HTTP Client
+   * @param {Pusher} props.pusher - Configured Pusher client
    * @returns {App}
    */
   constructor(props) {
     super(props)
 
-    const { NODE_ENV } = process.env
+    const debug = ['development', 'test'].includes(process.env.NODE_ENV)
 
     /**
-     * @todo Get tracking id
-     *
      * @property {*[]} analytics - Google Analytics configuration options
      * @property {string} analytics[0] - Google Analytics tracking id
      * @property {object} analytics[1] - Additional config options
      * @instance
      */
-    this.analytics = ['', { debug: ['development', 'test'].includes(NODE_ENV) }]
+    this.analytics = ['', { debug }]
 
     /**
-     * @property {string} env - development | test | staging | production
-     * @instance
-     */
-    this.env = NODE_ENV
-
-    /**
-     * @property {boolean} logging - For general messages, logging should be
+     * @property {boolean} debug - For general messages, logging should be
      * enabled if the Node environment is 'development' or 'test'
      * @instance
      */
-    this.logging = ['development', 'test'].includes(NODE_ENV)
+    this.debug = debug
 
     /**
      * @property {object} state - Internal component state
      * @property {boolean} state.analytics - True if Google Analytics was
      * initialized; this value will be updated in a production Node environment
-     * @property {string | null} state.deck - Id of current deck
+     * @property {object} state.curr - Current slide position and content
+     * @property {object} state.curr.data - Current slide data
+     * @property {number} state.curr.position - Index of current slide
+     * @property {object} state.deck - Deck data
+     * @property {string} state.deck.last_edited_by - Person to last edit
+     * @property {object[]} state.deck.slides - Slide objects
+     * @property {string} state.deck.title - Name of deck
      * @property {FeathersError | null} state.error - Current error
-     * @property {object} state.info - Error information
+     * @property {object | null} state.info - Error information
      * @property {boolean} state.loading - True if fetching content
      * @property {boolean} state.mobile - True if viewport width <= 768px
-     * @property {object[] | null} state.slides - Slide content
-     * @property {object[] | null} state.ticker - Ticker content
+     * @property {object} state.settings - DBKTV settings
+     * @property {string} state.settings.deck - Current deck URL
+     * @property {string} state.settings.ticker - Current ticker URL
+     * @property {object} state.ticker - Ticker content
+     * @property {object[]} state.ticker.items - Ticker links
+     * @property {string} state.ticker.last_edited_by - Person to last edit
+     * @property {string} state.ticker.title - Name of ticker
      * @instance
      */
     this.state = {
       analytics: false,
-      deck: null,
+      curr: { data: null, position: -1 },
+      deck: { last_edited_by: '', slides: [], title: '' },
       error: null,
-      id: null,
       info: null,
       loading: true,
-      mobile: $(window).width() <= 768,
-      settings: null,
-      ticker: null
+      mobile: false,
+      settings: { deck: '', ticker: '' },
+      ticker: { items: [], last_edited_by: '', title: '' }
     }
-  }
-
-  /**
-   * getDerivedStateFromProps is invoked right before calling the render method,
-   * both on the initial mount and on subsequent updates. It should return an
-   * object to update the state, or null to update nothing.
-   *
-   * Until a client side Feathers application is set up, component will update
-   * the internal state deck data based on the incoming props.
-   *
-   * The internal mobile state will also be updated.
-   *
-   * @todo Setup Feathers via component props
-   *
-   * @param {object} props - Incoming component properties
-   * @param {object} state - Incoming component state
-   * @returns {object | null}
-   */
-  static getDerivedStateFromProps(props, state) {
-    const { utils } = props
-    return { mobile: utils.ui.is_mobile() }
   }
 
   /**
@@ -130,86 +115,30 @@ export default class App extends Component {
   async componentDidMount() {
     if (this.logging) console.info('Application mounted.')
 
-    try {
-      const settings = await this.settings()
+    // Get initial data
+    await this.initialize()
 
-      console.info('Retreived TV settings ->', settings)
-
-      const deck = await this.deck(settings.deck)
-      const ticker = await this.ticker(settings.ticker)
-
-      this.setState({ deck, settings, ticker })
-    } catch (err) {
-      throw err
-    }
-
-    // TODO: Listen for changes
+    // Subscribe to updates
+    this.subscribe()
 
     // Attach window listener to update internal mobile state
     this.resize()
     $(window).resize(() => this.resize())
 
     // Google Analytics and Pageview tracking
-    this.tracking()
+    // this.tracking()
 
     // Update loading state
     this.fetch(false)
   }
 
   /**
-   * componentDidUpdate() is invoked immediately after updating occurs.
-   * This method is not called for the initial render, and it will not be
-   * invoked if shouldComponentUpdate() returns false.
-   *
-   * @see @method getSnapshotBeforeUpdate returns an object containing the last
-   * values of the internal slide position and mobile states.
-   *
-   * After the application has been reloaded, the internal slide position and
-   * mobile states will be updated.
-   *
-   * @param {object} props - Previous component props
-   * @param {object} state - Previous component state
-   * @param {object} snapshot - @see @method getSnapshotBeforeUpdate
-   * @returns {undefined}
-   *
-   * @see
-   * {@link https://reactjs.org/docs/react-component.html#componentdidupdate}
-   */
-  componentDidUpdate(props, state, snapshot) {
-    const { mobile } = snapshot
-    if (state.mobile !== mobile) this.setState({ mobile })
-  }
-
-  /**
-   * Before the component unmounts, our deck subscriptions will be removed and
-   * the window listener to update the mobile state will be removed.
+   * Removes the mobile window listener.
    *
    * @returns {undefined}
    */
   componentWillUnmount() {
-    // TODO: Unsubscribe from deck changes
-
-    // Remove window listener
     $(window).off('resize')
-  }
-
-  /**
-   * getSnapshotBeforeUpdate() is invoked right before the most recently
-   * rendered output is committed to e.g. the DOM.
-   *
-   * It enables your component to capture some information from the DOM (e.g.
-   * scroll position) before it is potentially changed.
-   *
-   * Any value returned by this lifecycle will be passed as
-   * a parameter to @see @method componentDidUpdate().
-   *
-   * @param {object} props - Previous component props
-   * @param {object} state - Previous component state
-   * @returns {object} Object containing a boolean value indicating if the user
-   * is on a mobile device
-   */
-  getSnapshotBeforeUpdate(props, state) {
-    return { mobile: $(window).width() <= 768 }
   }
 
   /**
@@ -227,75 +156,35 @@ export default class App extends Component {
    *
    * On mobile devices, a list of the deck slides will be displayed.
    *
-   * @returns {<MemoryRouter/>}
+   * @returns {<MobileContext.Provider/>}
    */
   render() {
-    const { deck, error, id, info, loading, mobile, ticker } = this.state
-    const { utils } = this.props
+    const { curr, deck, error, info, loading, mobile, ticker } = this.state
 
     // Handle error and loading states
     if (error) return <Error error={error} info={info} transform={this.error} />
     if (loading) return <Loading />
 
-    // Gather Deck component properties
-    const { slides } = deck
-    const props = { error: this.error, fetch: this.fetch, slides, utils }
-
     // Render application
+    const { position } = curr
+    const { slides } = deck
+
     return (
-      <MemoryRouter initialEntries={deck.slides} initialIndex={id}>
-        <MobileContext.Provider value={{ mobile }}>
-          <Header container>
-            <Logo />
-          </Header>
-          <DeckNavigation active={id} slides={slides} />
-          <Deck {...props} />
-          <Footer>
-            <Logo mini={mobile} />
-            <Ticker items={ticker.items} />
-          </Footer>
-        </MobileContext.Provider>
-      </MemoryRouter>
+      <MobileContext.Provider value={{ mobile }}>
+        <Header container>
+          <Logo />
+        </Header>
+        <DeckNavigation active={position} slides={slides} />
+        <Deck debug={this.debug} slides={slides} sync={this.sync} />
+        <Footer>
+          <Logo mini={mobile} />
+          <Ticker items={ticker.items} />
+        </Footer>
+      </MobileContext.Provider>
     )
   }
 
   // HELPERS
-
-  deck = async url => {
-    console.warn('Fetching slide deck...')
-
-    const { api, utils } = this.props
-    let deck
-
-    try {
-      deck = await api.get(this.filepath(url))
-
-      deck.slides = await Promise.all(deck.slides.map(async (slide, i) => {
-        slide = { filepath: this.filepath(slide.slide) }
-
-        return {
-          pathname: `/slides/${i + 1}`,
-          state: {
-            ...slide,
-            content: await api.get(slide.filepath),
-            mobile: this.state.mobile,
-            position: i,
-            pos: this.id
-          }
-        }
-      }))
-    } catch (err) {
-      let { message } = err
-      const { error } = utils
-
-      message = `DECK ERR -> UNABLE TO RETREIVE SLIDE DECK -> ${message}`
-
-      return this.setState({ error: error.feathers(message, null, 404) })
-    }
-
-    console.info('Retreived slide deck ->', deck)
-    return deck
-  }
 
   /**
    * Transform the incoming error into a FeathersError.
@@ -328,15 +217,34 @@ export default class App extends Component {
    */
   fetch = loading => this.setState({ loading }, () => loading)
 
-  filepath = url => (new URI(url)).pathname().replace('/api', '')
+  initialize = async () => {
+    const { api } = this.props
 
-  /**
-   * Updates the internal slide id state.
-   *
-   * @param {number} id - Index of current slide
-   * @returns {number} @see @param id
-   */
-  id = id => this.setState({ id }, () => id)
+    console.warn('Initializing DBKTV...')
+    let data
+
+    try {
+      data = await api.get('/deploy-succeeded')
+    } catch (err) {
+      return this.setState({ error: this.error(err) })
+    }
+
+    console.info('Retreived TV deck, ticker, and settings ->', data)
+
+    this.prep(data.deck)
+    this.setState({ ...data, curr: { data: data.deck.slides[0], position: 0 } })
+
+    console.info('Initialized DBKTV.')
+  }
+
+  prep = deck => {
+    deck.slides = deck.slides.map(slide => {
+      slide.pos = this.sync
+      return slide
+    })
+
+    return deck
+  }
 
   /**
    * Updates the internal mobile state.
@@ -345,38 +253,31 @@ export default class App extends Component {
    */
   resize = () => this.setState({ mobile: $(window).width() <= 768 })
 
-  settings = async () => {
-    const { api, utils } = this.props
+  subscribe = () => {
+    console.warn('Subscribing to deployment updates...')
 
-    console.warn('Fetching TV settings...')
+    this.subscription = this.props.pusher.subscribe('deployments')
+    this.subscription.bind('deploy-succeeded', data => {
+      console.info('SUBSCRIPTION UPDATE ->', data)
+      this.prep(data.deck)
+      return this.setState({
+        ...data, curr: { data: data.deck.slides[0], position: 0 }
+      })
+    })
 
-    try {
-      return await api.get('pages/settings.json')
-    } catch (err) {
-      return this.setState({ error: utils.error.feathers(`SETTINGS ERR -> UNABLE TO RETREIVE TV SETTINGS -> ${err.message}`, null, 404) })
-    }
+    console.info('Subscribed to deployment updates.')
   }
 
-  ticker = async url => {
-    console.warn('Fetching ticker...')
-
-    const { api, utils } = this.props
-    let ticker
-
-    try {
-      ticker = await api.get(this.filepath(url))
-    } catch (err) {
-      let { message } = err
-      const { error } = utils
-
-      message = `TICKER ERR -> UNABLE TO RETREIVE TICKER DATA -> ${message}`
-
-      return this.setState({ error: error.feathers(message, null, 404) })
-    }
-
-    ticker.items = await Promise.all(ticker.items.map(item => item.item))
-    console.info('Retreived ticker ->', ticker)
-    return ticker
+  /**
+   * Updates the current slide position and data.
+   *
+   * @param {object} curr - Current slide
+   * @param {object} curr.data - Current slide data
+   * @param {number} curr.position - Index of the current slide
+   * @returns {number} @see @param curr.position
+   */
+  sync = ({ data, position }) => {
+    return this.setState({ curr: { data, position } }, () => position)
   }
 
   /**

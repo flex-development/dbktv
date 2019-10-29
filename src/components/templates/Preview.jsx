@@ -1,5 +1,5 @@
 // Packages
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 
 // Components
 import {
@@ -55,16 +55,17 @@ export default class Preview extends Component {
     let icon = null
 
     if (component === 'Articles') {
-      const { articles } = content
-      headlines = articles.map(article => article.headline)
+      const { article1, article2 } = content
+      headlines = [article1, article2].map(article => article.headline)
       icon = <NewspaperIcon />
     } else if (component === 'Multimedia') {
-      const { alt, caption, src, video } = content.media
-      headlines.push({ href: src, text: video ? caption : alt })
+      const { alt, src, video } = content.media
+      headlines.push({ href: src, text: alt })
       category = `Multimedia (${video ? 'Video' : 'Image'})`
       icon = <PhotoVideoIcon />
     } else if (component === 'News') {
-      headlines.push(content.headline)
+      const { href, title } = content
+      headlines.push({ href, text: title })
       icon = <StarIcon />
     } else {
       category = 'From the Diamondback Staff'
@@ -74,9 +75,7 @@ export default class Preview extends Component {
       })
     }
 
-    return {
-      category, headlines, icon, type: component.toLowerCase()
-    }
+    return { category, headlines, icon }
   }
 
   /**
@@ -98,6 +97,15 @@ export default class Preview extends Component {
         <div className='headlines'>
           {headlines.map((headline, i) => {
             headline.className = 'preview-headline'
+
+            if (headlines.length > 1 && i === 0) {
+              return (
+                <Fragment key={`ph-${i}`}>
+                  <Headline {...headline} key={`ph-${i}`} />
+                  <br /><br />
+                </Fragment>
+              )
+            }
             return <Headline {...headline} key={`ph-${i}`} />
           })}
         </div>
