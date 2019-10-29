@@ -1,6 +1,5 @@
 // Packages
 import React, { Component } from 'react'
-import { BrowserRouter, Switch } from 'react-router'
 import ReactGA from 'react-ga'
 import $ from 'jquery'
 
@@ -231,19 +230,9 @@ export default class App extends Component {
 
     console.info('Retreived TV deck, ticker, and settings ->', data)
 
-    this.prep(data.deck)
     this.setState({ ...data, curr: { data: data.deck.slides[0], position: 0 } })
 
     console.info('Initialized DBKTV.')
-  }
-
-  prep = deck => {
-    deck.slides = deck.slides.map(slide => {
-      slide.pos = this.sync
-      return slide
-    })
-
-    return deck
   }
 
   /**
@@ -259,7 +248,6 @@ export default class App extends Component {
     this.subscription = this.props.pusher.subscribe('deployments')
     this.subscription.bind('deploy-succeeded', data => {
       console.info('SUBSCRIPTION UPDATE ->', data)
-      this.prep(data.deck)
       return this.setState({
         ...data, curr: { data: data.deck.slides[0], position: 0 }
       })

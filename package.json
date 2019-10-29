@@ -50,8 +50,6 @@
     "react-dfp": "^0.13.0",
     "react-dom": "^16.10.2",
     "react-ga": "^2.6.0",
-    "react-router": "^5.1.2",
-    "react-router-dom": "^5.1.2",
     "react-scripts": "3.1.1",
     "showdown": "^1.9.0",
     "urijs": "^1.19.1"
