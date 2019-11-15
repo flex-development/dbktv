@@ -42,11 +42,11 @@ export default class Logo extends Component {
       logos: {
         full: {
           alt: 'DiamondbackTV logo full white',
-          src: 'https://firebasestorage.googleapis.com/v0/b/diamondbackcloud.appspot.com/o/assets%2Fimages%2Flogos%2Ftv%2Fsvg%2Fdbktv-logo-full-white.svg?alt=media'
+          src: '/assets/dbktv-logo-full-white.svg'
         },
         mini: {
           alt: 'DiamondbackTV logo mini white',
-          src: 'https://firebasestorage.googleapis.com/v0/b/diamondbackcloud.appspot.com/o/assets%2Fimages%2Flogos%2Ftv%2Fsvg%2Fdbktv-logo-mini-white.svg?alt=media'
+          src: '/assets/dbktv-logo-mini-white.svg'
         }
       },
       plug: false

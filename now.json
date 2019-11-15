@@ -1,0 +1,28 @@
+{
+  "name": "dbktv",
+  "version": 2,
+  "public": true,
+  "alias": "dbktv",
+  "scope": "flexdevelopment",
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@now/static-build",
+      "config": {
+        "distDir": "build"
+      }
+    }
+  ],
+  "regions": [
+    "iad1"
+  ],
+  "routes": [
+    {
+      "src": "/repo",
+      "status": 301,
+      "headers": {
+        "Location": "https://github.com/flex-development/dbktv"
+      }
+    }
+  ]
+}

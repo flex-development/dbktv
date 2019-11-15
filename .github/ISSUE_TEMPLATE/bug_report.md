@@ -1,9 +1,10 @@
 ---
 name: Bug report
 about: Spot an error? Create a bug report
-title: "BUG - "
-labels: "bug", "help wanted"
-assignees: ""
+title: 'BUG - '
+labels: bug
+assignees: ''
+
 ---
 
 **Describe the bug**  

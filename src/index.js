@@ -3,7 +3,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 // Firebase
-import { deck } from './api'
+import { deck, ticker } from './api'
 
 // Utility functions
 import utils from './utils'
@@ -27,19 +27,19 @@ import './sass/app.sass'
  */
 
 /**
- * Component that connects the Feathers application to our React application.
+ * Component that renders DBKTV with mock Firebase data.
  *
- * Until a client side Feathers app is initialized, we will pass the mock data
- * as a component property. Our utility functions will also be passed as
- * component properties.
+ * This is needed after shutting down the Firebase project following other
+ * updates made by an outside lab team.
  *
- * @todo Replace api prop with Feathers application
  * @returns {<App/>}
  */
-const FeathersApp = () => <App api={{}} mock={deck} utils={utils} />
+const MockApp = props => {
+  return <App {...props} api={{ deck, ticker }} utils={utils} />
+}
 
 // Render connected Feathers application into <div id="root"></div>
-ReactDOM.render(<FeathersApp />, document.getElementById('root'))
+ReactDOM.render(<MockApp />, document.getElementById('root'))
 
 /**
  * If you want your app to work offline and load faster, you can change

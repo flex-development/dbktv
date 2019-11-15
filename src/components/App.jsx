@@ -25,6 +25,10 @@ export default class App extends Component {
    *
    * @todo Update documentation
    * @param {object} props - Component properties
+   * @param {object} props.api - Mock API data
+   * @param {object} props.api.deck - Mock Deck
+   * @param {object} props.api.ticker - Mock Ticker
+   * @param {object} props.utils - Utility functions
    * @returns {App}
    */
   constructor(props) {
@@ -59,13 +63,14 @@ export default class App extends Component {
      * @property {object} state - Internal component state
      * @property {boolean} state.analytics - True if Google Analytics was
      * initialized; this value will be updated in a production Node environment
-     * @property {string | null} state.deck - Id of current deck
+     * @property {object} state.deck - Slide deck
+     * @property {object[]} state.deck.slides - Slide content
      * @property {FeathersError | null} state.error - Current error
      * @property {object} state.info - Error information
      * @property {boolean} state.loading - True if fetching content
      * @property {boolean} state.mobile - True if viewport width <= 768px
-     * @property {object[] | null} state.slides - Slide content
-     * @property {object[] | null} state.ticker - Ticker content
+     * @property {object} state.ticker - Ticker content
+     * @property {object[]} state.ticker.items - Ticker items (links)
      * @instance
      */
     this.state = {
@@ -75,36 +80,8 @@ export default class App extends Component {
       info: null,
       loading: true,
       mobile: $(window).width() <= 768,
-      slides: null,
       ticker: null
     }
-
-    /**
-     * @property {object} subscriptions - Database subscriptions
-     * @instance
-     */
-    this.subscriptions = {}
-  }
-
-  /**
-   * getDerivedStateFromProps is invoked right before calling the render method,
-   * both on the initial mount and on subsequent updates. It should return an
-   * object to update the state, or null to update nothing.
-   *
-   * Until a client side Feathers application is set up, component will update
-   * the internal state deck data based on the incoming props.
-   *
-   * The internal mobile state will also be updated.
-   *
-   * @todo Setup Feathers via component props
-   *
-   * @param {object} props - Incoming component properties
-   * @param {object} state - Incoming component state
-   * @returns {object | null}
-   */
-  static getDerivedStateFromProps(props, state) {
-    const { mock, utils } = props
-    return { ...mock, mobile: utils.ui.is_mobile() }
   }
 
   /**
@@ -123,18 +100,16 @@ export default class App extends Component {
   }
 
   /**
-   * Subscribes to deck data changes and attaches a window listener to update
-   * the internal mobile state. In a 'production' Node environment, Google
-   * Analytics and Pageview tracking will be initialized.
+   * When the component mounts, the following will happen:
    *
-   * @async
+   * - A  window listener to update the internal mobile state will be added
+   * - In a 'production' Node environment, Google Analytics and Pageview
+   *   tracking will be initialized.
+   *
    * @returns {undefined}
-   * @throws {GeneralError | NotFound}
    */
   async componentDidMount() {
     if (this.logging) console.info('Application mounted.')
-
-    // TODO: Subscribe to deck changes and update internal state
 
     // Attach window listener to update internal mobile state
     this.resize()
@@ -148,61 +123,14 @@ export default class App extends Component {
   }
 
   /**
-   * componentDidUpdate() is invoked immediately after updating occurs.
-   * This method is not called for the initial render, and it will not be
-   * invoked if shouldComponentUpdate() returns false.
-   *
-   * @see @method getSnapshotBeforeUpdate returns an object containing the last
-   * values of the internal slide position and mobile states.
-   *
-   * After the application has been reloaded, the internal slide position and
-   * mobile states will be updated.
-   *
-   * @param {object} props - Previous component props
-   * @param {object} state - Previous component state
-   * @param {object} snapshot - @see @method getSnapshotBeforeUpdate
-   * @returns {undefined}
-   *
-   * @see
-   * {@link https://reactjs.org/docs/react-component.html#componentdidupdate}
-   */
-  componentDidUpdate(props, state, snapshot) {
-    const { id, mobile } = snapshot
-    if (state.id !== id || state.mobile !== mobile) {
-      this.setState({ id, mobile })
-    }
-  }
-
-  /**
-   * Before the component unmounts, our deck subscriptions will be removed and
-   * the window listener to update the mobile state will be removed.
+   * Before the component unmounts, the window listener to update the mobile
+   * state will be removed.
    *
    * @returns {undefined}
    */
   componentWillUnmount() {
-    // TODO: Unsubscribe from deck changes
-
     // Remove window listener
     $(window).off('resize')
-  }
-
-  /**
-   * getSnapshotBeforeUpdate() is invoked right before the most recently
-   * rendered output is committed to e.g. the DOM.
-   *
-   * It enables your component to capture some information from the DOM (e.g.
-   * scroll position) before it is potentially changed.
-   *
-   * Any value returned by this lifecycle will be passed as
-   * a parameter to @see @method componentDidUpdate().
-   *
-   * @param {object} props - Previous component props
-   * @param {object} state - Previous component state
-   * @returns {object} Object containing position of current slide and a boolean
-   * value indicating if the user is on a mobile device
-   */
-  getSnapshotBeforeUpdate(props, state) {
-    return { id: state.id, mobile: $(window).width() <= 768 }
   }
 
   /**
@@ -223,15 +151,15 @@ export default class App extends Component {
    * @returns {<MemoryRouter/>}
    */
   render() {
-    const { error, id, info, loading, mobile, slides, ticker } = this.state
-    const { utils } = this.props
+    const { error, id, info, loading, mobile } = this.state
+    const { api, utils } = this.props
 
     // Handle error and loading states
     if (error) return <Error error={error} info={info} transform={this.error} />
     if (loading) return <Loading />
 
     // Gather Deck component properties
-    const routes = this.routes(slides)
+    const routes = this.routes(api.deck.slides)
     const deck = { error: this.error, fetch: this.fetch, slides: routes, utils }
 
     // Render application
@@ -245,7 +173,7 @@ export default class App extends Component {
           <Deck {...deck} />
           <Footer>
             <Logo mini={mobile} />
-            <Ticker items={ticker} />
+            <Ticker items={api.ticker.items} />
           </Footer>
         </MobileContext.Provider>
       </MemoryRouter>
