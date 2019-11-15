@@ -3,7 +3,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 // Firebase
-import { deck } from './api'
+import { deck, ticker } from './api'
 
 // Utility functions
 import utils from './utils'
@@ -36,7 +36,7 @@ import './sass/app.sass'
  * @todo Replace api prop with Feathers application
  * @returns {<App/>}
  */
-const FeathersApp = () => <App api={{}} mock={deck} utils={utils} />
+const FeathersApp = () => <App api={{ deck, ticker }} utils={utils} />
 
 // Render connected Feathers application into <div id="root"></div>
 ReactDOM.render(<FeathersApp />, document.getElementById('root'))

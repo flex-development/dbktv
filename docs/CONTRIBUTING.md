@@ -15,14 +15,10 @@ on making a pull request.
 
 ## Prerequisites
 
-You'll need to have Node, Git, and Firebase CLI set up on your local machine.
+You'll need to have Nod and Git set up on your local machine.
 
 - [Install Node](https://nodejs.org/en/download/)
 - [Install Git](https://git-scm.com/downloads)
-- [Setup Firebase CLI](https://firebase.google.com/docs/cli)
-
-Next, you'll need to install run-script-os globally if it isn't already.
-Run the command `npm i -g run-script-os` to do so.
 
 ## Installing
 
@@ -36,7 +32,7 @@ Follow the steps below to get your development environment set up.
 
 ## Making Changes
 
-This project uses [Google Firebase][2], [React][2], [Sass][3], and [Babel][4].
+This project uses [React][2], [Sass][3], and [Babel][4].
 
 ### Create Your Development Branch
 

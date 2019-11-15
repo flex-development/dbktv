@@ -2,21 +2,20 @@
   "name": "@flexdevelopment/dbktv",
   "description": "DiamondbackTV (DBKTV) is a digital signage project with the goal of streaming specially curated Diamondback content - feature stories, multimedia, article previews, and advertisements - to various televisions on campus.",
   "version": "1.0.0",
-  "author": "Lexus Drumgold <lex@lexusdrumgold.design> (https://flexdevelopmentllc.web.app)",
+  "author": "Flex Development, LLC <support@flexdevelopment.llc>",
   "scripts": {
+    "clean": "rm -rf .env",
     "preinstall": "rm -rf node_modules && npm run prebuild",
     "lint": "eslint ./src/api/*.js ./src/components/*.jsx ./src/components/**/*.jsx --fix",
     "predev": "NODE_ENV=development cp .env.development .env",
     "dev": "react-scripts start",
-    "postdev": "rm -rf .env",
+    "postdev": "npm run clean",
     "test": "NODE_ENV=test jest --detectOpenHandles --passWithNoTests",
     "prebuild": "rm -rf build/",
     "build": "npm run lint && react-scripts build",
-    "preserve": "NODE_ENV=production cp .env.production .env && npm run build",
-    "serve": "firebase serve --only hosting:staging",
-    "prestart": "npm run preserve",
-    "start": "firebase serve --only hosting:production",
-    "poststart": "rm -rf .env"
+    "prestart": "NODE_ENV=production cp .env.production .env && npm run build",
+    "start": "serve -s build",
+    "poststart": "npm run clean"
   },
   "repository": {
     "type": "git",
@@ -58,11 +57,10 @@
     "@babel/plugin-proposal-throw-expressions": "^7.2.0",
     "@babel/preset-env": "^7.5.5",
     "@babel/preset-react": "^7.0.0",
-    "@feathersjs/feathers": "^4.3.3",
+    "@feathersjs/feathers": "^4.3.4",
     "babel-eslint": "^11.0.0-beta.0",
     "babel-jest": "^24.9.0",
     "concurrently": "^4.1.2",
-    "cross-env": "^5.2.1",
     "eslint": "^6.2.1",
     "eslint-config-standard": "^12.0.0",
     "eslint-config-standard-jsx": "^7.0.0",
@@ -74,15 +72,11 @@
     "eslint-plugin-promise": "^4.1.1",
     "eslint-plugin-react": "^7.14.2",
     "eslint-plugin-standard": "^4.0.0",
-    "eslint-watch": "^6.0.0",
-    "firebase-admin": "^8.6.0",
-    "firebase-functions": "^3.2.0",
-    "firebase-tools": "^7.1.0",
     "identity-obj-proxy": "^3.0.0",
+    "netlify-cli": "^2.15.0",
     "node-sass": "^4.12.0",
     "react-axe": "^3.2.0",
-    "run-script-os": "^1.0.7",
-    "serve": "^11.1.0"
+    "serve": "^11.2.0"
   },
   "browserslist": {
     "production": [

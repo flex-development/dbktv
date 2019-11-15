@@ -103,8 +103,8 @@ export default class App extends Component {
    * @returns {object | null}
    */
   static getDerivedStateFromProps(props, state) {
-    const { mock, utils } = props
-    return { ...mock, mobile: utils.ui.is_mobile() }
+    const { api, utils } = props
+    return { ...api, mobile: utils.ui.is_mobile() }
   }
 
   /**
@@ -223,15 +223,15 @@ export default class App extends Component {
    * @returns {<MemoryRouter/>}
    */
   render() {
-    const { error, id, info, loading, mobile, slides, ticker } = this.state
-    const { utils } = this.props
+    const { error, id, info, loading, mobile } = this.state
+    const { api, utils } = this.props
 
     // Handle error and loading states
     if (error) return <Error error={error} info={info} transform={this.error} />
     if (loading) return <Loading />
 
     // Gather Deck component properties
-    const routes = this.routes(slides)
+    const routes = this.routes(api.deck.slides)
     const deck = { error: this.error, fetch: this.fetch, slides: routes, utils }
 
     // Render application
@@ -245,7 +245,7 @@ export default class App extends Component {
           <Deck {...deck} />
           <Footer>
             <Logo mini={mobile} />
-            <Ticker items={ticker} />
+            <Ticker items={api.ticker.items} />
           </Footer>
         </MobileContext.Provider>
       </MemoryRouter>

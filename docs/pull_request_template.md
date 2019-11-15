@@ -1,9 +1,10 @@
 ---
 name: Pull request
 about: Contribute to this project
-title: "PR - "
-labels: "pull request", "needs review"
-assignees: ""
+title: 'PR - '
+labels: pull request, needs review
+assignees:
+
 ---
 
 **Pull Request Type:**  `feature` | `issue` | `hotfix` | `release`  
