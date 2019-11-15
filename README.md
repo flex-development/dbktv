@@ -34,12 +34,11 @@ To view the project in a production Node environment, run `npm start`.
 
 ## Built With
 
-- [Google Firebase][1] - Mobile development platform
-- [React.js][2] - JavaScript library for building user interfaces
-- [Babel][3] - JavaScript compiler to convert ECMAScript 2015+ code into a backwards compatible JS
+- [Adobe XD][2] - Software for designing and prototyping user experiences
+- [React.js][3] - JavaScript library for building user interfaces
 - [Sass][4] - CSS extension
 
-[1]: https://firebase.google.com/
-[2]: https://reactjs.com/
-[3]: https://babeljs.io/docs/en/#jsx-and-react
+[1]: https://xd.adobe.com/view/e8f623a2-52e8-455d-7f57-05d9fa1ad038-9ec7/
+[2]: https://www.adobe.com/products/xd.html
+[3]: https://reactjs.com/
 [4]: https://sass-lang.com
