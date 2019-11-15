@@ -265,5 +265,5 @@ Slide decks are JSON files with an array of slide content objects.
 
 ## **Examples**
 
-- Mock Slides: [`/tests/__mocks__/Slides.mock.json`][../tests/__mocks__/Slides.mock.json]
-- Mock SlideTickers: [`/tests/__mocks__/Ticker.mock.json`][../tests/__mocks__/Ticker.mock.json]
+- Mock Slides: [`/tests/__mocks__/Slides.mock.json`](../tests/__mocks__/Slides.mock.json)
+- Mock Ticker: [`/tests/__mocks__/Ticker.mock.json`](../tests/__mocks__/Ticker.mock.json)
