@@ -1,7 +1,9 @@
 # Netlify CMS
 
 This document will help you get logged in to the DiamondbackTV CMS and start
-creating content. Following the instructions outlined below will allow the TV
+creating content.  
+
+Following the instructions outlined below will allow the TV
 Team to create new slides, as well as update the current slide deck and ticker.
 
 ## Overview
@@ -61,8 +63,6 @@ To make the slide deck, you'll have to generate the preview link for each slide.
 4. **Make note of the preview link.**
 
 **Make sure each link begins with `https://dbktv.netlify.com/api/content/`**
-
----
 
 ## Slides
 
