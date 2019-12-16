@@ -57,17 +57,17 @@ To created a **personalized** staging url, run the command `now`.
 If your deployment is successful, you'll see the following:
 
 ```bash
-  > Deploying ~/<DIRECTORY_PATH>/mozshortlinks under modelb
-  > Using project mozshortlinks
+  > Deploying ~/<DIRECTORY_PATH>/dbktv under flexdevelopment
+  > Using project dbktv
   > Synced 1 file [1s]
-  > https://mozshortlinks-9tp1g1p10.now.sh [3s]
-  > Ready! Deployed to https://mozshortlinks-<username>.modelb.now.sh
+  > https://dbktv-<DEPLOYMENT_ID>.now.sh [3s]
+  > Ready! Deployed to https://dbktv-<username>.flexdevelopment.now.sh
 ```
 
-Users outside the `modelb` organization will receive a url that looks like:
+Users outside the `flexdevelopment` organization will receive a url that looks like:
 
 ```bash
-https://mozshortlinks.<username>.now.sh
+https://dbktv.<username>.now.sh
 ```
 
 ### Staging
@@ -83,13 +83,13 @@ If your deployment was successful, you'll see the following:
 ```bash
   > now --target staging
 
-  > Deploying ~/<DIRECTORY_PATH>/mozshortlinks under modelb
-  > Using project mozshortlinks
+  > Deploying ~/<DIRECTORY_PATH>/dbktv under flexdevelopment
+  > Using project dbktv
   > Synced 17 files [1s]
-  > https://mozshortlinks-<DEPLOYMENT_ID>.now.sh [4s]
+  > https://dbktv-<DEPLOYMENT_ID>.now.sh [4s]
   > Ready! Deployment complete [37s]
-  - https://mozshortlinks.modelb.now.sh
-  - https://mozshortlinks-<username>.modelb.now.sh
+  - https://dbktv.flexdevelopment.now.sh
+  - https://dbktv-<username>.flexdevelopment.now.sh
 ```
 
 ### Production
